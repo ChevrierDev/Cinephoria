@@ -4,7 +4,9 @@
   "description": "Projet ECF Studi sur une chaîne de cinéma nommée Cinépholia",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server/server.js"
+    "server": "nodemon server/server.js", 
+    "build-css": "tailwindcss build -i ./client/public/css/input.css -o ./client/public/css/output.css",
+    "watch-css": "tailwindcss build -i ./client/public/css/input.css -o ./client/public/css/output.css --watch"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +17,8 @@
     "express": "^4.19.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
   }
 }
