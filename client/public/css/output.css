@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 /*
 ! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
 */
@@ -446,7 +448,7 @@ video {
   display: none;
 }
 
-*, ::before, ::after {
+*, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -500,7 +502,7 @@ video {
   --tw-contain-style:  ;
 }
 
-::backdrop {
+::backdrop{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -552,4 +554,18 @@ video {
   --tw-contain-layout:  ;
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
+}
+
+.font-arvo{
+  font-family: Arvo, serif;
+}
+
+.text-redOne{
+  --tw-text-opacity: 1;
+  color: rgb(193 14 14 / var(--tw-text-opacity));
+}
+
+.text-blueOne{
+  --tw-text-opacity: 1;
+  color: rgb(16 44 87 / var(--tw-text-opacity));
 }
