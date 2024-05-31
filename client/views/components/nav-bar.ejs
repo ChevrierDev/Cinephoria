@@ -1,21 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-</head>
-<body class="mx-14">
-    <nav class="w-full overflow-hidden">
-        <ul class="flex flex-row mt-8 w-full justify-between text-blueOne font-arvo font-bold text-base items-center">
-            <li class="hover:text-goldOne hover:border-b-4 rounded hover:border-goldOne border-transparent border-b"><a href="">ACCUEIL</a></li>
-            <li class="hover:text-goldOne hover:border-b-4 hover:border-goldOne border-transparent border-b"><a href="">FILMS</a></li>
-            <li class="hover:text-goldOne hover:border-b-4 hover:border-goldOne border-transparent border-b"><a href="">RÉSERVATION</a></li>
-            <li><img src="/images/logo-principal.png" class="w-40"></li>
-            <li class="underline decoration-4"><a href="">CONTACT</a></li>
-            <li class="hover:text-goldOne hover:border-b-4 hover:border-goldOne border-transparent border-b"><a href="">CONNEXION</a></li>
-            <li class="hover:text-goldOne hover:border-b-4 hover:border-goldOne border-transparent border-b"><a href="">CRÉER UN COMPTE</a></li>
-        </ul>
+    <script type="text/javascript" defer src="js/main.js"></script>
+  </head>
+  <body class="">
+    <!-- desktop version -->
+    <nav class="w-full hidden bg-white overflow-hidden md:block">
+      <ul
+        class="flex mt-8 max-w-full mx-2 sm:mx-4 md:mx-8 lg:mx-12 xl:mx-16 justify-between text-blueOne font-arvo font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl items-center md:space-x-2"
+      >
+        <li class="nav"><a href="/">ACCUEIL</a></li>
+        <li class="nav"><a href="/films">FILMS</a></li>
+        <li class="nav"><a href="/réservation">RÉSERVATION</a></li>
+        <a href="/"
+          ><li><img src="/images/logo-principal.png" class="max-w-36" /></li
+        ></a>
+        <li class="nav"><a href="/contact">CONTACT</a></li>
+        <li class="nav"><a href="/login">CONNEXION</a></li>
+        <li class="nav md:text-nowrap">
+          <a href="/register">CRÉER UN COMPTE</a>
+        </li>
+      </ul>
     </nav>
-</body>
+
+    <!--NAVBAR RESPONSIVE MOBILE-->
+    <nav class="w-full md:hidden overflow-hidden">
+      <ul
+        class="flex mt-8 max-w-full gap-x-8 justify-between text-blueOne font-arvo font-bold text-base items-center mx-4"
+      >
+        <!--MENU HAMBURGER-->
+
+        <button id="hamburger-button" class="cursor-pointer relative w-8 h-8">
+          <div
+            class="bg-blueOne w-8 h-1 rounded absolute top-4 -mt-0.5 transition-all duration-500 before:content-[''] before:bg-blueOne before:h-1 before:w-8 before:rounded before:absolute before:-translate-x-4 before:-translate-y-3 before:transition-all before:duration-500 after:content-[''] after:bg-blueOne after:h-1 after:w-8 after:rounded after:absolute after:-translate-x-4 after:translate-y-3 after:transition-all after:duration-500"
+          ></div>
+        </button>
+
+        <!--LOGO-->
+        <li>
+          <a href="/"><img src="/images/logo-principal.png" class="w-40" /></a>
+        </li>
+
+        <!--USER LOGIN-->
+        <a href="/login">
+          <li class="md:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="#102c57"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="8" r="5" />
+                <path d="M20 21a8 8 0 0 0-16 0" />
+              </g>
+            </svg>
+          </li>
+        </a>
+      </ul>
+    </nav>
+
+    <!-- mobile nav menu -->
+    <section
+      id="mobile-menu"
+      class="absolute top-32 bg-blueOne w-full text-5xl flex-col justify-center items-center origin-top animate-open-menu hidden"
+    >
+
+      <nav
+        class="flex flex-col min-h-screen items-center py-8"
+        aria-label="mobile"
+      >
+        <a
+          href="/"
+          class="w-full text-center font-arvo text-white py-6 transition-all duration-300 ease-in-out transform hover:opacity-90 hover:scale-105 hover:-translate-y-2 hover:text-goldOne"
+          >Accueil</a
+        >
+        <a
+          href="/films"
+          class="w-full text-center font-arvo text-white py-6 transition-all duration-300 ease-in-out transform hover:opacity-90 hover:scale-105 hover:-translate-y-2 hover:text-goldOne"
+          >Films</a
+        >
+        <a
+          href="/réservation"
+          class="w-full text-center font-arvo text-white py-6 transition-all duration-300 ease-in-out transform hover:opacity-90 hover:scale-105 hover:-translate-y-2 hover:text-goldOne"
+          >Réservation</a
+        >
+        <a
+          href="/contact"
+          class="w-full text-center font-arvo text-white py-6 transition-all duration-300 ease-in-out transform hover:opacity-90 hover:scale-105 hover:-translate-y-2 hover:text-goldOne"
+          >Contact</a
+        >
+      </nav>
+    </section>
+  </body>
 </html>

@@ -3,3 +3,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .nav {
+      @apply relative text-blueOne font-arvo font-bold tracking-wide hover:text-goldOne;
+      font-size: calc(0.8rem + 0.2vw);
+      margin-left: calc(1rem - 4.5vw);
+    }
+    @screen md {
+      .nav {
+        margin-left: calc(1rem - 5vw); 
+      }
+    }
+    @screen lg {
+      .nav {
+        margin-left: calc(1rem); 
+      }
+    }
+    @screen xl {
+      .nav {
+        margin-left: calc(1.5rem); 
+      }
+    }
+    .nav::after {
+      content: '';
+      @apply bg-goldOne h-[3px] w-0 left-0 -bottom-[5px] rounded-xl absolute duration-300;
+    }
+    .nav:hover::after {
+      @apply w-[100%];
+    }
+
+    .section-min-height {
+      min-height: calc(100vh - 68px);
+    }
+
+    .toggle-btn{
+      @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45
+      [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent  [&>div]:rotate-[720deg]
+    }
+    
+  }
