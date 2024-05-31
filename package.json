@@ -4,21 +4,29 @@
   "description": "Projet ECF Studi sur une chaîne de cinéma nommée Cinépholia",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server/server.js", 
-    "build-css": "tailwindcss build -i ./client/public/css/input.css -o ./client/public/css/output.css",
-    "watch-css": "tailwindcss build -i ./client/public/css/input.css -o ./client/public/css/output.css --watch"
+    "server": "nodemon server/server.js",
+    "build-css": "postcss ./client/public/css/input.css -o ./client/public/css/output.css",
+    "watch-css": "postcss ./client/public/css/input.css -o ./client/public/css/output.css --watch",
+    "prettier": "npx prettier --write \"./client/**/*.ejs\" --parser html"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auto-prefixer": "^0.4.2",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.2"
+    "nodemon": "^3.1.2",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.6.1",
     "tailwindcss": "^3.4.3"
   }
 }
