@@ -1,89 +1,54 @@
 const initApp = () => {
+
   const hamburgerBtn = document.getElementById("hamburger-button");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  const toggleMenu = () => {
+  const quickaccess1Btn = document.getElementById("quickaccess-1");
+  const quickaccess2Btn = document.getElementById("quickaccess-2");
+
+  const franceCinemaMenu = document.getElementById("france-cinema-list");
+  const belgiumCinemaMenu = document.getElementById("belgium-cinema-list");
+
+  
+  const openTheaterMenueBtn = document.querySelectorAll('.theater-filter');
+  const theaterMenu = document.getElementById("theater-menu");
+  const closeTheaterMenuBtn = document.getElementById("close-search-theater-menu");
+
+  const toggleHamburgerMenu = () => {
     mobileMenu.classList.toggle("hidden");
     mobileMenu.classList.toggle("flex");
     hamburgerBtn.classList.toggle("toggle-btn");
   };
 
-  hamburgerBtn.addEventListener("click", toggleMenu);
-  mobileMenu.addEventListener("click", toggleMenu);
+  const toggleFranceCinemaMenu = () => {
+    franceCinemaMenu.classList.toggle("hidden");
+    franceCinemaMenu.classList.toggle("flex");
+  };
 
-  // Initialiser le premier carrousel
-  const mainSlider = new Swiper(".main-slider", {
-    slidesPerView: 1,
-    loop: true,
-    autoplay: {
-      delay: 2500,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
+  const toggleBelgiumCinemaMenu = () => {
+    belgiumCinemaMenu.classList.toggle("hidden");
+    belgiumCinemaMenu.classList.toggle("flex");
+  };
 
-  const latestMovieSlider = new Swiper(".latest-movie-slider", {
-    slidesPerView: 4,
-    spaceBetween: 10,
-    loop: true,
-    grabCursor: true,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      180: {
-        slidesPerView: 1,
-        spaceBetween: 10,
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      680: {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-      1280: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-      1536: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-    },
-    on: {
-      slideChangeTransitionEnd: function () {
-        const slides = document.querySelectorAll(".swiper-slide");
-        slides.forEach((slide) => {
-          slide.style.transition = "none";
-          if (slide.classList.contains("swiper-slide-duplicate")) {
-            slide.style.transform = "translateX(0px)";
-          }
-        });
-      },
-    },
-  });
+  const closeTheaterMenu = () => {
+    theaterMenu.classList.toggle("hidden");
+    theaterMenu.classList.toggle("flex");
+  }
+
+  const openTheaterMenue = () => {
+    theaterMenu.classList.toggle("hidden");
+    theaterMenu.classList.toggle("flex");
+  }
+
+  hamburgerBtn.addEventListener("click", toggleHamburgerMenu);
+  quickaccess1Btn.addEventListener("click", toggleFranceCinemaMenu);
+  quickaccess2Btn.addEventListener("click", toggleBelgiumCinemaMenu);
+  closeTheaterMenuBtn.addEventListener("click", closeTheaterMenu);
   
-  
+  openTheaterMenueBtn.forEach(btn => {
+    btn.addEventListener('click', openTheaterMenue)
+  })
+
 };
 
 document.addEventListener("DOMContentLoaded", initApp);
