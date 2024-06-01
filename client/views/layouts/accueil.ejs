@@ -1,23 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="stylesheet" href="css/output.css" />
-  </head>
-  <body class="flex flex-col min-h-screen">
-    <header>
-      <!-- navbar section -->
-      <%- include('../components/nav-bar') %>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link type="text/css" rel="stylesheet" href="css/output.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="text/javascript" defer src="js/main.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="relative min-h-screen pb-20">
+  <header class="relative">
+    <!-- navbar section -->
+    <%- include('../components/nav-bar') %>
 
-    <main class="flex-grow">
-    </main>
-    
-    <footer>
-      <!-- footer section -->
-      <%- include('../components/footer') %>
-    </footer>
-  </body>
+    <!-- Slider main container -->
+    <div class="swiper main-slider h-[60vh]">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <img src="images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg" alt="photo header" class="object-cover w-full h-full">
+        </div>
+        <div class="swiper-slide">
+          <img src="images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg" alt="photo header" class="object-cover w-full h-full">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- main content -->
+  <main class="flex-grow">
+    <!-- Add your main content here -->
+    <section>
+      <p class="text-3xl mx-28 my-16 font-arvo text-blueOne font-bold">NOUVEAUTÉS</p>
+      
+      <!-- latest movies carousel -->
+      <%- include('../components/latest-movies') %>
+    </section>
+  </main>
+  
+  <footer class="bg-blueOne text-white absolute bottom-0 left-0 w-full">
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+  </footer>
+</body>
 </html>
