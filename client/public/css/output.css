@@ -559,6 +559,18 @@ video {
 .top-\[103px\]{
   top: 103px;
 }
+.bottom-\[-50px\]{
+  bottom: -50px;
+}
+.bottom-\[-500px\]{
+  bottom: -500px;
+}
+.bottom-\[-300px\]{
+  bottom: -300px;
+}
+.bottom-\[-200px\]{
+  bottom: -200px;
+}
 .z-10{
   z-index: 10;
 }
@@ -605,6 +617,9 @@ video {
 }
 .mt-8{
   margin-top: 2rem;
+}
+.mt-64{
+  margin-top: 16rem;
 }
 .flex{
   display: flex;
@@ -766,6 +781,9 @@ video {
 }
 .pt-8{
   padding-top: 2rem;
+}
+.pt-48{
+  padding-top: 12rem;
 }
 .text-center{
   text-align: center;
