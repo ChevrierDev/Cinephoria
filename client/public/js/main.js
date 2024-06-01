@@ -1,47 +1,89 @@
 const initApp = () => {
-  const hamburgerBtn = document.getElementById('hamburger-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerBtn = document.getElementById("hamburger-button");
+  const mobileMenu = document.getElementById("mobile-menu");
 
   const toggleMenu = () => {
-    mobileMenu.classList.toggle('hidden');
-    mobileMenu.classList.toggle('flex');
-    hamburgerBtn.classList.toggle('toggle-btn');
-  }
+    mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("flex");
+    hamburgerBtn.classList.toggle("toggle-btn");
+  };
 
-  hamburgerBtn.addEventListener('click', toggleMenu);
-  mobileMenu.addEventListener('click', toggleMenu);
+  hamburgerBtn.addEventListener("click", toggleMenu);
+  mobileMenu.addEventListener("click", toggleMenu);
 
   // Initialiser le premier carrousel
-  const mainSlider = new Swiper('.main-slider', {
+  const mainSlider = new Swiper(".main-slider", {
+    slidesPerView: 1,
     loop: true,
     autoplay: {
       delay: 2500,
     },
     pagination: {
-      el: '.swiper-pagination',
+      el: ".swiper-pagination",
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
   });
 
-  // Initialiser le second carrousel
-  const latestMovieSlider = new Swiper('.latest-movie-slider', {
+  const latestMovieSlider = new Swiper(".latest-movie-slider", {
+    slidesPerView: 4,
+    spaceBetween: 10,
     loop: true,
-    slidesPerView: 3,
+    grabCursor: true,
     autoplay: {
       delay: 2500,
+      disableOnInteraction: false,
     },
     pagination: {
-      el: '.swiper-pagination',
+      el: ".swiper-pagination",
+      clickable: true,
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
-    spaceBetween: -300, 
+    breakpoints: {
+      180: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      480: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      680: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      1536: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+    },
+    on: {
+      slideChangeTransitionEnd: function () {
+        const slides = document.querySelectorAll(".swiper-slide");
+        slides.forEach((slide) => {
+          slide.style.transition = "none";
+          if (slide.classList.contains("swiper-slide-duplicate")) {
+            slide.style.transform = "translateX(0px)";
+          }
+        });
+      },
+    },
   });
-}
+  
+  
+};
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener("DOMContentLoaded", initApp);
