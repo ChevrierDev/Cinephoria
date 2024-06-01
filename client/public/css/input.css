@@ -32,6 +32,12 @@
     .nav:hover::after {
       @apply w-[100%];
     }
+    .nav.active a {
+      @apply text-goldOne;
+    }
+    .nav.active::after {
+        @apply w-[100%];
+    }
 
     .section-min-height {
       min-height: calc(100vh - 68px);

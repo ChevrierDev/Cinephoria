@@ -24,10 +24,15 @@ module.exports = {
           '80%': { transform: 'scaleY(1.2)' },
           '100%': { transform: 'scaleY(1)' },
         },
-        
+
+        'bg-fill': {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '0 0' },
+        },
       },
       animation: {
        'open-menu':  'open-menu 0.5s ease-in-out forwards',
+       'bg-fill-animation': 'bg-fill 1.5s forwards',
       },
       fontSize: {
         "xxs": "9px"

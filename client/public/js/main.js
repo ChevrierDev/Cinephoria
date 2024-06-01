@@ -1,3 +1,4 @@
+
 const initApp = () => {
 
   const hamburgerBtn = document.getElementById("hamburger-button");
@@ -44,7 +45,7 @@ const initApp = () => {
   quickaccess1Btn.addEventListener("click", toggleFranceCinemaMenu);
   quickaccess2Btn.addEventListener("click", toggleBelgiumCinemaMenu);
   closeTheaterMenuBtn.addEventListener("click", closeTheaterMenu);
-  
+
   openTheaterMenueBtn.forEach(btn => {
     btn.addEventListener('click', openTheaterMenue)
   })
