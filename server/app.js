@@ -21,7 +21,15 @@ app.get('/accueil',(req, res) =>{
 });
 
 app.get('/reservation',(req, res) =>{
-    res.render('layouts/reservation');
+    res.render('layouts/reservation', {
+        title: "Réserver un film."
+    });
+});
+
+app.get('/contact',(req, res) =>{
+    res.render('layouts/contact', {
+        title: "Contactez-nous."
+    });
 });
 
 module.exports = app;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link type="text/css" rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+</head>
+
+<body class="relative min-h-screen">
+
+    <header class="relative">
+        <!-- navbar section -->
+        <%- include('../components/nav-bar') %>
+    </header>
+
+
+    <main class="relative flex items-center justify-center min-h-screen md:mb-0 px-10">
+        <img src="/images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg" alt="sièges de cinéma bleus" class="absolute inset-0 w-full h-full object-cover z-0">
+        <div class="relative z-10 w-full max-w-lg mx-auto mb-44 md:mb-20">
+            <form class="bg-white font-arvo p-10 w-full max-w-lg mx-auto rounded-xl" action="" method="">
+                <h1 class="text-blueOne font-extrabold text-center text-3xl mb-7">CONTACTEZ-NOUS</h1>
+                    <!--Responsive Desktop et Mobile -->
+                <div class="flex flex-col md:flex-row md:space-x-4 md:mb-4">
+                    <div class="md:w-1/2">
+                        <label class="block text-sm font-normal text-blueOne opacity-60 mb-1" for="nom">Nom</label>
+                        <div class="w-full border border-gray-300 p-1 rounded-sm bg-whiteOne mb-3 md:mb-0">
+                            <input class="bg-whiteOne outline-none flex-1" type="text" id="nom" name="name" required>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <label class="block text-sm font-normal text-blueOne opacity-60 mb-1" for="prenom">Prénom</label>
+                        <div class="w-full border border-gray-300 p-1 rounded-sm bg-whiteOne mb-3 md:mb-0">
+                            <input class="bg-whiteOne m-0" type="text" id="prenom" name="first_name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-normal text-blueOne opacity-60 mb-1" for="objet">Objet*</label>
+                    <div class="w-full border border-gray-300 p-1 rounded-sm bg-whiteOne">
+                        <input class="bg-whiteOne" type="text" id="objet" name="objet" required>
+                    </div>
+                </div>
+                <div class="">
+                    <label class="block text-sm font-normal text-blueOne opacity-60 mb-1" for="message">Message*</label>
+                    <div class="w-full border border-gray-300 rounded-sm bg-whiteOne">
+                    <textarea class="w-full h-40 bg-whiteOne" id="message" name="message" required></textarea>
+                    </div>
+                </div>
+                <p class="text-xxs text-center font-extrabold text-blueOne opacity-60 mt-2 mb-6">*Champs obligatoires</p>
+                <div class="flex justify-center">
+                    <button class="bg-redOne text-white py-2 px-4 w-52 rounded hover:bg-red-500 hover:scale-95 duration-150">ENVOYER</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <!-- footer section -->
+        <%- include('../components/footer') %>
+      </footer>
+</body>
+</html>

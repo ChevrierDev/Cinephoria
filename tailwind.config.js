@@ -27,6 +27,9 @@ module.exports = {
       },
       animation: {
        'open-menu':  'open-menu 0.5s ease-in-out forwards',
+      },
+      fontSize: {
+        "xxs": "9px"
       }
     },
   },
