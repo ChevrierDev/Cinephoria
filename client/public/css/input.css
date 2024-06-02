@@ -39,6 +39,23 @@
         @apply w-[100%];
     }
 
+      .form-link {
+        @apply relative text-blueOne  font-extrabold text-center text-base md:text-xl;
+    }
+    .form-link::after {
+      content: '';
+      @apply bg-goldOne h-[3px] w-0 left-0 -bottom-[5px] rounded-xl absolute duration-300;
+    }
+    .form-link:hover::after {
+      @apply w-[100%];
+    }
+    .form-link.active h2{
+        @apply text-goldOne;
+    }
+    .form-link.active::after {
+        @apply w-[100%];
+    }
+
     .section-min-height {
       min-height: calc(100vh - 68px);
     }

@@ -32,4 +32,19 @@ app.get('/contact',(req, res) =>{
     });
 });
 
+app.get('/login',(req, res) =>{
+    res.render('auth/login', {
+        title: "Connectez-vous à votre compte."
+    });
+});
+
+//form components routes 
+app.get('/components/login-form.ejs', (req, res) => {
+    res.render('components/login-form');
+});
+
+app.get('/components/register-form.ejs', (req, res) => {
+    res.render('components/register-form');
+});
+
 module.exports = app;

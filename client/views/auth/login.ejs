@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link type="text/css" rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <script src="js/form-switcher.js" defer></script>
+    <script src="js/activeLink.js" defer></script>
+</head>
+<body class="relative min-h-screen pb-20">
+    <header class="relative">
+        <!-- navbar section -->
+        <%- include('../components/nav-bar') %>
+    </header>
+
+    <main class="flex items-center justify-center min-h-screen mb-28">
+        
+        <!-- connection container -->
+        <div class="w-full max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+
+            <div class="font-arvo px-10 pt-20  w-full  ">
+                <h1 class="text-blueOne font-extrabold text-center text-2xl mb-20 md:text-3xl">CONNEXION</h1>
+
+                <div class="flex space-x-4 justify-between mb-16">
+                    <a href="/login" id="login-link" class="form-link active">
+                        <h2 class="text-blueOne opacity-60 font-extrabold text-center text-base md:text-xl">JE M'IDENTIFIE</h2>
+                    </a>
+                    <a href="/register" id="register-link" class="form-link">
+                        <h2 class="text-blueOne opacity-60 font-extrabold text-center text-base md:text-xl">JE CRÉE UN COMPTE</h2>
+                    </a>
+                </div>
+            </div>
+
+            <!-- login and register form -->
+            <div class=""  id="form-container">
+                <%- include('../components/login-form') %>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer>
+        <!-- footer section -->
+        <%- include('../components/footer') %>
+      </footer>
+</body>
+</html>
