@@ -8,7 +8,6 @@
     "build-css": "postcss ./client/public/css/input.css -o ./client/public/css/output.css",
     "watch-css": "postcss ./client/public/css/input.css -o ./client/public/css/output.css --watch",
     "prettier": "npx prettier --write \"./client/**/*.ejs\" --parser html"
-
   },
   "keywords": [],
   "author": "",

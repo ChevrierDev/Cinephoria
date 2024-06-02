@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- filter menu -->
+    <section
+    id="filter-menu"
+    class="absolute z-10 top-[130px] hidden bg-blueOne w-full text-5xl flex-col justify-center items-center origin-top animate-open-menu"
+  >
+    <div
+      class="container gap-y-5 flex flex-col w-[80vw] mx-auto bg-transparent pt-4 md:px-20"
+    >
+      <div
+        class="w-full flex items-center justify-between text-white md:px-5 md:py-5"
+      >
+      <div class="flex flex-col">
+        <p class="font-arvo text-4xl text-nowrap">FILTRER </p>
+      </div>
+        <a href="#bottom">
+          <button class="text-6xl pb-3" id="close-filter-menu">
+            &times;
+          </button>
+        </a>
+      </div>
+
+      <form action="" class="container flex flex-col min-h-screen">
+       <div class="flex   space-x-3   md:space-x-5 py-8 pt-3">
+          <!-- movies genre filter -->
+          <div class="h-fit flex flex-col space-y-4">
+            <p class="font-arvo text-2xl text-white text-nowrap">GENRE </p>
+            <ul class="list-none w-fit md:w-[15vw] space-y-2">
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">ACTION</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">HORREUR</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">DRAME</label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- movies days filter -->
+          <div class="h-fit flex flex-col space-y-4">
+            <p class="font-arvo text-2xl text-white text-nowrap">JOURS </p>
+            <ul class="list-none w-fit md:w-[15vw] space-y-2">
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">LUNDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">MARDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">MERCREDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">JEUDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">VENDREDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">SAMEDI</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">DIMANCHE</label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- movies qualité filter -->
+          <div class="h-fit flex flex-col space-y-4">
+            <p class="font-arvo text-2xl text-white text-nowrap">QUALITÉ </p>
+            <ul class="list-none w-fit md:w-[15vw]">
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">4k</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">3D</label>
+              </li>
+
+              <li class="list-none flex items-center space-x-2">
+                <input type="checkbox" name="genres" id="genres-action" class="custom-checkbox relative">
+                <label for="genres" class="font-arvo text-white text-lg pt-1.5 tracking-wider align-text-bottom">4DX</label>
+              </li>
+
+            </ul>
+          </div>
+       </div>
+        
+
+        <div class="container flex justify-around mt-6  md:justify-start md:space-x-10 md:mt-10">
+          <!-- Reset filter -->
+          <button class="bg-goldOne  w-40 h-12 hover:scale-105 duration-200">
+            <p class="text-white font-arvo text-sm tracking-wider">
+              RÉINITIALISER
+            </p>
+          </button>
+
+          <!-- Validate filter -->
+          <button class="bg-redOne  w-32 h-12 hover:scale-105 duration-200">
+            <p class="text-white font-arvo text-sm tracking-wider">
+              VALIDER
+            </p>
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+    
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section
+        id="theater-menu"
+        class="absolute z-10 top-[130px] hidden  bg-blueOne w-full text-5xl flex-col justify-center items-center origin-top animate-open-menu"
+      >
+        <div
+          class="container gap-y-5 flex flex-col w-[80vw] mx-auto bg-transparent pt-4 md:px-20"
+        >
+          <div
+            class="w-full flex items-center justify-between text-white md:px-5 md:py-5"
+          >
+            <p class="font-arvo text-xl text-nowrap">Les scéances dans mon cinéma</p>
+            <a href="#bottom">
+              <button class="text-6xl pb-3" id="close-search-theater-menu">
+                &times;
+              </button>
+            </a>
+          </div>
+
+          <form action="">
+            <div
+              class="flex items-center justify-between border border-gray-400/70 h-20 w-full bg-whiteOne px-4 pl-10"
+            >
+              <input
+                class="list-none font-arvo text-xl text-blueOne outline-none flex-1 bg-transparent"
+                placeholder="Choisir un cinéma"
+              />
+            </div>
+          </form>
+
+          <div class="container pt-3">
+            <p class="font-arvo text-lg text-white">TOUS LES CINÉMAS</p>
+
+            <ul
+              class="flex flex-col min-h-screen space-y-3  py-8"
+              aria-label="mobile"
+            >
+
+            <div class="relative">
+              <button class="group flex items-center space-x-2 hover:text-goldOne duration-200 justify-between text-nowrap px-3 font-arvo text-lg text-white w-60" id="quickaccess-1">
+                FRANCE (4 CINÉMAS)
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-white duration-200 group-hover:text-goldOne"
+                    width="1.9em"
+                    height="1.9em"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"
+                    />
+                  </svg>
+                </div>
+              </button>
+
+              <form action="">
+                <ul class="bg-transparent text-nowrap flex-col w-fit h-fit py-4 px-10 space-y-4 origin-top animate-open-menu  hidden" id="france-cinema-list">
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Ulis</li>
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Ulis</li>
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Ulis</li>
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Ulis</li>
+                </ul>
+              </form>
+            </div>
+            
+            <div class="relative">
+              <button class="group flex items-center space-x-2 hover:text-goldOne duration-200 justify-between text-nowrap px-3 font-arvo text-lg text-white w-60" id="quickaccess-2">
+                BELGIQUE (2 CINÉMAS)
+                <div>
+                  <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="text-white duration-200 group-hover:text-goldOne"
+                      width="1.9em"
+                      height="1.9em"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"
+                      />
+                    </svg>
+                </div>
+              </button>
+
+              <form action="">
+                <ul class="bg-transparent  text-nowrap flex-col w-fit h-fit py-4 px-10 space-y-4 origin-top animate-open-menu  hidden" id="belgium-cinema-list">
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Bruxelles</li>
+                    <li class="font-arvo cursor-pointer text-white hover:text-goldOne duration-200 ease-out  text-lg">Cinephoria Bruxelles</li>
+                </ul>
+              </form>
+            </div>
+      
+            </ul>
+          </div>
+
+        </div>
+      </section>
+</body>
+</html>

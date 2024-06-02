@@ -11,7 +11,25 @@ app.set('views', path.join(__dirname, '..', 'client', 'views'));
 
 // Application's routes
 app.get('/',(req, res) =>{
-    res.render('layouts/accueil');
-})
+    res.redirect('/accueil');
+});
+
+app.get('/accueil',(req, res) =>{
+    res.render('layouts/accueil', {
+        title: 'bienvenue à Cinéphoria.'
+    });
+});
+
+app.get('/reservation',(req, res) =>{
+    res.render('layouts/reservation', {
+        title: "Réserver un film."
+    });
+});
+
+app.get('/contact',(req, res) =>{
+    res.render('layouts/contact', {
+        title: "Contactez-nous."
+    });
+});
 
 module.exports = app;
