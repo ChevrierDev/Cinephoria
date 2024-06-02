@@ -25,6 +25,7 @@
         margin-left: calc(1.5rem); 
       }
     }
+    /* navbar  link active color animation */
     .nav::after {
       content: '';
       @apply bg-goldOne h-[3px] w-0 left-0 -bottom-[5px] rounded-xl absolute duration-300;
@@ -39,12 +40,16 @@
         @apply w-[100%];
     }
 
+        /* login form link active color animation */
       .form-link {
         @apply relative text-blueOne  font-extrabold text-center text-base md:text-xl;
     }
+      .form-link:hover h2 {
+        @apply text-goldOne;
+    }
     .form-link::after {
       content: '';
-      @apply bg-goldOne h-[3px] w-0 left-0 -bottom-[5px] rounded-xl absolute duration-300;
+      @apply bg-goldOne h-[3px] w-0 left-0 -bottom-[5px] rounded-xl absolute duration-700;
     }
     .form-link:hover::after {
       @apply w-[100%];
@@ -56,15 +61,41 @@
         @apply w-[100%];
     }
 
+    /* login form link color animation */
+    .text-fill {
+      position: relative;
+      display: inline-block;
+      color: #102C57; 
+      background: linear-gradient(to right, #102C57  50%, #E3B04B  50%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      background-position: 0 0; 
+      transition: background-position 0.7s ease;
+    }
+    
+    .form-link:hover .text-fill {
+      background-position: -100% 0;
+    }
+
+    .form-link.active .text-fill {
+      background-position: -100% 0; 
+      color: #E3B04B; 
+      -webkit-text-fill-color: #E3B04B;
+    }
+
+    /*section responsive */
     .section-min-height {
       min-height: calc(100vh - 68px);
     }
 
+    /*hamburger btn animation */
     .toggle-btn{
       @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45
       [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent  [&>div]:rotate-[720deg]
     }
 
+    /*custom checkbox */
     .custom-checkbox {
       @apply appearance-none h-6 w-6 border-2 border-gray-300 rounded-md focus:outline-none transition duration-200;
     }
@@ -82,4 +113,7 @@
       background-size: contain;
       transform: translate(-50%, -50%);
     }
+   
+    
+
   }
