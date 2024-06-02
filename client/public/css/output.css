@@ -796,6 +796,19 @@ video {
 .animate-open-menu{
   animation: open-menu 0.5s ease-in-out forwards;
 }
+@keyframes text-fill-animation{
+
+  0%{
+    background-position: 200% 0;
+  }
+
+  100%{
+    background-position: 0 0;
+  }
+}
+.animate-text-fill-animation{
+  animation: text-fill-animation 1.5s ease forwards;
+}
 .cursor-pointer{
   cursor: pointer;
 }
@@ -1161,6 +1174,7 @@ video {
         margin-left: calc(1.5rem); 
       }
     }
+/* navbar  link active color animation */
 .nav::after {
       content: '';
       position: absolute;
@@ -1183,6 +1197,7 @@ video {
 .nav.active::after{
   width: 100%;
 }
+/* login form link active color animation */
 .form-link{
   position: relative;
   text-align: center;
@@ -1199,6 +1214,10 @@ video {
     line-height: 1.75rem;
   }
 }
+.form-link:hover h2{
+  --tw-text-opacity: 1;
+  color: rgb(227 176 75 / var(--tw-text-opacity));
+}
 .form-link::after {
       content: '';
       position: absolute;
@@ -1209,7 +1228,7 @@ video {
       border-radius: 0.75rem;
       --tw-bg-opacity: 1;
       background-color: rgb(227 176 75 / var(--tw-bg-opacity));
-      transition-duration: 300ms;
+      transition-duration: 700ms;
     }
 .form-link:hover::after{
   width: 100%;
@@ -1221,6 +1240,28 @@ video {
 .form-link.active::after{
   width: 100%;
 }
+/* login form link color animation */
+.text-fill {
+      position: relative;
+      display: inline-block;
+      color: #102C57; 
+      background: linear-gradient(to right, #102C57  50%, #E3B04B  50%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      background-position: 0 0; 
+      transition: background-position 0.7s ease;
+    }
+.form-link:hover .text-fill {
+      background-position: -100% 0;
+    }
+.form-link.active .text-fill {
+      background-position: -100% 0; 
+      color: #E3B04B; 
+      -webkit-text-fill-color: #E3B04B;
+    }
+/*section responsive */
+/*hamburger btn animation */
 .toggle-btn>div::after{
   --tw-translate-y: 0px;
   --tw-rotate: -45deg;
@@ -1236,6 +1277,7 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   background-color: transparent;
 }
+/*custom checkbox */
 .custom-checkbox{
   height: 1.5rem;
   width: 1.5rem;
