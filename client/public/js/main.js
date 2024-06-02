@@ -15,6 +15,10 @@ const initApp = () => {
   const theaterMenu = document.getElementById("theater-menu");
   const closeTheaterMenuBtn = document.getElementById("close-search-theater-menu");
 
+  const openFilterBtn = document.querySelectorAll('.movies-filter');
+  const filterMenu = document.getElementById('filter-menu');
+  const closeFilterBtn = document.getElementById('close-filter-menu');
+
   const toggleHamburgerMenu = () => {
     mobileMenu.classList.toggle("hidden");
     mobileMenu.classList.toggle("flex");
@@ -34,21 +38,37 @@ const initApp = () => {
   const closeTheaterMenu = () => {
     theaterMenu.classList.toggle("hidden");
     theaterMenu.classList.toggle("flex");
-  }
+  };
 
   const openTheaterMenue = () => {
     theaterMenu.classList.toggle("hidden");
     theaterMenu.classList.toggle("flex");
-  }
+  };
+
+  const openFilterMenue = () => {
+    filterMenu.classList.toggle("hidden");
+    filterMenu.classList.toggle("flex");
+  };
+
+  const closeFilterMenue = () => {
+    filterMenu.classList.toggle("hidden");
+    filterMenu.classList.toggle("flex");
+  };
 
   hamburgerBtn.addEventListener("click", toggleHamburgerMenu);
   quickaccess1Btn.addEventListener("click", toggleFranceCinemaMenu);
   quickaccess2Btn.addEventListener("click", toggleBelgiumCinemaMenu);
   closeTheaterMenuBtn.addEventListener("click", closeTheaterMenu);
+  closeFilterBtn.addEventListener("click", closeFilterMenue);
+  
 
   openTheaterMenueBtn.forEach(btn => {
     btn.addEventListener('click', openTheaterMenue)
-  })
+  });
+
+  openFilterBtn.forEach(btn => {
+    btn.addEventListener('click', openFilterMenue)
+  });
 
 };
 

@@ -47,4 +47,22 @@
       @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45
       [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent  [&>div]:rotate-[720deg]
     }
+
+    .custom-checkbox {
+      @apply appearance-none h-6 w-6 border-2 border-gray-300 rounded-md focus:outline-none transition duration-200;
+    }
+    .custom-checkbox:checked {
+      @apply bg-goldOne border-transparent;
+    }
+    .custom-checkbox:checked::after {
+      content: '';
+      @apply absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px; 
+      height: 30px; 
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.285 6.707l-10.585 10.585-4.707-4.707 1.414-1.414 3.293 3.293 9.171-9.171 1.414 1.414z"/></svg>');
+      background-size: contain;
+      transform: translate(-50%, -50%);
+    }
   }

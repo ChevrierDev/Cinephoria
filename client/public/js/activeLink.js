@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         navLinks.forEach(link => {
             if (link.getAttribute("href") === path) {
                 link.parentElement.classList.add("active");
-            }
+            } 
         });
     }
 });
