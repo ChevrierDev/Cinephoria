@@ -6,7 +6,7 @@ const filmsRoutes = require('./routes/films/films.routes');
 const reservationRoutes = require('./routes//reservation/reservation.routes');
 const contactRoutes = require('./routes/contact/contact.routes');
 const loginFormRoutes = require('./routes/components/login-form.routes');
-const registerFormRoutes = require('./routes/components/register-form.routes')
+const registerFormRoutes = require('./routes/components/register-form.routes');
 
 const app = express();
 app.use(morgan("dev"));
