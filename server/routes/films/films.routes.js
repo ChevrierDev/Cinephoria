@@ -7,4 +7,10 @@ filmsRoutes.get('/',(req, res) =>{
     });
 });
 
+filmsRoutes.get('/disponibiliter',(req, res) =>{
+    res.render('layouts/films-sub-pages/movie-availability', {
+        title: 'Trouver une disponibilitée pour votre film.'
+    });
+});
+
 module.exports = filmsRoutes

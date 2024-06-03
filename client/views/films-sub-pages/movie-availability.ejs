@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="js/main.js"></script>
+    <script type="text/javascript" defer src="js/swipper.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="relative min-h-screen pb-20">
+    <header class="relative">
+      <!-- navbar section -->
+      <%- include('../components/nav-bar') %>
+
+      <!-- Slider main container -->
+      <div class="swiper main-slider h-[60vh]">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <img
+              src="images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+              alt="photo header"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+              alt="photo header"
+              class="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- main content -->
+    <main class="flex-grow">
+
+      <section class="font-arvo text-blueOne font-bold">
+        <div class="md:flex md:flex-row md:justify-between md:mx-28 md:my-16 md:items-center flex flex-col mt-10 mb-10">
+          <p class="text-3xl mb-10 md:mb-0">
+            NOUVEAUTÉS
+          </p>
+          <a href="#" class="flex items-center">
+            Tous les films à l’affiche
+            <span class="ml-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024">
+                <path fill="#102c60" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+  
+        <!-- latest movies carousel -->
+        <div class="mb-36 md:mb-14"><%- include('../components/latest-movies') %></div>
+      </section>
+    </main>
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+  </body>
+</html>
