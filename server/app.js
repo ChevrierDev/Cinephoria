@@ -1,6 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const accueilRoutes = require('./routes/accueil/accueil.routes');
+const filmsRoutes = require('./routes/films/films.routes');
+const reservationRoutes = require('./routes//reservation/reservation.routes');
+const contactRoutes = require('./routes/contact/contact.routes');
+const loginFormRoutes = require('./routes/components/login-form.routes');
+const registerFormRoutes = require('./routes/components/register-form.routes')
 
 const app = express();
 app.use(morgan("dev"));
@@ -13,31 +19,12 @@ app.set('views', path.join(__dirname, '..', 'client', 'views'));
 app.get('/',(req, res) =>{
     res.redirect('/accueil');
 });
+app.use('/accueil', accueilRoutes);
+app.use('/films', filmsRoutes);
+app.use('/reservation', reservationRoutes);
+app.use('/contact', contactRoutes);
 
-app.get('/accueil',(req, res) =>{
-    res.render('layouts/accueil', {
-        title: 'bienvenue à Cinéphoria.'
-    });
-});
-
-app.get('/films',(req, res) =>{
-    res.render('layouts/films', {
-        title: 'Les dernier films disponible.'
-    });
-});
-
-app.get('/reservation',(req, res) =>{
-    res.render('layouts/reservation', {
-        title: "Réserver un film."
-    });
-});
-
-app.get('/contact',(req, res) =>{
-    res.render('layouts/contact', {
-        title: "Contactez-nous."
-    });
-});
-
+//login route 
 app.get('/login',(req, res) =>{
     res.render('auth/login', {
         title: "Connectez-vous à votre compte."
@@ -45,12 +32,7 @@ app.get('/login',(req, res) =>{
 });
 
 //form components routes 
-app.get('/components/login-form.ejs', (req, res) => {
-    res.render('components/login-form');
-});
-
-app.get('/components/register-form.ejs', (req, res) => {
-    res.render('components/register-form');
-});
+app.use('/', loginFormRoutes);
+app.use('/', registerFormRoutes);
 
 module.exports = app;
