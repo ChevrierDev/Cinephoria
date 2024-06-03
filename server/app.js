@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const favicon = require('serve-favicon');
 const accueilRoutes = require('./routes/accueil/accueil.routes');
 const filmsRoutes = require('./routes/films/films.routes');
 const reservationRoutes = require('./routes//reservation/reservation.routes');
@@ -10,8 +11,9 @@ const registerFormRoutes = require('./routes/components/register-form.routes');
 
 const app = express();
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
+app.use(favicon(path.join(__dirname, '..', 'client', 'public', 'images', 'logo-blanc.png')))
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'client', 'views'));
 
