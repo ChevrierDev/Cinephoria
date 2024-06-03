@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setActiveLink(registerLink);
     });
 
-    function loadForm(url) {
-        fetch(url)
+    function loadForm(form) {
+        fetch(form)
             .then(response => response.text())
             .then(data => {
                 formContainer.innerHTML = data;

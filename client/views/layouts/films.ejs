@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" src="js/main.js" defer></script>
+    <script type="text/javascript" src="js/swipper.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="relative min-h-screen pb-20 overflow-x-hidden" id="top">
+    <header class="relative space-y-16">
+      <!-- navbar section -->
+      <%- include('../components/nav-bar') %>
+
+      <!-- DESKTOP search theater and movies filter  -->
+      <section class="w-full hidden mt-10 md:block">
+        <div class="container gap-y-7 w-fit mx-auto flex flex-col">
+          <div class="container flex space-x-4 mx-auto">
+            <div class="flex relative">
+
+              <a href="#top">
+                <button class="theater-filter">
+                  <div class="flex items-center justify-between cursor-pointer border border-gray-400/70 h-20 w-[80vw] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation">
+                    <li class="list-none font-arvo text-blueOne">
+                      Choisir un cinéma
+                    </li>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-blueOne" width="1.9em" height="1.9em" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"/>
+                    </svg>
+                  </div>
+                </button>
+                
+              </a>
+
+              <div
+                class="bg-goldOne w-12 h-10 flex items-center justify-center absolute -left-5 top-1/2 transform -translate-y-1/2 -rotate-12"
+              >
+                <p class="text-white font-arvo rotate-12 font-bold">Où ?</p>
+              </div>
+            </div>
+
+            <!-- filter movies -->
+            <a href="#top" class=" flex items-center">
+              <button class="movies-filter">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="text-blueOne"
+                  width="50"
+                  height="50"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#102c57"
+                    d="M22 18.605a.75.75 0 0 1-.75.75h-5.1a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h7.74a2.93 2.93 0 0 1 5.66 0h5.1a.75.75 0 0 1 .75.75m0-13.21a.75.75 0 0 1-.75.75H18.8a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h10.39a2.93 2.93 0 0 1 5.66 0h2.45a.74.74 0 0 1 .75.75m0 6.6a.74.74 0 0 1-.75.75H9.55a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h1.14a2.93 2.93 0 0 1 5.66 0h11.7a.75.75 0 0 1 .75.75"
+                  />
+                </svg>
+              </button>
+            </a>
+           
+          </div>
+
+          
+        </div>
+      </section>
+
+      <!-- Slider main container -->
+      <div class="swiper main-slider h-[60vh]">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <img
+              src="images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+              alt="photo header"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+              alt="photo header"
+              class="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- main content -->
+    <main class="flex-grow pt-6">
+      <div id="bottom"></div>
+      
+
+        <!-- MOBILE search theater and movies filter  -->
+        <section class="w-full flex flex-col mt-10 md:hidden">
+            <div class="container gap-y-5 flex flex-col px-3 w-fit mx-auto">
+            <!-- filter theater input -->
+            <div class="container space-x-4 flex w-fit mx-auto">
+                
+                <a href="#top">
+                    <div class="flex">
+                    <button  class="theater-filter">
+                    <div
+                        class="flex items-center justify-between cursor-pointer border border-gray-400/70 h-20 w-[80vw] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/30 bg-[length:200%_100%] hover:animate-bg-fill-animation"
+                    >
+                        <li class="list-none font-arvo text-blueOne">
+                        Choisir un cinéma
+                        </li>
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="text-blueOne"
+                        width="1.9em"
+                        height="1.9em"
+                        viewBox="0 0 24 24"
+                        >
+                        <path
+                            fill="currentColor"
+                            d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"
+                        />
+                        </svg>
+                    </div>
+                    </button>
+                </div>
+                </a>
+                
+
+                <!-- filter movies -->
+                <a href="#top" class="flex items-center">
+                <button  class="movies-filter">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-blueOne"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 24 24"
+                    >
+                    <path
+                        fill="#102c57"
+                        d="M22 18.605a.75.75 0 0 1-.75.75h-5.1a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h7.74a2.93 2.93 0 0 1 5.66 0h5.1a.75.75 0 0 1 .75.75m0-13.21a.75.75 0 0 1-.75.75H18.8a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h10.39a2.93 2.93 0 0 1 5.66 0h2.45a.74.74 0 0 1 .75.75m0 6.6a.74.74 0 0 1-.75.75H9.55a2.93 2.93 0 0 1-5.66 0H2.75a.75.75 0 1 1 0-1.5h1.14a2.93 2.93 0 0 1 5.66 0h11.7a.75.75 0 0 1 .75.75"
+                    />
+                    </svg>
+                </button>
+                </a>
+                
+            </div>
+
+            <div class="container w-fit">
+                <a href="#top">
+                <button
+                class="flex items-center justify-between space-x-4 open-search-movies"
+                >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-blueOne"
+                    width="1.5em"
+                    height="1.5em"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                    fill="currentColor"
+                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
+                    />
+                </svg>
+                <p class="text-blueOne font-arvo font-bold text-sm">
+                    RECHERCHER UN FILM
+                </p>
+                </button>
+                </a>
+            </div>
+            </div>
+        
+        </section>
+
+        <!-- search movies menu -->
+        <section>
+            <%- include('../components/search-movies-menu') %>
+        </section>
+
+        <!-- filter menue section -->
+        <section>
+            <%- include('../components/filter-menu') %>
+        </section>
+
+        <!-- current  theater movies -->
+        <section  class="mt-16">
+
+            <div class="container hidden w-full px-16 md:block">
+                <div class="container w-fit ">
+                    <a href="#top">
+                        <button
+                            class="flex items-center justify-between space-x-3 open-search-movies"
+                        >
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="text-blueOne"
+                            width="2em"
+                            height="2em"
+                            viewBox="0 0 24 24"
+                            >
+                            <path
+                                fill="currentColor"
+                                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
+                            />
+                            </svg>
+                            <p class="text-blueOne font-arvo font-bold text-lg">
+                            RECHERCHER UN FILM
+                            </p>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <p class="text-3xl mx-28 my-16 font-arvo text-blueOne font-bold">
+                NOUVEAUTÉS
+            </p>
+    
+            <!-- latest movies carousel -->
+            <div >
+                <%- include('../components/latest-movies') %>
+            </div>
+        </section>
+
+        <!-- Now playing movies -->
+        <section class="bg-whiteOne py-1 mt-16">
+
+            <p class="text-3xl mx-28 my-16 font-arvo text-blueOne font-bold">
+                A L'AFFICHE
+            </p>
+
+            <div >
+                <%- include('../components/now-playing-movies') %>
+            </div>
+
+        </section>
+
+
+      <!-- search theater dropdown  -->
+      <%- include('../components/searchTheaterMenu') %>
+    </main>
+
+    <!-- footer section -->
+    <footer class=""><%- include('../components/footer') %></footer>
+  </body>
+</html>

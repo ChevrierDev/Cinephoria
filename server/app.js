@@ -20,6 +20,12 @@ app.get('/accueil',(req, res) =>{
     });
 });
 
+app.get('/films',(req, res) =>{
+    res.render('layouts/films', {
+        title: 'Les dernier films disponible.'
+    });
+});
+
 app.get('/reservation',(req, res) =>{
     res.render('layouts/reservation', {
         title: "Réserver un film."
