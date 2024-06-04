@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="../images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="../js/main.js"></script>
+    <script type="text/javascript" defer src="../js/swipper.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/form-switcher.js" defer></script>
+    <script src="../js/activeLink.js" defer></script>
+  </head>
+  <body class="relative min-h-screen pb-20">
+    <header class="relative">
+      <!-- navbar section -->
+      <%- include('../components/nav-bar') %>
+
+      <!-- Slider main container -->
+      <section class="hidden md:block relative">
+        <div class="swiper hidden main-slider h-[60vh] ">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class=" h-full w-[25vw] absolute flex flex-col top-0 z-40 ">
+       
+
+        </div>
+        <div class=" h-full w-[25vw] absolute flex flex-col top-0  z-40 pl-6">
+          <!-- movie detail -->
+        <div class="container flex flex-col h-full  w-[40vw] justify-start items-start space-y-6 py-8">
+          <!-- movie title -->
+          <h1 class="font-arvo text-white font-bold text-4xl">
+            Blade Runner
+          </h1>
+
+          <!-- movie score button-->
+          <button class="w-28 h-12 bg-blueOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
+            <div class="mb-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="white" d="M20 8h-5.612l1.123-3.367c.202-.608.1-1.282-.275-1.802S14.253 2 13.612 2H12c-.297 0-.578.132-.769.36L6.531 8H4c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h13.307a2.01 2.01 0 0 0 1.873-1.298l2.757-7.351A1 1 0 0 0 22 12v-2c0-1.103-.897-2-2-2M4 10h2v9H4zm16 1.819L17.307 19H8V9.362L12.468 4h1.146l-1.562 4.683A.998.998 0 0 0 13 10h7z"/></svg>
+            </div>
+            <p class="font-arvo text-white text-xl font-bold">
+              Noter
+            </p>
+          </button>
+
+          <!-- movie info -->
+          <div class="flex items-center space-x-3 text-xs">
+
+            <div class="flex items-center space-x-1">
+              <div class="mb-1 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M11.277 4.781A4 4 0 0 1 14.606 3h.213a2 2 0 0 1 1.973 2.329L16.18 9h2.38a3 3 0 0 1 2.942 3.588l-1.2 6A3 3 0 0 1 17.36 21H6a3 3 0 0 1-3-3v-8a1 1 0 0 1 1-1h3.93a1 1 0 0 0 .832-.445zM7 11H5v7a1 1 0 0 0 1 1h1z" clip-rule="evenodd"/></svg>
+              </div>
+              <p class="text-white font-arvo font-bold">248</p>
+            </div>
+
+            <p class="font-arvo text-white font-bold">1h31</p>
+            <p class="font-arvo text-white font-bold">Science-fiction</p>
+
+          </div>
+
+          <div class="container text-nowrap flex flex-col text-xs">
+            <p class="font-arvo text-white font-bold">Sortie : 01 mai 2024</p>
+            <p class="font-arvo text-white font-bold">Avec Ryan Gosling, Harrison Ford, de Denis Villeneuve </p>
+          </div>
+
+          <div class="container">
+            <p class="font-arvo text-white text-xs w-[50%]">
+              En 2049, la société est fragilisée par les nombreuses tensions entre les humains et leurs esclaves créés par bio-ingénierie. L'officier K est un blade runner: il fait partie d'une force...
+            </p>
+          </div>
+
+          <!-- movie reservation button -->
+          <button class="w-36 h-14  cursor-none bg-goldOne p-1 space-x-2 flex items-center justify-center ease-out">
+            <p class="font-arvo text-white text-xl font-bold">
+              Séance  : 15€
+            </p>
+          </button>
+
+        </div>
+
+
+        </div>
+
+      </section>
+      
+    </header>
+
+    <!-- return back button -->
+    <a href="/reservation" class="fixed z-40 top-11">
+      <div class=" w-12 h-10 flex items-center font-bold justify-center hover:scale-x-125 duration-200 text-white bg-blueOne ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="26" viewBox="0 0 24 24"><path fill="white" d="M16.62 2.99a1.25 1.25 0 0 0-1.77 0L6.54 11.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.38 12l7.25-7.25c.48-.48.48-1.28-.01-1.76"/></svg>
+      </div>
+    </a>
+
+    <!-- main content -->
+    <main class="flex-grow">
+
+      <!-- select days section -->
+      <section class="w-full flex justify-around py-4 mt-10 px-4">
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-gray-400/80">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-gray-400/80">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-gray-400/80">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-gray-400/80">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-blueOne">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-blueOne">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-blueOne">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Mai
+            </p>
+          </div>
+        </div>
+
+        <div class="flex w-[10%] shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Ven.
+            </p>
+            <p class="font-arvo font-bold w-full text-center text-2xl text-blueOne">
+              03
+            </p>
+            <p class="font-arvo w-full text-center font-bold text-blueOne">
+              Mai
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- select hours section -->
+      <section class="w-full  mt-20">
+
+        <div class="container flex pl-20 space-x-5 items-center justify-start w-full">
+          <h1 class="font-arvo text-blueOne font-bold text-2xl">
+            Cinéphoria Les Halles
+          </h1>
+          <!-- filter -->
+          <form action="" class="space-x-3">
+
+            <select name="" id="" class=" border-2 font-arvo outline-none h-8 cursor-pointer border-gray-200 w-20 ">
+              <option value="">4K</option>
+              <option value="">3D</option>
+              <option value="">4DX</option>
+            </select>
+
+            <select name="" id="" class=" border-2 font-arvo outline-none h-8 cursor-pointer border-gray-200 w-64">
+              <option value="">Choisir le nombre de places</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+              <option value="">6</option>
+              <option value="">7</option>
+              <option value="">8</option>
+              <option value="">9</option>
+              <option value="">10</option>
+            </select>
+          </form>
+        </div>
+
+      </section>
+
+      <!-- disponibility component section -->
+      <section  class="w-full flex gap-x-6  py-4 mt-16 px-7">
+
+        <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
+          <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
+            <h3 class="font-arvo font-bold text-lg text-blueOne">
+              15 : 30
+            </h3>
+            <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+          </div>
+          <div class="flex items-center space-y-3 justify-center flex-col">
+            <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
+              (fin  17:01)
+            </p>
+            <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
+              <p>Salle</p>
+              <p>2</p>
+            </div>
+          </div>
+        </div>
+        <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
+          <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
+            <h3 class="font-arvo font-bold text-lg text-blueOne">
+              15 : 30
+            </h3>
+            <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+          </div>
+          <div class="flex items-center space-y-3 justify-center flex-col">
+            <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
+              (fin  17:01)
+            </p>
+            <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
+              <p>Salle</p>
+              <p>2</p>
+            </div>
+          </div>
+        </div>
+        <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
+          <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
+            <h3 class="font-arvo font-bold text-lg text-blueOne">
+              15 : 30
+            </h3>
+            <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+          </div>
+          <div class="flex items-center space-y-3 justify-center flex-col">
+            <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
+              (fin  17:01)
+            </p>
+            <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
+              <p>Salle</p>
+              <p>2</p>
+            </div>
+          </div>
+        </div>
+        <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
+          <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
+            <h3 class="font-arvo font-bold text-lg text-blueOne">
+              15 : 30
+            </h3>
+            <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+          </div>
+          <div class="flex items-center space-y-3 justify-center flex-col">
+            <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
+              (fin  17:01)
+            </p>
+            <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
+              <p>Salle</p>
+              <p>2</p>
+            </div>
+          </div>
+        </div>
+        <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
+          <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
+            <h3 class="font-arvo font-bold text-lg text-blueOne">
+              15 : 30
+            </h3>
+            <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+          </div>
+          <div class="flex items-center space-y-3 justify-center flex-col">
+            <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
+              (fin  17:01)
+            </p>
+            <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
+              <p>Salle</p>
+              <p>2</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      
+    </main>
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+  </body>
+</html>
