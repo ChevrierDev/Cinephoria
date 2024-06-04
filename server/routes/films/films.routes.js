@@ -7,7 +7,7 @@ filmsRoutes.get('/',(req, res) =>{
     });
 });
 filmsRoutes.get('/disponibiliter',(req, res) =>{
-    res.render('layouts/movie-availability', {
+    res.render('film/movie-availability', {
         title: 'Les derniers films disponible.'
     });
 });

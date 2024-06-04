@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="../images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="../js/main.js"></script>
+    <script type="text/javascript" defer src="../js/swipper.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/form-switcher.js" defer></script>
+    <script src="../js/activeLink.js" defer></script>
+  </head>
+  <body class="relative min-h-screen pb-20">
+    <header class="relative">
+      <!-- navbar section -->
+      <%- include('../components/nav-bar') %>
+
+      <!-- Slider main container -->
+      <section class="hidden md:block">
+        <div class="swiper hidden main-slider h-[60vh] ">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+
+      </section>
+      
+    </header>
+
+    <!-- return back button -->
+    <a href="/films" class="fixed z-40 top-11">
+      <div class=" w-12 h-10 flex items-center font-bold justify-center hover:scale-x-125 duration-200 text-white bg-blueOne ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="26" viewBox="0 0 24 24"><path fill="white" d="M16.62 2.99a1.25 1.25 0 0 0-1.77 0L6.54 11.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.38 12l7.25-7.25c.48-.48.48-1.28-.01-1.76"/></svg>
+      </div>
+    </a>
+
+    <!-- main content -->
+    <main class="flex-grow">
+      <!-- movie description section -->
+      <section>
+        <%- include('../components/movie-details') %>
+      </section>
+
+      
+      <section class="w-full  flex flex-col mt-28">
+
+        <div class="container  mx-auto w-[50vw]">
+          <h1 class="font-arvo text-blueOne font-semibold text-3xl">
+            CINEMAS
+          </h1>
+        </div>
+
+        <!-- choose country section -->
+        <div class="container flex items-center justify-center space-x-16  mt-14 mx-auto w-[50vw]">
+            <a href="/login" id="login-link" class="form-link active">
+                <h2 class="text-fill  text-blueOne font-extrabold  text-center tracking-wider">FRANCE</h2>
+            </a>
+            <a href="/register" id="register-link" class="form-link">
+                <h2 class="text-fill  text-blueOne font-extrabold  text-center tracking-wider">BELGIQUE</h2>
+            </a>
+        </div>
+
+        <!-- Current days projection -->
+        <div class="w-full  bg-gray-200/60 h-[10vh] mt-1">
+          <div class="mx-auto flex flex-col justify-end h-full w-[50vw]">
+            <h1 class="font-arvo text-redOne font-semibold text-xl h-fit py-4">
+              DIM. 05 MAI
+            </h1>
+            <hr class="w-28 h-1 ml-2 rounded-xl bg-redOne">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- cinema & hours section -->
+      <section class="w-full  flex flex-col mt-14" id="theater-section">
+        <%- include('../components/france-theater-card') %>
+      </section>
+    </main>
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+  </body>
+</html>

@@ -63,6 +63,7 @@
 
     /* login form link color animation */
     .text-fill {
+      @apply font-arvo text-2xl;
       position: relative;
       display: inline-block;
       color: #102C57; 
