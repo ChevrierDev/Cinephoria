@@ -25,46 +25,43 @@
       <%- include('../components/nav-bar') %>
 
       <!-- Slider main container -->
-      <div class="swiper main-slider h-[60vh]">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <!-- Slides -->
-          <div class="swiper-slide">
-            <img
-              src="../images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
-              alt="photo header"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <div class="swiper-slide">
-            <img
-              src="../images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
-              alt="photo header"
-              class="object-cover w-full h-full"
-            />
+      <section class="hidden md:block">
+        <div class="swiper hidden main-slider h-[60vh] ">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
+            <div class="swiper-slide">
+              <img
+                src="../images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+                alt="photo header"
+                class="object-cover w-full h-full"
+              />
+            </div>
           </div>
         </div>
-      </div>
+
+      </section>
+      
     </header>
 
     <!-- main content -->
     <main class="flex-grow">
+      <!-- movie description section -->
+      <section>
+        <%- include('../components/movie-details') %>
+      </section>
 
-      <section class="font-arvo text-blueOne font-bold">
-        <div class="md:flex md:flex-row md:justify-between md:mx-28 md:my-16 md:items-center flex flex-col mt-10 mb-10">
-          <p class="text-3xl mb-10 md:mb-0">
-            NOUVEAUTÉS
-          </p>
-          <a href="#" class="flex items-center">
-            Tous les films à l’affiche
-            <span class="ml-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024">
-                <path fill="#102c60" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"/>
-              </svg>
-            </span>
-          </a>
-        </div>
-  
+      <!-- choose country section -->
+      <section class="w-full flex flex-col  mt-28">
+
+
 
       </section>
     </main>
