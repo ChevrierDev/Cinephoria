@@ -9,7 +9,8 @@ module.exports = {
         redOne: '#C10E0E',
         whiteOne: '#FEFAF6',
         creamOne: '#EADBC8',
-        beigeOne: '#DAC0A3'
+        beigeOne: '#DAC0A3',
+        simpleBlue: '#2360bd',
       },
       fontFamily: {
         "arvo": ["Arvo", "serif"]
