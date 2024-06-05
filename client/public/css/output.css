@@ -541,6 +541,9 @@ video {
     max-width: 1536px;
   }
 }
+.pointer-events-none{
+  pointer-events: none;
+}
 .fixed{
   position: fixed;
 }
@@ -589,6 +592,51 @@ video {
 .top-\[130px\]{
   top: 130px;
 }
+.bottom-10{
+  bottom: 2.5rem;
+}
+.bottom-20{
+  bottom: 5rem;
+}
+.top-10{
+  top: 2.5rem;
+}
+.top-20{
+  top: 5rem;
+}
+.right-5{
+  right: 1.25rem;
+}
+.-top-2{
+  top: -0.5rem;
+}
+.-top-4{
+  top: -1rem;
+}
+.top-28{
+  top: 7rem;
+}
+.right-1\/2{
+  right: 50%;
+}
+.left-1\/2{
+  left: 50%;
+}
+.-bottom-10{
+  bottom: -2.5rem;
+}
+.-bottom-12{
+  bottom: -3rem;
+}
+.bottom-1\/2{
+  bottom: 50%;
+}
+.right-4{
+  right: 1rem;
+}
+.top-2{
+  top: 0.5rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -601,8 +649,29 @@ video {
 .z-40{
   z-index: 40;
 }
+.-z-10{
+  z-index: -10;
+}
+.z-\[-1\]{
+  z-index: -1;
+}
+.z-30{
+  z-index: 30;
+}
+.z-50{
+  z-index: 50;
+}
 .-order-1{
   order: -1;
+}
+.order-1{
+  order: 1;
+}
+.order-2{
+  order: 2;
+}
+.order-4{
+  order: 4;
 }
 .m-0{
   margin: 0px;
@@ -741,6 +810,12 @@ video {
 .mt-\[600px\]{
   margin-top: 600px;
 }
+.ml-3{
+  margin-left: 0.75rem;
+}
+.mt-\[5000px\]{
+  margin-top: 5000px;
+}
 .block{
   display: block;
 }
@@ -853,6 +928,15 @@ video {
 .h-screen{
   height: 100vh;
 }
+.h-\[100vh\]{
+  height: 100vh;
+}
+.h-3{
+  height: 0.75rem;
+}
+.h-\[100\%\]{
+  height: 100%;
+}
 .max-h-\[30vh\]{
   max-height: 30vh;
 }
@@ -867,6 +951,15 @@ video {
 }
 .min-h-\[80\%\]{
   min-height: 80%;
+}
+.min-h-\[30\%\]{
+  min-height: 30%;
+}
+.min-h-\[50\%\]{
+  min-height: 50%;
+}
+.min-h-\[60\%\]{
+  min-height: 60%;
 }
 .w-12{
   width: 3rem;
@@ -983,6 +1076,12 @@ video {
 .w-\[2\%\]{
   width: 2%;
 }
+.w-\[40\%\]{
+  width: 40%;
+}
+.w-10{
+  width: 2.5rem;
+}
 .max-w-36{
   max-width: 9rem;
 }
@@ -1003,6 +1102,26 @@ video {
 }
 .-translate-y-1\/2{
   --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-1\/2{
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-52{
+  --tw-translate-x: -13rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-10{
+  --tw-translate-x: -2.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-0{
+  --tw-translate-x: -0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-x-1\/3{
+  --tw-translate-x: -33.333333%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .-rotate-12{
@@ -1176,6 +1295,26 @@ video {
   margin-right: calc(0.125rem * var(--tw-space-x-reverse));
   margin-left: calc(0.125rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-y-1 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+.space-y-5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+.space-y-8 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+.space-y-12 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
 .overflow-hidden{
   overflow: hidden;
 }
@@ -1199,6 +1338,9 @@ video {
 }
 .rounded-xl{
   border-radius: 0.75rem;
+}
+.rounded-full{
+  border-radius: 9999px;
 }
 .rounded-tl-xl{
   border-top-left-radius: 0.75rem;
@@ -1307,6 +1449,10 @@ video {
 }
 .bg-black\/65{
   background-color: rgb(0 0 0 / 0.65);
+}
+.bg-\[\#060F1E\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 15 30 / var(--tw-bg-opacity));
 }
 .from-whiteOne{
   --tw-gradient-from: #FEFAF6 var(--tw-gradient-from-position);
@@ -1447,6 +1593,9 @@ video {
 .pt-10{
   padding-top: 2.5rem;
 }
+.pt-5{
+  padding-top: 1.25rem;
+}
 .text-center{
   text-align: center;
 }
@@ -1571,6 +1720,9 @@ video {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+.outline{
+  outline-style: solid;
+}
 .outline-dashed{
   outline-style: dashed;
 }
@@ -1584,6 +1736,14 @@ video {
   --tw-blur: blur(12px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+.blur-sm{
+  --tw-blur: blur(4px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.blur{
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
 .saturate-100{
   --tw-saturate: saturate(1);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -1594,6 +1754,9 @@ video {
 }
 .filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter-none{
+  filter: none;
 }
 .transition{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -1943,6 +2106,21 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\:-translate-x-96:hover{
+  --tw-translate-x: -24rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:rotate-180:hover{
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:rotate-\[360deg\]:hover{
+  --tw-rotate: 360deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\:scale-105:hover{
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -1952,6 +2130,18 @@ video {
 .hover\:scale-95:hover{
   --tw-scale-x: .95;
   --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:scale-125:hover{
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:scale-110:hover{
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2037,6 +2227,11 @@ video {
     margin-bottom: 4rem;
   }
 
+  .md\:mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .md\:mb-0{
     margin-bottom: 0px;
   }
@@ -2083,6 +2278,34 @@ video {
 
   .md\:mt-40{
     margin-top: 10rem;
+  }
+
+  .md\:-mt-10{
+    margin-top: -2.5rem;
+  }
+
+  .md\:-mt-14{
+    margin-top: -3.5rem;
+  }
+
+  .md\:-mt-16{
+    margin-top: -4rem;
+  }
+
+  .md\:-mt-1{
+    margin-top: -0.25rem;
+  }
+
+  .md\:-mt-3{
+    margin-top: -0.75rem;
+  }
+
+  .md\:-mt-5{
+    margin-top: -1.25rem;
+  }
+
+  .md\:-mt-4{
+    margin-top: -1rem;
   }
 
   .md\:block{
@@ -2157,6 +2380,18 @@ video {
     width: 18%;
   }
 
+  .md\:w-full{
+    width: 100%;
+  }
+
+  .md\:w-\[70\%\]{
+    width: 70%;
+  }
+
+  .md\:w-\[80\%\]{
+    width: 80%;
+  }
+
   .md\:max-w-2xl{
     max-width: 42rem;
   }
@@ -2222,6 +2457,30 @@ video {
     --tw-space-x-reverse: 0;
     margin-right: calc(0px * var(--tw-space-x-reverse));
     margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:-space-x-10 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(-2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(-2.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:-space-x-40 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(-10rem * var(--tw-space-x-reverse));
+    margin-left: calc(-10rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:-space-x-52 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(-13rem * var(--tw-space-x-reverse));
+    margin-left: calc(-13rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:-space-x-20 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(-5rem * var(--tw-space-x-reverse));
+    margin-left: calc(-5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .md\:px-20{
