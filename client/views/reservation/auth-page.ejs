@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="../images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="../js/main.js"></script>
+    <script type="text/javascript" defer src="../js/swipper.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/form-switcher.js" defer></script>
+    <script src="../js/activeLink.js" defer></script>
+    <style>
+   
+  </style>
+  </head>
+  <body class="relative min-h-screen pb-20">
+    <header class="relative">
+        <!-- navbar section -->
+        <%- include('../components/nav-bar') %>
+
+        <!-- Slider main container -->
+        <section class=" relative">
+
+            <div class="swiper hidden main-slider h-[60vh] ">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                <img
+                    src="../images/films/blade-runner.jpeg"
+                    alt="photo header"
+                    class="object-cover w-full h-full"
+                />
+                </div>
+                
+            </div>
+            </div>
+
+            <div class=" h-full w-full bg-black/65 blur-md  absolute flex flex-col top-0 z-40 ">
+                
+
+            </div>
+            
+            <div class=" h-full w-full items-center gap-y-3 justify-start absolute flex flex-col top-0 z-40  pt-4 md:flex-row md:gap-y-0 ">
+                
+                
+                <div class="container mx-auto w-[20%] min-h-[40%] md:h-[80%] md:w-[15%]">
+                    <img src="../images/films/blade-runner.jpeg" class="object-cover h-full" alt="">
+                </div>
+                
+                <div class="container flex flex-col items-center justify-center space-y-2 bg-whiteOne rounded-tl-3xl rounded-br-3xl mx-auto w-[30%] h-[25%] md:w-[18%] md:h-[35%]">
+                    <h1 class="font-arvo font-bold text-lg text-blueOne">Blade Runner</h1>
+                    <p class="font-arvo text-sm text-blueOne text-nowrap">Cinéphoria Les Halles</p>
+                    <p class="font-arvo text-xs text-blueOne">Accès bus</p>
+                    
+                </div>
+                
+                <div class="container flex flex-col items-center justify-center space-y-2 bg-blueOne rounded-tl-3xl rounded-br-3xl mx-auto w-[30%] h-[25%] md:w-[18%] md:h-[35%]">
+                    <h1 class="font-arvo  text-lg text-white">07/05-19:45</h1>
+                    <p class="font-arvo text-sm text-white">(fin 21:16)</p>
+                    <p class="font-arvo font-bold text-xs text-white">VF</p>
+                </div>
+
+               
+
+            </div>
+            
+          
+
+        </section>
+      
+    </header>
+
+    <!-- main content -->
+    <main class=" h-screen">
+
+    <!-- connection container -->
+    <section class="flex flex-col items-center justify-center">
+
+        <div class="w-full max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+
+            <div class="font-arvo px-10 pt-20  w-full  ">
+                <h1 class="text-blueOne font-extrabold text-center text-2xl mb-20 md:text-3xl">CONNEXION</h1>
+    
+                <div class="flex space-x-4 justify-between mb-16">
+                    <a href="/login" id="login-link" class="form-link active">
+                        <h2 class="text-fill  text-blueOne font-extrabold text-center text-base md:text-xl">JE M'IDENTIFIE</h2>
+                    </a>
+                    <a href="/register" id="register-link" class="form-link">
+                        <h2 class="text-fill  text-blueOne font-extrabold text-center text-base md:text-xl">JE CRÉE UN COMPTE</h2>
+                    </a>
+                </div>
+            </div>
+    
+            <!-- login and register form -->
+            <div class=""  id="form-container">
+                <%- include('../components/login-form') %>
+            </div>
+            
+        </div>
+
+    </section>
+    
+      
+    </main>
+    <!-- footer section -->
+    <section class=" mt-40 md:mt-0">
+        <%- include('../components/footer') %>
+    </section>
+  </body>
+</html>

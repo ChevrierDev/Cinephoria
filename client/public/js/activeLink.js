@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
             break;
         case "/reservation":
         case "/reservation/choisir-sceance":
+        case "/reservation/login":
             setActiveLink("/reservation");
             break;
         case "/contact":
