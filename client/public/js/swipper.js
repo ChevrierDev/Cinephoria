@@ -70,6 +70,60 @@ const initSwipper = () => {
         },
       },
     });
+    const chooseMovieSlider = new Swiper(".choose-days-slider", {
+      slidesPerView: 5,
+      spaceBetween: -100,
+      loop: true,
+      grabCursor: true,
+     
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        180: {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        680: {
+          slidesPerView: 3,
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        1280: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        1536: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+      },
+      on: {
+        slideChangeTransitionEnd: function () {
+          const slides = document.querySelectorAll(".swiper-slide");
+          slides.forEach((slide) => {
+            slide.style.transition = "none";
+            if (slide.classList.contains("swiper-slide-duplicate")) {
+              slide.style.transform = "translateX(0px)";
+            }
+          });
+        },
+      },
+    });
+
+   
   
   };
   
