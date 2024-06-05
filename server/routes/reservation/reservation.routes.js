@@ -13,6 +13,12 @@ reservationRoutes.get('/choisir-sceance',(req, res) =>{
     });
 });
 
+reservationRoutes.get('/login',(req, res) =>{
+    res.render('reservation/auth-page', {
+        title: "Connectez-vous ou créer un compte."
+    });
+});
+
 
 
 module.exports = reservationRoutes
