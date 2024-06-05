@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="../images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="../js/main.js"></script>
+    <script type="text/javascript" defer src="../js/swipper.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/form-switcher.js" defer></script>
+    <script src="../js/activeLink.js" defer></script>
+    <style>
+   
+  </style>
+  </head>
+  <body class="relative min-h-screen pb-20 overflow-x-hidden">
+    <header class="relative">
+        <!-- navbar section -->
+        <%- include('../components/nav-bar') %>
+
+        <!-- Slider main container -->
+        <section class=" relative">
+
+            <div class="swiper hidden main-slider h-[60vh] ">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                <img
+                    src="../images/films/blade-runner.jpeg"
+                    alt="photo header"
+                    class="object-cover w-full h-full"
+                />
+                </div>
+                
+            </div>
+            </div>
+
+            <div class=" h-full w-full bg-black/65 blur-md  absolute flex flex-col top-0 z-40 ">
+                
+
+            </div>
+            
+            <div class=" h-full w-full items-center gap-y-3 justify-start absolute flex flex-col top-0 z-40  pt-8 md:gap-y-0 ">
+                
+                
+                <div class="container mx-auto w-[30%] min-h-[80%] md:h-[80%] md:w-[15%]">
+                    <img src="../images/films/blade-runner.jpeg" class="object-cover w-full h-full" alt="">
+                </div>
+
+                <h1 class="font-arvo tracking-wider font-bold text-2xl text-white">Blade Runner</h1>
+                    
+            </div>
+            
+        </section>
+      
+    </header>
+
+    <!-- main content -->
+    <main class=" flex-grow h-screen">
+
+        <!-- session information -->
+        <section class="flex flex-col w-full ">
+            
+            <div class=" px-5 mx-auto bg-blueOne  w-full  border-t border-b  border-gray-400 flex flex-col space-y-2 items-start justify-center h-fit py-4">
+                <h1 class="font-arvo text-white text-lg">Cinéma</h1>
+                <h2 class="font-arvo text-white text-2xl font-bold">Cinéphoria les Halles</h2>
+            </div>
+
+            <div class=" px-5 mx-auto bg-blueOne  w-full  border-t border-b  border-gray-400 flex flex-col space-y-2 items-start justify-center h-fit py-4">
+                <h1 class="font-arvo text-white text-lg">Date</h1>
+                <h2 class="font-arvo text-white text-2xl font-bold">Mardi 07 Mai 2024</h2>
+            </div>
+
+            <div class=" px-5 mx-auto bg-blueOne  w-full  border-t border-b  border-gray-400 flex flex-col space-y-2 items-start justify-center h-fit py-4">
+                <h1 class="font-arvo text-white text-lg">Scéance</h1>
+                <h2 class="font-arvo text-white text-2xl font-bold">19:45 VF</h2>
+                <p class="font-arvo font-light text-white text-xs">Fin prévue à 21:16</p>
+            </div>
+
+        </section>
+       
+        <!-- choose your seat section -->
+        <section class=" h-full relative">
+            <video class="background-video" autoplay muted loop>
+                <source src="../video/blade-runner.mp4" type="video/mp4">
+            </video>
+    
+            
+            <div class="container md:pt-10  flex flex-col items-center mx-auto w-full space-y-7">
+                <h1 class="font-arvo font-bold text-blueOne text-4xl">Sélectionnez vos places</h1>
+                <p class="font-arvo text-blueOne text-xl">160 places libres</p>
+            </div>
+
+            <!-- seat map and selection -->
+            <div class="screen text-blueOne mx-auto mt-4">
+                écran
+            </div>
+
+            <!-- chairs -->
+            <div class="chair ">
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>J</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>J</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>K</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>K</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>L</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>L</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>M</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>M</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>N</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>N</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>O</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>O</span>
+                </div>
+                <div class="row relative space-x-0.5 md:space-x-0">
+                    <span>P</span>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <li class="seat">560</li>
+                    <span>P</span>
+                </div>
+            </div>
+            <!-- details -->
+            <div class="details" id="det">
+                <div class="details_chair">
+                    <li>Disponible</li>
+                    <li>Occupé</li>
+                    <li>Séléctionné</li>
+                </div>
+            </div>
+        </section>
+
+
+      
+    </main>
+
+    <!-- footer section -->
+    <section class=" mt-[600px] md:mt-40">
+        <%- include('../components/footer') %>
+    </section>
+  </body>
+</html>
