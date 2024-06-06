@@ -24,7 +24,7 @@
    
   </style>
   </head> 
-  <body class="relative min-h-screen  overflow-x-hidden h-full ">
+  <body class="relative  overflow-x-hidden h-full ">
 
     <!-- movie trailer video -->
     <div class="absolute bg-black w-[80%] h-[70%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 hidden no-blur " id="movie">
@@ -89,13 +89,7 @@
    
     <!-- main content -->
     <main class=" h-full w-full md:flex relative">
-
-       
-
-
-         
-       
-
+        
         <!-- DESKTOP sidebar -->
         <aside class="h-full  w-[20%] relative hidden md:block">
 
@@ -162,7 +156,7 @@
         <!--MOBILE session information -->
         <section class="flex flex-col w-full md:hidden">
 
-            <div class=" px-5 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
+            <div class=" px-5 mx-auto bg-[#060F1E]  w-full   border-b-1  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Cinéma</h1>
                 <h2 class="font-arvo text-white text-2xl font-bold">Cinéphoria les Halles</h2>
             </div>
@@ -182,11 +176,11 @@
      
        
         <!-- choose your seat section -->
-        <section class=" h-full md:mx-auto md:w-[80%]   relative">
+        <section class=" h-full md:mx-auto md:w-[80%] md:pt-28  relative">
           
     
             
-            <div class="container md:pt-10 pt-10  flex flex-col items-center mx-auto w-full space-y-7">
+            <div class="container md:pt-10 pt-20  flex flex-col items-center mx-auto w-full space-y-7">
                 <h1 class="font-arvo font-bold text-blueOne text-4xl">Sélectionnez vos places</h1>
                 <p class="font-arvo text-blueOne text-xl">160 places libres</p>
             </div>
@@ -208,12 +202,123 @@
                     <li>Séléctionné</li>
                 </div>
             </div>
+            
         </section>
 
-    
+         
+        <!-- MOBILE RESERVATION CONFIRMATION -->
+        <div class="w-full flex-col md:hidden">
+            <div class="w-full flex items-center justify-between py-7 px-3">
+                <!-- VERIFY NUMBER OF SEAT -->
+                <button id="view-seat">
+                    <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
+                        <p class="font-arvo ">1 place réservée</p>
+                        <div class="mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
+                        </div>
+                    </div>
+                </button>
 
+                <!-- CURRENT SEAT CHOOSEN -->
+                <p class="font-arvo text-blueOne">B15</p>
+            </div>
+
+            <!-- RESERVATION CONFIRMATION BUTTON -->
+            <button class=" flex items-center justify-center text-blueOne font-arvo font-bold tracking-wide gap-x-1 text-xl w-full bg-goldOne reservation-confirmation h-[13vh]" >
+                RÉSERVER
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16"><path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.042-.018a.75.75 0 0 1-.018-1.042l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06"/></svg>
+            </button>
+        </div>
+ 
+             
     </main>
+
+    <!-- DESKTOP RESERVATION CONFIRMATION -->
+    <footer class=" w-[80%] ml-[20%] mt-[75.5px] hidden md:block">
+        <div class="w-full flex items-center justify-between py-7 px-7">
+            <!-- VERIFY NUMBER OF SEAT -->
+            <button id="view-seat">
+                <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
+                    <p class="font-arvo ">1 place réservée</p>
+                    <div class="mt-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
+                    </div>
+                </div>
+            </button>
+
+            <!-- CURRENT SEAT CHOOSEN -->
+            <p class="font-arvo text-blueOne">B15</p>
+        </div>
+
+        <!-- RESERVATION CONFIRMATION BUTTON -->
+        <button class=" flex items-center justify-center text-blueOne font-arvo font-bold tracking-wide gap-x-1 text-xl w-full bg-goldOne reservation-confirmation h-[13vh]" >
+         RÉSERVER
+         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16"><path fill="currentColor" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.042-.018a.75.75 0 0 1-.018-1.042l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06"/></svg>
+        </button>
+
+    </footer>
+
+    <!-- total amount plus reserve Now menu  -->
+    <div class="absolute h-full w-full hidden  bg-white md:w-[50%] space-y-7 px-10 py-7 md:h-[85%] bottom-50 md:top-2/3 rounded-xl left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" id="reservation-details">
+        <!-- Current session info -->
+        <div class="w-full space-y-2 flex flex-col text-blueOne font-arvo items-center justify-center">
+            <h1 class="font-bold text-xl">Mardi 7 Mai</h1>
+            <h2 class="font-bold text-lg">19:45</h2>
+            <p class="font-light text-sm">VF</p>
+        </div>
+        <!-- current movie info -->
+        <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
+            <div class="flex flex-col gap-y-3 px-4 py-5">
+                <h1 class="font-bold text-3xl">Blade Runner</h1>
+                <div class="flex items-center space-x-4 justify-between">
+                    <p>Durée: 1h31</p>
+                    <p class="bg-blueOne/20 px-1">Fin prévue à 21h36</p>
+                </div>
+            </div>
+            <!-- movie picture and place -->
+            <div class="flex items-center space-x-4">
+                <div class="flex space-y-1 items-center justify-center flex-col">
+                    <h1 class="font-bold text-xl">1 Place</h1>
+                    <h1 class="font-bold text-blueOne/60 text-xl">4K</h1>
+                </div>
+                <div class="h-full w-24 ">
+                    <img src="../images/Films/blade-runner.jpeg" alt="Movie picture" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- general cinema and place info -->
+        <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
+            <div class="flex flex-col gap-y-3 px-4 py-5">
+                <h1 class="font-bold text-3xl">Cinéphoria Les Halles</h1>
+                <div class="flex items-center space-x-4 justify-between">
+                    <p>Paris 75001</p>
+                </div>
+            </div>
+            <!-- movie picture and place -->
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center justify-center flex-col p-2 mr-6 border rounded-sm bg-goldOne">
+                    <h1 class="text-xl">Salle</h1>
+                    <h1 class="font-bold text-xl">8</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- total session amount -->
+        <div class="w-full flex text-blueOne font-arvo justify-center">
+                <h1 class="font-bold text-2xl">TOTAL A RÉGLER : 15 €</h1>
+        </div>
+
+        <!-- go to payment button -->
+        <div class="w-full flex text-white font-arvo justify-center">
+            <button class=" bg-blueOne w-[80%] h-14 rounded-md space-x-4 flex items-center justify-center py-8" id="go-payment">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="m490.18 181.4l-44.13-44.13a20 20 0 0 0-27-1a30.81 30.81 0 0 1-41.68-1.6a30.81 30.81 0 0 1-1.6-41.67a20 20 0 0 0-1-27L330.6 21.82a19.91 19.91 0 0 0-28.13 0l-70.35 70.34a39.9 39.9 0 0 0-9.57 15.5a7.71 7.71 0 0 1-4.83 4.83a39.8 39.8 0 0 0-15.5 9.58l-180.4 180.4a19.91 19.91 0 0 0 0 28.13L66 374.73a20 20 0 0 0 27 1a30.69 30.69 0 0 1 43.28 43.28a20 20 0 0 0 1 27l44.13 44.13a19.91 19.91 0 0 0 28.13 0l180.4-180.4a39.8 39.8 0 0 0 9.58-15.49a7.69 7.69 0 0 1 4.84-4.84a39.84 39.84 0 0 0 15.49-9.57l70.34-70.35a19.91 19.91 0 0 0-.01-28.09m-228.37-29.65a16 16 0 0 1-22.63 0l-11.51-11.51a16 16 0 0 1 22.63-22.62l11.51 11.5a16 16 0 0 1 0 22.63m44 44a16 16 0 0 1-22.62 0l-11-11a16 16 0 1 1 22.63-22.63l11 11a16 16 0 0 1 .01 22.66Zm44 44a16 16 0 0 1-22.63 0l-11-11a16 16 0 0 1 22.63-22.62l11 11a16 16 0 0 1 .05 22.67Zm44.43 44.54a16 16 0 0 1-22.63 0l-11.44-11.5a16 16 0 1 1 22.68-22.57l11.45 11.49a16 16 0 0 1-.01 22.63Z"/></svg>
+                <h1 class="font-bold text-2xl text-white">Réserver maintenant</h1>
+            </button>
+        </div>
+
+    </div>
+
+</body>
     
-    
-  </body>
 </html>
