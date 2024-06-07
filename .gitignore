@@ -1,3 +1,5 @@
-#dependencies
+# dependencies
 /node_modules
+
+.env.development.local
 
