@@ -9,7 +9,7 @@ reservationRoutes.get('/',(req, res) =>{
 
 reservationRoutes.get('/choisir-sceance',(req, res) =>{
     res.render('reservation/choose-session', {
-        title: "Choissir un scéance pour votre film."
+        title: "Choisir un scéance pour votre film."
     });
 });
 

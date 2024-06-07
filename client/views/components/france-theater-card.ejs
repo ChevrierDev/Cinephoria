@@ -7,38 +7,40 @@
 </head>
 <body>
     <!-- theater card -->
-    <div class="container w-full ">
-        <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] space-x-14  mt-10">
+    <div class="container w-full mx-auto">
+        <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] md:space-x-14 space-x-4 mt-10">
 
           <!-- movie picture container -->
-          <div class="container mx-auto md:mx-0 w-[30vw] h-[80%]  relative group">
+          <div class="container mx-auto md:mx-0 md:w-[30vw] md:h-[80%] relative group">
             <img src="../images/cinema/Beaugrenelle.jpg" class="object-cover h-full"  alt="movie picture">
             <!-- movie details container -->
             <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100    transition-opacity duration-200">
               <!-- movie reservation button -->
-              <button class="w-44 h-12 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
-                <p class="font-arvo text-white text-xl font-bold">
-                  Réserver
-                </p>
-              </button>
+              <a href="/reservation/Choisir-sceance">
+                <button class="w-44 h-12 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
+                    <p class="font-arvo text-white text-xl font-bold">
+                        Réserver
+                    </p>
+                </button>
+                </a>
             </div>
           </div>
 
           <!-- theater detail -->
-          <div class="container flex flex-col h-[50vh] justify-center w-[40vw]  items-start space-y-6 py-8">
+          <div class="container flex flex-col md:h-[50vh] h-[36vh] justify-center md:w-[40vw] items-start space-y-6 md:py-8">
             <!-- theater name -->
-            <h1 class="font-arvo text-blueOne font-bold text-4xl text-nowrap">
-              Cinépholia Panthéon
+            <h1 class="font-arvo text-blueOne font-bold md:text-4xl text-2xl text-nowrap">
+              Cinéphoria Panthéon
             </h1>
             <!-- theater address -->
             <div class="container text-nowrap flex flex-col text-xs">
-              <p class="font-arvo text-blueOne font-bold">13 Rue Victor Cousin, 75005 Paris</p>
+              <p class="font-arvo text-blueOne font-normal mb-10 ml-1">13 Rue Victor Cousin, 75005 Paris</p>
             </div>
             <!-- theater address -->
-            <div class="container flex space-x-10  ">
+            <div class="container flex md:space-x-10 space-x-7 w-38">
 
-              <div class="flex w-[45%] shadow-xl h-[15vh] bg-whiteOne">
-                <div class="flex flex-col  w-[80%] py-2 h-full">
+              <div class="flex md:w-[45%] shadow-xl md:h-[15vh] bg-whiteOne w-[55%] h-[11vh]">
+                <div class="flex flex-col w-[80%] py-2 h-full text-center">
                   <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
 
                   <div class="flex flex-col items-center h-full justify-center w-full">
@@ -52,12 +54,12 @@
                   </div>
 
                 </div>
-                <div class="flex w-[20%] bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
+                <div class="flex md:w-[20%]  w-10 bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
                   <p>4K</p>
                 </div>
               </div>
               
-              <div class="flex w-[30%] shadow-xl h-[15vh] bg-whiteOne">
+              <div class="flex w-[30%] shadow-xl md:h-[15vh] bg-whiteOne h-[11vh]">
                 <div class="flex flex-col items-center justify-center  w-[100%] h-full">
                   <p class="font-arvo w-full text-center font-bold text-blueOne">
                     20 <span class="text-blueOne text-lg font-extrabold font-arvo">€</span> 
@@ -73,100 +75,106 @@
       </div>
 
       <!-- theater card -->
-      <div class="container w-full bg-gray-200/60">
-        <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] space-x-14  mt-10">
+<div class="w-full bg-gray-200/60 pt-20">
+  <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] md:space-x-14 space-x-4 mt-10">
 
-          <!-- movie picture container -->
-          <div class="container mx-auto md:mx-0 w-[30vw] h-[80%] relative group">
-            <img src="../images/cinema/gobelins.jpg" class="object-cover h-full"  alt="movie picture">
-            <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100    transition-opacity duration-200">
+      <!-- movie picture container -->
+      <div class="md:w-[30vw] w-full md:h-[80%] relative group">
+          <img src="../images/cinema/Gobelins.jpg" class="object-cover h-full w-full" alt="movie picture">
+          <!-- movie details container -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <!-- movie reservation button -->
+              <a href="/reservation/Choisir-sceance">
               <button class="w-44 h-12 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
-                <p class="font-arvo text-white text-xl font-bold">
-                  Réserver
-                </p>
-              </button>
-            </div>
-          </div>
-          <!-- theater detail -->
-          <div class="container flex flex-col h-[50vh] justify-center w-[40vw]  items-start space-y-6 py-8">
-            <!-- theater name -->
-            <h1 class="font-arvo text-blueOne font-bold text-4xl text-nowrap">
-              Cinépholia Panthéon
-            </h1>
-            <!-- theater address -->
-            <div class="container text-nowrap flex flex-col text-xs">
-              <p class="font-arvo text-blueOne font-bold">13 Rue Victor Cousin, 75005 Paris</p>
-            </div>
-            <!-- theater address -->
-            <div class="container flex space-x-10  ">
-
-              <div class="flex w-[45%] shadow-xl h-[15vh] bg-whiteOne">
-                <div class="flex flex-col  w-[80%] py-2 h-full">
-                  <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
-
-                  <div class="flex flex-col items-center h-full justify-center w-full">
-                    <p class="font-arvo font-bold text-blueOne">
-                      15 : 30
-                    </p>
-                    <p class="font-arvo font-light text-sm tracking-wide text-blueOne">
-                      (fin  17:01)
-                    </p>
-
-                  </div>
-
-                </div>
-                <div class="flex w-[20%] bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
-                  <p>4K</p>
-                </div>
-              </div>
-              
-              <div class="flex w-[30%] shadow-xl h-[15vh] bg-whiteOne">
-                <div class="flex flex-col items-center justify-center  w-[100%] h-full">
-                  <p class="font-arvo w-full text-center font-bold text-blueOne">
-                    20 <span class="text-blueOne text-lg font-extrabold font-arvo">€</span> 
+                  <p class="font-arvo text-white text-xl font-bold">
+                      Réserver
                   </p>
-                </div>
-              </div>
-    
-            </div>
-
+              </button>
+              </a>
           </div>
-  
-        </div>
       </div>
 
+      <!-- theater detail -->
+      <div class="flex flex-col md:h-[50vh] h-[36vh] justify-center md:w-[40vw] w-full items-start space-y-6 md:py-8">
+          <!-- theater name -->
+          <h1 class="font-arvo text-blueOne font-bold md:text-4xl text-2xl text-nowrap">
+              Cinéphoria Panthéon
+          </h1>
+          <!-- theater address -->
+          <div class="text-nowrap flex flex-col text-xs">
+              <p class="font-arvo text-blueOne font-normal mb-10 ml-1">13 Rue Victor Cousin, 75005 Paris</p>
+          </div>
+          <!-- theater address -->
+          <div class="flex md:space-x-10 space-x-7 w-full">
+
+              <div class="flex md:w-[45%] shadow-xl md:h-[15vh] bg-whiteOne w-[55%] h-[11vh]">
+                  <div class="flex flex-col w-[80%] py-2 h-full text-center">
+                      <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
+
+                      <div class="flex flex-col items-center h-full justify-center w-full">
+                          <p class="font-arvo font-bold text-blueOne">
+                              15 : 30
+                          </p>
+                          <p class="font-arvo font-light text-sm tracking-wide text-blueOne">
+                              (fin 17:01)
+                          </p>
+                      </div>
+                  </div>
+                  <div class="flex md:w-[20%] w-10 bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
+                      <p>4K</p>
+                  </div>
+              </div>
+
+              <div class="flex w-[30%] shadow-xl md:h-[15vh] bg-whiteOne h-[11vh]">
+                  <div class="flex flex-col items-center justify-center w-[100%] h-full">
+                      <p class="font-arvo w-full text-center font-bold text-blueOne">
+                          20 <span class="text-blueOne text-lg font-extrabold font-arvo">€</span>
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+</div>
+
       <!-- theater card -->
-      <div class="container w-full ">
-        <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] space-x-14  mt-10">
+      <div class="container w-full mx-auto pt-20">
+        <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[60vw] md:min-h-0 md:h-[70vh] md:space-x-14 space-x-4 mt-10">
 
           <!-- movie picture container -->
-          <div class="container mx-auto md:mx-0 w-[30vw] h-[80%] relative group">
+          <div class="container mx-auto md:mx-0 md:w-[30vw] md:h-[80%] relative group">
             <img src="../images/cinema/Panthéon.jpg" class="object-cover h-full"  alt="movie picture">
+            <!-- movie details container -->
             <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100    transition-opacity duration-200">
               <!-- movie reservation button -->
-              <button class="w-44 h-12 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
-                <p class="font-arvo text-white text-xl font-bold">
-                  Réserver
-                </p>
-              </button>
+              <a href="/reservation/Choisir-sceance">
+                <button class="w-44 h-12 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
+                    <p class="font-arvo text-white text-xl font-bold">
+                        Réserver
+                    </p>
+                </button>
+                </a>
             </div>
           </div>
+
           <!-- theater detail -->
-          <div class="container flex flex-col h-[50vh] justify-center w-[40vw]  items-start space-y-6 py-8">
+          <div class="container flex flex-col md:h-[50vh] h-[36vh] justify-center md:w-[40vw] items-start space-y-6 md:py-8">
             <!-- theater name -->
-            <h1 class="font-arvo text-blueOne font-bold text-4xl text-nowrap">
-              Cinépholia Panthéon
+            <h1 class="font-arvo text-blueOne font-bold md:text-4xl text-2xl text-nowrap">
+              Cinéphoria Panthéon
             </h1>
             <!-- theater address -->
             <div class="container text-nowrap flex flex-col text-xs">
-              <p class="font-arvo text-blueOne font-bold">13 Rue Victor Cousin, 75005 Paris</p>
+              <p class="font-arvo text-blueOne font-normal mb-10 ml-1">13 Rue Victor Cousin, 75005 Paris</p>
             </div>
             <!-- theater address -->
-            <div class="container flex space-x-10  ">
+            <div class="container flex md:space-x-10 space-x-7 w-38">
 
-              <div class="flex w-[45%] shadow-xl h-[15vh] bg-whiteOne">
-                <div class="flex flex-col  w-[80%] py-2 h-full">
+              <div class="flex md:w-[45%] shadow-xl md:h-[15vh] bg-whiteOne w-[55%] h-[11vh]">
+                <div class="flex flex-col w-[80%] py-2 h-full text-center">
                   <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
 
                   <div class="flex flex-col items-center h-full justify-center w-full">
@@ -180,12 +188,12 @@
                   </div>
 
                 </div>
-                <div class="flex w-[20%] bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
+                <div class="flex md:w-[20%] w-10 bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
                   <p>4K</p>
                 </div>
               </div>
               
-              <div class="flex w-[30%] shadow-xl h-[15vh] bg-whiteOne">
+              <div class="flex w-[30%] shadow-xl md:h-[15vh] bg-whiteOne h-[11vh]">
                 <div class="flex flex-col items-center justify-center  w-[100%] h-full">
                   <p class="font-arvo w-full text-center font-bold text-blueOne">
                     20 <span class="text-blueOne text-lg font-extrabold font-arvo">€</span> 
