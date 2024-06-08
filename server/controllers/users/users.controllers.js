@@ -61,8 +61,7 @@ async function updateUserById(req, res) {
     try {
       const id = req.params.id;
       const { first_name, last_name, email, password, role } = req.body;
-  
-      // Récupérer les informations actuelles de l'utilisateur
+
       const verificationQuery = "SELECT * FROM users WHERE user_id = $1";
       const data = await DB.query(verificationQuery, [id]);
   
@@ -71,7 +70,7 @@ async function updateUserById(req, res) {
       }
   
       const user = data.rows[0];
-      
+
       const isSameFirstName = first_name === user.first_name;
       const isSameLastName = last_name === user.last_name;
       const isSameEmail = email === user.email;
