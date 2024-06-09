@@ -11,7 +11,8 @@ const loginFormRoutes = require("./routes/components/login-form.routes");
 const registerFormRoutes = require("./routes/components/register-form.routes");
 
 //api routes
-const usersRoutes = require("./routes/users/users.routes");
+const usersRoutes = require("./api/users/users.routes");
+const moviesRoutes = require("./api/movies/movies.routes");
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/contact", contactRoutes);
 
 //API routes
 app.use("/api/v1/", usersRoutes);
+app.use("/api/v1/", moviesRoutes);
 
 //login route
 app.get("/login", (req, res) => {
