@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    user_id INT NOT NULL PRIMARY KEY,
+    user_id SERIAL  NOT NULL PRIMARY KEY,
     first_name VARCHAR(250) NOT NULL,
     last_name VARCHAR(250) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE movies (
-    movie_id INT NOT NULL PRIMARY KEY,
+    movie_id SERIAL  NOT NULL PRIMARY KEY,
     title VARCHAR(250) NOT NULL,
     duration INT NOT NULL,
     genre VARCHAR(250) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE movies (
 );
 
 CREATE TABLE cinemas (
-    cinema_id INT NOT NULL PRIMARY KEY,
+    cinema_id SERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(250) NOT NULL,
     location VARCHAR(250) NOT NULL,
     country VARCHAR(250) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE cinemas (
 );
 
 CREATE TABLE rooms (
-    room_id INT NOT NULL PRIMARY KEY,
+    room_id SERIAL  NOT NULL PRIMARY KEY,
     cinema_id INT NOT NULL,
     name VARCHAR(250) NOT NULL,
     quality VARCHAR(250),
@@ -39,7 +39,7 @@ CREATE TABLE rooms (
 );
 
 CREATE TABLE seats (
-    seat_id INT NOT NULL PRIMARY KEY,
+    seat_id SERIAL  NOT NULL PRIMARY KEY,
     room_id INT NOT NULL,
     seat_label VARCHAR(10) NOT NULL,
     accessibility BOOLEAN DEFAULT false,
@@ -47,7 +47,7 @@ CREATE TABLE seats (
 );
 
 CREATE TABLE reviews (
-    review_id INT NOT NULL PRIMARY KEY,
+    review_id SERIAL NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     movie_id INT NOT NULL,
     rating INT NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE showtimes (
-    showtimes_id INT NOT NULL PRIMARY KEY,
+    showtimes_id SERIAL NOT NULL PRIMARY KEY,
     movie_id INT NOT NULL,
     cinema_id INT NOT NULL,
     room_id INT NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE showtimes (
 );
 
 CREATE TABLE reservations (
-    reservation_id INT NOT NULL PRIMARY KEY,
+    reservation_id SERIAL  NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     cinema_id INT NOT NULL,
     showtimes_id INT NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE reservations (
 );
 
 CREATE TABLE incident (
-    incident_id INT NOT NULL PRIMARY KEY,
+    incident_id SERIAL  NOT NULL PRIMARY KEY,
     room_id INT NOT NULL,
     seat_id INT NOT NULL,
     user_id INT NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE incident (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
---  Indexes
+-- Adding Indexes
 CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 CREATE INDEX idx_reviews_movie_id ON reviews(movie_id);
 CREATE INDEX idx_showtimes_movie_id ON showtimes(movie_id);
