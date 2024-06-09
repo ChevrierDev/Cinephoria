@@ -12,26 +12,14 @@ const pool = new Pool({
     connectionTimeoutMillis: 2000,
 });
 
-// Test de la connexion
-pool.connect(async (err, client, release) => {
-    if (err) {
-        return console.error('Error acquiring client', err.stack);
-    }
-    console.log('Connected to the database');
-    release();
-});
-
-// Fermeture sécurisée de la connexion
-const shutdown = () => {
-    pool.end(() => {
-        console.log('Pool has ended');
-        process.exit(0);
-    });
+const closePool = async () => {
+    await pool.end();
 };
 
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
+process.on('SIGTERM', closePool);
+process.on('SIGINT', closePool);
 
 module.exports = {
     query: (text, params) => pool.query(text, params),
+    closePool
 };
