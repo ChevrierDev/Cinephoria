@@ -80,7 +80,6 @@ describe("Users API", () => {
       expect(response.body).toHaveProperty("role", "admin");
 
       testUserId = response.body.user_id;
-      console.log("Created test user with ID:", testUserId);
     });
 
     test("should respond with 400 fail", async () => {
