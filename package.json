@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Projet ECF Studi sur une chaîne de cinéma nommée Cinépholia",
   "main": "index.js",
+  
   "scripts": {
     "server": "nodemon server/server.js",
     "test": "jest --detectOpenHandles",
@@ -11,6 +12,7 @@
     "watch-css": "postcss ./client/public/css/input.css -o ./client/public/css/output.css --watch",
     "prettier": "npx prettier --write \"./client/**/*.ejs\" --parser html"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

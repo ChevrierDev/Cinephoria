@@ -3,8 +3,16 @@ const app = require("../../app");
 const DB = require("../../config/postgres.config");
 describe("TEST cinemas api", () => {
   let cinemaId;
+
+  beforeAll(async () => {
+    await DB.query(`
+      INSERT INTO cinemas (cinema_id, name, location, country, images) VALUES
+      (4, 'Cinema City', 'Downtown', 'USA', 'cinema_city.jpg');
+    `);
+  });
   //close connection to DB after testing
   afterAll(async () => {
+    await DB.query("DELETE FROM cinemas;");
     await DB.closePool();
   });
 

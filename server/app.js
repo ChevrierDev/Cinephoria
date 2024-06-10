@@ -14,6 +14,7 @@ const registerFormRoutes = require("./routes/components/register-form.routes");
 const usersRoutes = require("./api/users/users.routes");
 const moviesRoutes = require("./api/movies/movies.routes");
 const cinemasRoutes = require('./api/cinemas/cinemas.routes');
+const incidentRoutes = require('./api/incident/incident.routes');
 
 
 const app = express();
@@ -42,7 +43,8 @@ app.use("/contact", contactRoutes);
 //API routes
 app.use("/api/v1/", usersRoutes);
 app.use("/api/v1/", moviesRoutes);
-app.use("/api/v1/", cinemasRoutes)
+app.use("/api/v1/", cinemasRoutes);
+app.use("/api/v1/", incidentRoutes);
 
 //login route
 app.get("/login", (req, res) => {

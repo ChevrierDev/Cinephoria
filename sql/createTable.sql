@@ -90,7 +90,7 @@ CREATE TABLE incident (
     room_id INT NOT NULL,
     seat_id INT NOT NULL,
     user_id INT NOT NULL,
-    report_by VARCHAR(250),
+    description VARCHAR(250),
     report_date DATE,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id),
     FOREIGN KEY (seat_id) REFERENCES seats(seat_id),

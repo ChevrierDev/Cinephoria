@@ -43,6 +43,6 @@ INSERT INTO reservations (reservation_id, user_id, cinema_id, showtimes_id, seat
 (2, 2, 1, 2, 'B1', false);
 
 -- Inserting data into incident table
-INSERT INTO incident (incident_id, room_id, seat_id, user_id, report_by, report_date) VALUES
+INSERT INTO incident (incident_id, room_id, seat_id, user_id, description, report_date) VALUES
 (1, 1, 1, 1, 'John Doe', '2024-06-01'),
 (2, 2, 3, 2, 'Jane Smith', '2024-06-02');

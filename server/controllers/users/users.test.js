@@ -15,7 +15,15 @@ function generateUniqueEmail() {
 describe("Users API", () => {
   let testUserId;
 
+  beforeAll(async () => {
+    await DB.query(`
+        INSERT INTO users (user_id, first_name, last_name, email, password, role) VALUES
+      (4, 'Jane', 'Smith', 'jane@example.com', 'password123', 'user');
+    `);
+  });
+  //close connection to DB after testing
   afterAll(async () => {
+    await DB.query("DELETE FROM cinemas;");
     await DB.closePool();
   });
 
@@ -80,6 +88,7 @@ describe("Users API", () => {
       expect(response.body).toHaveProperty("role", "admin");
 
       testUserId = response.body.user_id;
+
     });
 
     test("should respond with 400 fail", async () => {
