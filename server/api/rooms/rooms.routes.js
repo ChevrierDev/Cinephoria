@@ -7,7 +7,10 @@ const {
   postRooms,
   updateRoomsById,
 } = require("../../controllers/rooms/rooms.controllers");
-const { postRoomsValidator, validateRooms } = require('../../middlewares/validator/rooms.validator');
+const {
+  postRoomsValidator,
+  validateRooms,
+} = require("../../middlewares/validator/rooms.validator");
 
 // get all Rooms
 roomsRoutes.get("/rooms", getRooms);
@@ -19,9 +22,14 @@ roomsRoutes.get("/rooms/:id", getRoomsById);
 roomsRoutes.delete("/rooms/:id", deleteRoomsById);
 
 // post Rooms
-roomsRoutes.post("/rooms",postRoomsValidator(), validateRooms, postRooms);
+roomsRoutes.post("/rooms", postRoomsValidator(), validateRooms, postRooms);
 
 // update Rooms
-roomsRoutes.put("/rooms/:id",postRoomsValidator(), validateRooms, updateRoomsById);
+roomsRoutes.put(
+  "/rooms/:id",
+  postRoomsValidator(),
+  validateRooms,
+  updateRoomsById
+);
 
 module.exports = roomsRoutes;
