@@ -9,7 +9,7 @@ async function getShowtimes(req, res) {
 
      // Check if any showtimes are found
     if (results.rows.length <= 0) {
-      res.status(404).json("No showtimes found !");
+      res.status(404).json({message:"No showtimes found !"});
       return;
     }
     // Send the found showtimes as response
@@ -28,7 +28,7 @@ async function getShowtimesById(req, res) {
     const results = await DB.query(query, [id]);
     // Check if the showtimes with the given ID is found
     if (results.rows.length <= 0) {
-      res.status(404).json("No showtimes id found !");
+      res.status(404).json({message:"No showtimes id found !"});
       return;
     }
     // Send the found showtimes as response
@@ -65,7 +65,7 @@ async function postShowtimes(req, res) {
       !qr
     ) {
       return res
-        .status(400)
+        .status(404)
         .json({ error: "You must enter all required fields!" });
     }
 
@@ -137,9 +137,9 @@ async function deleteShowtimesById(req, res) {
       const query = "DELETE FROM showtimes WHERE showtimes_id = $1";
       await DB.query(query, [id]);
       // Send a success message as response
-      return res.status(200).json("showtimes deleted successfully");
+      return res.status(200).json({message:"showtimes deleted successfully"});
     } else {
-      return res.status(404).json("No showtimes found !");
+      return res.status(404).json({message:"No showtimes found !"});
     }
   } catch (err) {
     console.log(err);
