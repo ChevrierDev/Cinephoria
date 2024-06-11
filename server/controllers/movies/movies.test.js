@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../../app");
 const DB = require("../../config/postgres.config");
 
-describe("Movies api", () => {
+describe("TEST Movies api", () => {
   let testMovieId;
 
 
