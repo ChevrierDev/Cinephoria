@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const path = require("path");
 const favicon = require("serve-favicon");
 
+
 //Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
 const filmsRoutes = require("./routes/films/films.routes");
@@ -58,6 +59,7 @@ app.use("/api/v1/", reservationApiRoutes);
 app.use("/api/v1/", showtimesRoutes);
 app.use("/api/v1/", seatsRoutes);
 app.use("/api/v1/", roomsRoutes);
+
 
 //login route
 app.get("/login", (req, res) => {
