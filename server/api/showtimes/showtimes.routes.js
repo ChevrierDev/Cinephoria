@@ -8,6 +8,11 @@ const {
   updateShowtimesById,
 } = require("../../controllers/showtimes/showtimes.controllers");
 
+const {
+  postShowtimesValidator,
+  validateShowtimes,
+} = require("../../middlewares/validator/showtimes.validator");
+
 // get all showtimes
 showtimesRoutes.get("/showtimes", getShowtimes);
 
@@ -18,9 +23,19 @@ showtimesRoutes.get("/showtimes/:id", getShowtimesById);
 showtimesRoutes.delete("/showtimes/:id", deleteShowtimesById);
 
 // post showtimes
-showtimesRoutes.post("/showtimes", postShowtimes);
+showtimesRoutes.post(
+  "/showtimes",
+  postShowtimesValidator(),
+  validateShowtimes,
+  postShowtimes
+);
 
 // update showtimes
-showtimesRoutes.put("/showtimes/:id", updateShowtimesById);
+showtimesRoutes.put(
+  "/showtimes/:id",
+  postShowtimesValidator(),
+  validateShowtimes,
+  updateShowtimesById
+);
 
 module.exports = showtimesRoutes;

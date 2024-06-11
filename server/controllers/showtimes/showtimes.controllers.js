@@ -65,7 +65,7 @@ async function postShowtimes(req, res) {
       !qr
     ) {
       return res
-        .status(404)
+        .status(400)
         .json({ error: "You must enter all required fields!" });
     }
 

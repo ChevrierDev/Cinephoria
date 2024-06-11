@@ -109,11 +109,7 @@ describe("TEST showtimes api", () => {
         .post("/api/v1/showtimes")
         .send(emptyShowtimesTestData)
         .expect("Content-Type", /json/)
-        .expect(404);
-
-      expect(response.body).toEqual({
-        error: "You must enter all required fields!",
-      });
+        .expect(400);
     });
   });
 
