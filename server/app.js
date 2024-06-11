@@ -3,6 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const favicon = require("serve-favicon");
+
+//Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
 const filmsRoutes = require("./routes/films/films.routes");
 const reservationRoutes = require("./routes//reservation/reservation.routes");
@@ -10,7 +12,7 @@ const contactRoutes = require("./routes/contact/contact.routes");
 const loginFormRoutes = require("./routes/components/login-form.routes");
 const registerFormRoutes = require("./routes/components/register-form.routes");
 
-//api routes
+//API routes import
 const usersRoutes = require("./api/users/users.routes");
 const moviesRoutes = require("./api/movies/movies.routes");
 const cinemasRoutes = require('./api/cinemas/cinemas.routes');
@@ -25,7 +27,7 @@ const roomsRoutes = require('./api/rooms/rooms.routes')
 const app = express();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(

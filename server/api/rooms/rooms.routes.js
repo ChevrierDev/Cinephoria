@@ -6,7 +6,7 @@ const {
   deleteRoomsById,
   postRooms,
   updateRoomsById,
-} = require("../../controllers/rooms/rooms.controller");
+} = require("../../controllers/rooms/rooms.controllers");
 
 // get all Rooms
 roomsRoutes.get("/rooms", getRooms);
