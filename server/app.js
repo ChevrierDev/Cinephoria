@@ -17,6 +17,9 @@ const cinemasRoutes = require('./api/cinemas/cinemas.routes');
 const incidentRoutes = require('./api/incident/incident.routes');
 const reviewsRoutes = require('./api/reviews/reviews.routes');
 const reservationApiRoutes = require('./api/reservation/reservation.routes');
+const showtimesRoutes = require('./api/showtimes/showtimes.routes');
+const seatsRoutes = require('./api/seats/seats.routes');
+const roomsRoutes = require('./api/rooms/rooms.routes')
 
 
 const app = express();
@@ -32,6 +35,7 @@ app.use(
 );
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "..", "client", "views"));
+
 
 // Layouts application's routes
 app.get("/", (req, res) => {
@@ -49,6 +53,9 @@ app.use("/api/v1/", cinemasRoutes);
 app.use("/api/v1/", incidentRoutes);
 app.use("/api/v1/", reviewsRoutes);
 app.use("/api/v1/", reservationApiRoutes);
+app.use("/api/v1/", showtimesRoutes);
+app.use("/api/v1/", seatsRoutes);
+app.use("/api/v1/", roomsRoutes);
 
 //login route
 app.get("/login", (req, res) => {
