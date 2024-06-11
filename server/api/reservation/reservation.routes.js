@@ -1,20 +1,28 @@
-const express = require('express');
+const express = require("express");
 const reservationApiRoutes = express.Router();
-const {getReservation, getReservationById, deleteReservationById, postReservation, updateReservationById} = require('../../controllers/reservations/reservation.controllers');
+const {
+  getReservation,
+  getReservationById,
+  deleteReservationById,
+  postReservation,
+  updateReservationById,
+} = require("../../controllers/reservations/reservation.controllers");
+
+const { postReservationValidator, validateReservation } = require('../../middlewares/validator/reservation.validator')
 
 // get all reservation
-reservationApiRoutes.get('/reservation', getReservation);
+reservationApiRoutes.get("/reservation", getReservation);
 
 // get reservation by Id
-reservationApiRoutes.get('/reservation/:id', getReservationById);
+reservationApiRoutes.get("/reservation/:id", getReservationById);
 
 // delete reservation by Id
-reservationApiRoutes.delete('/reservation/:id', deleteReservationById);
+reservationApiRoutes.delete("/reservation/:id", deleteReservationById);
 
 // post reservation
-reservationApiRoutes.post('/reservation', postReservation);
+reservationApiRoutes.post("/reservation",postReservationValidator(), validateReservation, postReservation);
 
 // update reservation
-reservationApiRoutes.put('/reservation/:id', updateReservationById);
+reservationApiRoutes.put("/reservation/:id",postReservationValidator(), validateReservation, updateReservationById);
 
 module.exports = reservationApiRoutes;

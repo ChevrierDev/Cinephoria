@@ -7,6 +7,7 @@ const {
   postReviews,
   updateReviewsById,
 } = require("../../controllers/reviews/reviews.controllers");
+const {postReviewsValidator, validateReviews} = require('../../middlewares/validator/reviews.validator')
 
 // get all reviews
 reviewsRoutes.get("/reviews", getReviews);
@@ -18,9 +19,9 @@ reviewsRoutes.get("/reviews/:id", getReviewsById);
 reviewsRoutes.delete("/reviews/:id", deleteReviewsById);
 
 // post reviews
-reviewsRoutes.post("/reviews", postReviews);
+reviewsRoutes.post("/reviews",postReviewsValidator(), validateReviews, postReviews);
 
 // update reviews
-reviewsRoutes.put("/reviews/:id", updateReviewsById);
+reviewsRoutes.put("/reviews/:id",postReviewsValidator(), validateReviews, updateReviewsById);
 
 module.exports = reviewsRoutes;

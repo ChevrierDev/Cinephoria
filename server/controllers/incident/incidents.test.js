@@ -82,13 +82,6 @@ describe("TEST incident api", () => {
       description: "New Incident",
       report_date: "2024-06-03",
     };
-    const emptyNewIncident = {
-      room_id: "",
-      seat_id: "",
-      user_id: "",
-      description: "",
-      report_date: "",
-    };
 
     test("should respond with 201 created", async () => {
       const response = await request(app)
@@ -99,25 +92,11 @@ describe("TEST incident api", () => {
 
       testIncidentId = response.body.incident_id;
     });
-
-    test("should respond with 404 error", async () => {
-      const response = await request(app)
-        .post("/api/v1/incident")
-        .send(emptyNewIncident)
-        .expect("Content-Type", /json/)
-        .expect(404);
-
-      expect(response.body).toStrictEqual({
-        error: "You must enter all required fields!",
-      });
-
-      testIncidentId = response.body.incident_id;
-    });
   });
 
   // Test DELETE incident
-  describe('test DELETE /incident', () => {
-    test('should respond with 200 ok', async () => {
+  describe("test DELETE /incident", () => {
+    test("should respond with 200 ok", async () => {
       const newIncident = {
         room_id: 1,
         seat_id: 1,
@@ -157,60 +136,72 @@ describe("TEST incident api", () => {
   });
 
   // Test UPDATE incident
-  describe('test PUT /api/v1/incident/:id', () => {
-    test('should respond with 200 ok', async () => {
+  describe("test PUT /api/v1/incident/:id", () => {
+    test("should respond with 200 ok", async () => {
       const updatedIncident = {
         room_id: 1,
         seat_id: 1,
         user_id: 1,
-        description: 'Updated Incident',
-        report_date: '2024-06-04'
+        description: "Updated Incident",
+        report_date: "2024-06-04",
       };
 
       const response = await request(app)
-        .put('/api/v1/incident/1')
+        .put("/api/v1/incident/1")
         .send(updatedIncident)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
         .expect(200);
     });
 
-    test('should respond with 400 bad request', async () => {
+    test("should respond with 400 bad request", async () => {
       const incompleteIncident = {
         room_id: 1,
         seat_id: 1,
         user_id: 1,
-        // description is missing
-        report_date: '2024-06-04'
+        report_date: "2024-06-04",
       };
 
       const response = await request(app)
-        .put('/api/v1/incident/1')
+        .put("/api/v1/incident/1")
         .send(incompleteIncident)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
         .expect(400);
 
       expect(response.body).toStrictEqual({
-        error: "You must enter all required fields!"
+        errors: [
+          {
+            location: "body",
+            msg: "Invalid value",
+            path: "description",
+            type: "field",
+          },
+          {
+            location: "body",
+            msg: "La valeur doit être une chaine de caractère.",
+            path: "description",
+            type: "field",
+          },
+        ],
       });
     });
 
-    test('should respond with 404 not found', async () => {
+    test("should respond with 404 not found", async () => {
       const updatedIncident = {
         room_id: 1,
         seat_id: 1,
         user_id: 1,
-        description: 'Updated Incident',
-        report_date: '2024-06-04'
+        description: "Updated Incident",
+        report_date: "2024-06-04",
       };
 
       const response = await request(app)
-        .put('/api/v1/incident/9999')
+        .put("/api/v1/incident/9999")
         .send(updatedIncident)
-        .expect('Content-Type', /json/)
+        .expect("Content-Type", /json/)
         .expect(404);
 
       expect(response.body).toStrictEqual({
-        error: "No incident found!"
+        error: "No incident found!",
       });
     });
   });

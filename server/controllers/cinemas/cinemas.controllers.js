@@ -38,9 +38,6 @@ async function postCinema(req, res) {
     if (!name || !location || !country || !images) {
       return res.status(400).json({ error: "You must enter all fields!" });
     }
-
-    console.log('body -------------------->', req.body )
-
     const query =
       "INSERT INTO cinemas (name, location, country, images) VALUES ($1, $2, $3, $4) RETURNING *";
     const result = await DB.query(query, [name, location, country, images]);

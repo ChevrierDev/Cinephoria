@@ -10,8 +10,7 @@ const postMovieValidator = () => {
       .escape(),
     body("duration")
       .isInt({ min: 1, max: 400 })
-      .withMessage("La durée doit être un entier positif.")
-      .toInt(),
+      .withMessage("La durée doit être un entier positif."),
     body("genre")
       .notEmpty()
       .withMessage("Le genre est obligatoire.")
@@ -38,8 +37,7 @@ const postMovieValidator = () => {
       .escape(),
     body("favorite")
       .isBoolean()
-      .withMessage("Favori doit être un booléen.")
-      .toBoolean(),
+      .withMessage("Favori doit être un booléen."),
     body("description")
       .notEmpty()
       .withMessage("La description est obligatoire.")

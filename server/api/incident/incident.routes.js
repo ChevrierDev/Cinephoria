@@ -7,6 +7,10 @@ const {
   postIncident,
   updateIncidentById,
 } = require("../../controllers/incident/incident.controllers");
+const {
+  postIncidentValidator,
+  validateIncident,
+} = require("../../middlewares/validator/incident.validator");
 
 // get all incident
 incidentRoutes.get("/incident", getIncident);
@@ -18,9 +22,9 @@ incidentRoutes.get("/incident/:id", getIncidentById);
 incidentRoutes.delete("/incident/:id", deleteIncidentById);
 
 // post Incident
-incidentRoutes.post("/incident", postIncident);
+incidentRoutes.post("/incident",postIncidentValidator(), validateIncident, postIncident);
 
 // update Incident
-incidentRoutes.put("/incident/:id", updateIncidentById);
+incidentRoutes.put("/incident/:id",postIncidentValidator(), validateIncident, updateIncidentById);
 
 module.exports = incidentRoutes;

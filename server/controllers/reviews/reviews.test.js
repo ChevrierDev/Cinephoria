@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../../app");
 const DB = require("../../config/postgres.config");
+const moment = require('moment');
 
 describe("TEST reviews API", () => {
   let testReviewId;
@@ -70,16 +71,18 @@ describe("TEST reviews API", () => {
         rating: 5,
         comment: "Very good movie",
         status: true,
+        created_at: moment().toISOString() 
       };
-
+    
       const response = await request(app)
         .post("/api/v1/reviews")
         .send(insertReviews)
         .expect("Content-Type", /json/)
         .expect(201);
-
+    
       testReviewId = response.body.review_id;
     });
+    
 
     test("should respond with 400 bad request when missing fields", async () => {
       const emptyInsertReviews = {
@@ -141,9 +144,10 @@ describe("TEST reviews API", () => {
       const updateReview = {
         user_id: 1,
         movie_id: 1,
-        rating: 4,
-        comment: "Good movie!",
+        rating: 5,
+        comment: "Very good movie",
         status: true,
+        created_at: moment().toISOString() 
       };
 
       const response = await request(app)
@@ -158,9 +162,10 @@ describe("TEST reviews API", () => {
       const updateReview = {
         user_id: 1,
         movie_id: 1,
-        rating: 4,
-        comment: "Good movie!",
+        rating: 5,
+        comment: "Very good movie",
         status: true,
+        created_at: moment().toISOString() 
       };
 
       const response = await request(app)
