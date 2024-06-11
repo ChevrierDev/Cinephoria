@@ -125,7 +125,6 @@ async function deleteUserById(req, res) {
     }
     const foundUserQuery = "SELECT * FROM users WHERE user_id = $1";
     const user = await DB.query(foundUserQuery, [id]);
-    console.log(`User found: ${user.rows.length !== 0}`); 
 
     if (user.rows.length !== 0) {
       const query = "DELETE FROM users WHERE user_id = $1";

@@ -5,10 +5,18 @@ const DB = require("../../config/postgres.config");
 describe("Movies api", () => {
   let testMovieId;
 
+
+    beforeAll(async () => {
+    await DB.query(`INSERT INTO movies (movie_id, title, duration, genre, pg, banner, poster, video, favorite, description, casting, release_date) VALUES
+        (3, 'Inception', 148, 'Sci-Fi', 13, 'inception_banner.jpg', 'inception_poster.jpg', 'inception_trailer.mp4', false, 'A mind-bending thriller.', 'Leonardo DiCaprio, Joseph Gordon-Levitt', '2010-07-16')`);
+    });
+
+  //close connection to DB after testing
   afterAll(async () => {
+    await DB.query("DELETE FROM movies;");
     await DB.closePool();
   });
-
+  
   afterEach(async () => {
     if (testMovieId) {
       await DB.query("DELETE FROM users WHERE user_id = $1", [testMovieId]);
@@ -131,7 +139,6 @@ describe("Movies api", () => {
         .send(completeMovieData)
         .expect("Content-Type", /json/)
         .expect(201);
-      console.log("movie--------------------------->", movie.body);
       testMovieId = movie.body.movie_id;
 
       // Delete the Movies
