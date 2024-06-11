@@ -50,7 +50,7 @@ async function postRooms(req, res) {
 
     // Validate the request body fields
     if (
-      !cinema_id ||
+      !cinema_id||
       !name ||
       !quality
     ) {
