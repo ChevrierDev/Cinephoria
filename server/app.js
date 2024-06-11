@@ -16,6 +16,7 @@ const moviesRoutes = require("./api/movies/movies.routes");
 const cinemasRoutes = require('./api/cinemas/cinemas.routes');
 const incidentRoutes = require('./api/incident/incident.routes');
 const reviewsRoutes = require('./api/reviews/reviews.routes');
+const reservationApiRoutes = require('./api/reservation/reservation.routes');
 
 
 const app = express();
@@ -47,6 +48,7 @@ app.use("/api/v1/", moviesRoutes);
 app.use("/api/v1/", cinemasRoutes);
 app.use("/api/v1/", incidentRoutes);
 app.use("/api/v1/", reviewsRoutes);
+app.use("/api/v1/", reservationApiRoutes);
 
 //login route
 app.get("/login", (req, res) => {
