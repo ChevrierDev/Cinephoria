@@ -3,6 +3,10 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const favicon = require("serve-favicon");
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const configurePassportJWT = require('./config/passportJWT.config');
 
 
 //Layout routes import
@@ -22,13 +26,28 @@ const reviewsRoutes = require('./api/reviews/reviews.routes');
 const reservationApiRoutes = require('./api/reservation/reservation.routes');
 const showtimesRoutes = require('./api/showtimes/showtimes.routes');
 const seatsRoutes = require('./api/seats/seats.routes');
-const roomsRoutes = require('./api/rooms/rooms.routes')
+const roomsRoutes = require('./api/rooms/rooms.routes');
+
+//login and logout API 
+const authRouter = require('./auth/login');
 
 
 const app = express();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.SECRET,
+  name: "session",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+configurePassportJWT(passport);
+
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(
@@ -67,6 +86,8 @@ app.get("/login", (req, res) => {
     title: "Connectez-vous à votre compte.",
   });
 });
+
+app.use("/api/v1/", authRouter);
 
 //form components routes
 app.use("/", loginFormRoutes);
