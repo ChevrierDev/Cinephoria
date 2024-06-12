@@ -7,6 +7,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const configurePassportJWT = require('./config/passportJWT.config');
+const { checkAuthenticated, checkRole } = require('./middlewares/autorisation/autorisation')
 
 
 //Layout routes import
@@ -29,7 +30,8 @@ const seatsRoutes = require('./api/seats/seats.routes');
 const roomsRoutes = require('./api/rooms/rooms.routes');
 
 //login and logout API 
-const authRouter = require('./auth/login');
+const authRouter = require('./auth/loginApi');
+const logoutRouter = require('./auth/logoutApi');
 
 
 const app = express();
@@ -88,6 +90,7 @@ app.get("/login", (req, res) => {
 });
 
 app.use("/api/v1/", authRouter);
+app.use("/api/v1/", logoutRouter);
 
 //form components routes
 app.use("/", loginFormRoutes);
