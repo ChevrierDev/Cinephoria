@@ -41,15 +41,6 @@ const postUserValidator = () => {
       })
       .withMessage("Un utilisateur avec cette addresse mail existe déjà.")
       .trim(),
-
-    body("role")
-      .notEmpty()
-      .isString()
-      .withMessage("La valeur doit être une chaine de caractère.")
-      .isLength({ max: 20 })
-      .withMessage("La valeur ne doit pas dépasser 20 caractère.")
-      .trim()
-      .escape(),
   ];
 };
 const updateUserValidator = () => {
@@ -79,15 +70,6 @@ const updateUserValidator = () => {
       .isLength({ max: 50 })
       .withMessage("La valeur ne doit pas dépasser 50 caractère.")
       .trim(),
-
-    body("role")
-      .notEmpty()
-      .isString()
-      .withMessage("La valeur doit être une chaine de caractère.")
-      .isLength({ max: 20 })
-      .withMessage("La valeur ne doit pas dépasser 20 caractère.")
-      .trim()
-      .escape(),
   ];
 };
 

@@ -64,7 +64,7 @@ describe("Users API", () => {
       last_name: "Pokemon",
       email: uniqueEmail,
       password: "Azerty-123",
-      role: "admin",
+      role: "user",
     };
 
     const missingUserData = {
@@ -85,7 +85,7 @@ describe("Users API", () => {
       expect(response.body).toHaveProperty("first_name", "Sasha");
       expect(response.body).toHaveProperty("last_name", "Pokemon");
       expect(response.body).toHaveProperty("email", uniqueEmail);
-      expect(response.body).toHaveProperty("role", "admin");
+      expect(response.body).toHaveProperty("role", "user");
 
       testUserId = response.body.user_id;
 
@@ -110,7 +110,7 @@ describe("Users API", () => {
         last_name: "User",
         email: uniqueEmail,
         password: "Test1234",
-        role: "admin",
+        role: "user",
       };
 
       const createUserResponse = await request(app)
@@ -220,7 +220,7 @@ describe("Users API", () => {
         last_name: "User",
         email: uniqueEmail,
         password: "Test1234",
-        role: "admin",
+        role: "user",
       };
 
       const updateUserResponse = await request(app)

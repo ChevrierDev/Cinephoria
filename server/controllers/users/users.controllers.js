@@ -3,6 +3,7 @@ const {
   hashPassword,
   compareHashedPassword,
 } = require("../../utils/hashPassword");
+const transporter = require("../../config/nodeMailer.config");
 
 async function getUsers(req, res) {
   try {
@@ -35,25 +36,42 @@ async function getUserById(req, res) {
   }
 }
 
+
+//create user account for register 
 async function postUser(req, res) {
   try {
-    const { first_name, last_name, email, password, role } = req.body;
+    const { first_name, last_name, email, password, username } = req.body;
 
-    if (!first_name || !last_name || !email || !password || !role) {
+    if (!first_name || !last_name || !email || !password || !username) {
       return res.status(400).json({ error: "You must enter all fields!" });
     }
 
     const hashedPassword = await hashPassword(password);
 
     const query =
-      "INSERT INTO users (first_name, last_name, email, password, role) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+      "INSERT INTO users (first_name, last_name, email, password, role, username) VALUES ($1, $2, $3, $4, 'user', $5) RETURNING *";
     const result = await DB.query(query, [
       first_name,
       last_name,
       email,
       hashedPassword,
-      role,
+      username
     ]);
+
+    const mailOptions = {
+      from: process.env.USER_EMAIL,
+      to: email,
+      subject: "Bienvenue à Cinéphoria",
+      text: `Bonjour ${first_name} ${last_name},\n\nVotre compte Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à réserver une place pour un scéance directement en ligne. `,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error sending email:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
 
     return res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -62,16 +80,45 @@ async function postUser(req, res) {
   }
 }
 
+//create employee account for admin create employee dashboard panel
+// async function postEmployee(req, res) {
+//   try {
+//     const { first_name, last_name, email, password, role, username } = req.body;
+
+//     if (!first_name || !last_name || !email || !password || !role) {
+//       return res.status(400).json({ error: "You must enter all fields!" });
+//     }
+
+//     const hashedPassword = await hashPassword(password);
+
+//     const query =
+//       "INSERT INTO users (first_name, last_name, email, password, role, username) VALUES ($1, $2, $3, $4, 'employee', $5) RETURNING *";
+//     const result = await DB.query(query, [
+//       first_name,
+//       last_name,
+//       email,
+//       hashedPassword,
+//       role,
+//       username
+//     ]);
+
+//     return res.status(201).json(result.rows[0]);
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).json({ error: "Internal server error!" });
+//   }
+// }
+
 async function updateUserById(req, res) {
   try {
     const id = req.params.id;
-    const { first_name, last_name, email, password, role } = req.body;
+    const { first_name, last_name, email, password, role, username } = req.body;
 
     const verificationQuery = "SELECT * FROM users WHERE user_id = $1";
     const data = await DB.query(verificationQuery, [id]);
 
     if (data.rows.length === 0) {
-      return res.status(404).json({message: "User not found"});
+      return res.status(404).json({ message: "User not found" });
     }
 
     const user = data.rows[0];
@@ -81,15 +128,19 @@ async function updateUserById(req, res) {
     const isSameEmail = email === user.email;
     const isSamePassword = await compareHashedPassword(password, user.password);
     const isSameRole = role === user.role;
+    const isSameUsername = user.username;
 
     if (
       isSameFirstName &&
       isSameLastName &&
       isSameEmail &&
       isSamePassword &&
-      isSameRole
+      isSameRole &&
+      isSameUsername
     ) {
-      return res.status(400).json({message: "You must update with different data."});
+      return res
+        .status(400)
+        .json({ message: "You must update with different data." });
     }
 
     let hashedPassword;
@@ -100,20 +151,21 @@ async function updateUserById(req, res) {
     }
 
     const query =
-      "UPDATE users SET first_name = $1, last_name = $2, email = $3, password = $4, role = $5 WHERE user_id = $6 RETURNING *";
+      "UPDATE users SET first_name = $1, last_name = $2, email = $3, password = $4, role = 'user', $5 = username WHERE user_id = $6 RETURNING *";
     const result = await DB.query(query, [
       first_name,
       last_name,
       email,
       hashedPassword,
       role,
+      username,
       id,
     ]);
 
     return res.status(200).json(result.rows[0]);
   } catch (err) {
     console.log(err);
-    return res.status(500).json({error:"Internal server error!"});
+    return res.status(500).json({ error: "Internal server error!" });
   }
 }
 
@@ -130,13 +182,13 @@ async function deleteUserById(req, res) {
       const query = "DELETE FROM users WHERE user_id = $1";
       await DB.query(query, [id]);
       res.status(200).json({ message: "User deleted successfully!" });
-    } else { 
+    } else {
       return res
         .status(404)
         .json({ error: "No User found with this provided ID!" });
     }
   } catch (err) {
-    console.log("Error during deletion:", err); 
+    console.log("Error during deletion:", err);
     res.status(500).json({ error: "Internal server error!" });
   }
 }
