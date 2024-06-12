@@ -68,7 +68,7 @@ describe("TEST seats api", () => {
   // Test post showtimes
   describe("Test POST /seats", () => {
     const seatsTestData = {
-        room_id: 5,  // Ensure room_id matches existing room
+        room_id: 5,  
         seat_label: "J35",
         accessibility: true, 
     };

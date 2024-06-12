@@ -3,7 +3,7 @@ const DB = require("../../config/postgres.config");
 
 const postSeatsValidator = () => {
   return [
-    body("name")
+    body("seat_label")
       .notEmpty()
       .isString()
       .withMessage("La valeur doit être une chaine de caractère.")
@@ -12,38 +12,13 @@ const postSeatsValidator = () => {
       .trim()
       .escape(),
       
-    body("quality")
+    body("accessibility")
       .notEmpty()
-      .isString()
-      .withMessage("La valeur doit être une chaine de caractère.")
-      .isLength({ max: 50 })
-      .withMessage("La valeur ne doit pas dépasser 50 caractère.")
-      .trim()
-      .escape(),
+      .isBoolean()
   ];
 };
 
-const updateSeatsValidator = () => {
-  return [
-    body("name")
-      .notEmpty()
-      .isString()
-      .withMessage("La valeur doit être une chaine de caractère.")
-      .isLength({ max: 50 })
-      .withMessage("La valeur ne doit pas dépasser 50 caractère.")
-      .trim()
-      .escape(),
-      
-    body("quality")
-      .notEmpty()
-      .isString()
-      .withMessage("La valeur doit être une chaine de caractère.")
-      .isLength({ max: 50 })
-      .withMessage("La valeur ne doit pas dépasser 50 caractère.")
-      .trim()
-      .escape(),
-  ];
-};
+
 
 async function validateSeats(req, res, next) {
     const errors = validationResult(req);
@@ -53,4 +28,4 @@ async function validateSeats(req, res, next) {
     next();
   }
 
-  module.exports= {postSeatsValidator, validateSeats, updateSeatsValidator}
+  module.exports= {postSeatsValidator, validateSeats}
