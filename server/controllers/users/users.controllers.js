@@ -1,4 +1,5 @@
 const DB = require("../../config/postgres.config");
+const crypto = require('crypto');
 const {
   hashPassword,
   compareHashedPassword,
@@ -49,7 +50,7 @@ async function postUser(req, res) {
     const hashedPassword = await hashPassword(password);
 
     const query =
-      "INSERT INTO users (first_name, last_name, email, password, role, username) VALUES ($1, $2, $3, $4, 'user', $5) RETURNING *";
+      "INSERT INTO users (first_name, last_name, email, password, role, username, must_change_password) VALUES ($1, $2, $3, $4, 'user', $5, 'false') RETURNING *";
     const result = await DB.query(query, [
       first_name,
       last_name,
@@ -109,6 +110,83 @@ async function postUser(req, res) {
 //   }
 // }
 
+//generate a new password if forgot
+function generateTemporaryPassword() {
+  return crypto.randomBytes(8).toString('hex'); 
+}
+
+//Forgot pass resend new pass by email 
+async function forgotPassword(req, res) {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "Email is required!" });
+    }
+
+    // Check if user exists
+    const userQuery = "SELECT * FROM users WHERE email = $1";
+    const userResult = await DB.query(userQuery, [email]);
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ error: "No user found with this email!" });
+    }
+
+    const temporaryPassword = generateTemporaryPassword();
+    const hashedPassword = await hashPassword(temporaryPassword);
+
+    // Update user password in the database
+    const updateQuery = "UPDATE users SET password = $1, must_change_password = true WHERE email = $2 RETURNING *";
+    const result = await DB.query(updateQuery, [hashedPassword, email]);
+
+    // Send email with the temporary password
+    const mailOptions = {
+      from: process.env.USER_EMAIL,
+      to: email,
+      subject: "Reset Password Request",
+      text: `Bonjours,\n\nVotre mot de passe temporaire est: ${temporaryPassword}\nPour des raison de sécuriter veuillez vous connectez et changer votre mot de passe au plus vite.\n\nMerci!`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log("Error sending email:", error);
+        return res.status(500).json({ error: "Error sending email!" });
+      } else {
+        console.log("Email sent:", info.response);
+        return res.status(200).json({ message: "Temporary password sent to your email!" });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Internal server error!" });
+  }
+}
+
+
+//change with new password
+async function changePassword(req, res) {
+  try {
+    const { userId, newPassword } = req.body;
+    if (!userId || !newPassword) {
+      return res.status(400).json({ error: "User ID and new password are required!" });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+
+    const updateQuery = "UPDATE users SET password = $1, must_change_password = false WHERE user_id = $2 RETURNING *";
+    const result = await DB.query(updateQuery, [hashedPassword, userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.status(200).json({ message: "Password updated successfully!" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Internal server error!" });
+  }
+}
+
+
+//update users credential
 async function updateUserById(req, res) {
   try {
     const id = req.params.id;
@@ -169,6 +247,7 @@ async function updateUserById(req, res) {
   }
 }
 
+//delete User
 async function deleteUserById(req, res) {
   try {
     const id = req.params.id;
@@ -199,4 +278,6 @@ module.exports = {
   deleteUserById,
   postUser,
   updateUserById,
+  forgotPassword,
+  changePassword
 };

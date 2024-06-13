@@ -6,7 +6,7 @@ const PORT = 3000;
 
 const server = http.createServer(app);
 
-//connextion to MongoDB
+//connexion to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connexion à MongoDB réussie !"))

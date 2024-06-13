@@ -10,9 +10,7 @@ async function authUser(req, res) {
     const { rows } = await DB.query(findUserQuery, [email]);
 
     if (rows.length <= 0) {
-      return res
-        .status(404)
-        .json({ message: "No user found with this email address." });
+      return res.status(404).json({ message: "No user found with this email address." });
     }
 
     const user = rows[0];
@@ -38,6 +36,10 @@ async function authUser(req, res) {
       maxAge: 2 * 60 * 60 * 1000,
     });
 
+    if (user.must_change_password) {
+      return res.redirect('/update-pass')
+    }
+
     console.log("User logged in, token:", token);
 
     switch (user.role) {
@@ -49,13 +51,12 @@ async function authUser(req, res) {
         return res.redirect("/dashboard/user");
     }
 
-    return res
-      .status(200)
-      .json({ message: "User logged in", accessToken: token });
+    return res.status(200).json({ message: "User logged in", accessToken: token });
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
   }
 }
+
 
 module.exports = { authUser };
