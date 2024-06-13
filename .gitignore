@@ -1,5 +1,3 @@
-# dependencies
+# .gitignore
 /node_modules
-
 .env
-
