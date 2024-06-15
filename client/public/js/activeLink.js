@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             setActiveLink("/contact");
             break;
         case "/login":
+        case "/reset/forgot-password":
             setActiveLink("/login");
             break;
         case "/register":

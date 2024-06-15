@@ -236,3 +236,10 @@ background: greenyellow
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+  display: none;
+}
+

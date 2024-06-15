@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" href="../images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+    ></script>
+    <script type="text/javascript" defer src="../js/main.js"></script>
+    <script type="text/javascript" defer src="../js/swipper.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/activeLink.js" defer></script>
+    <script src="../js/forgot-pass.js" defer></script>
+    <style>
+   
+  </style>
+  </head>
+  <body class="relative min-h-screen pb-20">
+    <header class="relative">
+      <!-- navbar section -->
+      <%- include('../components/nav-bar') %>     
+    </header>
+
+    <!-- return back button -->
+    <a href="/login" class="fixed z-40 top-11">
+      <div class=" w-12 h-10 flex items-center font-bold justify-center hover:scale-x-125 duration-200 text-white bg-blueOne ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="26" viewBox="0 0 24 24"><path fill="white" d="M16.62 2.99a1.25 1.25 0 0 0-1.77 0L6.54 11.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.38 12l7.25-7.25c.48-.48.48-1.28-.01-1.76"/></svg>
+      </div>
+    </a>
+
+    <!-- main content -->
+    <main class="flex items-center justify-center mb-28">
+
+      <!-- connection container -->
+      <div class="w-full max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+          <div class="font-arvo px-10 pt-20 w-full space-y-10">
+              <h1 class="text-blueOne font-extrabold text-center text-2xl md:text-3xl tracking-wide">Vous avez oublié vôtre mot-de-passe ?</h1>
+              <p class="text-blueOne  text-center text-sm  md:text-sm tracking-wide">
+                  Besoin de réinitialiser votre mot de passe ?<br>
+                  Pas de problème. Entrez simplement votre adresse e-mail dans le champ ci-dessous. <br>
+                  Vous recevrez par mail un mot de passe temporaire que vous pourrez modifier par la suite.
+              </p>
+          </div>
+
+          <form id="forgotPass-form" action="/api/v1/send-temp-pass" method="post" class="w-[40vw] mx-auto mt-7 space-y-7">
+              <div class="flex flex-col">
+                  <div class="">
+                      <div class="w-full border border-gray-300 p-3 rounded-sm bg-whiteOne mb-3">
+                          <input  class="bg-whiteOne outline-none h-full flex-1 w-full placeholder:text-blueOne" type="email" id="forgotPass-email" name="email" placeholder="E-mail*" required >
+                      </div>
+                  </div>
+                  <span id="email-error" class="error">Veuillez entrer une adresse e-mail valide.</span>
+              </div>
+
+              <div class="flex justify-center h-fit">
+                  <button type="submit" class="bg-redOne text-white py-2 px-4 w-40 h-10 rounded-sm hover:scale-105 hover:bg-red-500 duration-200">Valider</button>
+              </div>
+          </form>
+      </div>
+      
+    </main>
+
+    
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+  </body>
+</html>

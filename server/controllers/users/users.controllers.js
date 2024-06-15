@@ -151,7 +151,7 @@ async function forgotPassword(req, res) {
         return res.status(500).json({ error: "Error sending email!" });
       } else {
         console.log("Email sent:", info.response);
-        return res.status(200).json({ message: "Temporary password sent to your email!" });
+        return res.status(200).json({ message: "Temporary password sent to your email !" });
       }
     });
   } catch (err) {

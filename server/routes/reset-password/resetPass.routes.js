@@ -7,11 +7,10 @@ const {
 
 
 //reset Password layout
-resetPasswordRoutes.get(
-  "/forgot-password",
-  (req, res) => {
-    console.log(req.user);
-    res.status(300).send("redirection vers changement de mot de passe");
+resetPasswordRoutes.get("/forgot-password", (req, res) => {
+    res.render('layouts/forgot-pass', {
+      title: "Vous avez oublier votre mot de passe ?"
+    })
   }
 );
 
