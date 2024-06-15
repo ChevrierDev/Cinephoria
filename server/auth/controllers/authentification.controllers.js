@@ -37,8 +37,16 @@ async function authUser(req, res) {
     });
 
     if (user.must_change_password) {
-      return res.redirect('/update-pass')
-    }
+      if (user.role === "user") {
+        return res.redirect('/dashboard/user/reset-pass');
+      }
+      if (user.role === "admin") {
+        return res.redirect('/dashboard/admin/reset-pass');
+      }
+      if (user.role === "employee") {
+        return res.redirect('/dashboard/employee/reset-pass');
+      }
+    };
 
     console.log("User logged in, token:", token);
 

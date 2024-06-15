@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form class="font-arvo px-10 w-full  " action="" method="">
+    <form class="font-arvo px-10 w-full" action="/api/v1/auth" method="post">
 
         <div class="flex flex-col">
             <div class="">
@@ -16,13 +16,13 @@
             </div>
             <div class="">
                 <div class="w-full border border-gray-300 p-3 rounded-sm bg-whiteOne mb-3">
-                    <input class="bg-whiteOne m-0 w-full outline-none placeholder:text-blueOne" type="text" id="password" name="password" placeholder="Mot de passe*" required>
+                    <input class="bg-whiteOne m-0 w-full outline-none placeholder:text-blueOne" type="password" id="password" name="password" placeholder="Mot de passe*" required>
                 </div>
             </div>
         </div>
 
         <div class="text-blueOne flex items-center font-semibold text-xs mb-16">
-            <input class="bg-whiteOne m-0 placeholder:text-blueOne mr-1" type="checkbox" id="remember" name="remember" required>
+            <input class="bg-whiteOne m-0 placeholder:text-blueOne mr-1" type="checkbox" id="remember" name="remember">
             <label for="remember"></label> SE SOUVENIR DE MOI
         </div>
         

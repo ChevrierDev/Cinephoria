@@ -18,6 +18,9 @@ const registerFormRoutes = require("./routes/components/register-form.routes");
 const resetPasswordRoutes = require("./routes/reset-password/resetPass.routes");
 const loginRoutes = require('./routes/login/login.routes');
 
+//user Dashboard routes
+const userDashRoutes = require('./routes/dashboard/users/userDash.routes');
+
 //API routes import
 const usersRoutes = require("./api/users/users.routes");
 const moviesRoutes = require("./api/movies/movies.routes");
@@ -72,6 +75,9 @@ app.use("/reservation", reservationRoutes);
 app.use("/contact", contactRoutes);
 app.use('/reset', resetPasswordRoutes);
 app.use("/login", loginRoutes);
+
+//user Dashboard layout
+app.use("/dashboard", userDashRoutes);
 
 //API routes
 app.use("/api/v1/", usersRoutes);
