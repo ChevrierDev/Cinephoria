@@ -165,8 +165,8 @@ async function forgotPassword(req, res) {
 async function changePassword(req, res) {
   try {
     
-    const { userId, newPassword } = req.body;
-    if (!userId || !newPassword) {
+    const { userId, newPassword, confirmPassword } = req.body;
+    if (!userId || !newPassword || !confirmPassword) {
       return res.status(400).json({ error: "User ID and new password are required!" });
     }
 
