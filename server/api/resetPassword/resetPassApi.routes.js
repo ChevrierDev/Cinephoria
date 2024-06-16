@@ -10,6 +10,11 @@ const {
   validateForgotPass,
 } = require("../../middlewares/validator/forgotPass.validator");
 
+const {
+  postResetPasswordValidator,
+  validateResetPassword,
+} = require("../../middlewares/validator/resetPassword.validator");
+
 //get temporary password feature
 resetPassApiRoutes.post(
   "/send-temp-pass",
@@ -17,6 +22,13 @@ resetPassApiRoutes.post(
   validateForgotPass,
   forgotPassword
 );
-resetPassApiRoutes.post("/change-pass", changePassword);
+
+//reset password after reconnection password
+resetPassApiRoutes.post(
+  "/change-pass",
+  postResetPasswordValidator(),
+  validateResetPassword,
+  changePassword
+);
 
 module.exports = resetPassApiRoutes;
