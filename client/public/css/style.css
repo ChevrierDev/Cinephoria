@@ -241,5 +241,6 @@ background: greenyellow
   color: red;
   font-size: 0.875rem;
   display: none;
+  text-wrap: nowrap;
 }
 
