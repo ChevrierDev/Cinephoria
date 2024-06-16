@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class=" min-h-screen relative ">
+<!-- Nav Bar -->
+<header class=" ">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
+
+<!-- Cinema and Date Filters -->
+<main class="flex flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto min-h-screen  md:pt-40">
+
+    <div class="mt-7 md:mt-0 container flex flex-col md:flex-row md:space-x-4  mx-auto w-fit">
+        <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border mb-8">
+            <label for="cinema" class="block text-sm font-medium text-blueOne ml-4">Cinéma</label>
+            <select id="cinema" name="cinema" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blueOne focus:border-blueOne sm:text-sm rounded-md  cursor-pointer">
+                <option>FRANCE - Cinéphoria Dauphine</option>
+                <option>FRANCE - Cinéphoria Panthéon</option>
+            </select>
+        </div>
+        
+        <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border">
+            <label for="date" class="block text-sm font-medium text-blueOne ml-3">Date</label>
+            <input type="date" id="date" name="date" class="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-blueOne focus:border-blueOne sm:text-sm rounded-md">
+        </div>
+    </div>
+    
+
+    <!-- Movie Listing Section -->
+    <section class="mt-8">
+        <%- include('../../components/dashboard/movie-listing') %>
+    </section>    
+</main>
+
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+
+
+
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
+</html>

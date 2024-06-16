@@ -27,10 +27,10 @@ async function getUserById(req, res) {
     const query = "SELECT * FROM users WHERE user_id = $1";
     const result = await DB.query(query, [id]);
     if (result.rows.length <= 0) {
-      res.status(400).send("No user found !");
+      throw new Error('No user found with this Id.')
       return;
     }
-    res.status(200).send(result.rows[0]);
+    return result.rows[0];
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error !");

@@ -56,7 +56,7 @@ async function authUser(req, res) {
       case "employee":
         return res.redirect("/dashboard/employee");
       case "user":
-        return res.redirect("/dashboard/user");
+        return res.redirect("/dashboard/users");
     }
 
     return res.status(200).json({ message: "User logged in", accessToken: token });
