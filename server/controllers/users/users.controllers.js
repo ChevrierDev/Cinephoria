@@ -1,10 +1,12 @@
 const DB = require("../../config/postgres.config");
-const crypto = require('crypto');
+const crypto = require("crypto");
 const {
   hashPassword,
   compareHashedPassword,
 } = require("../../utils/hashPassword");
 const transporter = require("../../config/nodeMailer.config");
+require("dotenv").config({ path: "../../../.env" });
+const sendEmail = require("../../services/sendEmail.services");
 
 async function getUsers(req, res) {
   try {
@@ -27,7 +29,7 @@ async function getUserById(req, res) {
     const query = "SELECT * FROM users WHERE user_id = $1";
     const result = await DB.query(query, [id]);
     if (result.rows.length <= 0) {
-      throw new Error('No user found with this Id.')
+      throw new Error("No user found with this Id.");
       return;
     }
     return result.rows[0];
@@ -37,8 +39,7 @@ async function getUserById(req, res) {
   }
 }
 
-
-//create user account for register 
+//create user account for register
 async function postUser(req, res) {
   try {
     const { first_name, last_name, email, password, username } = req.body;
@@ -56,23 +57,14 @@ async function postUser(req, res) {
       last_name,
       email,
       hashedPassword,
-      username
+      username,
     ]);
 
-    const mailOptions = {
-      from: process.env.USER_EMAIL,
-      to: email,
-      subject: "Bienvenue à Cinéphoria",
-      text: `Bonjour ${first_name} ${last_name},\n\nVotre compte Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à réserver une place pour un scéance directement en ligne. `,
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log("Error sending email:", error);
-      } else {
-        console.log("Email sent:", info.response);
-      }
-    });
+    sendEmail(
+      email,
+      "Bienvenue à Cinéphoria",
+      `Bonjour ${first_name} ${last_name},\n\nVotre compte Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à réserver une place pour un scéance directement en ligne.`
+    );
 
     return res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -112,10 +104,10 @@ async function postUser(req, res) {
 
 //generate a new password if forgot
 function generateTemporaryPassword() {
-  return crypto.randomBytes(8).toString('hex'); 
+  return crypto.randomBytes(8).toString("hex");
 }
 
-//Forgot pass resend new pass by email 
+//Forgot pass resend new pass by email
 async function forgotPassword(req, res) {
   try {
     const { email } = req.body;
@@ -134,45 +126,35 @@ async function forgotPassword(req, res) {
     const hashedPassword = await hashPassword(temporaryPassword);
 
     // Update user password in the database
-    const updateQuery = "UPDATE users SET password = $1, must_change_password = true WHERE email = $2 RETURNING *";
+    const updateQuery =
+      "UPDATE users SET password = $1, must_change_password = true WHERE email = $2 RETURNING *";
     const result = await DB.query(updateQuery, [hashedPassword, email]);
 
-    // Send email with the temporary password
-    const mailOptions = {
-      from: process.env.USER_EMAIL,
-      to: email,
-      subject: "Reset Password Request",
-      text: `Bonjours,\n\nVotre mot de passe temporaire est: ${temporaryPassword}\nPour des raison de sécuriter veuillez vous connectez et changer votre mot de passe au plus vite.\n\nMerci!`,
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log("Error sending email:", error);
-        return res.status(500).json({ error: "Error sending email!" });
-      } else {
-        console.log("Email sent:", info.response);
-        return res.status(200).json({ message: "Temporary password sent to your email !" });
-      }
-    });
+    sendEmail(
+      email,
+      "Reset Password Request",
+      `Bonjours,\n\nVotre mot de passe temporaire est: ${temporaryPassword}\nPour des raison de sécuriter veuillez vous connectez et changer votre mot de passe au plus vite.\n\nMerci!`
+    );
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error!" });
   }
 }
 
-
 //change with new password
 async function changePassword(req, res) {
   try {
-    
     const { userId, newPassword, confirmPassword } = req.body;
     if (!userId || !newPassword || !confirmPassword) {
-      return res.status(400).json({ error: "User ID and new password are required!" });
+      return res
+        .status(400)
+        .json({ error: "User ID and new password are required!" });
     }
 
     const hashedPassword = await hashPassword(newPassword);
 
-    const updateQuery = "UPDATE users SET password = $1, must_change_password = false WHERE user_id = $2 RETURNING *";
+    const updateQuery =
+      "UPDATE users SET password = $1, must_change_password = false WHERE user_id = $2 RETURNING *";
     const result = await DB.query(updateQuery, [hashedPassword, userId]);
 
     if (result.rows.length === 0) {
@@ -185,7 +167,6 @@ async function changePassword(req, res) {
     return res.status(500).json({ error: "Internal server error!" });
   }
 }
-
 
 //update users credential
 async function updateUserById(req, res) {
@@ -264,8 +245,8 @@ async function deleteUserById(req, res) {
       res.status(200).json({ message: "User deleted successfully!" });
     } else {
       return res
-        .status(404)
-        .json({ error: "No User found with this provided ID!" });
+      .status(404)
+      .json({ error: "No User found with this provided ID!" });
     }
   } catch (err) {
     console.log("Error during deletion:", err);
@@ -280,5 +261,5 @@ module.exports = {
   postUser,
   updateUserById,
   forgotPassword,
-  changePassword
+  changePassword,
 };

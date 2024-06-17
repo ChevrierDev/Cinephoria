@@ -1,7 +1,7 @@
 const express = require('express');
 const logoutRouter = express.Router();
 
-logoutRouter.post('/', (req, res) => {
+logoutRouter.post('/logout', (req, res) => {
     console.log("Déconnection wanted");
     res.clearCookie('token');
     res.redirect('/accueil');

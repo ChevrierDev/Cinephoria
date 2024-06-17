@@ -5,8 +5,8 @@ const DB = require("../../config/postgres.config");
 
 async function authUser(req, res) {
   try {
-    const findUserQuery = `SELECT * FROM users WHERE email = $1`;
     const { email, password } = req.body;
+    const findUserQuery = `SELECT * FROM users WHERE email = $1`;
     const { rows } = await DB.query(findUserQuery, [email]);
 
     if (rows.length <= 0) {
@@ -33,7 +33,8 @@ async function authUser(req, res) {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      maxAge: 2 * 60 * 60 * 1000,
+      maxAge: 1 * 60 * 60 * 1000,
+      
     });
 
     if (user.must_change_password) {
