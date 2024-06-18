@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     opensubmit.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({
-            top: 300,
+            top: 310,
             behavior: 'smooth' 
         });
         submitMenu.classList.remove('hidden');
