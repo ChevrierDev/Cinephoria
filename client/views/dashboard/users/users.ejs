@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 </header>
 
 <!-- Cinema and Date Filters -->
-<main class="flex flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto min-h-screen  md:pt-40">
+<main class="flex flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto min-h-screen  md:pt-40" id="main-container">
 
     <div class="mt-7 md:mt-0 container flex flex-col md:flex-row md:space-x-4  mx-auto w-fit">
         <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border mb-8">
@@ -36,7 +36,11 @@
     <!-- Movie Listing Section -->
     <section class="mt-8">
         <%- include('../../components/dashboard/movie-listing') %>
-    </section>    
+    </section>  
+    
+    <button class="w-36 h-10 font-bold tracking-wide font-arvo text-white bg-redOne mx-auto hover:scale-95 hover:bg-red-500 duration-200 ease-out" id="reviews-button">
+        Noter
+    </button>
 </main>
 
 

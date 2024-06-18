@@ -57,6 +57,7 @@ app.use(
 configurePassportJWT(passport);
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use('/dashboard', express.static(path.join(__dirname, "..", "client", "public")));
 app.use(
   favicon(
     path.join(__dirname, "..", "client", "public", "images", "logo-blanc.png")
@@ -77,7 +78,7 @@ app.use('/reset', resetPasswordRoutes);
 app.use("/login", loginRoutes);
 
 //user Dashboard layout
-app.use("/dashboard", userDashboardRoutes);
+app.use("/dashboard/users", userDashboardRoutes);
 
 //API routes
 app.use("/api/v1/", usersRoutes);

@@ -24,7 +24,7 @@ userDashboardRoutes.get(
 
 //users dashboard homePage routes
 userDashboardRoutes.get(
-  "/users",
+  "/",
   checkAuthenticated,
   checkRole("user"),
   enrichUserWithInfo,
@@ -33,6 +33,38 @@ userDashboardRoutes.get(
     res.render("dashboard/users/users", {
       user: user,
       title: `Bienvenue ${user.first_name}.`
+    });
+  }
+);
+
+//users dashboard homePage routes
+userDashboardRoutes.get(
+  "/reviews",
+  checkAuthenticated,
+  checkRole("user"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/users/userReview", {
+      user: user,
+      title: `Laisser un avis.`,
+      currentPath: req.path
+    });
+  }
+);
+
+//users dashboard get review form routes
+userDashboardRoutes.get(
+  "/reviews-form",
+  checkAuthenticated,
+  checkRole("user"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/users/reviewForm", {
+      user: user,
+      title: `Laisser un avis.`,
+      currentPath: req.path
     });
   }
 );

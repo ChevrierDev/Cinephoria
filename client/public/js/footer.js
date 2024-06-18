@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname;
 
     const adjustFooter = () => {
-        if (currentPage === '/dashboard/users') {
+        if (currentPage === '/dashboard/users' || currentPage === '/dashboard/users/reviews') {
             if (window.innerWidth <= 738) {
                 footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-[-200px]');
                 footer.classList.add('left-0', 'w-full', 'absolute', 'bottom-0');
