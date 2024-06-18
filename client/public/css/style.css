@@ -244,3 +244,34 @@ background: greenyellow
   text-wrap: nowrap;
 }
 
+.top-div {
+    width: 70%;
+    background-color: rgb(227 176 75);
+    position: relative;
+}
+
+.top-div {
+    height: 100%;
+    border-radius: 55px;
+}
+
+.top-div::before,
+.top-div::after{
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background-color: white;
+  border-radius: 100%;
+  transform: translateY(-50%);
+}
+
+.top-div::before {
+  top: 50%;
+  left: -60px;
+}
+
+.top-div::after {
+  top: 50%;
+  right: -60px;
+}
