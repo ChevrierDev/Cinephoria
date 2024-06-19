@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
-    <link type="text/css" rel="stylesheet" href="../css/output.css" />
-    <link rel="stylesheet" href="../css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css">
     <script defer src="/js/movie-listing.js"></script>
-    <script defer src="/js/userDash.js"></script>
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
 </head>
 <body class=" min-h-screen relative ">
 <!-- Nav Bar -->
-<header class=" ">
+<header class="relative z-10 ">
     <%- include('../../components/dashboard/nav-bar-dashboard') %>
 </header>
 
 <!-- Cinema and Date Filters -->
-<main class="flex text-blueOne flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto min-h-screen  md:pt-40 relative" id="main-container ">
+<main class="flex text-blueOne flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto   md:pt-40 relative" id="main-container ">
 
     <div class="mt-7 md:mt-0 container flex flex-col md:flex-row md:space-x-4  mx-auto w-fit">
         <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border mb-8">

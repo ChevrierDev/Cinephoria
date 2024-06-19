@@ -30,7 +30,6 @@ async function getUserById(req, res) {
     const result = await DB.query(query, [id]);
     if (result.rows.length <= 0) {
       throw new Error("No user found with this Id.");
-      return;
     }
     return result.rows[0];
   } catch (err) {

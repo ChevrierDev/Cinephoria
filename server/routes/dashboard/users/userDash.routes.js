@@ -31,7 +31,6 @@ userDashboardRoutes.get(
   (req, res) => {
     const user = req.user.details
     res.render("dashboard/users/users", {
-      user: user,
       title: `Bienvenue ${user.first_name}.`
     });
   }
@@ -60,9 +59,7 @@ userDashboardRoutes.get(
   checkRole("user"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/users/reviewForm", {
-      user: user,
       title: `Laisser un avis.`,
       currentPath: req.path
     });
