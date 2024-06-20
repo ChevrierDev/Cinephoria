@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         case '/dashboard/admin/rooms':
         case '/dashboard/admin/employees':
         case '/dashboard/admin/films/add':
+        case '/dashboard/admin/films/select-update':
           if (window.innerWidth <= 738) {
             footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-[-200px]');
             footer.classList.add('left-0', 'w-full', 'absolute', 'bottom-0');

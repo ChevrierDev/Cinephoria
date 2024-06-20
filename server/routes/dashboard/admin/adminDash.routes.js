@@ -51,6 +51,20 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard add films layouts routes
+adminDashboardRoutes.get(
+  "/films/select-update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/selectUpdateMovie", {
+      title: `Séléctionner un film à modifer.`
+    });
+  }
+);
+
 //admin dashboard rooms layouts routes
 adminDashboardRoutes.get(
   "/rooms",
