@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
         case "/dashboard/admin/films":
         case "/dashboard/admin/films/add":
         case "/dashboard/admin/films/select-update":
+        case "/dashboard/admin/films/update":
+        case "/dashboard/admin/films/delete-selection":
             setActiveLink("/dashboard/admin");
             sideBarSetActiveLink("/dashboard/admin/films");
             break;

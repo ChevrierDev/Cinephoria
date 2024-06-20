@@ -51,7 +51,7 @@ adminDashboardRoutes.get(
   }
 );
 
-//admin dashboard add films layouts routes
+//admin dashboard update films layouts routes
 adminDashboardRoutes.get(
   "/films/select-update",
   checkAuthenticated,
@@ -64,6 +64,36 @@ adminDashboardRoutes.get(
     });
   }
 );
+
+//admin dashboard update films layouts routes
+adminDashboardRoutes.get(
+  "/films/update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/updateMovie", {
+      title: `Modifier le film.`
+    });
+  }
+);
+
+//admin dashboard delete films layouts routes
+adminDashboardRoutes.get(
+  "/films/delete-selection",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/deleteMovieSelection", {
+      title: `Choisir le films a Supprimer.`
+    });
+  }
+);
+
+
 
 //admin dashboard rooms layouts routes
 adminDashboardRoutes.get(
