@@ -1,84 +1,59 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelectorAll("nav .nav a");
-    const aLinks = document.querySelectorAll("a[href]")
+    const aLinks = document.querySelectorAll("a[href]");
     const globalPath = window.location.pathname;
-
-    switch (globalPath) {
-        case "/":
-            setActiveLink("/accueil");
-            break;
-        case "/accueil":
-            setActiveLink("/accueil");
-            break;
-        case "/films":
-        case "/films/disponibiliter":
-            setActiveLink("/films");
-            break;
-        case "/reservation":
-        case "/reservation/choisir-sceance":
-        case "/reservation/login":
-        case "/reservation/choisir-place":
-            setActiveLink("/reservation");
-            break;
-        case "/contact":
-            setActiveLink("/contact");
-            break;
-        case "/login":
-        case "/reset/forgot-password":
-            //modify later
-        case "/dashboard/users":
-            setActiveLink("/dashboard/users");
-            sideBarSetActiveLink("/dashboard/users");
-            break;
-        case "/dashboard/users":
-            setActiveLink("/dashboard/users");
-            sideBarSetActiveLink("/dashboard/users");
-            break;
-        case "/dashboard/admin":
-            setActiveLink("/dashboard/admin");
-            sideBarSetActiveLink("/dashboard/admin");
-            break;
-        case "/dashboard/admin/films":
-        case "/dashboard/admin/films/add":
-        case "/dashboard/admin/films/select-update":
-        case "/dashboard/admin/films/update":
-        case "/dashboard/admin/films/delete-selection":
-            setActiveLink("/dashboard/admin");
-            sideBarSetActiveLink("/dashboard/admin/films");
-            break;
-        case "/dashboard/admin/rooms":
-            setActiveLink("/dashboard/admin");
-            sideBarSetActiveLink("/dashboard/admin/rooms");
-            break;
-        case "/dashboard/admin/employees":
-            setActiveLink("/dashboard/admin");
-            sideBarSetActiveLink("/dashboard/admin/employees");
-            break;
-        case "/register":
-            setActiveLink("/register");
-            break;
-        default:
-            break;
-    }
-
+  
     function setActiveLink(path) {
-        navLinks.forEach(link => {
-            if (link.getAttribute("href") === path) {
-                link.parentElement.classList.add("active");
-            } 
-        });
+      navLinks.forEach((link) => {
+        if (link.getAttribute("href") === path) {
+          link.parentElement.classList.add("active");
+        }
+      });
+    }
+  
+    function sideBarSetActiveLink(path) {
+      aLinks.forEach((link) => {
+        if (link.getAttribute("href") === path) {
+          const button = link.querySelector("button");
+          if (button) {
+            button.classList.add("bg-goldOne");
+          }
+        }
+      });
     }
 
-    function sideBarSetActiveLink(path) {
-        aLinks.forEach(link => {
-          if (link.getAttribute("href") === path) {
-            const button = link.querySelector('button');
-            if (button) {
-              button.classList.add('bg-goldOne');
-            }
-          }
-        });
-      }
+    //navBar active link
+    if (globalPath === "/" || globalPath.startsWith("/accueil")) {
+        setActiveLink("/accueil");
+      } else if (globalPath.startsWith("/films")) {
+        setActiveLink("/films");
+      } else if (globalPath.startsWith("/contact")) {
+        setActiveLink("/contact");
+      } else if (globalPath.startsWith("/login") || globalPath.startsWith("/reset")) {
+          setActiveLink("/login");
+      } else if (globalPath.startsWith("/register")) {
+        setActiveLink("/register");
+    }
+  
+    //Dashboard active link
+    if (globalPath.startsWith("/dashboard/users")) {
+      setActiveLink("/dashboard/users");
+      sideBarSetActiveLink("/dashboard/users");
+    } else if (globalPath.startsWith("/dashboard/admin/films")) {
+      setActiveLink("/dashboard/admin");
+      sideBarSetActiveLink("/dashboard/admin/films");
+    } else if (globalPath.startsWith("/dashboard/admin/rooms")) {
+      setActiveLink("/dashboard/admin");
+      sideBarSetActiveLink("/dashboard/admin/rooms");
+    } else if (globalPath.startsWith("/dashboard/admin/employees")) {
+      setActiveLink("/dashboard/admin");
+      sideBarSetActiveLink("/dashboard/admin/employees");
+    } else if (globalPath.startsWith("/dashboard/admin")) {
+      setActiveLink("/dashboard/admin");
+      sideBarSetActiveLink("/dashboard/admin");
+    } else if (globalPath.startsWith("/reservation")) {
+      setActiveLink("/reservation");
+    } 
 
-
-});
+  });
+  

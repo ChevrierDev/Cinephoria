@@ -125,28 +125,14 @@ adminDashboardRoutes.get(
 
 //admin dashboard select update rooms layouts routes
 adminDashboardRoutes.get(
-  "/rooms/select-update",
-  checkAuthenticated,
-  checkRole("admin"),
-  enrichUserWithInfo,
-  (req, res) => {
-    const user = req.user.details
-    res.render("dashboard/admin/selectUpdateRooms", {
-      title: `Séléctionner une salle à modifier dans votre cinéma.`
-    });
-  }
-);
-
-//admin dashboard update rooms layouts routes
-adminDashboardRoutes.get(
   "/rooms/update",
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
     const user = req.user.details
-    res.render("dashboard/admin/UpdateRooms", {
-      title: `Modifier la salle dans votre cinéma.`
+    res.render("dashboard/admin/updateRooms", {
+      title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`
     });
   }
 );
