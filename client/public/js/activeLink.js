@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll("nav .nav a");
+    const aLinks = document.querySelectorAll("a[href]")
     const globalPath = window.location.pathname;
 
     switch (globalPath) {
@@ -26,7 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
         case "/reset/forgot-password":
             //modify later
         case "/dashboard/users":
-            setActiveLink("/login");
+            setActiveLink("/dashboard/users");
+            sideBarSetActiveLink("/dashboard/users");
+            break;
+        case "/dashboard/admin":
+            setActiveLink("/dashboard/admin");
+            sideBarSetActiveLink("/dashboard/admin");
             break;
         case "/register":
             setActiveLink("/register");
@@ -42,6 +48,17 @@ document.addEventListener("DOMContentLoaded", function() {
             } 
         });
     }
+
+    function sideBarSetActiveLink(path) {
+        aLinks.forEach(link => {
+          if (link.getAttribute("href") === path) {
+            const button = link.querySelector('button');
+            if (button) {
+              button.classList.add('bg-goldOne');
+            }
+          }
+        });
+      }
 
 
 });

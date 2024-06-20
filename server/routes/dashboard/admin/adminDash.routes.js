@@ -23,4 +23,46 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard films layouts routes
+adminDashboardRoutes.get(
+  "/films",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/films", {
+      title: `Modifier ou ajouter des films à l'affiche.`
+    });
+  }
+);
+
+//admin dashboard rooms layouts routes
+adminDashboardRoutes.get(
+  "/rooms",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/rooms", {
+      title: `Modifier ou ajouter des films à l'affiche.`
+    });
+  }
+);
+
+//admin dashboard employee layouts routes
+adminDashboardRoutes.get(
+  "/employees",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/employees", {
+      title: `Modifier ou ajouter des films à l'affiche.`
+    });
+  }
+);
+
 module.exports = adminDashboardRoutes;

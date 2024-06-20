@@ -21,7 +21,7 @@
         <% if (user && user.role === 'user') { %>
           <li class="nav"><a href="/dashboard/users">MON ESPACE</a></li>
         <% } else if (user && user.role === 'employee') { %>
-        <li class="nav"><a href="/dashboard/users">INTRANET</a></li>
+        <li class="nav"><a href="/dashboard/empployee">INTRANET</a></li>
         <% } else if (user && user.role === 'admin') { %>
         <li class="nav"><a href="/dashboard/admin">ADMINISTRATION</a></li>
         <% } else { %>
