@@ -3,17 +3,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname;
 
     const adjustFooter = () => {
-        if (currentPage === '/dashboard/users' || currentPage === '/dashboard/users/reviews') {
-            if (window.innerWidth <= 738) {
-                footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-[-200px]');
-                footer.classList.add('left-0', 'w-full', 'absolute', 'bottom-0');
-            } else {
-                footer.classList.remove('left-0', 'w-full', 'absolute', 'bottom-0', 'bottom-[-200px]');
-                footer.classList.add('right-0', 'w-[85vw]', 'absolute', 'bottom-0');
-            }
-        } else {
-            footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-0', 'left-0', 'w-full', 'fixed', 'bottom-0');
-            footer.classList.add('w-full', 'absolute', 'bottom-[-200px]');
+        switch (currentPage) {
+            case '/dashboard/users':
+            case '/dashboard/users/reviews-form':
+                  if (window.innerWidth <= 738) {
+                    footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-[-200px]');
+                    footer.classList.add('left-0', 'w-full', 'absolute', 'bottom-0');
+                  } else {
+                    footer.classList.remove('left-0', 'w-full', 'absolute', 'bottom-0', 'bottom-[-200px]');
+                    footer.classList.add('right-0', 'w-[85vw]', 'absolute', 'bottom-0');
+                  }
+                  break;
+            case '/dashboard/admin':
+            case '/dashboard/admin/films':
+            case '/dashboard/admin/rooms':
+            case '/dashboard/admin/employees':
+                  if (window.innerWidth <= 738) {
+                    footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-[-200px]');
+                    footer.classList.add('left-0', 'w-full', 'absolute', 'bottom-0');
+                  } else {
+                    footer.classList.remove('left-0', 'w-full', 'absolute', 'bottom-0', 'bottom-[-200px]');
+                    footer.classList.add('right-0', 'w-[85vw]', 'absolute', 'bottom-0');
+                  }
+                  break;
+            default:
+                  footer.classList.remove('right-0', 'w-[85vw]', 'absolute', 'bottom-0', 'left-0', 'w-full', 'fixed', 'bottom-0');
+                  footer.classList.add('w-full', 'absolute', 'bottom-[-200px]');
+                  break;
         }
     };
 
