@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             sideBarSetActiveLink("/dashboard/admin");
             break;
         case "/dashboard/admin/films":
+        case "/dashboard/admin/films/add":
             setActiveLink("/dashboard/admin");
             sideBarSetActiveLink("/dashboard/admin/films");
             break;

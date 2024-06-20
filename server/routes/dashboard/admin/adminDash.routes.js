@@ -37,6 +37,20 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard add films layouts routes
+adminDashboardRoutes.get(
+  "/films/add",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/addMovie", {
+      title: `Ajouter un films.`
+    });
+  }
+);
+
 //admin dashboard rooms layouts routes
 adminDashboardRoutes.get(
   "/rooms",
