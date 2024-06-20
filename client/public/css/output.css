@@ -940,6 +940,9 @@ video {
 .h-\[35vh\]{
   height: 35vh;
 }
+.h-\[25vh\]{
+  height: 25vh;
+}
 .max-h-\[30vh\]{
   max-height: 30vh;
 }
@@ -1060,6 +1063,12 @@ video {
 }
 .w-\[40\%\]{
   width: 40%;
+}
+.w-\[75vw\]{
+  width: 75vw;
+}
+.w-\[7vw\]{
+  width: 7vw;
 }
 .max-w-36{
   max-width: 9rem;
@@ -2239,6 +2248,11 @@ video {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.hover\:text-3xl:hover{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .hover\:text-goldOne:hover{
   --tw-text-opacity: 1;
   color: rgb(227 176 75 / var(--tw-text-opacity));
@@ -2466,6 +2480,18 @@ video {
     width: 30%;
   }
 
+  .md\:w-full{
+    width: 100%;
+  }
+
+  .md\:w-7\/12{
+    width: 58.333333%;
+  }
+
+  .md\:w-\[85vw\]{
+    width: 85vw;
+  }
+
   .md\:max-w-2xl{
     max-width: 42rem;
   }
@@ -2518,6 +2544,14 @@ video {
   .md\:gap-x-0{
     -moz-column-gap: 0px;
          column-gap: 0px;
+  }
+
+  .md\:gap-y-8{
+    row-gap: 2rem;
+  }
+
+  .md\:gap-y-10{
+    row-gap: 2.5rem;
   }
 
   .md\:-space-x-10 > :not([hidden]) ~ :not([hidden]){

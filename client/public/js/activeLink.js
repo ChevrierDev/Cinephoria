@@ -30,9 +30,25 @@ document.addEventListener("DOMContentLoaded", function() {
             setActiveLink("/dashboard/users");
             sideBarSetActiveLink("/dashboard/users");
             break;
+        case "/dashboard/users":
+            setActiveLink("/dashboard/users");
+            sideBarSetActiveLink("/dashboard/users");
+            break;
         case "/dashboard/admin":
             setActiveLink("/dashboard/admin");
             sideBarSetActiveLink("/dashboard/admin");
+            break;
+        case "/dashboard/admin/films":
+            setActiveLink("/dashboard/admin");
+            sideBarSetActiveLink("/dashboard/admin/films");
+            break;
+        case "/dashboard/admin/rooms":
+            setActiveLink("/dashboard/admin");
+            sideBarSetActiveLink("/dashboard/admin/rooms");
+            break;
+        case "/dashboard/admin/employees":
+            setActiveLink("/dashboard/admin");
+            sideBarSetActiveLink("/dashboard/admin/employees");
             break;
         case "/register":
             setActiveLink("/register");
