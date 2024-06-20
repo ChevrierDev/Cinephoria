@@ -8,7 +8,6 @@ const filterApp = () => {
     const franceCinemaMenu = document.getElementById("france-cinema-list");
     const belgiumCinemaMenu = document.getElementById("belgium-cinema-list");
   
-    
     const openTheaterMenueBtn = document.querySelectorAll('.theater-filter');
     const theaterMenu = document.getElementById("theater-menu");
     const closeTheaterMenuBtn = document.getElementById("close-search-theater-menu");
@@ -60,6 +59,17 @@ const filterApp = () => {
       searchMoviesMenu.classList.toggle("hidden");
       searchMoviesMenu.classList.toggle("flex");
     };
+
+    // set up style for users dashboard
+    if (window.location.pathname === "/dashboard/users/reviews") {
+      searchMoviesMenu.classList.remove('w-full');
+      searchMoviesMenu.classList.add('w-[85vw]');
+      searchMoviesMenu.classList.add('right-0');
+
+      theaterMenu.classList.remove('w-full');
+      theaterMenu.classList.add('w-[85vw]');
+      theaterMenu.classList.add('right-0');
+    }
   
     quickaccess1Btn.addEventListener("click", toggleFranceCinemaMenu);
     quickaccess2Btn.addEventListener("click", toggleBelgiumCinemaMenu);

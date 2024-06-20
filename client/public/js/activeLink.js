@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
             break;
         case "/login":
         case "/reset/forgot-password":
+            //modify later
+        case "/dashboard/users":
             setActiveLink("/login");
             break;
         case "/register":

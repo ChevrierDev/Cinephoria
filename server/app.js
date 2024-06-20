@@ -7,6 +7,7 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const configurePassportJWT = require("./config/passportJWT.config");
+const { checkUser } = require("./middlewares/enrichUserWithInfo");
 
 //Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
@@ -16,10 +17,11 @@ const contactRoutes = require("./routes/contact/contact.routes");
 const loginFormRoutes = require("./routes/components/login-form.routes");
 const registerFormRoutes = require("./routes/components/register-form.routes");
 const resetPasswordRoutes = require("./routes/reset-password/resetPass.routes");
-const loginRoutes = require('./routes/login/login.routes');
+const loginRoutes = require("./routes/login/login.routes");
 
-//user Dashboard routes
-const userDashRoutes = require('./routes/dashboard/users/userDash.routes');
+//Dashboard routes
+const userDashboardRoutes = require("./routes/dashboard/users/userDash.routes");
+const adminDashboardRoutes = require("./routes/dashboard/admin/adminDash.routes");
 
 //API routes import
 const usersRoutes = require("./api/users/users.routes");
@@ -31,12 +33,11 @@ const reservationApiRoutes = require("./api/reservation/reservation.routes");
 const showtimesRoutes = require("./api/showtimes/showtimes.routes");
 const seatsRoutes = require("./api/seats/seats.routes");
 const roomsRoutes = require("./api/rooms/rooms.routes");
-const resetPassApiRoutes = require('./api/resetPassword/resetPassApi.routes');
+const resetPassApiRoutes = require("./api/resetPassword/resetPassApi.routes");
 
 //login and logout API
 const authRouter = require("./auth/loginApi");
 const logoutRouter = require("./auth/logoutApi");
-
 
 const app = express();
 app.use(morgan("dev"));
@@ -51,12 +52,18 @@ app.use(
     name: "session",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: false },
   })
 );
 configurePassportJWT(passport);
 
+app.use(checkUser);
+
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use(
+  "/dashboard",
+  express.static(path.join(__dirname, "..", "client", "public"))
+);
 app.use(
   favicon(
     path.join(__dirname, "..", "client", "public", "images", "logo-blanc.png")
@@ -73,11 +80,13 @@ app.use("/accueil", accueilRoutes);
 app.use("/films", filmsRoutes);
 app.use("/reservation", reservationRoutes);
 app.use("/contact", contactRoutes);
-app.use('/reset', resetPasswordRoutes);
+app.use("/reset", resetPasswordRoutes);
 app.use("/login", loginRoutes);
 
 //user Dashboard layout
-app.use("/dashboard", userDashRoutes);
+app.use("/dashboard/users", userDashboardRoutes);
+app.use("/dashboard/admin", adminDashboardRoutes);
+
 
 //API routes
 app.use("/api/v1/", usersRoutes);

@@ -8,7 +8,10 @@ const {
   updateReservationById,
 } = require("../../controllers/reservations/reservation.controllers");
 
-const { postReservationValidator, validateReservation } = require('../../middlewares/validator/reservation.validator')
+const {
+  postReservationValidator,
+  validateReservation,
+} = require("../../middlewares/validator/reservation.validator");
 
 // get all reservation
 reservationApiRoutes.get("/reservation", getReservation);
@@ -20,9 +23,19 @@ reservationApiRoutes.get("/reservation/:id", getReservationById);
 reservationApiRoutes.delete("/reservation/:id", deleteReservationById);
 
 // post reservation
-reservationApiRoutes.post("/reservation",postReservationValidator(), validateReservation, postReservation);
+reservationApiRoutes.post(
+  "/reservation",
+  postReservationValidator(),
+  validateReservation,
+  postReservation
+);
 
 // update reservation
-reservationApiRoutes.put("/reservation/:id",postReservationValidator(), validateReservation, updateReservationById);
+reservationApiRoutes.put(
+  "/reservation/:id",
+  postReservationValidator(),
+  validateReservation,
+  updateReservationById
+);
 
 module.exports = reservationApiRoutes;
