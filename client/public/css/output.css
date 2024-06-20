@@ -819,15 +819,6 @@ video {
 .mt-\[75\.5px\]{
   margin-top: 75.5px;
 }
-.mt-52{
-  margin-top: 13rem;
-}
-.mt-56{
-  margin-top: 14rem;
-}
-.mt-80{
-  margin-top: 20rem;
-}
 .block{
   display: block;
 }
@@ -1761,9 +1752,6 @@ video {
 }
 .outline{
   outline-style: solid;
-}
-.outline-dashed{
-  outline-style: dashed;
 }
 .outline-8{
   outline-width: 8px;
