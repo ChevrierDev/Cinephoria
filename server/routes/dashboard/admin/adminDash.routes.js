@@ -104,7 +104,49 @@ adminDashboardRoutes.get(
   (req, res) => {
     const user = req.user.details
     res.render("dashboard/admin/rooms", {
-      title: `Modifier ou ajouter des films à l'affiche.`
+      title: `Modifier ou ajouter des salle dans vos cinémas.`
+    });
+  }
+);
+
+//admin dashboard add rooms layouts routes
+adminDashboardRoutes.get(
+  "/rooms/add",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/addRooms", {
+      title: `Ajouter une salle à votre cinéma.`
+    });
+  }
+);
+
+//admin dashboard select update rooms layouts routes
+adminDashboardRoutes.get(
+  "/rooms/select-update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/selectUpdateRooms", {
+      title: `Séléctionner une salle à modifier dans votre cinéma.`
+    });
+  }
+);
+
+//admin dashboard update rooms layouts routes
+adminDashboardRoutes.get(
+  "/rooms/update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/UpdateRooms", {
+      title: `Modifier la salle dans votre cinéma.`
     });
   }
 );
