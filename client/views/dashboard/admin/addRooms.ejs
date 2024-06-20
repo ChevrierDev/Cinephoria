@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+    <script defer src="/js/addRoom.js"></script>
 </head>
 <body class=" min-h-screen relative ">
 <!-- Nav Bar -->
@@ -20,14 +21,26 @@
 
     <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
 
-       <form action="" method="post" class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8">
+       <form action="" method="post" class="flex flex-col items-center justify-center relative  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8">
 
             <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER </h1>
 
-            <button class="w-full h-16 bg-white flex items-center justify-between px-7" id="select-theater">
-                <p class="font-arvo text-lg font-bold text-blueOne">choisir un  cinema</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
-            </button>
+            <div class="relative w-full">
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer " id="select-theater">
+                    <p class="font-arvo text-lg font-bold text-blueOne" id="cinema-choosen">choisir un  cinema</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
+                </div>
+
+                <!-- hidden theater menu -->
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-60 animate-open-menu hidden" id="theater-menu">
+                    <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
+                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES HALLES</li>
+                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - BRUXELLE</li>
+                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - MANTES LA JOLIE</li>
+                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES ULIS</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- option field section  -->
             <section id="main-field" class="flex flex-col w-full gap-y-6">
@@ -45,9 +58,24 @@
                 </div>
             </section>
            
-            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center">Ajouter</button>
+            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">Ajouter</button>
+
+            <!-- hidden alert pop up -->
+            <div class="absolute   z-50  animate-open-menu hidden  flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48 " id="alert">
+                <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT AJOUTER LA SALLE "B13" ?</p>
+                <div class="flex items-center justify-center space-x-10">
+                    <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
+                        OUI
+                    </button>
+                    <button  id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                        NON
+                    </button>
+                </div>
+            </div>
 
         </form>
+
+        
 
     </section>
 

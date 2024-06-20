@@ -643,6 +643,24 @@ video {
 .left-80{
   left: 20rem;
 }
+.-bottom-20{
+  bottom: -5rem;
+}
+.-bottom-12{
+  bottom: -3rem;
+}
+.-bottom-52{
+  bottom: -13rem;
+}
+.-bottom-\[200px\]{
+  bottom: -200px;
+}
+.-bottom-56{
+  bottom: -14rem;
+}
+.-bottom-60{
+  bottom: -15rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -1913,6 +1931,9 @@ video {
 .ease-out{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+.ease-in{
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
 .nav{
   position: relative;
   font-family: Arvo, serif;
@@ -2236,6 +2257,11 @@ video {
 
 .hover\:-translate-y-2:hover{
   --tw-translate-y: -0.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:translate-x-5:hover{
+  --tw-translate-x: 1.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
