@@ -123,7 +123,7 @@ adminDashboardRoutes.get(
   }
 );
 
-//admin dashboard select update rooms layouts routes
+//admin dashboard  update rooms layouts routes
 adminDashboardRoutes.get(
   "/rooms/update",
   checkAuthenticated,
@@ -133,6 +133,20 @@ adminDashboardRoutes.get(
     const user = req.user.details
     res.render("dashboard/admin/updateRooms", {
       title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`
+    });
+  }
+);
+
+//admin dashboard  delete rooms layouts routes
+adminDashboardRoutes.get(
+  "/rooms/delete",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/deleteRooms", {
+      title: `Séléctionner une salle et à supprimer dans votre cinéma.`
     });
   }
 );
