@@ -238,7 +238,20 @@ adminDashboardRoutes.get(
   enrichUserWithInfo,
   (req, res) => {
     res.render("dashboard/admin/addShowtimes", {
-      title: `Ajouter un scéance à projeter.`,
+      title: `Ajouter une scéance à projeter.`,
+    });
+  }
+);
+
+//admin dashboard update showtimes  layouts routes
+adminDashboardRoutes.get(
+  "/showtimes/update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/updateShowtimes", {
+      title: `modifier une scéance.`,
     });
   }
 );
