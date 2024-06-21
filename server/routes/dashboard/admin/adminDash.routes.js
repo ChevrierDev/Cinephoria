@@ -5,9 +5,8 @@ const {
   checkRole,
 } = require("../../../middlewares/autorisation/autorisation");
 const {
-  enrichUserWithInfo
-} = require('../../../middlewares/enrichUserWithInfo')
-
+  enrichUserWithInfo,
+} = require("../../../middlewares/enrichUserWithInfo");
 
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
@@ -16,9 +15,9 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
+    const user = req.user.details;
     res.render("dashboard/admin/admin", {
-      title: `Bienvenue ${user.first_name}.`
+      title: `Bienvenue ${user.first_name}.`,
     });
   }
 );
@@ -30,9 +29,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/films", {
-      title: `Modifier ou ajouter des films à l'affiche.`
+      title: `Modifier ou ajouter des films à l'affiche.`,
     });
   }
 );
@@ -44,9 +42,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/addMovie", {
-      title: `Ajouter un films.`
+      title: `Ajouter un films.`,
     });
   }
 );
@@ -58,9 +55,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/selectUpdateMovie", {
-      title: `Séléctionner un film à modifer.`
+      title: `Séléctionner un film à modifer.`,
     });
   }
 );
@@ -72,9 +68,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/updateMovie", {
-      title: `Modifier le film.`
+      title: `Modifier le film.`,
     });
   }
 );
@@ -86,14 +81,11 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/deleteMovieSelection", {
-      title: `Choisir le films a Supprimer.`
+      title: `Choisir le films a Supprimer.`,
     });
   }
 );
-
-
 
 //admin dashboard rooms layouts routes
 adminDashboardRoutes.get(
@@ -102,9 +94,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/rooms", {
-      title: `Modifier ou ajouter des salle dans vos cinémas.`
+      title: `Modifier ou ajouter des salle dans vos cinémas.`,
     });
   }
 );
@@ -116,9 +107,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/addRooms", {
-      title: `Ajouter une salle à votre cinéma.`
+      title: `Ajouter une salle à votre cinéma.`,
     });
   }
 );
@@ -130,9 +120,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/updateRooms", {
-      title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`
+      title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
     });
   }
 );
@@ -144,9 +133,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/deleteRooms", {
-      title: `Séléctionner une salle et à supprimer dans votre cinéma.`
+      title: `Séléctionner une salle et à supprimer dans votre cinéma.`,
     });
   }
 );
@@ -158,9 +146,8 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/employees", {
-      title: `Modifier ou ajouter des films à l'affiche.`
+      title: `Modifier ou ajouter des films à l'affiche.`,
     });
   }
 );
@@ -172,9 +159,34 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
     res.render("dashboard/admin/addEmployees", {
-      title: `Ajouter des employées entreprises.`
+      title: `Ajouter des employées entreprises.`,
+    });
+  }
+);
+
+//admin dashboard select update employee layouts routes
+adminDashboardRoutes.get(
+  "/employees/update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/selectUpdateEmployees", {
+      title: `Modifier le compte de votre employé.`,
+    });
+  }
+);
+
+//admin dashboard update employee layouts routes
+adminDashboardRoutes.get(
+  "/employees/updateEmployee",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/updateEmployees", {
+      title: `Modifier le compte de votre employé.`,
     });
   }
 );
