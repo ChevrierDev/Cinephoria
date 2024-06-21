@@ -165,4 +165,18 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard add employee layouts routes
+adminDashboardRoutes.get(
+  "/employees/add",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    const user = req.user.details
+    res.render("dashboard/admin/addEmployees", {
+      title: `Ajouter des employées entreprises.`
+    });
+  }
+);
+
 module.exports = adminDashboardRoutes;
