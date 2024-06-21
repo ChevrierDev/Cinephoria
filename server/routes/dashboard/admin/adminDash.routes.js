@@ -191,4 +191,17 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard select delete employee layouts routes
+adminDashboardRoutes.get(
+  "/employees/delete",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/selectDelete", {
+      title: `supprimer le compte de votre employé.`,
+    });
+  }
+);
+
 module.exports = adminDashboardRoutes;
