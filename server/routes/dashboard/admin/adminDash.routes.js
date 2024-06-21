@@ -230,4 +230,17 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard add showtimes  layouts routes
+adminDashboardRoutes.get(
+  "/showtimes/add",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/addShowtimes", {
+      title: `Ajouter un scéance à projeter.`,
+    });
+  }
+);
+
 module.exports = adminDashboardRoutes;
