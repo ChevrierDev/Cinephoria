@@ -204,4 +204,30 @@ adminDashboardRoutes.get(
   }
 );
 
+//admin dashboard showtimes layouts routes
+adminDashboardRoutes.get(
+  "/showtimes",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/showtimes", {
+      title: `Modifier ou ajouter des scéances dans vos cinémas.`,
+    });
+  }
+);
+
+//admin dashboard showtimes select movie layouts routes
+adminDashboardRoutes.get(
+  "/showtimes/select-movies",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/selectMovie", {
+      title: `Choisir quel films projeter.`,
+    });
+  }
+);
+
 module.exports = adminDashboardRoutes;
