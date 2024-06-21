@@ -251,7 +251,20 @@ adminDashboardRoutes.get(
   enrichUserWithInfo,
   (req, res) => {
     res.render("dashboard/admin/updateShowtimes", {
-      title: `modifier une scéance.`,
+      title: `Supprimer une scéance.`,
+    });
+  }
+);
+
+//admin dashboard update showtimes  layouts routes
+adminDashboardRoutes.get(
+  "/showtimes/delete",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/admin/deleteShowtimes", {
+      title: `Supprimer une scéance.`,
     });
   }
 );
