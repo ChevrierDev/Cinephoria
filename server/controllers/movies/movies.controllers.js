@@ -19,17 +19,16 @@ async function getMovies(req, res) {
 
 async function getMovieById(req, res) {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     const query = "SELECT * FROM movies WHERE movie_id = $1";
-    const results = await DB.query(query, [id]);
-    if (results.rows.length <= 0) {
-      res.status(404).json("No movie id found !");
-      return;
+    const result = await DB.query(query, [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "No movie found with the given ID" });
     }
-    res.status(200).json(results.rows);
+    res.json(result.rows[0]);
   } catch (err) {
-    console.log(err);
-    res.status(500).json("Internal server error !");
+    console.error('Error fetching movie by ID:', err);
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 

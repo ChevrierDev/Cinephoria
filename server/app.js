@@ -65,6 +65,7 @@ app.use(
   "/dashboard",
   express.static(path.join(__dirname, "..", "client", "public"))
 );
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(
   favicon(
     path.join(__dirname, "..", "client", "public", "images", "logo-blanc.png")
