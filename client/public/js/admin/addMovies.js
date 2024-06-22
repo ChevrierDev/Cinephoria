@@ -19,3 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmationMenu.classList.add("hidden");
   });
 });
+
+document.querySelectorAll('.file-input').forEach(input => {
+  input.addEventListener('change', function () {
+      const fileName = this.files[0].name;
+      const label = this.previousElementSibling;
+      label.innerText = fileName;
+  });
+});
