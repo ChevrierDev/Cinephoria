@@ -19,21 +19,31 @@
 <!-- Cinema and Date Filters -->
 <main class="flex text-blueOne flex-col md:flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto   md:pt-40 relative" id="main-container ">
 
-    <div class="mt-7 md:mt-0 container flex flex-col md:flex-row md:space-x-4  mx-auto w-fit">
-        <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border mb-8">
-            <label for="cinema" class="block text-sm font-medium text-blueOne ml-4">Cinéma</label>
-            <select id="cinema" name="cinema" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blueOne focus:border-blueOne sm:text-sm rounded-md  cursor-pointer">
-                <option>FRANCE - Cinéphoria Dauphine</option>
-                <option>FRANCE - Cinéphoria Panthéon</option>
-            </select>
+     <!-- Search a movie -->
+     <a href="#top">
+        <button class="container w-fit open-search-movies">
+            <div class="flex items-center justify-between cursor-pointer border h-20 w-[40vw] min-w-[300px] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation whitespace-nowrap">
+                <li class="list-none font-arvo text-blueOne">
+                    Rechercher un film
+                </li>
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-blueOne" width="2em" height="2em" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/>
+                </svg>
+            </div>
+        </button>
+    </a>
+
+    <!-- Choose a movie theater -->
+    <button class="theater-filter">
+        <div class="flex items-center justify-between cursor-pointer border h-20 w-[40vw] min-w-[300px] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation whitespace-nowrap">
+            <li class="list-none font-arvo text-blueOne">
+                Choisir un cinéma
+            </li>
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-blueOne" width="1.9em" height="1.9em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"/>
+            </svg>
         </div>
-        
-        <div class=" w-80 h-20 md:h-16 border-blueOne border-solid border">
-            <label for="date" class="block text-sm font-medium text-blueOne ml-3">Date</label>
-            <input type="date" id="date" name="date" class="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-blueOne focus:border-blueOne sm:text-sm rounded-md">
-        </div>
-    </div>
-    
+    </button>
 
     <!-- Movie Listing Section -->
     <section class="mt-8">
