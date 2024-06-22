@@ -64,15 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
     sideBarSetActiveLink("/dashboard/admin");
 
     //dahsboard employee active link
-  } else if (globalPath.startsWith("/dashboard/employee")) {
+  } else if (globalPath.startsWith("/dashboard/employee/films")) {
     setActiveLink("/dashboard/employee");
-    sideBarSetActiveLink("/dashboard/employee");
+    sideBarSetActiveLink("/dashboard/employee/films");
 
   } else if (globalPath.startsWith("/dashboard/employee/rooms")) {
     sideBarSetActiveLink("/dashboard/employee/rooms");
 
-  } else if (globalPath.startsWith("/dashboard/employee/review")) {
-    sideBarSetActiveLink("/dashboard/employee");
+  } else if (globalPath.startsWith("/dashboard/employee/reviews")) {
+    sideBarSetActiveLink("/dashboard/employee/reviews");
 
   } else if (globalPath.startsWith("/dashboard/employee/showtimes")) {
     sideBarSetActiveLink("/dashboard/employee/showtimes");

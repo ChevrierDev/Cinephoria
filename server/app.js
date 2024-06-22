@@ -85,6 +85,9 @@ app.use("/reset", resetPasswordRoutes);
 app.use("/login", loginRoutes);
 
 //user Dashboard layout
+app.get('/dashboard/employee', (req, res) => {
+  res.redirect('/dashboard/employee/films')
+})
 app.use("/dashboard/users", userDashboardRoutes);
 app.use("/dashboard/admin", adminDashboardRoutes);
 app.use("/dashboard/employee", employeeDashboardRoutes);

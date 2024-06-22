@@ -10,7 +10,7 @@ const {
 
 //employee dashboard homePage routes
 employeeDashboardRoutes.get(
-  "/",
+  "/films",
   checkAuthenticated,
   checkRole("employee"),
   enrichUserWithInfo,
@@ -66,13 +66,13 @@ employeeDashboardRoutes.get(
 
 //employee dashboard reviews routes
 employeeDashboardRoutes.get(
-  "/films/delete",
+  "/reviews",
   checkAuthenticated,
   checkRole("employee"),
   enrichUserWithInfo,
   (req, res) => {
     const user = req.user.details;
-    res.render("dashboard/employee/deleteFilm", {
+    res.render("dashboard/employee/reviews", {
       title: `Bienvenue ${user.first_name}.`,
     });
   }

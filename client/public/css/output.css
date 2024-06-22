@@ -943,6 +943,9 @@ video {
 .h-screen{
   height: 100vh;
 }
+.h-11{
+  height: 2.75rem;
+}
 .max-h-\[30vh\]{
   max-height: 30vh;
 }
@@ -1063,6 +1066,12 @@ video {
 }
 .w-full{
   width: 100%;
+}
+.w-16{
+  width: 4rem;
+}
+.min-w-\[300px\]{
+  min-width: 300px;
 }
 .max-w-36{
   max-width: 9rem;
@@ -1211,6 +1220,9 @@ video {
 .gap-y-7{
   row-gap: 1.75rem;
 }
+.gap-y-2{
+  row-gap: 0.5rem;
+}
 .space-x-0 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0px * var(--tw-space-x-reverse));
@@ -1352,6 +1364,9 @@ video {
 }
 .text-ellipsis{
   text-overflow: ellipsis;
+}
+.whitespace-nowrap{
+  white-space: nowrap;
 }
 .text-nowrap{
   text-wrap: nowrap;
@@ -1579,6 +1594,10 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.px-1\.5{
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+}
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -1662,6 +1681,18 @@ video {
 }
 .pt-80{
   padding-top: 20rem;
+}
+.pt-96{
+  padding-top: 24rem;
+}
+.pt-\[26rem\]{
+  padding-top: 26rem;
+}
+.pl-2{
+  padding-left: 0.5rem;
+}
+.text-left{
+  text-align: left;
 }
 .text-center{
   text-align: center;
@@ -1814,6 +1845,9 @@ video {
 }
 .outline{
   outline-style: solid;
+}
+.outline-dashed{
+  outline-style: dashed;
 }
 .outline-8{
   outline-width: 8px;
@@ -2290,6 +2324,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-red-600:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-gradient-to-r:hover{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -2545,6 +2584,14 @@ video {
     width: 85vw;
   }
 
+  .md\:w-\[60\%\]{
+    width: 60%;
+  }
+
+  .md\:w-\[48\%\]{
+    width: 48%;
+  }
+
   .md\:max-w-2xl{
     max-width: 42rem;
   }
@@ -2592,6 +2639,22 @@ video {
 
   .md\:gap-y-10{
     row-gap: 2.5rem;
+  }
+
+  .md\:gap-y-4{
+    row-gap: 1rem;
+  }
+
+  .md\:gap-y-5{
+    row-gap: 1.25rem;
+  }
+
+  .md\:gap-y-8{
+    row-gap: 2rem;
+  }
+
+  .md\:gap-y-12{
+    row-gap: 3rem;
   }
 
   .md\:-space-x-10 > :not([hidden]) ~ :not([hidden]){
