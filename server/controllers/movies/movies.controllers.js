@@ -1,4 +1,6 @@
 const DB = require("../../config/postgres.config");
+const { validationResult } = require('express-validator');
+const fs = require("fs");
 
 async function getMovies(req, res) {
   try {
@@ -32,20 +34,33 @@ async function getMovieById(req, res) {
 }
 
 async function postMovie(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (req.files) {
+      Object.values(req.files).forEach(fileArray => {
+        fileArray.forEach(file => {
+          fs.unlinkSync(file.path);
+        });
+      });
+    }
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const {
       title,
       duration,
       genre,
       pg,
-      banner,
-      poster,
-      video,
       favorite,
       description,
       casting,
       release_date,
     } = req.body;
+
+    const banner = req.files["banner"] ? req.files["banner"][0].filename : null;
+    const poster = req.files["poster"] ? req.files["poster"][0].filename : null;
+    const video = req.files["video"] ? req.files["video"][0].filename : null;
 
     if (
       !title ||
@@ -55,18 +70,24 @@ async function postMovie(req, res) {
       !banner ||
       !poster ||
       !video ||
-      typeof favorite !== "boolean" ||
       !description ||
       !casting ||
       !release_date
     ) {
+      if (req.files) {
+        Object.values(req.files).forEach(fileArray => {
+          fileArray.forEach(file => {
+            fs.unlinkSync(file.path);
+          });
+        });
+      }
       return res
         .status(400)
         .json({ error: "You must enter all required fields!" });
     }
 
     const query =
-      "INSERT INTO movies (title, duration, genre, pg, banner, poster, video, favorite, description, casting, release_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *";
+      "INSERT INTO movies (title, duration, genre, pg, banner, poster, video, favorite, description, casting, release_date) VALUES ($1, $2, $3, $4, $5, $6, $7, 'false', $8, $9, $10) RETURNING *";
     const result = await DB.query(query, [
       title,
       duration,
@@ -75,7 +96,6 @@ async function postMovie(req, res) {
       banner,
       poster,
       video,
-      favorite,
       description,
       casting,
       release_date,
@@ -83,6 +103,13 @@ async function postMovie(req, res) {
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
+    if (req.files) {
+      Object.values(req.files).forEach(fileArray => {
+        fileArray.forEach(file => {
+          fs.unlinkSync(file.path);
+        });
+      });
+    }
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
   }

@@ -1,5 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const DB = require("../../config/postgres.config");
+const fs = require('fs')
 
 const postMovieValidator = () => {
   return [
@@ -20,24 +21,6 @@ const postMovieValidator = () => {
       .isInt({ min: 0, max: 50 })
       .withMessage("La classification PG doit être un entier.")
       .toInt(),
-    body("banner")
-      .notEmpty()
-      .withMessage("La bannière est obligatoire.")
-      .trim()
-      .escape(),
-    body("poster")
-      .notEmpty()
-      .withMessage("L'affiche est obligatoire.")
-      .trim()
-      .escape(),
-    body("video")
-      .notEmpty()
-      .withMessage("La vidéo est obligatoire.")
-      .trim()
-      .escape(),
-    body("favorite")
-      .isBoolean()
-      .withMessage("Favori doit être un booléen."),
     body("description")
       .notEmpty()
       .withMessage("La description est obligatoire.")
@@ -51,17 +34,24 @@ const postMovieValidator = () => {
     body("release_date")
       .notEmpty()
       .withMessage("La date de sortie est obligatoire.")
-      .isDate({ format: "DD/MM/YYYY", strictMode: true })
+      .isDate({ format: "DD/MM/YYYY", strictMode: false })
       .withMessage(
         "La date de sortie doit être une date valide au format DD/MM/YYYY."
       )
-      .trim()
+      .trim(),
   ];
 };
 
 async function validateMovie(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    if (req.files) {
+      Object.values(req.files).forEach((fileArray) => {
+        fileArray.forEach((file) => {
+          fs.unlinkSync(file.path);
+        });
+      });
+    }
     return res.status(400).json({ errors: errors.array() });
   }
   next();

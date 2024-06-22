@@ -12,6 +12,8 @@ const {
   validateMovie,
 } = require("../../middlewares/validator/movies.validator");
 
+const upload = require("../../middlewares/multer/multer.config");
+
 // get all Movies
 moviesRoutes.get("/movies", getMovies);
 
@@ -22,7 +24,17 @@ moviesRoutes.get("/movies/:id", getMovieById);
 moviesRoutes.delete("/movies/:id", deleteMovieById);
 
 // post Movie
-moviesRoutes.post("/movies", postMovieValidator(), validateMovie, postMovie);
+moviesRoutes.post(
+  "/movies",
+  upload.fields([
+    { name: "banner", maxCount: 1 },
+    { name: "poster", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
+  postMovieValidator(),
+  validateMovie,
+  postMovie
+);
 
 // update Movie
 moviesRoutes.put(
