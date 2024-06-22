@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+    <script defer src="/js/deleteMovies.js"></script>
+</head>
+<body class=" min-h-screen relative ">
+<!-- Nav Bar -->
+<header class="relative z-10 ">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
+
+<!-- Delete Movie Selection -->
+<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
+
+    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 relative">
+        
+        <div action=""  class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-8 space-y-5 md:pb-20 md:pt-14 md:space-y-8">
+            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">MODIFIER</h1>
+
+            <!-- search movie input -->
+            <form action="" method="" class="w-full flex flex-col items-center justify-center mb:pb-5">
+                <div class="w-[80%] h-14 bg-white flex px-4">
+                    <input type="text" class="flex  justify-between flex-1 w-full h-full outline-none placeholder:font-arvo placeholder:font-bold placeholder:text-blueOne placeholder:text-lg" placeholder="RECHERCHER UN FILM">
+                    <button type="submit" class="flex items-center h-full pb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
+                    </button>
+                </div>
+            </form>
+
+            <div class="container space-y-7  flex flex-col items-center justify-center pt-8">
+                    <button class="h-[30%] w-[50%] md:w-[35%]">
+                        <img src="/images/films/blade-runner.png" class="object-cover" alt="Movie picture">
+                    </button>
+                <p class="text-blueOne font-arvo text-sm md:text-lg tracking-wide font-bold text-center">BLADE RUNNER</p>
+            </div>
+            
+            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-7 py-2  flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-delete-menu">
+                SUPPRIMER
+            </button>
+        </div>
+
+        <!-- hidden alert -->
+        <div class="absolute top-20  z-50 left-80  animate-open-menu hidden  flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48 " id="delete-alert">
+            <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT SUPPRIMER LE FILM "BLADE RUNNER ?"</p>
+            <div class="flex items-center justify-center space-x-10">
+                <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
+                    OUI
+                </button>
+                <button  id="close-delete-menu" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                    NON
+                </button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
+</html>

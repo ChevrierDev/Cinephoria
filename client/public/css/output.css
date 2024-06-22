@@ -1336,6 +1336,11 @@ video {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
+.space-y-80 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(20rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(20rem * var(--tw-space-y-reverse));
+}
 .overflow-hidden{
   overflow: hidden;
 }
@@ -2251,6 +2256,15 @@ video {
   border-bottom-width: 4px;
 }
 
+.hover\:border-solid:hover{
+  border-style: solid;
+}
+
+.hover\:border-goldOne:hover{
+  --tw-border-opacity: 1;
+  border-color: rgb(227 176 75 / var(--tw-border-opacity));
+}
+
 .hover\:border-b-goldOne:hover{
   --tw-border-opacity: 1;
   border-bottom-color: rgb(227 176 75 / var(--tw-border-opacity));
@@ -2287,6 +2301,14 @@ video {
 
 .hover\:opacity-90:hover{
   opacity: 0.9;
+}
+
+.hover\:outline-8:hover{
+  outline-width: 8px;
+}
+
+.hover\:outline-goldOne:hover{
+  outline-color: #E3B04B;
 }
 
 .focus\:border-blueOne:focus{
