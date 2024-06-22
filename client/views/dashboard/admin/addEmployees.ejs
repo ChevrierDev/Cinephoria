@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+</head>
+<body class=" min-h-screen relative ">
+<!-- Nav Bar -->
+<header class="relative z-10 ">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
+
+<!-- Cinema and Date Filters -->
+<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
+
+    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
+
+       <form action="" method="post" class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-10 md:space-y-8">
+
+            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER DES EMPLOYÉS</h1>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="NOM">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="PRÉNOM">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="USERNAME">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="EMAIL">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="MOT DE PASSE">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="CONFIRMER MOT DE PASSE">
+            </div>
+        
+            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center">Valider</button>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+
+
+
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
+</html>

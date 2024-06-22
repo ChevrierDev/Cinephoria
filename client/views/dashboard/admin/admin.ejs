@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+</head>
+<body class=" min-h-screen relative ">
+<!-- Nav Bar -->
+<header class="relative z-10 ">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
+
+<!-- Cinema and Date Filters -->
+<main class="flex text-blueOne flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto   md:pt-40  relative" id="main-container">
+
+    <h1 class="font-arvo font-bold text-3xl mt-10 text-blueOne w-full text-center">RÉSERVATIONS HEBDOMADAIRE</h1>
+    
+    
+    <!-- stats diagrams section -->
+    <section>
+
+    </section>
+    
+  <section class="container flex gap-y-10 flex-col mx-auto md:flex-row md:gap-x-0 md:gap-y-0">
+
+    <div class="container  flex flex-col  items-center justify-center space-y-7 bg-whiteOne rounded-sm w-[60%] h-[35vh] pb-12 mx-auto md:w-[40%]">
+        <p class="font-arvo font-bold text-2xl text-blueOne w-full text-center">Total Réservations</p>
+        <p class="font-arvo font-bold text-4xl text-blueOne w-full text-center"> +45</p>
+    </div>
+
+    <div class="container  flex flex-col  items-center justify-center space-y-7 bg-whiteOne rounded-sm w-[60%] h-[35vh] pb-7 mx-auto md:w-[40%]">
+        <p class="font-arvo font-bold text-2xl text-blueOne w-full text-center">Nouvelles Réservations</p>
+        <p class="font-arvo font-bold text-4xl text-blueOne w-full text-center"> +5 <br> <span class="text-blueOne/50 font-arvo text-sm font-light">Ce jour</span></p>
+    </div>
+
+  </section>
+
+    
+</main>
+
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+
+
+
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
+</html>
