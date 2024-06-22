@@ -9,15 +9,16 @@ const {
 } = require('../../../middlewares/enrichUserWithInfo')
 
 // user reset password routes
+//admin dashboard homePage routes
 employeeDashboardRoutes.get(
   "/",
   checkAuthenticated,
   checkRole("employee"),
   enrichUserWithInfo,
   (req, res) => {
-    const user = req.user.details
-    res.render("dashboard/users/employee", {
-      title: `Bienvenue sur votre intranet ${user.first_name}.`,
+    const user = req.user.details;
+    res.render("dashboard/employee/employee", {
+      title: `Bienvenue ${user.first_name}.`,
     });
   }
 );

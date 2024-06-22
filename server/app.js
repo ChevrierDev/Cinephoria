@@ -22,7 +22,7 @@ const loginRoutes = require("./routes/login/login.routes");
 //Dashboard routes
 const userDashboardRoutes = require("./routes/dashboard/users/userDash.routes");
 const adminDashboardRoutes = require("./routes/dashboard/admin/adminDash.routes");
-const employeeDashboardRoutes = require("./routes/dashboard/users/userDash.routes");
+const employeeDashboardRoutes = require("./routes/dashboard/employee/employeeDash.routes");
 
 //API routes import
 const usersRoutes = require("./api/users/users.routes");
