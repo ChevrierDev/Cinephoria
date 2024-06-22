@@ -72,34 +72,39 @@ async function postUser(req, res) {
   }
 }
 
-//create employee account for admin create employee dashboard panel
-// async function postEmployee(req, res) {
-//   try {
-//     const { first_name, last_name, email, password, role, username } = req.body;
+//Create employee account
+async function postEmployee(req, res) {
+  try {
+    const { first_name, last_name, email, password, username } = req.body;
 
-//     if (!first_name || !last_name || !email || !password || !role) {
-//       return res.status(400).json({ error: "You must enter all fields!" });
-//     }
+    if (!first_name || !last_name || !email || !password || !username) {
+      return res.status(400).json({ error: "You must enter all fields!" });
+    }
 
-//     const hashedPassword = await hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
-//     const query =
-//       "INSERT INTO users (first_name, last_name, email, password, role, username) VALUES ($1, $2, $3, $4, 'employee', $5) RETURNING *";
-//     const result = await DB.query(query, [
-//       first_name,
-//       last_name,
-//       email,
-//       hashedPassword,
-//       role,
-//       username
-//     ]);
+    const query =
+      "INSERT INTO users (first_name, last_name, email, password, role, username, must_change_password) VALUES ($1, $2, $3, $4, 'employee', $5, 'false') RETURNING *";
+    const result = await DB.query(query, [
+      first_name,
+      last_name,
+      email,
+      hashedPassword,
+      username,
+    ]);
 
-//     return res.status(201).json(result.rows[0]);
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).json({ error: "Internal server error!" });
-//   }
-// }
+    sendEmail(
+      email,
+      "Bienvenue à Cinéphoria.",
+      `Bonjour ${first_name} ${last_name},\n\nVotre compte employer Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à présent vous rapprocher de l'administrateur pour obtenir votre mot de passe.`
+    );
+
+    return res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Internal server error!" });
+  }
+}
 
 //generate a new password if forgot
 function generateTemporaryPassword() {
@@ -244,8 +249,8 @@ async function deleteUserById(req, res) {
       res.status(200).json({ message: "User deleted successfully!" });
     } else {
       return res
-      .status(404)
-      .json({ error: "No User found with this provided ID!" });
+        .status(404)
+        .json({ error: "No User found with this provided ID!" });
     }
   } catch (err) {
     console.log("Error during deletion:", err);
@@ -261,4 +266,5 @@ module.exports = {
   updateUserById,
   forgotPassword,
   changePassword,
+  postEmployee,
 };

@@ -6,6 +6,7 @@ const {
   deleteUserById,
   postUser,
   updateUserById,
+  postEmployee
 } = require("../../controllers/users/users.controllers");
 const {
   postUserValidator,
@@ -19,6 +20,8 @@ usersRoutes.get("/users", getUsers);
 usersRoutes.get("/users/:id", getUserById);
 //post user
 usersRoutes.post("/users", postUserValidator(), validateUser, postUser);
+//post employee
+usersRoutes.post("/employee",postUserValidator(), validateUser, postEmployee);
 //update user
 usersRoutes.put(
   "/users/:id",
