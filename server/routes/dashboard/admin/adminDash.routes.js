@@ -8,6 +8,10 @@ const {
   enrichUserWithInfo,
 } = require("../../../middlewares/enrichUserWithInfo");
 
+const {
+  getMovieById,
+} = require("../../../controllers/movies/movies.controllers");
+
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
   "/",
@@ -63,14 +67,17 @@ adminDashboardRoutes.get(
 
 //admin dashboard update films layouts routes
 adminDashboardRoutes.get(
-  "/films/update",
+  "/films/update/:id",
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const movie = await getMovieById(req, res);
     res.render("dashboard/admin/updateMovie", {
       title: `Modifier le film.`,
+      movie : movie
     });
+    
   }
 );
 

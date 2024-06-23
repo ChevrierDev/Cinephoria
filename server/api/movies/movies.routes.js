@@ -45,6 +45,11 @@ moviesRoutes.post(
 // update Movie
 moviesRoutes.put(
   "/movies/:id",
+  upload.fields([
+    { name: "banner", maxCount: 1 },
+    { name: "poster", maxCount: 1 },
+    { name: "video", maxCount: 1 },
+  ]),
   postMovieValidator(),
   validateMovie,
   updateMovieById

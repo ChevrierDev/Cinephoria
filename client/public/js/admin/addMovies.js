@@ -1,20 +1,30 @@
 currentPage = window.location.pathname;
 if (currentPage === "/dashboard/admin/films") {
   document.addEventListener("DOMContentLoaded", () => {
-    const confirmationMessage = localStorage.getItem("confirmationMessage");
-    if (confirmationMessage) {
+    const confirmationPostMessage = localStorage.getItem("confirmationMessage");
+    const confirmationUpdateMessage = localStorage.getItem("update-succes");
+    
+    if (confirmationPostMessage || confirmationUpdateMessage) {
       const messageElement = document.getElementById("confirmation-message");
       const textElement = document.getElementById("confirmation-text");
-      textElement.innerText = confirmationMessage;
+    
+      if (confirmationPostMessage) {
+        textElement.innerText = confirmationPostMessage;
+      } else if (confirmationUpdateMessage) {
+        textElement.innerText = confirmationUpdateMessage;
+      }
+    
       messageElement.classList.remove("hidden");
       messageElement.classList.add("flex");
-
+    
       setTimeout(() => {
         messageElement.classList.add("hidden");
         messageElement.classList.remove("flex");
         localStorage.removeItem("confirmationMessage");
+        localStorage.removeItem("update-succes");
       }, 6000);
     }
+    
   });
 } else {
   document.addEventListener("DOMContentLoaded", () => {
@@ -43,16 +53,30 @@ if (currentPage === "/dashboard/admin/films") {
 
       if (!inputs.title.value.trim()) errors.push("Le titre est obligatoire.");
       if (!inputs.genre.value.trim()) errors.push("Le genre est obligatoire.");
-      if (!inputs.pg.value.trim() || isNaN(inputs.pg.value) || inputs.pg.value < 0)
+      if (
+        !inputs.pg.value.trim() ||
+        isNaN(inputs.pg.value) ||
+        inputs.pg.value < 0
+      )
         errors.push("La classification PG doit être un entier.");
-      if (!inputs.duration.value.trim() || isNaN(inputs.duration.value) || inputs.duration.value <= 0)
+      if (
+        !inputs.duration.value.trim() ||
+        isNaN(inputs.duration.value) ||
+        inputs.duration.value <= 0
+      )
         errors.push("La durée doit être un entier positif.");
-      if (!inputs.releaseDate.value.trim()) errors.push("La date de sortie est obligatoire.");
-      if (!inputs.casting.value.trim()) errors.push("Le casting est obligatoire.");
-      if (!inputs.description.value.trim()) errors.push("La description est obligatoire.");
-      if (!inputs.image || !inputs.image.files.length) errors.push("L'image est obligatoire.");
-      if (!inputs.cover || !inputs.cover.files.length) errors.push("La photo de couverture est obligatoire.");
-      if (!inputs.video || !inputs.video.files.length) errors.push("La vidéo est obligatoire.");
+      if (!inputs.releaseDate.value.trim())
+        errors.push("La date de sortie est obligatoire.");
+      if (!inputs.casting.value.trim())
+        errors.push("Le casting est obligatoire.");
+      if (!inputs.description.value.trim())
+        errors.push("La description est obligatoire.");
+      if (!inputs.image || !inputs.image.files.length)
+        errors.push("L'image est obligatoire.");
+      if (!inputs.cover || !inputs.cover.files.length)
+        errors.push("La photo de couverture est obligatoire.");
+      if (!inputs.video || !inputs.video.files.length)
+        errors.push("La vidéo est obligatoire.");
       if (inputs.favorite.value.trim() && isNaN(inputs.favorite.value))
         errors.push("La note doit être un nombre.");
 
@@ -84,8 +108,8 @@ if (currentPage === "/dashboard/admin/films") {
       e.preventDefault();
       scrollTo({
         top: 400,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
       const errors = validateInputs();
       if (errors.length) {
         displayErrors(errors);
@@ -102,7 +126,7 @@ if (currentPage === "/dashboard/admin/films") {
 
     submitFormBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      submitFormBtn.disabled = true; // Désactiver le bouton de soumission
+      submitFormBtn.disabled = true;
 
       const formData = new FormData(form);
       try {
@@ -111,17 +135,24 @@ if (currentPage === "/dashboard/admin/films") {
           body: formData,
         });
         if (response.ok) {
-          localStorage.setItem("confirmationMessage", "Le film a bien été ajouté");
+          localStorage.setItem(
+            "confirmationMessage",
+            "Le film a bien été ajouté"
+          );
           window.location.href = "/dashboard/admin/films";
         } else {
           const result = await response.json();
-          const errors = result.errors || ["Une erreur s'est produite lors de l'envoi du formulaire."];
+          const errors = result.errors || [
+            "Une erreur s'est produite lors de l'envoi du formulaire.",
+          ];
           displayErrors(errors);
-          submitFormBtn.disabled = false; // Réactiver le bouton de soumission en cas d'erreur
+          submitFormBtn.disabled = false;
         }
       } catch (error) {
-        displayErrors(["Une erreur s'est produite lors de l'envoi du formulaire."]);
-        submitFormBtn.disabled = false; // Réactiver le bouton de soumission en cas d'erreur
+        displayErrors([
+          "Une erreur s'est produite lors de l'envoi du formulaire.",
+        ]);
+        submitFormBtn.disabled = false;
       }
     });
 

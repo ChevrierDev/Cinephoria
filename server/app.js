@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const configurePassportJWT = require("./config/passportJWT.config");
 const { checkUser } = require("./middlewares/enrichUserWithInfo");
+const methodOverride = require('method-override')
 
 //Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
@@ -41,6 +42,7 @@ const authRouter = require("./auth/loginApi");
 const logoutRouter = require("./auth/logoutApi");
 
 const app = express();
+app.use(methodOverride('_method'))
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
