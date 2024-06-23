@@ -216,18 +216,45 @@ async function deleteMovieById(req, res) {
     const id = req.params.id;
     const foundMovieQuery = "SELECT * FROM movies WHERE movie_id = $1";
     const movie = await DB.query(foundMovieQuery, [id]);
-    if (movie.rows.length !== 0) {
-      const query = "DELETE FROM movies WHERE movie_id = $1";
-      await DB.query(query, [id]);
-      return res.status(200).json("Movie deleted successfully");
-    } else {
+
+    if (movie.rows.length === 0) {
       return res.status(404).json("No movie found !");
     }
+
+    const currentMovie = movie.rows[0];
+    const uploadsDir = path.join(__dirname, "..", "..", "uploads");
+
+    if (currentMovie.banner) {
+      const bannerPath = path.join(uploadsDir, currentMovie.banner);
+      if (fs.existsSync(bannerPath)) {
+        fs.unlinkSync(bannerPath);
+      }
+    }
+
+    if (currentMovie.poster) {
+      const posterPath = path.join(uploadsDir, currentMovie.poster);
+      if (fs.existsSync(posterPath)) {
+        fs.unlinkSync(posterPath);
+      }
+    }
+
+    if (currentMovie.video) {
+      const videoPath = path.join(uploadsDir, currentMovie.video);
+      if (fs.existsSync(videoPath)) {
+        fs.unlinkSync(videoPath);
+      }
+    }
+
+    const deleteMovieQuery = "DELETE FROM movies WHERE movie_id = $1";
+    await DB.query(deleteMovieQuery, [id]);
+
+    return res.status(200).json({ success: true, message: "Movie deleted successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error !");
   }
 }
+
 
 module.exports = {
   getMovies,
