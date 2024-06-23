@@ -96,10 +96,10 @@ async function postEmployee(req, res) {
     sendEmail(
       email,
       "Bienvenue à Cinéphoria.",
-      `Bonjour ${first_name} ${last_name},\n\nVotre compte employer Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à présent vous rapprocher de l'administrateur pour obtenir votre mot de passe.`
+      `Bonjour ${first_name} ${last_name},\n\nVotre compte employé Cinéphoria a été créé avec succès à cette adresse mail ${email} vous pouvez dès à présent vous rapprocher de l'administrateur pour obtenir votre mot de passe.`
     );
 
-    return res.status(201).json(result.rows[0]);
+    return res.status(201).json({ success: true });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error!" });

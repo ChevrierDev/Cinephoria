@@ -27,6 +27,30 @@ const postUserValidator = () => {
       .trim()
       .escape(),
 
+    body("password")
+      .notEmpty()
+      .isString()
+      .withMessage("La valeur doit être une chaine de caractère.")
+      .isLength({ max: 50 })
+      .withMessage("La valeur ne doit pas dépasser 50 caractère.")
+      .trim()
+      .custom((value) => {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).+$/;
+        if (!passwordRegex.test(value)) {
+          throw new Error("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.");
+        }
+        return true;
+      }),
+
+    body("confirmPassword")
+      .notEmpty()
+      .trim()
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error("La confirmation du mot de passe doit être identique au mot de passe.");
+        }
+        return true;
+      }),
     body("email")
       .notEmpty()
       .isEmail()
@@ -43,6 +67,7 @@ const postUserValidator = () => {
       .trim(),
   ];
 };
+
 const updateUserValidator = () => {
   return [
     body("first_name")
