@@ -12,6 +12,14 @@ const {
   getMovieById,
 } = require("../../../controllers/movies/movies.controllers");
 
+const {
+  getCinemas,
+} = require("../../../controllers/cinemas/cinemas.controllers");
+
+const {
+  getUsers,
+} = require("../../../controllers/users/users.controllers");
+
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
   "/",
@@ -272,6 +280,24 @@ adminDashboardRoutes.get(
   (req, res) => {
     res.render("dashboard/admin/deleteShowtimes", {
       title: `Supprimer une scéance.`,
+    });
+  }
+);
+
+//admin dashboard assign employee  layouts routes
+adminDashboardRoutes.get(
+  "/employees/assign",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const users =await getUsers(req, res);
+    const employees = users.filter(user => user.role === 'employee');
+    res.render("dashboard/admin/assign", {
+      title: `Assigner un employer à un cinémas.`,
+      cinemas: cinemas || [],
+      employees: employees || []
     });
   }
 );

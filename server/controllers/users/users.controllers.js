@@ -16,7 +16,7 @@ async function getUsers(req, res) {
       res.status(400).send("No Users found !");
       return;
     }
-    return res.status(200).send(results.rows);
+    return results.rows;
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error !");

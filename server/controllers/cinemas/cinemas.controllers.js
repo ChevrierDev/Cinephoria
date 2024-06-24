@@ -8,7 +8,7 @@ async function getCinemas(req, res) {
       res.status(400).json({ message: "No cinemas found !" });
       return;
     }
-    return res.status(200).json(results.rows);
+    return results.rows;
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
