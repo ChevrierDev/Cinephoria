@@ -220,9 +220,14 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await  getCinemas(req, res);
+    const users = await getUsers(req, res);
+    const employees = users.filter((user) => user.role === 'employee')
     res.render("dashboard/admin/selectDelete", {
       title: `supprimer le compte de votre employé.`,
+      employees : employees,
+      cinemas: cinemas,
     });
   }
 );

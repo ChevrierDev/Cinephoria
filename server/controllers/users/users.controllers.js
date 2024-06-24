@@ -182,8 +182,8 @@ async function updateUserById(req, res) {
     const data = await DB.query(verificationQuery, [id]);
 
     if (data.rows.length === 0) {
-      req.flash('error_msg', 'User not found');
-      return res.redirect('/dashboard/admin/employees');
+      req.flash("error_msg", "User not found");
+      return res.redirect("/dashboard/admin/employees");
     }
 
     const user = data.rows[0];
@@ -211,32 +211,53 @@ async function updateUserById(req, res) {
       id,
     ]);
 
-    req.flash('success_msg', `L'utilisateur ${updatedFirstName} ${updatedLastName} a bien été mis à jour.`);
-    return res.redirect('/dashboard/admin/employees');
+    req.flash(
+      "success_msg",
+      `L'utilisateur ${updatedFirstName} ${updatedLastName} a bien été mis à jour.`
+    );
+    return res.redirect("/dashboard/admin/employees");
   } catch (err) {
     console.log(err);
-    req.flash('error_msg', 'Internal server error!');
-    return res.redirect('/dashboard/admin/employees');
+    req.flash("error_msg", "Internal server error!");
+    return res.redirect("/dashboard/admin/employees");
   }
 }
-
-
 
 //delete User
 async function deleteUserById(req, res) {
   try {
     const id = req.params.id;
     if (!id) {
+      console.log("Invalid user ID");
       return res.status(400).json({ error: "Invalid user ID!" });
     }
+
+    console.log(`Deleting user with ID: ${id}`);
+
     const foundUserQuery = "SELECT * FROM users WHERE user_id = $1";
     const user = await DB.query(foundUserQuery, [id]);
 
     if (user.rows.length !== 0) {
-      const query = "DELETE FROM users WHERE user_id = $1";
-      await DB.query(query, [id]);
-      return res.status(200)
+      console.log("User found:", user.rows[0]);
+
+      const deleteCinemaEmployeesQuery =
+        "DELETE FROM cinema_employees WHERE user_id = $1";
+      await DB.query(deleteCinemaEmployeesQuery, [id]);
+
+      console.log(
+        `Associated records in cinema_employees for user ID: ${id} have been deleted`
+      );
+
+      // Supprimer l'utilisateur de la table users
+      const deleteUserQuery = "DELETE FROM users WHERE user_id = $1";
+      await DB.query(deleteUserQuery, [id]);
+
+      console.log(`User with ID: ${id} has been deleted`);
+
+      req.flash("success_msg", "L'utilisateur a bien été supprimé.");
+      return res.redirect("/dashboard/admin/employees");
     } else {
+      console.log("No User found with this provided ID");
       return res
         .status(404)
         .json({ error: "No User found with this provided ID!" });

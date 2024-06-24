@@ -83,14 +83,14 @@ if (currentPage === "/dashboard/admin/employees/update") {
             "hover:scale-105"
           );
           li.textContent = `${employee.first_name} ${employee.last_name}`;
-          li.setAttribute("data-id", employee.user_id); // Utiliser data-id pour stocker l'ID de l'utilisateur
+          li.setAttribute("data-id", employee.user_id); 
           li.addEventListener("click", () => {
             const [firstName, lastName] = li.textContent.split(" ");
             employeeChosen.textContent = li.textContent;
             employeeFirstNameInput.value = firstName;
             employeeLastNameInput.value = lastName;
             selectedEmployeeId = li.getAttribute("data-id");
-            console.log(selectedEmployeeId); // Pour vérifier l'ID de l'utilisateur
+            console.log(selectedEmployeeId);
             validateBtn.href = `/dashboard/admin/employees/updateEmployee/${selectedEmployeeId}`;
             employeeMenu.classList.add("hidden");
           });
@@ -178,10 +178,10 @@ if (currentPage === "/dashboard/admin/employees/update") {
           input.value = input.placeholder;
         }
       });
-      // Redirection après soumission réussie
+
       setTimeout(() => {
         window.location.href = "/dashboard/admin/employees";
-      }, 500); // délai pour s'assurer que la soumission est complète
+      }, 500); 
     });
   });
 }
