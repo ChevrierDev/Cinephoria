@@ -176,62 +176,51 @@ async function changePassword(req, res) {
 async function updateUserById(req, res) {
   try {
     const id = req.params.id;
-    const { first_name, last_name, email, password, role, username } = req.body;
+    const { first_name, last_name, email, password, username } = req.body;
 
     const verificationQuery = "SELECT * FROM users WHERE user_id = $1";
     const data = await DB.query(verificationQuery, [id]);
 
     if (data.rows.length === 0) {
-      return res.status(404).json({ message: "User not found" });
+      req.flash('error_msg', 'User not found');
+      return res.redirect('/dashboard/admin/employees');
     }
 
     const user = data.rows[0];
 
-    const isSameFirstName = first_name === user.first_name;
-    const isSameLastName = last_name === user.last_name;
-    const isSameEmail = email === user.email;
-    const isSamePassword = await compareHashedPassword(password, user.password);
-    const isSameRole = role === user.role;
-    const isSameUsername = user.username;
+    const updatedFirstName = first_name || user.first_name;
+    const updatedLastName = last_name || user.last_name;
+    const updatedEmail = email || user.email;
+    const updatedUsername = username || user.username;
 
-    if (
-      isSameFirstName &&
-      isSameLastName &&
-      isSameEmail &&
-      isSamePassword &&
-      isSameRole &&
-      isSameUsername
-    ) {
-      return res
-        .status(400)
-        .json({ message: "You must update with different data." });
-    }
-
-    let hashedPassword;
-    if (!isSamePassword) {
-      hashedPassword = await hashPassword(password);
+    let updatedPassword;
+    if (password) {
+      updatedPassword = await hashPassword(password);
     } else {
-      hashedPassword = user.password;
+      updatedPassword = user.password;
     }
 
     const query =
-      "UPDATE users SET first_name = $1, last_name = $2, email = $3, password = $4, role = 'user', $5 = username WHERE user_id = $6 RETURNING *";
-    const result = await DB.query(query, [
-      first_name,
-      last_name,
-      email,
-      hashedPassword,
-      role,
-      username,
+      "UPDATE users SET first_name = $1, last_name = $2, email = $3, password = $4, username = $5 WHERE user_id = $6 RETURNING *";
+    await DB.query(query, [
+      updatedFirstName,
+      updatedLastName,
+      updatedEmail,
+      updatedPassword,
+      updatedUsername,
       id,
     ]);
 
-    return res.status(200).json(result.rows[0]);
+    req.flash('success_msg', `L'utilisateur ${updatedFirstName} ${updatedLastName} a bien été mis à jour.`);
+    return res.redirect('/dashboard/admin/employees');
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: "Internal server error!" });
+    req.flash('error_msg', 'Internal server error!');
+    return res.redirect('/dashboard/admin/employees');
   }
 }
+
+
 
 //delete User
 async function deleteUserById(req, res) {
@@ -246,7 +235,7 @@ async function deleteUserById(req, res) {
     if (user.rows.length !== 0) {
       const query = "DELETE FROM users WHERE user_id = $1";
       await DB.query(query, [id]);
-      res.status(200).json({ message: "User deleted successfully!" });
+      return res.status(200)
     } else {
       return res
         .status(404)

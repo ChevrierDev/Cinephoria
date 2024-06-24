@@ -18,6 +18,7 @@ const {
 
 const {
   getUsers,
+  getUserById
 } = require("../../../controllers/users/users.controllers");
 
 //admin dashboard homePage routes
@@ -200,13 +201,15 @@ adminDashboardRoutes.get(
 
 //admin dashboard update employee layouts routes
 adminDashboardRoutes.get(
-  "/employees/updateEmployee",
+  "/employees/updateEmployee/:id",
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const users = await getUserById(req, res);
     res.render("dashboard/admin/updateEmployees", {
       title: `Modifier le compte de votre employé.`,
+      users: users
     });
   }
 );

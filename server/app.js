@@ -8,7 +8,8 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const configurePassportJWT = require("./config/passportJWT.config");
 const { checkUser } = require("./middlewares/enrichUserWithInfo");
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 //Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
@@ -44,6 +45,7 @@ const logoutRouter = require("./auth/logoutApi");
 
 const app = express();
 app.use(methodOverride('_method'))
+app.use(flash());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -62,6 +64,11 @@ app.use(
 configurePassportJWT(passport);
 
 app.use(checkUser);
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(

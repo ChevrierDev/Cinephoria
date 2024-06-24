@@ -1,4 +1,4 @@
-const { body, validationResult  } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const DB = require("../../config/postgres.config");
 
 const checkEmailExists = async (email) => {
@@ -17,7 +17,7 @@ const postUserValidator = () => {
       .withMessage("La valeur ne doit pas dépasser 50 caractère.")
       .trim()
       .escape(),
-      
+
     body("last_name")
       .notEmpty()
       .isString()
@@ -35,9 +35,12 @@ const postUserValidator = () => {
       .withMessage("La valeur ne doit pas dépasser 50 caractère.")
       .trim()
       .custom((value) => {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).+$/;
+        const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).+$/;
         if (!passwordRegex.test(value)) {
-          throw new Error("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.");
+          throw new Error(
+            "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
+          );
         }
         return true;
       }),
@@ -47,7 +50,9 @@ const postUserValidator = () => {
       .trim()
       .custom((value, { req }) => {
         if (value !== req.body.password) {
-          throw new Error("La confirmation du mot de passe doit être identique au mot de passe.");
+          throw new Error(
+            "La confirmation du mot de passe doit être identique au mot de passe."
+          );
         }
         return true;
       }),
@@ -78,7 +83,36 @@ const updateUserValidator = () => {
       .withMessage("La valeur ne doit pas dépasser 50 caractère.")
       .trim()
       .escape(),
-      
+    body("password")
+      .notEmpty()
+      .isString()
+      .withMessage("La valeur doit être une chaine de caractère.")
+      .isLength({ max: 50 })
+      .withMessage("La valeur ne doit pas dépasser 50 caractère.")
+      .trim()
+      .custom((value) => {
+        const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).+$/;
+        if (!passwordRegex.test(value)) {
+          throw new Error(
+            "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
+          );
+        }
+        return true;
+      }),
+
+    body("confirmPassword")
+      .notEmpty()
+      .trim()
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error(
+            "La confirmation du mot de passe doit être identique au mot de passe."
+          );
+        }
+        return true;
+      }),
+
     body("last_name")
       .notEmpty()
       .isString()
@@ -99,11 +133,11 @@ const updateUserValidator = () => {
 };
 
 async function validateUser(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next();
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+  next();
+}
 
-  module.exports= {postUserValidator, validateUser, updateUserValidator}
+module.exports = { postUserValidator, validateUser, updateUserValidator };

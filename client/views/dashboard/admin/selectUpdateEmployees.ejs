@@ -53,7 +53,7 @@
                     <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="employee-list">
                         <% if (employees.length !== 0) { %>
                             <% employees.forEach(employee => { %>
-                                <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">
+                                <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105" data-id="<%= employee.user_id %>">
                                     <%= employee.first_name %> <%= employee.last_name %>
                                 </li>
                             <% }) %>
@@ -63,7 +63,7 @@
             </div>
            
            
-            <a href="/dashboard/admin/employees/updateEmployee" class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">
+            <a href="" class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center"  id="validate-btn">
                 Valider
             </a>
         </form>

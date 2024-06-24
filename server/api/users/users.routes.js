@@ -23,11 +23,11 @@ usersRoutes.post("/getEmployeesByCinema", async (req, res) => {
     const { cinema } = req.body;
     console.log("Cinema received:", cinema);
     const query = `
-      SELECT u.first_name, u.last_name FROM users u
-      INNER JOIN cinema_employees ce ON u.user_id = ce.user_id
-      INNER JOIN cinemas c ON ce.cinema_id = c.cinema_id
-      WHERE c.name = $1 AND u.role = 'employee'
-    `;
+    SELECT u.user_id, u.first_name, u.last_name FROM users u
+    INNER JOIN cinema_employees ce ON u.user_id = ce.user_id
+    INNER JOIN cinemas c ON ce.cinema_id = c.cinema_id
+    WHERE c.name = $1 AND u.role = 'employee'
+  `;
     const employees = await DB.query(query, [cinema]);
     console.log("Employees found:", employees.rows); 
     res.json({ employees: employees.rows });
@@ -48,7 +48,7 @@ usersRoutes.post("/employee", postUserValidator(), validateUser, postEmployee);
 //update user
 usersRoutes.put(
   "/users/:id",
-  postUserValidator(),
+  updateUserValidator(),
   validateUser,
   updateUserById
 );
