@@ -26,43 +26,42 @@
             <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">MODIFIER EMPLOYÉ </h1>
 
             <div class="relative w-full">
-                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer " id="select-theater">
-                    <p class="font-arvo text-lg font-bold text-blueOne" id="cinema-choosen">CHOISIR UN CINÉMA</p>
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-theater">
+                    <div class="cursor-pointer font-arvo text-lg font-bold text-blueOne placeholder:font-arvo placeholder:text-blueOne outline-none flex-1" id="cinema-choosen">choisir un cinema</div>
+                    <input type="text" name="cinema" id="cinema-input" class="hidden" value="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
                 </div>
-
-                <!-- hidden theater menu -->
-                <div class="absolute z-50 bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-60 animate-open-menu hidden" id="theater-menu">
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 z-50 -bottom-96 animate-open-menu hidden" id="theater-menu">
                     <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES HALLES</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - BRUXELLE</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - MANTES LA JOLIE</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES ULIS</li>
+                        <% if (cinemas.length !== 0) { %>
+                            <% cinemas.forEach(cinema => { %>
+                                <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105"><%= cinema.name %></li>
+                            <% }) %>
+                        <% } %>
                     </ul>
                 </div>
             </div>
 
-            <!-- option field section  -->
-            <section id="main-field" class="flex flex-col w-full gap-y-6">
-
-                <div class="relative w-full">
-                    <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer " id="select-employee">
-                        <p class="font-arvo text-lg font-bold text-blueOne" id="employee-choosen">CHOISIR UN EMPLOYÉ</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
-                    </div>
-    
-                    <!-- hidden theater menu -->
-                    <div class="absolute  z-50 bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-60 animate-open-menu hidden" id="employee-menu">
-                        <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="employee-list">
-                            <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">Marc Aurèle</li>
-                            <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">Moussa Touré</li>
-                            <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">Jacque Prevert</li>
-                            <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">Simone Veil</li>
-                        </ul>
-                    </div>
+            <div class="relative w-full">
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-employee">
+                    <div class="font-arvo cursor-pointer text-lg font-bold text-blueOne placeholder:font-arvo placeholder:text-blueOne outline-none flex-1" id="employee-choosen">choisir un employer</div>
+                    <input type="text" name="firstName" id="employee-first-name" class="hidden" value="">
+                    <input type="text" name="lastName" id="employee-last-name" class="hidden" value="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
                 </div>
-
-            </section>
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 z-50 -bottom-44 animate-open-menu hidden" id="employee-menu">
+                    <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="employee-list">
+                        <% if (employees.length !== 0) { %>
+                            <% employees.forEach(employee => { %>
+                                <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">
+                                    <%= employee.first_name %> <%= employee.last_name %>
+                                </li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+           
            
             <a href="/dashboard/admin/employees/updateEmployee" class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">
                 Valider

@@ -70,9 +70,31 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Selected Employee on submit:", selectedEmployee);
 
     if (selectedCinema && selectedEmployee) {
-      document.querySelector("form").submit();
-      localStorage.setItem('assignation-succes', 'Employer assigner avec succès.')
-      window.location.href = "/dashboard/admin/employees"; 
+      // Utiliser fetch pour envoyer les données via AJAX
+      fetch('/api/v1/assign', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          cinema: selectedCinema,
+          firstName: employeeFirstNameInput.value,
+          lastName: employeeLastNameInput.value
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          localStorage.setItem('assignation-succes', 'Employer assigner avec succès.');
+          window.location.href = "/dashboard/admin/employees";
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Une erreur s'est produite lors de l'assignation de l'employé.");
+      });
     } else {
       alert("Veuillez sélectionner un cinéma et un employé.");
     }

@@ -186,9 +186,14 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await  getCinemas(req, res);
+    const users = await getUsers(req, res);
+    const employees = users.filter((user) => user.role === "employee")
     res.render("dashboard/admin/selectUpdateEmployees", {
       title: `Modifier le compte de votre employé.`,
+      cinemas: cinemas,
+      employees: employees
     });
   }
 );
