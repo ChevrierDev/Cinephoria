@@ -45,7 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", () => {
       selectedEmployee = item.textContent.trim();
       choosenEmployee.textContent = selectedEmployee;
-      const [firstName, lastName] = selectedEmployee.split(' ');
+      
+      const nameParts = selectedEmployee.split(' ');
+      const lastName = nameParts.pop();  
+      const firstName = nameParts.join(' ');
+
       employeeFirstNameInput.value = firstName.trim();
       employeeLastNameInput.value = lastName.trim(); 
       employeeMenu.classList.add("hidden");

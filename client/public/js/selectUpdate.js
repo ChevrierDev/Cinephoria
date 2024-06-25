@@ -11,16 +11,27 @@ if (currentPage === "/dashboard/admin/employees/update") {
     const cinemaChosen = document.getElementById("cinema-choosen");
     const cinemaInput = document.getElementById("cinema-input");
     const employeeChosen = document.getElementById("employee-choosen");
-    const employeeFirstNameInput = document.getElementById("employee-first-name");
+    const employeeFirstNameInput = document.getElementById(
+      "employee-first-name"
+    );
     const employeeLastNameInput = document.getElementById("employee-last-name");
     const validateBtn = document.getElementById("validate-btn");
     let selectedEmployeeId = null;
-  
+
+    const closeMenu = () => {
+      theaterMenu.classList.add("hidden");
+      employeeMenu.classList.add("hidden");
+    };
+
     // Toggle theater menu
     selectTheater.addEventListener("click", () => {
-      theaterMenu.classList.toggle("hidden");
+      const isHidden = theaterMenu.classList.contains("hidden");
+      closeMenu();
+      if (isHidden) {
+        theaterMenu.classList.toggle("hidden");
+      }
     });
-  
+
     // Handle theater selection
     theaterListItems.forEach((item) => {
       item.addEventListener("click", () => {
@@ -31,12 +42,16 @@ if (currentPage === "/dashboard/admin/employees/update") {
         theaterMenu.classList.add("hidden");
       });
     });
-  
+
     // Toggle employee menu
     selectEmployee.addEventListener("click", () => {
-      employeeMenu.classList.toggle("hidden");
+      const isHidden = employeeMenu.classList.contains("hidden");
+      closeMenu();
+      if (isHidden) {
+        employeeMenu.classList.toggle("hidden");
+      }
     });
-  
+
     // Handle employee selection
     employeeList.addEventListener("click", (event) => {
       if (event.target.tagName === "LI") {
@@ -51,7 +66,7 @@ if (currentPage === "/dashboard/admin/employees/update") {
         employeeMenu.classList.add("hidden");
       }
     });
-  
+
     function filterEmployeesByCinema(cinemaName) {
       fetch("/api/v1/getEmployeesByCinema", {
         method: "POST",
@@ -66,10 +81,10 @@ if (currentPage === "/dashboard/admin/employees/update") {
         })
         .catch((error) => console.error("Error:", error));
     }
-  
+
     function updateEmployeeDropdown(employees) {
-      employeeList.innerHTML = ""; 
-  
+      employeeList.innerHTML = "";
+
       if (employees.length !== 0) {
         employees.forEach((employee) => {
           const li = document.createElement("li");
@@ -83,7 +98,7 @@ if (currentPage === "/dashboard/admin/employees/update") {
             "hover:scale-105"
           );
           li.textContent = `${employee.first_name} ${employee.last_name}`;
-          li.setAttribute("data-id", employee.user_id); 
+          li.setAttribute("data-id", employee.user_id);
           li.addEventListener("click", () => {
             const [firstName, lastName] = li.textContent.split(" ");
             employeeChosen.textContent = li.textContent;
@@ -99,7 +114,6 @@ if (currentPage === "/dashboard/admin/employees/update") {
       }
     }
   });
-  
 } else {
   document.addEventListener("DOMContentLoaded", () => {
     const updateForm = document.getElementById("update-form");
@@ -118,17 +132,22 @@ if (currentPage === "/dashboard/admin/employees/update") {
     const validateForm = () => {
       const errors = [];
       const passwordInput = updateForm.querySelector("input[name='password']");
-      const confirmPasswordInput = updateForm.querySelector("input[name='confirmPassword']");
+      const confirmPasswordInput = updateForm.querySelector(
+        "input[name='confirmPassword']"
+      );
 
       if (!passwordInput || !confirmPasswordInput) {
         errors.push("Les champs de mot de passe ne sont pas disponibles.");
       } else {
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
-        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#\$%\^&\*])[A-Za-z\d-_!@#\$%\^&\*]{8,}$/;
+        const passwordPattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_!@#\$%\^&\*])[A-Za-z\d-_!@#\$%\^&\*]{8,}$/;
 
         if (!passwordPattern.test(password)) {
-          errors.push("Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial, et être d'au moins 8 caractères.");
+          errors.push(
+            "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial, et être d'au moins 8 caractères."
+          );
         }
 
         if (password !== confirmPassword) {
@@ -173,7 +192,7 @@ if (currentPage === "/dashboard/admin/employees/update") {
 
     updateForm.addEventListener("submit", (event) => {
       const inputs = updateForm.querySelectorAll("input[placeholder]");
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         if (!input.value) {
           input.value = input.placeholder;
         }
@@ -181,7 +200,7 @@ if (currentPage === "/dashboard/admin/employees/update") {
 
       setTimeout(() => {
         window.location.href = "/dashboard/admin/employees";
-      }, 500); 
+      }, 500);
     });
   });
 }

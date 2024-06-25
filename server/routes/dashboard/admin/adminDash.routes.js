@@ -221,16 +221,23 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   async (req, res) => {
-    const cinemas = await  getCinemas(req, res);
-    const users = await getUsers(req, res);
-    const employees = users.filter((user) => user.role === 'employee')
-    res.render("dashboard/admin/selectDelete", {
-      title: `supprimer le compte de votre employé.`,
-      employees : employees,
-      cinemas: cinemas,
-    });
+    try {
+      const cinemas = await getCinemas(req, res);
+      const users = await getUsers(req, res);
+      const employees = users.filter((user) => user.role === 'employee');
+
+      res.render("dashboard/admin/selectDelete", {
+        title: "Supprimer le compte de votre employé.",
+        employees: employees,
+        cinemas: cinemas,
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).send("Internal Server Error");
+    }
   }
 );
+
 
 //admin dashboard showtimes layouts routes
 adminDashboardRoutes.get(
