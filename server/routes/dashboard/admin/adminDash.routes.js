@@ -21,6 +21,10 @@ const {
   getUserById
 } = require("../../../controllers/users/users.controllers");
 
+const {
+  getRooms
+} = require('../../../controllers/rooms/rooms.controllers')
+
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
   "/",
@@ -137,9 +141,13 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res)
     res.render("dashboard/admin/updateRooms", {
       title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
+      cinemas: cinemas,
+      rooms: rooms
     });
   }
 );

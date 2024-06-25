@@ -7,6 +7,8 @@ const {
   postRooms,
   updateRoomsById,
   postRoomWithSeats,
+  updateRoomWithSeats,
+  getRoomsByCinema
 } = require("../../controllers/rooms/rooms.controllers");
 const {
   postRoomsValidator,
@@ -18,6 +20,9 @@ roomsRoutes.get("/rooms", getRooms);
 
 // get Rooms by Id
 roomsRoutes.get("/rooms/:id", getRoomsById);
+
+// get Rooms by cinema Id
+roomsRoutes.get("/getRoomsByCinema/:cinemaId", getRoomsByCinema);
 
 // delete Rooms by Id
 roomsRoutes.delete("/rooms/:id", deleteRoomsById);
@@ -34,6 +39,12 @@ roomsRoutes.put(
   postRoomsValidator(),
   validateRooms,
   updateRoomsById
+);
+
+// update Rooms
+roomsRoutes.put(
+  "/updateRoomWithSeats/:id",
+  updateRoomWithSeats
 );
 
 module.exports = roomsRoutes;

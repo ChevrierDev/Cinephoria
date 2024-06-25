@@ -13,7 +13,7 @@ async function getRooms(req, res) {
       return;
     }
     // Send the found rooms as response
-    res.status(200).json(results.rows);
+    return results.rows;
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error !");
@@ -36,6 +36,24 @@ async function getRoomsById(req, res) {
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error !");
+  }
+};
+
+async function getRoomsByCinema(req, res) {
+  try {
+    const cinemaId = req.params.cinemaId;
+    
+    const query = "SELECT * FROM rooms WHERE cinema_id = $1";
+    const result = await DB.query(query, [cinemaId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "No rooms found for this cinema" });
+    }
+
+    res.status(200).json({ rooms: result.rows });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 
@@ -98,6 +116,7 @@ async function postRoomWithSeats(req, res) {
     }
 
     await DB.query("COMMIT");
+    req.flash('success_msg', 'La salle a été créer avec succès.');
     const redirectUrl = req.user.role === "admin" ? "/dashboard/admin/rooms" : "/dashboard/employee/rooms";
     res.status(201).json({ message: "Room and seats added successfully!", redirectUrl });
   } catch (err) {
@@ -123,6 +142,47 @@ async function updateRoomsById(req, res) {
     return res.status(500).json({ error: "Internal server error!" });
   }
 }
+
+async function updateRoomWithSeats(req, res) {
+  try {
+    const { cinema_id, name, quality, seats } = req.body;
+    const roomId = req.params.id;
+
+    if (!cinema_id || !name || !quality || !Array.isArray(seats) || seats.length === 0) {
+      return res.status(400).json({ error: "You must enter all required fields!" });
+    }
+
+    await DB.query("BEGIN");
+
+    const roomQuery =
+      "UPDATE rooms SET cinema_id = $1, name = $2, quality = $3 WHERE room_id = $4";
+    await DB.query(roomQuery, [cinema_id, name, quality, roomId]);
+
+    const deleteSeatsQuery = "DELETE FROM seats WHERE room_id = $1";
+    await DB.query(deleteSeatsQuery, [roomId]);
+
+    const seatQuery = "INSERT INTO seats (room_id, seat_label, accessibility) VALUES ($1, $2, $3)";
+
+    for (const seat of seats) {
+      const { seat_label, count, accessibility } = seat;
+      for (let i = 1; i <= count; i++) {
+        await DB.query(seatQuery, [roomId, `${seat_label}${i}`, accessibility]);
+      }
+    }
+
+    await DB.query("COMMIT");
+
+    req.flash('success_msg', 'La salle a été modifiée avec succès.');
+    const redirectUrl = req.user.role === "admin" ? "/dashboard/admin/rooms" : "/dashboard/employee/rooms";
+    res.status(201).json({ message: "Room and seats updated successfully!", redirectUrl });
+  } catch (err) {
+    await DB.query("ROLLBACK");
+    console.error(err);
+    res.status(500).json({ error: "Internal server error!" });
+  }
+}
+
+
 
 // Function to delete a room by ID
 async function deleteRoomsById(req, res) {
@@ -153,4 +213,6 @@ module.exports = {
   postRoomWithSeats,
   deleteRoomsById,
   updateRoomsById,
+  updateRoomWithSeats,
+  getRoomsByCinema
 };

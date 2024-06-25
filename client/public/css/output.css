@@ -667,6 +667,15 @@ video {
 .top-5{
   top: 1.25rem;
 }
+.-bottom-72{
+  bottom: -18rem;
+}
+.-bottom-52{
+  bottom: -13rem;
+}
+.-bottom-16{
+  bottom: -4rem;
+}
 .z-0{
   z-index: 0;
 }
