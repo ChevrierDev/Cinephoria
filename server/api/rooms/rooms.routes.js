@@ -6,6 +6,7 @@ const {
   deleteRoomsById,
   postRooms,
   updateRoomsById,
+  postRoomWithSeats,
 } = require("../../controllers/rooms/rooms.controllers");
 const {
   postRoomsValidator,
@@ -23,6 +24,9 @@ roomsRoutes.delete("/rooms/:id", deleteRoomsById);
 
 // post Rooms
 roomsRoutes.post("/rooms", postRoomsValidator(), validateRooms, postRooms);
+
+// post & Rooms
+roomsRoutes.post("/addRoomWithSeats", postRoomWithSeats);
 
 // update Rooms
 roomsRoutes.put(
