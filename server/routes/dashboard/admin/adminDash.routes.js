@@ -122,9 +122,11 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res)
     res.render("dashboard/admin/addRooms", {
       title: `Ajouter une salle à votre cinéma.`,
+      cinemas: cinemas
     });
   }
 );

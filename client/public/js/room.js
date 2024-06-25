@@ -12,15 +12,62 @@ if (currentPage === "/dashboard/admin/rooms/add") {
     const alertMenu = document.getElementById("alert");
     const closeAlertBtn = document.getElementById("close-alert");
 
+    const mainField = document.getElementById("main-field");
+    const addSeatGroupBtn = document.getElementById("add-seat-group");
+    const seatGroupsContainer = document.getElementById("seat-groups"); // Define seatGroupsContainer
+    const errorMessages = document.getElementById("error-messages"); // Define errorMessages
+
+    const closeMenu = () => {
+      openTheaterMenu.classList.add("hidden");
+    };
+
+    const showError = (message) => {
+      const errorMessage = document.createElement("li");
+      errorMessage.textContent = message;
+      errorMessages.appendChild(errorMessage);
+    };
+
+    const clearErrors = () => {
+      errorMessages.innerHTML = "";
+    };
+
+    const validateInputs = () => {
+      const seatLabels = document.querySelectorAll(".seat-label");
+      const seatCounts = document.querySelectorAll(".seat-count");
+      let allValid = true;
+      let labelsSet = new Set();
+
+      clearErrors();
+
+      seatLabels.forEach((label, index) => {
+        const normalizedLabel = label.value.trim().toLowerCase();
+        if (normalizedLabel === "" || seatCounts[index].value.trim() === "") {
+          allValid = false;
+        }
+        if (labelsSet.has(normalizedLabel)) {
+          allValid = false;
+          showError("Deux sièges ne peuvent pas avoir le même libellé.");
+        }
+        labelsSet.add(normalizedLabel);
+      });
+
+      addSeatGroupBtn.disabled = !allValid;
+    };
+
     selectTheaterBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      openTheaterMenu.classList.toggle("hidden");
+      const isHidden = openTheaterMenu.classList.contains("hidden");
+      closeMenu();
+      if (isHidden) {
+        openTheaterMenu.classList.toggle("hidden");
+      }
     });
 
     theaterListItems.forEach((item) => {
       item.addEventListener("click", () => {
         cinemaChoosen.textContent = item.textContent;
         openTheaterMenu.classList.add("hidden");
+        mainField.classList.remove("hidden");
       });
     });
 
@@ -39,6 +86,52 @@ if (currentPage === "/dashboard/admin/rooms/add") {
       alertMenu.classList.toggle("hidden");
       alertMenu.classList.toggle("flex");
     });
+
+    // Ajouter un nouveau groupe de sièges
+    addSeatGroupBtn.addEventListener("click", () => {
+      const seatGroup = document.createElement("div");
+      seatGroup.classList.add("seat-group", "flex", "items-center", "gap-x-2");
+
+      seatGroup.innerHTML = `
+            <input type="text" class="seat-label outline-none w-1/3 h-10 px-2 text-sm placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="LIBELLÉ SIEGE" required>
+            <input type="number" class="seat-count outline-none w-1/3 h-10 px-2 text-sm placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOMBRE DE SIEGES" min="1" max="24" required>
+            <select class="seat-accessibility outline-none w-1/3 h-10 px-2 font-arvo text-blueOne font-bold text-sm" required>
+                <option value="true">Accessibilité: Oui</option>
+                <option value="false">Accessibilité: Non</option>
+            </select>
+            <button type="button" class="remove-seat-group bg-redOne text-white w-5 h-5 flex items-center justify-center hover:bg-red-600 duration-200 hover:scale-95">-</button>
+        `;
+
+      // Ajouter le gestionnaire de suppression pour le bouton
+      seatGroup
+        .querySelector(".remove-seat-group")
+        .addEventListener("click", () => {
+          seatGroup.remove();
+          validateInputs();
+        });
+
+      // Ajouter les gestionnaires d'événements pour la validation
+      seatGroup
+        .querySelector(".seat-label")
+        .addEventListener("input", validateInputs);
+      seatGroup
+        .querySelector(".seat-count")
+        .addEventListener("input", validateInputs);
+
+      seatGroupsContainer.appendChild(seatGroup);
+      validateInputs(); // Valider les champs après l'ajout d'un nouveau groupe
+    });
+
+    // Ajouter les gestionnaires d'événements de validation initiaux
+    document
+      .querySelectorAll(".seat-label")
+      .forEach((label) => label.addEventListener("input", validateInputs));
+    document
+      .querySelectorAll(".seat-count")
+      .forEach((count) => count.addEventListener("input", validateInputs));
+
+    // Initial validation
+    validateInputs();
   });
 } else if (currentPage === "/dashboard/admin/rooms/update") {
   document.addEventListener("DOMContentLoaded", () => {
