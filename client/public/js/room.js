@@ -165,7 +165,7 @@ if (currentPage === "/dashboard/admin/rooms/add") {
         const data = await response.json();
         if (response.ok) {
           localStorage.setItem("succes-msg", "Salle ajouter avec succès");
-          window.location.href("/dashboard/admin/rooms");
+          window.location.href = data.redirectUrl;
         } else {
           showError(data.error);
         }
@@ -285,13 +285,13 @@ if (currentPage === "/dashboard/admin/rooms/add") {
                     "hover:scale-105"
                   );
                   li.dataset.roomId = room.room_id;
-                  li.dataset.roomName = room.name; // Added data attribute for room name
+                  li.dataset.roomName = room.name; 
                   roomListContainer.appendChild(li);
 
                   li.addEventListener("click", () => {
                     roomChoosen.textContent = room.name;
                     roomIdInput.value = room.room_id;
-                    currentRoomNameInput.value = room.name; // Store current room name
+                    currentRoomNameInput.value = room.name; 
                     openRoomMenu.classList.add("hidden");
                   });
                 });
@@ -379,10 +379,9 @@ if (currentPage === "/dashboard/admin/rooms/add") {
           .addEventListener("input", validateInputs);
 
         seatGroupsContainer.appendChild(seatGroup);
-        validateInputs(); // Valider les champs après l'ajout d'un nouveau groupe
+        validateInputs();
       });
 
-      // Ajouter les gestionnaires d'événements de validation initiaux
       document
         .querySelectorAll(".seat-label")
         .forEach((label) => label.addEventListener("input", validateInputs));
@@ -455,21 +454,26 @@ if (currentPage === "/dashboard/admin/rooms/add") {
       const openTheaterMenu = document.getElementById("theater-menu");
       const theaterListItems = document.querySelectorAll("#theater-list li");
       const cinemaChoosen = document.getElementById("cinema-choosen");
-
+  
       const openAlertBtn = document.getElementById("open-alert-btn");
       const alertMenu = document.getElementById("alert");
       const closeAlertBtn = document.getElementById("close-alert");
-
-      const selectRoomsBtn = document.getElementById("select-rooms");
+  
+      const selectRoomsBtn = document.getElementById("select-room");
       const openRoomsMenu = document.getElementById("room-menu");
       const roomChoosen = document.getElementById("room-choosen");
       const roomListItem = document.querySelectorAll("#room-list li");
+      const roomIdInput = document.getElementById("room-id");
+      const currentRoomNameInput = document.getElementById("current-room-name");
+      const roomListContainer = document.getElementById("room-list");
 
+      const submitFormBtn = document.getElementById('submit-form');
+  
       const closeAllMenus = () => {
         openTheaterMenu.classList.add("hidden");
         openRoomsMenu.classList.add("hidden");
       };
-
+  
       selectTheaterBtn.addEventListener("click", (e) => {
         e.preventDefault();
         const isHidden = openTheaterMenu.classList.contains("hidden");
@@ -479,43 +483,115 @@ if (currentPage === "/dashboard/admin/rooms/add") {
         }
       });
 
+      selectRoomsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isHidden = openRoomsMenu.classList.contains('hidden');
+        closeAllMenus();
+        if (isHidden) {
+          openRoomsMenu.classList.toggle('hidden')
+        }
+      })
+  
       theaterListItems.forEach((item) => {
         item.addEventListener("click", () => {
           cinemaChoosen.textContent = item.textContent;
           openTheaterMenu.classList.add("hidden");
+  
+          const selectedCinemaId = item.dataset.cinemaId;
+          
+          // Fetch rooms for the selected cinema
+          fetch(`/api/v1/getRoomsByCinema/${selectedCinemaId}`)
+            .then((response) => response.json())
+            .then((data) => {
+              roomListContainer.innerHTML = "";
+              if (data.rooms && data.rooms.length > 0) {
+                data.rooms.forEach((room) => {
+                  const li = document.createElement("li");
+                  li.textContent = room.name;
+                  li.classList.add(
+                    "list-none",
+                    "hover:translate-x-5",
+                    "duration-200",
+                    "ease-out",
+                    "cursor-pointer",
+                    "hover:text-goldOne",
+                    "hover:scale-105"
+                  );
+                  li.dataset.roomId = room.room_id;
+                  li.dataset.roomName = room.name; 
+                  roomListContainer.appendChild(li);
+  
+                  li.addEventListener("click", () => {
+                    roomChoosen.textContent = room.name;
+                    roomIdInput.value = room.room_id;
+                    currentRoomNameInput.value = room.name; 
+                    openRoomsMenu.classList.add("hidden");
+                  });
+                });
+              } else {
+                const noRoomsMessage = document.createElement("p");
+                noRoomsMessage.textContent = "Aucune Salle";
+                noRoomsMessage.classList.add(
+                  "text-center",
+                  "font-arvo",
+                  "text-white",
+                  "font-bold",
+                  "text-3xl",
+                  "w-fit"
+                );
+                roomListContainer.appendChild(noRoomsMessage);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              showError("Une erreur s'est produite lors de la récupération des salles.");
+            });
         });
       });
-
+  
       openAlertBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        scrollTo({
-          top: 105,
-          behavior: "smooth",
-        });
+        const currentRoomName = currentRoomNameInput.value || "SALLE";
+        document.getElementById("alert-message").textContent =
+          `VOULEZ-VOUS VRAIMENT SUPPRIMER LA SALLE ${currentRoomName} ?`;
         alertMenu.classList.toggle("hidden");
         alertMenu.classList.toggle("flex");
       });
-
+  
       closeAlertBtn.addEventListener("click", (e) => {
         e.preventDefault();
         alertMenu.classList.toggle("hidden");
         alertMenu.classList.toggle("flex");
       });
-
-      selectRoomsBtn.addEventListener("click", (e) => {
+  
+      // Soumission du formulaire pour suppression
+      submitFormBtn.addEventListener("click", async (e) => {
         e.preventDefault();
-        const isHidden = openRoomsMenu.classList.contains("hidden");
-        closeAllMenus();
-        if (isHidden) {
-          openRoomsMenu.classList.toggle("hidden");
+  
+        const roomId = roomIdInput.value;
+  
+        try {
+          const response = await fetch(`/api/v1/rooms/${roomId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log(data); 
+          localStorage.setItem("success-msg", "Salle supprimée avec succès");
+          window.location.href = "/dashboard/admin/rooms"; 
+  
+        } catch (error) {
+          console.error('Error:', error);
+          showError("Une erreur s'est produite lors de la suppression de la salle.");
         }
-      });
-
-      roomListItem.forEach((item) => {
-        item.addEventListener("click", () => {
-          roomChoosen.textContent = item.textContent;
-          openRoomsMenu.classList.add("hidden");
-        });
+  
+        alertMenu.classList.toggle("hidden");
+        alertMenu.classList.toggle("flex");
       });
     }
   });
@@ -532,5 +608,5 @@ if (currentPage === "/dashboard/admin/rooms/add") {
   setTimeout(() => {
     localStorage.removeItem("succes-msg");
     confirmation.classList.add("hidden");
-  }, 6000);
+  }, 2000);
 }

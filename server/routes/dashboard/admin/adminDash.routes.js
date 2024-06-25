@@ -127,11 +127,21 @@ adminDashboardRoutes.get(
   checkRole("admin"),
   enrichUserWithInfo,
   async (req, res) => {
-    const cinemas = await getCinemas(req, res)
-    res.render("dashboard/admin/addRooms", {
-      title: `Ajouter une salle à votre cinéma.`,
-      cinemas: cinemas
-    });
+    try {
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas
+      });
+    } catch (err) {
+      console.log(err)
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas || []
+      });
+    }
+
   }
 );
 
@@ -143,7 +153,7 @@ adminDashboardRoutes.get(
   enrichUserWithInfo,
   async (req, res) => {
     const cinemas = await getCinemas(req, res);
-    const rooms = await getRooms(req, res)
+    const rooms = await getRooms(req, res);
     res.render("dashboard/admin/updateRooms", {
       title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
       cinemas: cinemas,
@@ -158,10 +168,23 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/deleteRooms", {
-      title: `Séléctionner une salle et à supprimer dans votre cinéma.`,
-    });
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res);
+    try {
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
   }
 );
 

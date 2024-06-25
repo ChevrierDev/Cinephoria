@@ -1,22 +1,18 @@
 // Import the database configuration
 const DB = require("../../config/postgres.config");
 
-// Functions to get all Rooms
 async function getRooms(req, res) {
   try {
     const query = "SELECT * FROM rooms";
     const results = await DB.query(query);
 
-    // Check if any rooms are found
     if (results.rows.length <= 0) {
-      res.status(404).json("No rooms found !");
-      return;
+      return [];
     }
-    // Send the found rooms as response
     return results.rows;
   } catch (err) {
     console.log(err);
-    res.status(500).json("Internal server error !");
+    return [];
   }
 }
 
@@ -37,12 +33,12 @@ async function getRoomsById(req, res) {
     console.log(err);
     res.status(500).json("Internal server error !");
   }
-};
+}
 
 async function getRoomsByCinema(req, res) {
   try {
     const cinemaId = req.params.cinemaId;
-    
+
     const query = "SELECT * FROM rooms WHERE cinema_id = $1";
     const result = await DB.query(query, [cinemaId]);
 
@@ -116,9 +112,14 @@ async function postRoomWithSeats(req, res) {
     }
 
     await DB.query("COMMIT");
-    req.flash('success_msg', 'La salle a été créer avec succès.');
-    const redirectUrl = req.user.role === "admin" ? "/dashboard/admin/rooms" : "/dashboard/employee/rooms";
-    res.status(201).json({ message: "Room and seats added successfully!", redirectUrl });
+    req.flash("success_msg", "La salle a été créer avec succès.");
+    const redirectUrl =
+      req.user.role === "admin"
+        ? "/dashboard/admin/rooms"
+        : "/dashboard/employee/rooms";
+    res
+      .status(201)
+      .json({ message: "Room and seats added successfully!", redirectUrl });
   } catch (err) {
     await DB.query("ROLLBACK");
     console.error(err);
@@ -148,8 +149,16 @@ async function updateRoomWithSeats(req, res) {
     const { cinema_id, name, quality, seats } = req.body;
     const roomId = req.params.id;
 
-    if (!cinema_id || !name || !quality || !Array.isArray(seats) || seats.length === 0) {
-      return res.status(400).json({ error: "You must enter all required fields!" });
+    if (
+      !cinema_id ||
+      !name ||
+      !quality ||
+      !Array.isArray(seats) ||
+      seats.length === 0
+    ) {
+      return res
+        .status(400)
+        .json({ error: "You must enter all required fields!" });
     }
 
     await DB.query("BEGIN");
@@ -161,7 +170,8 @@ async function updateRoomWithSeats(req, res) {
     const deleteSeatsQuery = "DELETE FROM seats WHERE room_id = $1";
     await DB.query(deleteSeatsQuery, [roomId]);
 
-    const seatQuery = "INSERT INTO seats (room_id, seat_label, accessibility) VALUES ($1, $2, $3)";
+    const seatQuery =
+      "INSERT INTO seats (room_id, seat_label, accessibility) VALUES ($1, $2, $3)";
 
     for (const seat of seats) {
       const { seat_label, count, accessibility } = seat;
@@ -172,9 +182,14 @@ async function updateRoomWithSeats(req, res) {
 
     await DB.query("COMMIT");
 
-    req.flash('success_msg', 'La salle a été modifiée avec succès.');
-    const redirectUrl = req.user.role === "admin" ? "/dashboard/admin/rooms" : "/dashboard/employee/rooms";
-    res.status(201).json({ message: "Room and seats updated successfully!", redirectUrl });
+    req.flash("success_msg", "La salle a été modifiée avec succès.");
+    const redirectUrl =
+      req.user.role === "admin"
+        ? "/dashboard/admin/rooms"
+        : "/dashboard/employee/rooms";
+    res
+      .status(201)
+      .json({ message: "Room and seats updated successfully!", redirectUrl });
   } catch (err) {
     await DB.query("ROLLBACK");
     console.error(err);
@@ -182,20 +197,24 @@ async function updateRoomWithSeats(req, res) {
   }
 }
 
-
-
 // Function to delete a room by ID
 async function deleteRoomsById(req, res) {
   try {
-    const id = req.params.id;
+    const roomId = req.params.id;
     const foundRoomsQuery = "SELECT * FROM rooms WHERE room_id = $1";
-    const room = await DB.query(foundRoomsQuery, [id]);
-    // Check if the room with the given ID is found
+    const room = await DB.query(foundRoomsQuery, [roomId]);
     if (room.rows.length !== 0) {
-      const query = "DELETE FROM rooms WHERE room_id = $1";
-      await DB.query(query, [id]);
-      // Send a success message as response
-      return res.status(200).json("Room deleted successfully");
+      const deleteSeatsQuery = "DELETE FROM seats WHERE room_id = $1";
+      await DB.query(deleteSeatsQuery, [roomId]);
+      const deleteRoomQuery = "DELETE FROM rooms WHERE room_id = $1";
+      await DB.query(deleteRoomQuery, [roomId]);
+      const redirectUrl =
+        req.user.role === "admin"
+          ? "/dashboard/admin/rooms"
+          : "/dashboard/employee/rooms";
+      res
+        .status(201)
+        .json({ message: "Room and seats deleted successfully!", redirectUrl });
     } else {
       return res.status(404).json("No room found !");
     }
@@ -214,5 +233,5 @@ module.exports = {
   deleteRoomsById,
   updateRoomsById,
   updateRoomWithSeats,
-  getRoomsByCinema
+  getRoomsByCinema,
 };
