@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+    <script defer src="/js/admin/selectShowtimes.js"></script>
 </head>
 <body class=" min-h-screen relative ">
 <!-- Nav Bar -->
@@ -19,7 +20,11 @@
 <main class="flex text-blueOne flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto md:pt-40 " id="main-container">
 
     
-    <section class="container flex gap-y-10 flex-col md:gap-y-10 mt-10">
+    <section class="container flex gap-y-10 flex-col md:gap-y-10 mt-10 relative">
+
+        <div class="container hidden w-fit mx-auto" id="message">
+            <p id="text" class="text-sm font-arvo font-bold text-green-600"></p>
+          </div>
 
         <a href="/dashboard/admin/showtimes/select-movies">
             <button class="container  flex flex-col  items-center justify-center space-y-7 bg-whiteOne rounded-sm w-[80%] h-[25vh] hover:scale-105 duration-300 ease-in-out mx-auto md:w-7/12 ">

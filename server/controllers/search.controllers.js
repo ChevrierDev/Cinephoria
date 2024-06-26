@@ -4,7 +4,7 @@ async function searchMovies(req, res) {
     try {
         const { query } = req.query;
         const result = await DB.query(
-          "SELECT movie_id, title, poster FROM movies WHERE title ILIKE $1",
+          "SELECT * FROM movies WHERE title ILIKE $1",
           [`%${query}%`]
         );
         res.json(result.rows);
