@@ -331,10 +331,24 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/updateShowtimes", {
-      title: `Supprimer une scéance.`,
-    });
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/admin/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+   
   }
 );
 

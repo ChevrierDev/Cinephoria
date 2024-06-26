@@ -17,6 +17,32 @@ async function getShowtimes(req, res) {
     console.log(err);
     res.status(500).json("Internal server error !");
   }
+};
+
+// Function to get showtimes by cinema and room
+async function getShowtimesByCinemaAndRoom(req, res) {
+  try {
+    const { cinemaId, roomId } = req.params;
+    const query = `
+      SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price, m.title 
+      FROM showtimes s
+      JOIN movies m ON s.movie_id = m.movie_id
+      WHERE s.cinema_id = $1 AND s.room_id = $2
+      ORDER BY s.day, s.start_time
+    `;
+    const results = await DB.query(query, [cinemaId, roomId]);
+
+    // Check if any showtimes are found
+    if (results.rows.length <= 0) {
+      return res.status(404).json({ message: "No showtimes found!" });
+    }
+
+    // Send the found showtimes as response
+    res.status(200).json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error!" });
+  }
 }
 
 // Function to get a showtime by ID
@@ -125,12 +151,40 @@ async function postShowtimes(req, res) {
 async function updateShowtimesById(req, res) {
   try {
     const id = req.params.id;
-    const { movie_id, cinema_id, room_id, day, start_time, end_time, price } =
-      req.body;
+    const { movie_id, cinema_id, room_id, day, start_time, end_time, price } = req.body;
 
-    const query =
-      "UPDATE showtimes SET movie_id = $1, cinema_id = $2, room_id = $3, day = $4, start_time = $5, end_time = $6, price = $7 WHERE showtimes_id = $8";
-    const result = await DB.query(query, [
+    const queryCheck = `
+      SELECT * FROM showtimes 
+      WHERE cinema_id = $1 AND room_id = $2 AND day = $3 AND showtimes_id != $8
+      AND (
+        (start_time < $4 AND end_time > $4) OR
+        (start_time < $5 AND end_time > $5) OR
+        (start_time >= $4 AND end_time <= $5)
+      )
+    `;
+
+    const result = await DB.query(queryCheck, [
+      cinema_id,
+      room_id,
+      day,
+      start_time,
+      end_time,
+      id,
+    ]);
+
+    if (result.rows.length > 0) {
+      return res.status(400).json({
+        error: `Time overlap detected for showtime on ${day} from ${start_time} to ${end_time}`,
+      });
+    }
+
+
+    const query = `
+      UPDATE showtimes 
+      SET movie_id = $1, cinema_id = $2, room_id = $3, day = $4, start_time = $5, end_time = $6, price = $7 
+      WHERE showtimes_id = $8
+    `;
+    await DB.query(query, [
       movie_id,
       cinema_id,
       room_id,
@@ -140,7 +194,7 @@ async function updateShowtimesById(req, res) {
       price,
       id,
     ]);
-    // Send a success message as response
+
     return res.status(200).json({ message: "Showtimes updated successfully" });
   } catch (err) {
     console.log(err);
@@ -179,4 +233,5 @@ module.exports = {
   postShowtimes,
   deleteShowtimesById,
   updateShowtimesById,
+  getShowtimesByCinemaAndRoom
 };

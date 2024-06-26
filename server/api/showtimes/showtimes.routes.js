@@ -5,6 +5,7 @@ const {
   getShowtimesById,
   deleteShowtimesById,
   postShowtimes,
+  getShowtimesByCinemaAndRoom,
   updateShowtimesById,
 } = require("../../controllers/showtimes/showtimes.controllers");
 
@@ -15,6 +16,9 @@ const {
 
 // get all showtimes
 showtimesRoutes.get("/showtimes", getShowtimes);
+
+// get all showtimes by cinemas and rooms
+showtimesRoutes.get('/getShowtimesByCinemaAndRoom/:cinemaId/:roomId', getShowtimesByCinemaAndRoom);
 
 // get showtimes by Id
 showtimesRoutes.get("/showtimes/:id", getShowtimesById);
