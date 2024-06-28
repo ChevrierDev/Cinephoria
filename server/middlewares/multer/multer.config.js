@@ -1,11 +1,11 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
+const { v4: uuidv4 } = require('uuid');
 
 const uploadDir = path.join(__dirname, '../../uploads');
 
-//if upload directory does not exist create it
+// if upload directory does not exist create it
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -15,12 +15,13 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+        const uniqueSuffix = Date.now() + '-' + uuidv4();
+        cb(null, uniqueSuffix + '-' + file.originalname);
     },
 });
 
 const fileFilter = (req, file, cb) => {
-    const allowedTypes = /mp4|avi|mkv|jpg|jpeg|png|gif|wav/;
+    const allowedTypes = /mp4|avi|mkv|jpg|jpeg|png|gif|wav|webp/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
 
@@ -33,7 +34,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 100 * 1024 * 1024 }, 
+    limits: { fileSize: 100 * 1024 * 1024 },
     fileFilter: fileFilter
 });
 

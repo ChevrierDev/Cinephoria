@@ -16,6 +16,7 @@ const closePool = async () => {
     await pool.end();
 };
 
+
 process.on('SIGTERM', closePool);
 process.on('SIGINT', closePool);
 

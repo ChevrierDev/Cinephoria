@@ -22,22 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const startWithPath = (path) => {
-    return globalPath.startsWith(path);
-  };
-
   //navBar active link
   if (globalPath === "/" || globalPath.startsWith("/accueil")) {
     setActiveLink("/accueil");
+
   } else if (globalPath.startsWith("/films")) {
     setActiveLink("/films");
+
   } else if (globalPath.startsWith("/contact")) {
     setActiveLink("/contact");
+
   } else if (
     globalPath.startsWith("/login") ||
     globalPath.startsWith("/reset")
   ) {
     setActiveLink("/login");
+
   } else if (globalPath.startsWith("/register")) {
     setActiveLink("/register");
   }
@@ -63,9 +63,22 @@ document.addEventListener("DOMContentLoaded", function () {
     setActiveLink("/dashboard/admin");
     sideBarSetActiveLink("/dashboard/admin");
 
+    //dahsboard employee active link
+  } else if (globalPath.startsWith("/dashboard/employee/films")) {
+    setActiveLink("/dashboard/employee");
+    sideBarSetActiveLink("/dashboard/employee/films");
+
+  } else if (globalPath.startsWith("/dashboard/employee/rooms")) {
+    sideBarSetActiveLink("/dashboard/employee/rooms");
+
+  } else if (globalPath.startsWith("/dashboard/employee/reviews")) {
+    sideBarSetActiveLink("/dashboard/employee/reviews");
+
+  } else if (globalPath.startsWith("/dashboard/employee/showtimes")) {
+    sideBarSetActiveLink("/dashboard/employee/showtimes");
+
   } else if (globalPath.startsWith("/reservation")) {
     setActiveLink("/reservation");
   }
-
-
+  
 });

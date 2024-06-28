@@ -8,6 +8,23 @@ const {
   enrichUserWithInfo,
 } = require("../../../middlewares/enrichUserWithInfo");
 
+const {
+  getMovieById,
+} = require("../../../controllers/movies/movies.controllers");
+
+const {
+  getCinemas,
+} = require("../../../controllers/cinemas/cinemas.controllers");
+
+const {
+  getUsers,
+  getUserById
+} = require("../../../controllers/users/users.controllers");
+
+const {
+  getRooms
+} = require('../../../controllers/rooms/rooms.controllers')
+
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
   "/",
@@ -63,14 +80,17 @@ adminDashboardRoutes.get(
 
 //admin dashboard update films layouts routes
 adminDashboardRoutes.get(
-  "/films/update",
+  "/films/update/:id",
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const movie = await getMovieById(req, res);
     res.render("dashboard/admin/updateMovie", {
       title: `Modifier le film.`,
+      movie : movie
     });
+    
   }
 );
 
@@ -106,10 +126,22 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/addRooms", {
-      title: `Ajouter une salle à votre cinéma.`,
-    });
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas
+      });
+    } catch (err) {
+      console.log(err)
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas || []
+      });
+    }
+
   }
 );
 
@@ -119,9 +151,13 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res);
     res.render("dashboard/admin/updateRooms", {
       title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
+      cinemas: cinemas,
+      rooms: rooms
     });
   }
 );
@@ -132,10 +168,23 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/deleteRooms", {
-      title: `Séléctionner une salle et à supprimer dans votre cinéma.`,
-    });
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res);
+    try {
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
   }
 );
 
@@ -171,22 +220,29 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const cinemas = await  getCinemas(req, res);
+    const users = await getUsers(req, res);
+    const employees = users.filter((user) => user.role === "employee")
     res.render("dashboard/admin/selectUpdateEmployees", {
       title: `Modifier le compte de votre employé.`,
+      cinemas: cinemas,
+      employees: employees
     });
   }
 );
 
 //admin dashboard update employee layouts routes
 adminDashboardRoutes.get(
-  "/employees/updateEmployee",
+  "/employees/updateEmployee/:id",
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const users = await getUserById(req, res);
     res.render("dashboard/admin/updateEmployees", {
       title: `Modifier le compte de votre employé.`,
+      users: users
     });
   }
 );
@@ -197,12 +253,24 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/selectDelete", {
-      title: `supprimer le compte de votre employé.`,
-    });
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const users = await getUsers(req, res);
+      const employees = users.filter((user) => user.role === 'employee');
+
+      res.render("dashboard/admin/selectDelete", {
+        title: "Supprimer le compte de votre employé.",
+        employees: employees,
+        cinemas: cinemas,
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).send("Internal Server Error");
+    }
   }
 );
+
 
 //admin dashboard showtimes layouts routes
 adminDashboardRoutes.get(
@@ -223,10 +291,24 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/selectMovie", {
-      title: `Choisir quel films projeter.`,
-    });
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/admin/selectMovie", {
+        title: `Choisir quel films projeter.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/selectMovie", {
+        title: `Choisir quel films projeter.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+ 
   }
 );
 
@@ -249,10 +331,24 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/updateShowtimes", {
-      title: `Supprimer une scéance.`,
-    });
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/admin/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+   
   }
 );
 
@@ -262,9 +358,41 @@ adminDashboardRoutes.get(
   checkAuthenticated,
   checkRole("admin"),
   enrichUserWithInfo,
-  (req, res) => {
-    res.render("dashboard/admin/deleteShowtimes", {
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/admin/deleteShowtimes", {
       title: `Supprimer une scéance.`,
+      cinemas: cinemas,
+      rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/updateShowtimes", {
+        title: `Supprimer une séance.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+  
+  }
+);
+
+//admin dashboard assign employee  layouts routes
+adminDashboardRoutes.get(
+  "/employees/assign",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const users =await getUsers(req, res);
+    const employees = users.filter(user => user.role === 'employee');
+    res.render("dashboard/admin/assign", {
+      title: `Assigner un employer à un cinémas.`,
+      cinemas: cinemas || [],
+      employees: employees || []
     });
   }
 );

@@ -7,9 +7,11 @@
     <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/form/admin/validateAddUsersForm.js"></script>
+    <script defer src="/js/form/admin/messages.js"></script>
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
 </head>
-<body class=" min-h-screen relative ">
+<body class=" min-h-screen relative">
 <!-- Nav Bar -->
 <header class="relative z-10 ">
     <%- include('../../components/dashboard/nav-bar-dashboard') %>
@@ -17,34 +19,54 @@
 
 <!-- Cinema and Date Filters -->
 <main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
+  
 
-    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
+    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 relative">
+     
+        <div class="absolute w-fit h-fit z-50 flex -top-20 left-1/2 transform -translate-x-1/2 items-center justify-center hidden " id="confirmation-message">
+            <p class="font-arvo text-green-500 font-bold text-sm" id="confirmation-text"></p>
+        </div>
 
-       <form action="" method="post" class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-10 md:space-y-8">
+        <form id="employee-form" action="/api/v1/employee" method="post" class="flex flex-col items-center justify-center bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-10 md:space-y-8 relative">
+
+         
+            <ul class="flex-col items-start justify-center space-y-1 w-fit mx-auto hidden" id="error-list">
+
+            </ul>
 
             <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER DES EMPLOYÉS</h1>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" id="first_name" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="PRÉNOM" name="first_name">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" id="last_name" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="NOM" name="last_name">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" id="username" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="USERNAME" name="username">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" id="email" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="EMAIL" name="email">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="password" id="password" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="MOT DE PASSE" name="password">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="password" id="confirm_password" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:font-arvo placeholder:font-bold" placeholder="CONFIRMER MOT DE PASSE" name="confirmPassword">
+            </div>
+            <button id="confirmbtn" class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justify-center">Valider</button>
 
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="NOM">
+               <!-- hidden alert -->
+            <div class="absolute top-20 z-50  animate-open-menu hidden flex-col items-center justify-around space-y-40 bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48" id="alert">
+                <p class="text-center font-arvo text-white font-bold text-3xl" id="delete-message"> Voulez vous vraiment créer l'employer ? </p>
+                <div class="flex items-center justify-center space-x-10">
+                <button type="submit" id="confirm" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
+                    OUI
+                </button>
+                <button id="close-delete-menu" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                    NON
+                </button>
+                </div>
             </div>
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="PRÉNOM">
-            </div>
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="USERNAME">
-            </div>
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="EMAIL">
-            </div>
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="MOT DE PASSE">
-            </div>
-            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg  placeholder:font-arvo placeholder:font-bold" placeholder="CONFIRMER MOT DE PASSE">
-            </div>
-        
-            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center">Valider</button>
-
         </form>
 
     </section>

@@ -10,64 +10,80 @@
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
     <script defer src="/js/room.js"></script>
 </head>
-<body class=" min-h-screen relative ">
+<body class="min-h-screen relative">
 <!-- Nav Bar -->
 <header class="relative z-10 ">
     <%- include('../../components/dashboard/nav-bar-dashboard') %>
 </header>
 
 <!-- Cinema and Date Filters -->
-<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
+<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw] ml-auto md:pt-40" id="main-container">
+    <section class="container w-full md:w-[85vw] ml-auto flex flex-col mt-10 relative">
+        <form id="addRoomForm" action="/api/v1/addRoomWithSeats" method="post" class="flex flex-col items-center justify-center relative bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8">
+            <div class="absolute top-5">
+                <ul id="error-messages" class="text-redOne font-arvo font-bold">
+                </ul>
+            </div>
 
-    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
-
-       <form action="" method="post" class="flex flex-col items-center justify-center relative  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8">
-
-            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER </h1>
+            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER</h1>
 
             <div class="relative w-full">
-                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer " id="select-theater">
-                    <p class="font-arvo text-lg font-bold text-blueOne" id="cinema-choosen">choisir un  cinema</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-theater">
+                    <p class="font-arvo text-lg font-bold text-blueOne" id="cinema-choosen">choisir un cinema</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                        <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
+                    </svg>
                 </div>
 
                 <!-- hidden theater menu -->
-                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-60 animate-open-menu hidden" id="theater-menu">
-                    <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES HALLES</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - BRUXELLE</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - MANTES LA JOLIE</li>
-                        <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105">CINÉPHORIA - LES ULIS</li>
-                    </ul>
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-96 z-50 animate-open-menu hidden" id="theater-menu">
+                    <% if (cinemas.length > 0) { %>
+                        <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
+                            <% cinemas.forEach(cinema => { %>
+                                <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105" data-cinema-id="<%= cinema.cinema_id %>"><%= cinema.name %></li>
+                            <% }) %>
+                        </ul>
+                    <% } else { %>
+                        <p class="text-center font-arvo text-white font-bold text-3xl w-fit ">Aucun cinema</p>
+                    <% } %>
                 </div>
             </div>
 
-            <!-- option field section  -->
-            <section id="main-field" class="flex flex-col w-full gap-y-6">
-
+            <!-- Informations de la salle -->
+            <section id="main-field" class="flex flex-col w-full gap-y-6 hidden">
                 <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="SALLE">
+                    <input type="text" name="name" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="SALLE" id="room-name" required>
                 </div>
 
                 <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOMBRE DE PLACE">
+                    <input type="text" name="quality" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="QUALITÉ" id="room-quality" required>
                 </div>
-
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="QUALITÉ">
+                
+                <h2 class="text-lg font-bold text-blueOne">Ajouter des Sièges</h2>
+                <div id="seat-groups" class="flex flex-col gap-y-4">
+                    <div class="seat-group flex items-center gap-x-2">
+                        <input type="text" class="seat-label outline-none w-1/3 h-10 px-2 text-sm placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="LIBELLÉ SIEGE" required>
+                        <input type="number" class="seat-count outline-none w-1/3 h-10 px-2 text-sm placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOMBRE DE SIEGES" min="1" max="24" required>
+                        <select class="seat-accessibility outline-none w-1/3 h-10 px-2 font-arvo text-blueOne font-bold text-sm" required>
+                            <option value="true">Accessibilité: Oui</option>
+                            <option value="false">Accessibilité: Non</option>
+                        </select>
+                        <button type="button" class="remove-seat-group bg-redOne text-white w-5 h-5 flex items-center justify-center hover:bg-red-600 duration-200 hover:scale-95">-</button>
+                    </div>
                 </div>
+                <button type="button" id="add-seat-group" class="bg-blueOne font-arvo text-white px-4 py-4 mt-4">Ajouter un groupe de sièges</button>
             </section>
-           
-            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">Ajouter</button>
+
+            <button type="button" id="open-alert-btn" class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center">Ajouter</button>
 
             <!-- hidden alert pop up -->
-            <div class="absolute   z-50  animate-open-menu hidden  flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48 " id="alert">
-                <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT AJOUTER LA SALLE "B13" ?</p>
+            <div class="absolute z-50 animate-open-menu hidden flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48" id="alert">
+                <p id="alert-message" class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT AJOUTER LA SALLE ?</p>
                 <div class="flex items-center justify-center space-x-10">
-                    <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
+                    <button type="button" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
                         OUI
                     </button>
-                    <button  id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                    <button type="button" id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
                         NON
                     </button>
                 </div>
@@ -75,21 +91,14 @@
 
         </form>
 
-        
-
     </section>
 
 </main>
-
 
 <!-- Side Bar Menu -->
 <aside class="fixed z-20 top-0 left-0 h-screen">
     <%- include('../../components/dashboard/side-menu') %>
 </aside>
-
-
-
-
 
 <!-- Footer -->
 <footer class="pt-[400px]">

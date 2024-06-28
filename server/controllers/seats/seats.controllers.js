@@ -73,8 +73,7 @@ async function postSeats(req, res) {
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
   }
-}
-
+};
 
 // Function to update a seat by ID
 async function updateSeatsById(req, res) {
@@ -94,7 +93,7 @@ async function updateSeatsById(req, res) {
       accessibility,
       id,
     ]);
-    // Send a success message as response
+ 
     return res.status(200).json({ message: "Seat updated successfully" });
   } catch (err) {
     console.log(err);

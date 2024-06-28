@@ -8,6 +8,8 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const configurePassportJWT = require("./config/passportJWT.config");
 const { checkUser } = require("./middlewares/enrichUserWithInfo");
+const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 //Layout routes import
 const accueilRoutes = require("./routes/accueil/accueil.routes");
@@ -22,6 +24,7 @@ const loginRoutes = require("./routes/login/login.routes");
 //Dashboard routes
 const userDashboardRoutes = require("./routes/dashboard/users/userDash.routes");
 const adminDashboardRoutes = require("./routes/dashboard/admin/adminDash.routes");
+const employeeDashboardRoutes = require("./routes/dashboard/employee/employeeDash.routes");
 
 //API routes import
 const usersRoutes = require("./api/users/users.routes");
@@ -34,12 +37,15 @@ const showtimesRoutes = require("./api/showtimes/showtimes.routes");
 const seatsRoutes = require("./api/seats/seats.routes");
 const roomsRoutes = require("./api/rooms/rooms.routes");
 const resetPassApiRoutes = require("./api/resetPassword/resetPassApi.routes");
+const assignRouter = require('./api/assign/assignRouter.routes')
 
 //login and logout API
 const authRouter = require("./auth/loginApi");
 const logoutRouter = require("./auth/logoutApi");
 
 const app = express();
+app.use(methodOverride('_method'))
+app.use(flash());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -58,12 +64,18 @@ app.use(
 configurePassportJWT(passport);
 
 app.use(checkUser);
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(
   "/dashboard",
   express.static(path.join(__dirname, "..", "client", "public"))
 );
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(
   favicon(
     path.join(__dirname, "..", "client", "public", "images", "logo-blanc.png")
@@ -84,8 +96,12 @@ app.use("/reset", resetPasswordRoutes);
 app.use("/login", loginRoutes);
 
 //user Dashboard layout
+app.get('/dashboard/employee', (req, res) => {
+  res.redirect('/dashboard/employee/films')
+})
 app.use("/dashboard/users", userDashboardRoutes);
 app.use("/dashboard/admin", adminDashboardRoutes);
+app.use("/dashboard/employee", employeeDashboardRoutes);
 
 
 //API routes
@@ -99,6 +115,7 @@ app.use("/api/v1/", showtimesRoutes);
 app.use("/api/v1/", seatsRoutes);
 app.use("/api/v1/", roomsRoutes);
 app.use("/api/v1/", resetPassApiRoutes);
+app.use("/api/v1", assignRouter);
 
 //login and logout API
 app.use("/api/v1/", authRouter);

@@ -7,6 +7,7 @@
     <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/admin/employee.js"></script>
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
 </head>
 <body class=" min-h-screen relative ">
@@ -19,11 +20,30 @@
 <main class="flex text-blueOne flex-col items-center gap-y-7 justify-center w-[85vw]  ml-auto md:pt-40 " id="main-container">
 
     
-    <section class="container flex gap-y-10 flex-col md:gap-y-10 mt-10">
+    <section class="container flex gap-y-10 flex-col md:gap-y-10 mt-10 relative">
+
+        
+        <% if (success_msg) { %>
+            <div class="absolute w-fit h-fit z-50 flex -top-20 left-1/2 transform -translate-x-1/2 items-center justify-center hidden" id="confirmation-message">
+                <p class="font-arvo text-green-500 font-bold text-sm" id="confirmation-text"> <%= success_msg %></p>
+            </div>
+          <% } %>
+        
+          <% if (error_msg) { %>
+            <div class="absolute w-fit h-fit z-50 flex -top-20 left-1/2 transform -translate-x-1/2 items-center justify-center hidden" id="confirmation-message">
+                <p class="font-arvo text-red-700 font-bold text-sm" id="confirmation-text">  <%= error_msg %></p>
+            </div>
+          <% } %>
 
         <a href="/dashboard/admin/employees/add">
             <button class="container  flex flex-col  items-center justify-center space-y-7 bg-whiteOne rounded-sm w-[80%] h-[25vh] hover:scale-105 duration-300 ease-in-out mx-auto md:w-7/12 ">
                 <p class="font-arvo font-bold text-2xl text-blueOne w-full text-center">AJOUTER EMPLOYÉ</p>
+            </button>
+        </a>
+
+        <a href="/dashboard/admin/employees/assign">
+            <button class="container  flex flex-col  items-center justify-center space-y-7 bg-whiteOne rounded-sm w-[80%] h-[25vh] hover:scale-105 duration-300 ease-in-out mx-auto md:w-7/12 ">
+                <p class="font-arvo font-bold text-2xl text-blueOne w-full text-center">ASSIGNER EMPLOYÉ</p>
             </button>
         </a>
 
