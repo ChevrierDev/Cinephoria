@@ -6,7 +6,11 @@ const {
 } = require("../../../middlewares/autorisation/autorisation");
 const {
   enrichUserWithInfo
-} = require('../../../middlewares/enrichUserWithInfo')
+} = require('../../../middlewares/enrichUserWithInfo');
+
+const {
+  getMovieById
+} = require('../../../controllers/movies/movies.controllers')
 
 //employee dashboard homePage routes
 employeeDashboardRoutes.get(
@@ -47,6 +51,22 @@ employeeDashboardRoutes.get(
     res.render("dashboard/employee/updateFilm", {
       title: `Bienvenue ${user.first_name}.`,
     });
+  }
+);
+
+//employee dashboard update films layouts routes
+employeeDashboardRoutes.get(
+  "/films/update/:id",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    const movie = await getMovieById(req, res);
+    res.render("dashboard/employee/update", {
+      title: `Modifier le film.`,
+      movie : movie
+    });
+    
   }
 );
 

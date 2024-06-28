@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/employee/selectUpdate.js"></script>
+    <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
+</head>
+<body class=" min-h-screen relative ">
+<!-- Nav Bar -->
+<header class="relative z-10 ">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
+
+<!-- Cinema and Date Filters -->
+<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
+
+    <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
+
+       <form id="update-movie-form" action="/api/v1/movies/<%= movie.movie_id %>?_method=PUT" enctype="multipart/form-data" method="post" class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8" >
+
+            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">MODIFIER</h1>
+
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.title %>" name="title" id="title-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.genre %>" name="genre" id="genre-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.pg %>" name="pg" id="pg-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.duration %>" name="duration" id="duration-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" 
+                placeholder="<%= new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' }).format(new Date(movie.release_date)) %>" 
+                name="release_date" id="release-date-input">
+            </div>
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.casting %>" name="casting" id="casting-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="<%= movie.description %>" name="description" id="description-input">
+            </div>
+
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">IMAGE</p>
+                <label for="file-upload-1" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-1" type="file" name="poster" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="image-input"/>
+            </div>
+            
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">PHOTO DE COUVERTURE</p>
+                <label for="file-upload-2" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-2" type="file" name="banner" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="cover-input"/>
+            </div>
+            
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">VIDEO</p>
+                <label for="file-upload-3" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-3" type="file" name="video" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="video-input"/>
+            </div>
+            
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOTE" name="favorite" id="favorite-input">
+            </div>
+
+            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="confirmation-button">
+                poster
+            </button>
+
+            <!-- hidden alert pop up -->
+            <div class="absolute   z-50  animate-open-menu hidden  flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48 " id="alert">
+                <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT MODIFER  "<%= movie.title %>" ?</p>
+                <div class="flex items-center justify-center space-x-10">
+                    <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400" >
+                        OUI
+                    </button>
+                    <button  id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                        NON
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+
+
+
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
+</html>
