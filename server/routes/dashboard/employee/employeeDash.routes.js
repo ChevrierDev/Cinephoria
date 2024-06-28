@@ -187,4 +187,111 @@ employeeDashboardRoutes.get(
     }
   }
 );
+
+//employee dashboard  showtimes layouts routes
+employeeDashboardRoutes.get(
+  "/showtimes",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/employee/showtimes", {
+      title: `Modifier ou ajouter des scéances dans vos cinémas.`,
+    });
+  }
+);
+
+//employee dashboard showtimes select movie layouts routes
+employeeDashboardRoutes.get(
+  "/showtimes/add",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/employee/addShowtimes", {
+        title: `Choisir quel films projeter.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/employee/addShowtimes", {
+        title: `Choisir quel films projeter.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+ 
+  }
+);
+
+//admin dashboard add showtimes  layouts routes
+// employeeDashboardRoutes.get(
+//   "/showtimes/ad",
+//   checkAuthenticated,
+//   checkRole("admin"),
+//   enrichUserWithInfo,
+//   (req, res) => {
+//     res.render("dashboard/admin/addShowtimes", {
+//       title: `Ajouter une scéance à projeter.`,
+//     });
+//   }
+// );
+
+//admin dashboard update showtimes  layouts routes
+employeeDashboardRoutes.get(
+  "/showtimes/update",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/employee/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/employee/updateShowtimes", {
+        title: `Modifier une séance.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+   
+  }
+);
+
+//employee dashboard update showtimes  layouts routes
+employeeDashboardRoutes.get(
+  "/showtimes/delete",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res);
+      const rooms = await getRooms(req, res);
+      res.render("dashboard/employee/deleteShowtimes", {
+      title: `Supprimer une scéance.`,
+      cinemas: cinemas,
+      rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/employee/updateShowtimes", {
+        title: `Supprimer une séance.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+  }
+);
+
 module.exports = employeeDashboardRoutes;
