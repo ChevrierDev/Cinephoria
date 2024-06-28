@@ -145,7 +145,7 @@ employeeDashboardRoutes.get(
   }
 );
 
-//admin dashboard  update rooms layouts routes
+//employee dashboard  update rooms layouts routes
 employeeDashboardRoutes.get(
   "/rooms/update",
   checkAuthenticated,
@@ -162,24 +162,24 @@ employeeDashboardRoutes.get(
   }
 );
 
-//admin dashboard  delete rooms layouts routes
+//employee dashboard  delete rooms layouts routes
 employeeDashboardRoutes.get(
   "/rooms/delete",
   checkAuthenticated,
-  checkRole("admin"),
+  checkRole("employee"),
   enrichUserWithInfo,
   async (req, res) => {
     const cinemas = await getCinemas(req, res);
     const rooms = await getRooms(req, res);
     try {
-      res.render("dashboard/admin/deleteRooms", {
+      res.render("dashboard/employee/deleteRooms", {
         title: `Séléctionner une salle à supprimer dans votre cinéma.`,
         cinemas: cinemas,
         rooms: rooms
       });
     } catch (err) {
       console.log(err)
-      res.render("dashboard/admin/deleteRooms", {
+      res.render("dashboard/employee/deleteRooms", {
         title: `Séléctionner une salle à supprimer dans votre cinéma.`,
         cinemas: cinemas || [],
         rooms: rooms || []
