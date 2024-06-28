@@ -1,6 +1,6 @@
 const currentPage = window.location.pathname;
 
-if (currentPage === "/dashboard/admin/rooms/add") {
+if (currentPage === "/dashboard/admin/rooms/add" ) {
   document.addEventListener("DOMContentLoaded", () => {
     const selectTheaterBtn = document.getElementById("select-theater");
     const openTheaterMenu = document.getElementById("theater-menu");
@@ -183,7 +183,7 @@ if (currentPage === "/dashboard/admin/rooms/add") {
 } else if (currentPage === "/dashboard/admin/rooms/update") {
   document.addEventListener("DOMContentLoaded", () => {
     if (currentPage === "/dashboard/admin/rooms/add") {
-      // Code pour ajouter une salle
+
     } else if (currentPage === "/dashboard/admin/rooms/update") {
       const selectTheaterBtn = document.getElementById("select-theater");
       const openTheaterMenu = document.getElementById("theater-menu");

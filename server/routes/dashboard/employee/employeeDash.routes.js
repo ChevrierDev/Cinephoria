@@ -98,4 +98,86 @@ employeeDashboardRoutes.get(
   }
 );
 
+
+
+//admin dashboard rooms layouts routes
+employeeDashboardRoutes.get(
+  "/rooms",
+  checkAuthenticated,
+  checkRole("employee"),
+  enrichUserWithInfo,
+  (req, res) => {
+    res.render("dashboard/employee/rooms", {
+      title: `Modifier ou ajouter des salle dans vos cinémas.`,
+    });
+  }
+);
+
+//admin dashboard add rooms layouts routes
+employeeDashboardRoutes.get(
+  "/rooms/add",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    try {
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas
+      });
+    } catch (err) {
+      console.log(err)
+      const cinemas = await getCinemas(req, res)
+      res.render("dashboard/admin/addRooms", {
+        title: `Ajouter une salle à votre cinéma.`,
+        cinemas: cinemas || []
+      });
+    }
+
+  }
+);
+
+//admin dashboard  update rooms layouts routes
+employeeDashboardRoutes.get(
+  "/rooms/update",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res);
+    res.render("dashboard/admin/updateRooms", {
+      title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
+      cinemas: cinemas,
+      rooms: rooms
+    });
+  }
+);
+
+//admin dashboard  delete rooms layouts routes
+employeeDashboardRoutes.get(
+  "/rooms/delete",
+  checkAuthenticated,
+  checkRole("admin"),
+  enrichUserWithInfo,
+  async (req, res) => {
+    const cinemas = await getCinemas(req, res);
+    const rooms = await getRooms(req, res);
+    try {
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas,
+        rooms: rooms
+      });
+    } catch (err) {
+      console.log(err)
+      res.render("dashboard/admin/deleteRooms", {
+        title: `Séléctionner une salle à supprimer dans votre cinéma.`,
+        cinemas: cinemas || [],
+        rooms: rooms || []
+      });
+    }
+  }
+);
 module.exports = employeeDashboardRoutes;
