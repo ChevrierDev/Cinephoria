@@ -154,7 +154,7 @@ employeeDashboardRoutes.get(
   async (req, res) => {
     const cinemas = await getCinemas(req, res);
     const rooms = await getRooms(req, res);
-    res.render("dashboard/admin/updateRooms", {
+    res.render("dashboard/employee/updateRooms", {
       title: `Séléctionner une salle et à modifier la salle dans votre cinéma.`,
       cinemas: cinemas,
       rooms: rooms

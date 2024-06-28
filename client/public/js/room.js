@@ -1,6 +1,6 @@
 const currentPage = window.location.pathname;
 
-if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/employee/rooms/add" ) {
+if (currentPage === "/dashboard/admin/rooms/add" ) {
   document.addEventListener("DOMContentLoaded", () => {
     const selectTheaterBtn = document.getElementById("select-theater");
     const openTheaterMenu = document.getElementById("theater-menu");
