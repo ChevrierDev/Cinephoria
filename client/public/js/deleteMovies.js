@@ -178,6 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
       messageElement.classList.add("hidden");
       messageElement.classList.remove("flex");
       localStorage.removeItem("delete-message");
-    }, 6000);
+    }, 1500);
   }
 });
