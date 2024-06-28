@@ -10,7 +10,15 @@ const {
 
 const {
   getMovieById
-} = require('../../../controllers/movies/movies.controllers')
+} = require('../../../controllers/movies/movies.controllers');
+
+const {
+  getRooms
+} = require('../../../controllers/rooms/rooms.controllers')
+
+const {
+  getCinemas
+} = require('../../../controllers/cinemas/cinemas.controllers')
 
 //employee dashboard homePage routes
 employeeDashboardRoutes.get(
@@ -100,7 +108,7 @@ employeeDashboardRoutes.get(
 
 
 
-//admin dashboard rooms layouts routes
+//employee dashboard rooms layouts routes
 employeeDashboardRoutes.get(
   "/rooms",
   checkAuthenticated,
@@ -113,28 +121,27 @@ employeeDashboardRoutes.get(
   }
 );
 
-//admin dashboard add rooms layouts routes
+//employee dashboard add rooms layouts routes
 employeeDashboardRoutes.get(
   "/rooms/add",
   checkAuthenticated,
-  checkRole("admin"),
+  checkRole("employee"),
   enrichUserWithInfo,
   async (req, res) => {
     try {
       const cinemas = await getCinemas(req, res)
-      res.render("dashboard/admin/addRooms", {
+      res.render("dashboard/employee/addRooms", {
         title: `Ajouter une salle à votre cinéma.`,
         cinemas: cinemas
       });
     } catch (err) {
       console.log(err)
       const cinemas = await getCinemas(req, res)
-      res.render("dashboard/admin/addRooms", {
+      res.render("dashboard/employee/addRooms", {
         title: `Ajouter une salle à votre cinéma.`,
         cinemas: cinemas || []
       });
     }
-
   }
 );
 
@@ -142,7 +149,7 @@ employeeDashboardRoutes.get(
 employeeDashboardRoutes.get(
   "/rooms/update",
   checkAuthenticated,
-  checkRole("admin"),
+  checkRole("employee"),
   enrichUserWithInfo,
   async (req, res) => {
     const cinemas = await getCinemas(req, res);

@@ -1,6 +1,6 @@
 const currentPage = window.location.pathname;
 
-if (currentPage === "/dashboard/admin/rooms/add" ) {
+if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/employee/rooms/add" ) {
   document.addEventListener("DOMContentLoaded", () => {
     const selectTheaterBtn = document.getElementById("select-theater");
     const openTheaterMenu = document.getElementById("theater-menu");
@@ -433,8 +433,7 @@ if (currentPage === "/dashboard/admin/rooms/add" ) {
           }
 
           const data = await response.json();
-          console.log(data.message); // Log success message or handle as needed
-          window.location.href = data.redirectUrl; // Redirect user
+          window.location.href = data.redirectUrl;
         } catch (error) {
           console.error("Error:", error);
           showError(
