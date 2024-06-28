@@ -37,7 +37,8 @@ const showtimesRoutes = require("./api/showtimes/showtimes.routes");
 const seatsRoutes = require("./api/seats/seats.routes");
 const roomsRoutes = require("./api/rooms/rooms.routes");
 const resetPassApiRoutes = require("./api/resetPassword/resetPassApi.routes");
-const assignRouter = require('./api/assign/assignRouter.routes')
+const assignRouter = require('./api/assign/assignRouter.routes');
+
 
 //login and logout API
 const authRouter = require("./auth/loginApi");
@@ -124,5 +125,7 @@ app.use("/api/v1/", logoutRouter);
 //form components routes
 app.use("/", loginFormRoutes);
 app.use("/", registerFormRoutes);
+
+
 
 module.exports = app;

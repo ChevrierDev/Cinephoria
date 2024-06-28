@@ -8,290 +8,115 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
+    <% if (movies.length !== 0) { %>
     <!-- latest movies carousel -->
     <div class="swiper latest-movie-slider">
       <div class="swiper-wrapper">
        
-        <!-- card -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative">
+        <% movies.forEach(movie => { %>
 
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
+          <% if (movie.favorite === false) { %>
+            <!-- card -->
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <a href="/films/disponibiliter">
+                <div
+                  class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
+                >
+                  <div class="w-full h-fit relative group">
+                    <div class="relative">
 
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
+                      <img
+                        src="uploads/<%= movie.poster %>"
+                        alt="photo film"
+                        class="object-cover"
+                      />
+                      
+                      <!-- movie details container -->
+                      <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <p class="font-arvo  text-white text-sm text-center text-ellipsis">
+                          <%= movie.description %>
+                        </p>
+
+                        <p class="font-arvo  text-goldOne font-bold text-sm text-center">
+                          5/5
+                        </p>
+                      </div>
+
+                    </div>
+                    
+                    <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
+                      <%= movie.genre %>
+                    </div>
+
                   </div>
-
+                  <h1
+                    class="font-arvo text-blueOne text-lg font-bold tracking-wide"
+                  >
+                  <%= movie.title %>
+                  </h1>
+                  <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                    Depuis le <%= new Date(movie.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                  </p>
                 </div>
-                
-                <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  Drame
-                </div>
-
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
+              </a>
             </div>
-          </a>
-        </div>
-        <!-- card -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative">
+          <% } else {%>
+            <!-- card with heart -->
+            <div class="swiper-slide flex flex-col items-center justify-center">
+              <a href="/films/disponibiliter">
+                <div
+                  class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
+                >
+                  <div class="w-full h-fit relative group">
+                    <div class="relative ">
+                      <img
+                      src="uploads/<%= movie.poster %>"
+                        alt="photo film"
+                        class="object-cover"
+                      />
+                      <!-- movie details container -->
+                      <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <p class="font-arvo  text-white text-sm text-center text-ellipsis">
+                          <%= movie.description %>
+                        </p>
 
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
-
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
-                  </div>
-
-                </div>
-                
-                <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  Drame
-                </div>
-
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
-            </div>
-          </a>
-        </div>
-        <!-- card -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative">
-
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
-
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
-                  </div>
-
-                </div>
-                
-                <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  Drame
-                </div>
-
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
-            </div>
-          </a>
-        </div>
-        <!-- card -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative">
-
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
-
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
-                  </div>
-
-                </div>
-                
-                <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  Drame
-                </div>
-
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
-            </div>
-          </a>
-        </div>
-        <!-- card -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative">
-
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
-
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
-                  </div>
-
-                </div>
-                
-                <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  Drame
-                </div>
-
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
-            </div>
-          </a>
-        </div>
-        
-        
-        <!-- card with heart -->
-        <div class="swiper-slide flex flex-col items-center justify-center">
-          <a href="/films/disponibiliter">
-            <div
-              class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
-            >
-              <div class="w-full h-fit relative group">
-                <div class="relative ">
-                  <img
-                    src="../images/Films/0079479_11.jpg"
-                    alt="photo film"
-                    class="object-cover"
-                  />
-                  <!-- movie details container -->
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <p class="font-arvo  text-white text-sm text-center text-ellipsis">
-                      C'est l’histoire d’un cascadeur, et comme tous les cascadeurs, il se
-                      fait tirer dessus, exploser, écraser, jeter par les fenêtres et 
-                      tombe toujours de plus en plus haut.
-                    </p>
-
-                    <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                      5/5
-                    </p>
-                  </div>
-                </div>
-                <div class="absolute top-4 right-0 bg-goldOne  font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
-                  <div class="relative">
-                    Drame
-                    <div class="absolute h-fit w-fit -top-1 -left-5 -rotate-[30deg]">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 128 128"><path fill="#f44336" d="M93.99 8.97c-21.91 0-29.96 22.39-29.96 22.39s-7.94-22.39-30-22.39c-16.58 0-35.48 13.14-28.5 43.01c6.98 29.87 58.56 67.08 58.56 67.08s51.39-37.21 58.38-67.08c6.98-29.87-10.56-43.01-28.48-43.01"/><path fill="#c33" d="M30.65 11.2c17.2 0 25.74 18.49 28.5 25.98c.39 1.07 1.88 1.1 2.33.06L64 31.35C60.45 20.01 50.69 8.97 34.03 8.97c-6.9 0-14.19 2.28-19.86 7.09c5.01-3.29 10.88-4.86 16.48-4.86m63.34-2.23c-5.29 0-10.11 1.15-13.87 3.47c2.64-1.02 5.91-1.24 9.15-1.24c16.21 0 30.72 12.29 24.17 40.7c-5.62 24.39-38.46 53.98-48.49 65.27c-.64.72-.86 1.88-.86 1.88s51.39-37.21 58.38-67.08c6.98-29.86-10.53-43-28.48-43"/><path fill="#ff8a80" d="M17.04 24.82c3.75-4.68 10.45-8.55 16.13-4.09c3.07 2.41 1.73 7.35-1.02 9.43c-4 3.04-7.48 4.87-9.92 9.63c-1.46 2.86-2.34 5.99-2.79 9.18c-.18 1.26-1.83 1.57-2.45.46c-4.22-7.48-5.42-17.78.05-24.61m60.12 9.84c-1.76 0-3-1.7-2.36-3.34c1.19-3.02 2.73-5.94 4.58-8.54c2.74-3.84 7.95-6.08 11.25-3.75c3.38 2.38 2.94 7.14.57 9.44c-5.09 4.93-11.51 6.19-14.04 6.19"/></svg>
+                        <p class="font-arvo  text-goldOne font-bold text-sm text-center">
+                          5/5
+                        </p>
+                      </div>
+                    </div>
+                    <div class="absolute top-4 right-0 bg-goldOne  font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
+                      <div class="relative">
+                        <%= movie.genre %>
+                        <div class="absolute h-fit w-fit -top-1 -left-5 -rotate-[30deg]">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 128 128"><path fill="#f44336" d="M93.99 8.97c-21.91 0-29.96 22.39-29.96 22.39s-7.94-22.39-30-22.39c-16.58 0-35.48 13.14-28.5 43.01c6.98 29.87 58.56 67.08 58.56 67.08s51.39-37.21 58.38-67.08c6.98-29.87-10.56-43.01-28.48-43.01"/><path fill="#c33" d="M30.65 11.2c17.2 0 25.74 18.49 28.5 25.98c.39 1.07 1.88 1.1 2.33.06L64 31.35C60.45 20.01 50.69 8.97 34.03 8.97c-6.9 0-14.19 2.28-19.86 7.09c5.01-3.29 10.88-4.86 16.48-4.86m63.34-2.23c-5.29 0-10.11 1.15-13.87 3.47c2.64-1.02 5.91-1.24 9.15-1.24c16.21 0 30.72 12.29 24.17 40.7c-5.62 24.39-38.46 53.98-48.49 65.27c-.64.72-.86 1.88-.86 1.88s51.39-37.21 58.38-67.08c6.98-29.86-10.53-43-28.48-43"/><path fill="#ff8a80" d="M17.04 24.82c3.75-4.68 10.45-8.55 16.13-4.09c3.07 2.41 1.73 7.35-1.02 9.43c-4 3.04-7.48 4.87-9.92 9.63c-1.46 2.86-2.34 5.99-2.79 9.18c-.18 1.26-1.83 1.57-2.45.46c-4.22-7.48-5.42-17.78.05-24.61m60.12 9.84c-1.76 0-3-1.7-2.36-3.34c1.19-3.02 2.73-5.94 4.58-8.54c2.74-3.84 7.95-6.08 11.25-3.75c3.38 2.38 2.94 7.14.57 9.44c-5.09 4.93-11.51 6.19-14.04 6.19"/></svg>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <h1
+                    class="font-arvo text-blueOne text-lg font-bold tracking-wide"
+                  >
+                  <%= movie.title %>
+                  </h1>
+                  <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                    Depuis le  <%= new Date(movie.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                  </p>
                 </div>
-              </div>
-              <h1
-                class="font-arvo text-blueOne text-lg font-bold tracking-wide"
-              >
-                Une affaire de principe
-              </h1>
-              <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Depuis le 15 Mai 2024
-              </p>
+              </a>
             </div>
-          </a>
-        </div>
+
+          <% } %>
+      
+        <% }) %>
+        
         
       </div>
     </div>
+    <% } else { %>
+      <div class="w-full flex items-center justify-center">
+        <p class="font-arvo text-blueOne font-bold text-3xl">Aucun films ajouté</p>
+      </div>
+      <% } %>
   </body>
 </html>

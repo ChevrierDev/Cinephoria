@@ -18,6 +18,26 @@ async function getMovies(req, res) {
   }
 }
 
+// Get all recent wednesday movies
+async function getLastWedMovies(req, res) {
+  try {
+    const query = `
+      WITH last_wednesday AS (
+        SELECT date_trunc('day', current_date) - ((date_part('dow', current_date)::int + 4) % 7) * interval '1 day' AS last_wed
+      )
+      SELECT *
+      FROM movies
+      WHERE DATE(added_date) >= (SELECT last_wed FROM last_wednesday) - interval '7 days'
+      ORDER BY added_date DESC;
+    `;
+    const result = await DB.query(query);
+    const movies = result.rows;
+    return movies;
+  } catch (err) {
+    throw err
+  }
+}
+
 async function getMovieById(req, res) {
   try {
     const { id } = req.params;
@@ -88,8 +108,9 @@ async function postMovie(req, res) {
         .json({ error: "You must enter all required fields!" });
     }
 
-    const query =
-      "INSERT INTO movies (title, duration, genre, pg, banner, poster, video, favorite, description, casting, release_date) VALUES ($1, $2, $3, $4, $5, $6, $7, 'false', $8, $9, $10) RETURNING *";
+    const query = `
+      INSERT INTO movies (title, duration, genre, pg, banner, poster, video, favorite, description, casting, release_date, added_date)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, 'false', $8, $9, $10, NOW()) RETURNING *`;
     const result = await DB.query(query, [
       title,
       duration,
@@ -116,6 +137,7 @@ async function postMovie(req, res) {
     res.status(500).json({ error: "Internal server error!" });
   }
 }
+
 
 async function updateMovieById(req, res) {
   console.log("Received request body:", req.body);
@@ -262,4 +284,5 @@ module.exports = {
   postMovie,
   deleteMovieById,
   updateMovieById,
+  getLastWedMovies
 };
