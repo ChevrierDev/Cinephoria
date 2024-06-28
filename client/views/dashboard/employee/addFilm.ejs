@@ -1,93 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
-    
+<html lang="en" class="h-full scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title><%= title %></title>
     <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://kit.fontawesome.com/1126a5f03b.js" crossorigin="anonymous"></script>
     <script defer src="/js/employee/addMovies.js"></script>
 </head>
+<body class="min-h-screen relative">
+<!-- Nav Bar -->
+<header class="relative z-10">
+    <%- include('../../components/dashboard/nav-bar-dashboard') %>
+</header>
 
-<body class=" min-h-screen relative ">
-    <!-- Nav Bar -->
-    <header class="relative z-10 ">
-        <%- include('../../components/dashboard/nav-bar-dashboard') %>
-    </header>
-    
-    <!-- Cinema and Date Filters -->
-    <main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw]  ml-auto md:pt-40 " id="main-container">
-    
-        <section class="container w-full  md:w-[85vw]  ml-auto flex flex-col mt-10 ">
-    
-           <form action="" method="post" class="flex flex-col items-center justify-center  bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8">
-    
-                <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER</h1>
-    
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="TITRE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="GENRE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="PUBLIC">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DURÉE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DATE DE SORTIE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="CASTING">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DESCRIPTION">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="IMAGE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOTE">
-                </div>
-                <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
-                    <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="AVIS CINEPHORIA">
-                </div>
-    
-                <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">poster</button>
-    
-                <!-- hidden alert pop up -->
-                <div class="absolute z-50 animate-open-menu flex-col items-center hidden justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48 space-y-80" id="alert">
-                    <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT MODIFIER LA SCÉANCE  ?</p>
-                    <div class="flex items-center justify-center space-x-10">
-                        <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400">
-                            OUI
-                        </button>
-                        <button  id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
-                            NON
-                        </button>
-                    </div>
-                </div>
-                
-            </form>
-    
-        </section>
-    
-    </main>
+<!-- Cinema and Date Filters -->
+<main class="flex text-blueOne w-full flex-col items-center gap-y-7 justify-center md:w-[85vw] ml-auto md:pt-40" id="main-container">
 
-    <!-- Side Bar Menu -->
-    <aside class="fixed z-20 top-0 left-0 h-screen">
-        <%- include('../../components/dashboard/side-menu') %>
-    </aside>
+    <section class="container w-full md:w-[85vw] ml-auto flex flex-col mt-10">
 
-    <!-- Footer -->
-    <footer class="pt-[400px]">
-        <%- include('../../components/footer') %>
-    </footer>
-    
-    </body>
+      
+
+        <form action="/api/v1/movies" method="post" enctype="multipart/form-data" class="flex flex-col relative items-center justify-center bg-whiteOne w-[90%] md:w-[55%] mx-auto rounded-sm px-6 py-5 space-y-5 md:py-7 md:space-y-8" id="movie-form">
+
+            <h1 class="text-blueOne font-arvo text-3xl tracking-wide font-bold text-center">AJOUTER</h1>
+
+            <ul class="flex-col items-start justify-center space-y-1  w-fit mx-auto hidden" id="error-list">
+                <li class="font-arvo text-sm text-redOne list-disc"></li>
+            </ul>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="TITRE" name="title" id="title-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="GENRE" name="genre" id="genre-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="PUBLIC" name="pg" id="pg-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DURÉE" name="duration" id="duration-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DATE DE SORTIE" name="release_date" id="release-date-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="CASTING" name="casting" id="casting-input">
+            </div>
+
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="DESCRIPTION" name="description" id="description-input">
+            </div>
+
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">IMAGE</p>
+                <label for="file-upload-1" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-1" type="file" name="poster" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="image-input"/>
+            </div>
+            
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">PHOTO DE COUVERTURE</p>
+                <label for="file-upload-2" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-2" type="file" name="banner" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="cover-input"/>
+            </div>
+            
+            <div class="relative w-full h-16 bg-white flex items-center justify-between px-5">
+                <p class="text-blueOne font-arvo font-bold text-lg">VIDEO</p>
+                <label for="file-upload-3" class="custom-file-upload bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 rounded cursor-pointer">
+                    Choisir un fichier
+                </label>
+                <input id="file-upload-3" type="file" name="video" class="file-input absolute inset-0 opacity-0 w-full h-full cursor-pointer" id="video-input"/>
+            </div>
+            
+            <div class="w-full h-16 bg-white flex items-center justify-center pl-4">
+                <input type="text" class="outline-none flex-1 w-full h-full flex items-center placeholder:text-lg placeholder:text-blueOne placeholder:font-arvo placeholder:font-bold" placeholder="NOTE" name="favorite" id="favorite-input">
+            </div>
+
+            <button class="mx-auto bg-redOne font-arvo text-white font-bold text-lg px-10 py-2 mt-2 flex hover:scale-95 duration-200 ease-in-out items-center justifify-center" id="open-alert-btn">poster</button>
+
+            <!-- hidden alert pop up -->
+            <div class="absolute z-50 animate-open-menu space-y-20 hidden flex-col items-center justify-around bg-blueOne/75 w-[50vw] h-[100vh] rounded-lg px-10 py-48" id="alert">
+                <p class="text-center font-arvo text-white font-bold text-3xl">VOULEZ-VOUS VRAIMENT AJOUTER LE FILMS ?</p>
+                <div class="flex items-center justify-center space-x-10">
+                    <button type="submit" id="submit-form" class="bg-green-500 w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-green-400" id="submit-form">
+                        OUI
+                    </button>
+                    <button id="close-alert" class="bg-redOne w-36 h-14 text-white font-arvo font-bold flex items-center justify-center hover:scale-95 duration-200 hover:bg-red-500">
+                        NON
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+<!-- Side Bar Menu -->
+<aside class="fixed z-20 top-0 left-0 h-screen">
+    <%- include('../../components/dashboard/side-menu') %>
+</aside>
+
+<!-- Footer -->
+<footer class="pt-[400px]">
+    <%- include('../../components/footer') %>
+</footer>
+
+</body>
 </html>
