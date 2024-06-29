@@ -150,7 +150,14 @@ async function updateShowtimesById(req, res) {
     const { movie_id, cinema_id, room_id, price, showtimes } = req.body;
 
     // Vérifiez que tous les champs sont présents
-    if (!movie_id || !cinema_id || !room_id || !price || !Array.isArray(showtimes) || showtimes.length === 0) {
+    if (
+      !movie_id ||
+      !cinema_id ||
+      !room_id ||
+      !price ||
+      !Array.isArray(showtimes) ||
+      showtimes.length === 0
+    ) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -159,11 +166,24 @@ async function updateShowtimesById(req, res) {
 
       // Vérifiez que les champs showtime sont présents
       if (!day || !start_time || !end_time) {
-        return res.status(400).json({ error: "Day, start time, and end time are required for each showtime" });
+        return res
+          .status(400)
+          .json({
+            error:
+              "Day, start time, and end time are required for each showtime",
+          });
       }
 
       // Log parameters to check their values
-      console.log("Parameters for conflict check:", cinema_id, room_id, day, start_time, end_time, id);
+      console.log(
+        "Parameters for conflict check:",
+        cinema_id,
+        room_id,
+        day,
+        start_time,
+        end_time,
+        id
+      );
 
       const queryCheck = `
         SELECT * FROM showtimes 
@@ -181,7 +201,7 @@ async function updateShowtimesById(req, res) {
         day,
         start_time,
         end_time,
-        id 
+        id,
       ]);
 
       if (result.rows.length > 0) {
@@ -190,7 +210,17 @@ async function updateShowtimesById(req, res) {
         });
       }
 
-      console.log("Parameters for update:", movie_id, cinema_id, room_id, day, start_time, end_time, price, id);
+      console.log(
+        "Parameters for update:",
+        movie_id,
+        cinema_id,
+        room_id,
+        day,
+        start_time,
+        end_time,
+        price,
+        id
+      );
 
       const queryUpdate = `
         UPDATE showtimes 
@@ -205,8 +235,8 @@ async function updateShowtimesById(req, res) {
         day,
         start_time,
         end_time,
-        parseFloat(price), // Utiliser parseFloat pour le prix
-        id
+        parseFloat(price), 
+        id,
       ]);
 
       if (updateResult.rows.length === 0) {
@@ -221,9 +251,24 @@ async function updateShowtimesById(req, res) {
   }
 }
 
-
-
-
+// get movies associated to showtimes
+async function getShowtimesWithMovies(req, res) {
+  try {
+    const query = `
+      SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price, 
+             m.title, m.poster, m.description, m.genre, m.release_date
+      FROM showtimes s
+      JOIN movies m ON s.movie_id = m.movie_id
+      ORDER BY s.day DESC;
+    `;
+    const result = await DB.query(query);
+    const showtimesWithMovies = result.rows;
+    return showtimesWithMovies;
+  } catch (err) {
+    console.log("Internal server error", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
 
 // Function to delete a showtimes by ID
 async function deleteShowtimesById(req, res) {
@@ -252,6 +297,7 @@ async function deleteShowtimesById(req, res) {
 // Export the functions as a module
 module.exports = {
   getShowtimes,
+  getShowtimesWithMovies,
   getShowtimesById,
   postShowtimes,
   deleteShowtimesById,

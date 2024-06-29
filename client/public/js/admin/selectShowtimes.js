@@ -125,6 +125,10 @@ if (currentPage === '/dashboard/admin/showtimes/select-movies') {
     // Confirmation Alert menu
     openAlertBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      scrollTo({
+        top: 130,
+        behavior: 'smooth'
+      });
       alertMenu.classList.toggle("hidden");
       alertMenu.classList.toggle("flex");
     });
@@ -212,6 +216,8 @@ if (currentPage === '/dashboard/admin/showtimes/select-movies') {
   
   submitFormBtn.addEventListener("click", async (e) => {
       e.preventDefault();
+
+    
   
       // Collect data from the form
       const movieId = selectedMovieId;
@@ -407,7 +413,7 @@ if (currentPage === '/dashboard/admin/showtimes/select-movies') {
       setTimeout(() => {
         messageContainer.classList.add('hidden');
         localStorage.removeItem('success-message');
-      }, 3000);
+      }, 1000);
     }
   })
 }

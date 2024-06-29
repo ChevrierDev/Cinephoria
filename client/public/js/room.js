@@ -607,5 +607,5 @@ if (currentPage === "/dashboard/admin/rooms/add" ) {
   setTimeout(() => {
     localStorage.removeItem("succes-msg");
     confirmation.classList.add("hidden");
-  }, 2000);
+  }, 1000);
 }

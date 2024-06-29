@@ -3,6 +3,7 @@ const showtimesRoutes = express.Router();
 const {
   getShowtimes,
   getShowtimesById,
+  getShowtimesWithMovies,
   deleteShowtimesById,
   postShowtimes,
   getShowtimesByCinemaAndRoom,
@@ -16,6 +17,9 @@ const {
 
 // get all showtimes
 showtimesRoutes.get("/showtimes", getShowtimes);
+
+//get all movies by showtimes
+showtimesRoutes.get("/getMoviesByShowtimes", getShowtimesWithMovies);
 
 // get all showtimes by cinemas and rooms
 showtimesRoutes.get(
@@ -38,9 +42,6 @@ showtimesRoutes.post(
 );
 
 // update showtimes
-showtimesRoutes.put(
-  "/showtimes/:id",
-  updateShowtimesById
-);
+showtimesRoutes.put("/showtimes/:id", updateShowtimesById);
 
 module.exports = showtimesRoutes;
