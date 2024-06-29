@@ -166,12 +166,9 @@ async function updateShowtimesById(req, res) {
 
       // Vérifiez que les champs showtime sont présents
       if (!day || !start_time || !end_time) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "Day, start time, and end time are required for each showtime",
-          });
+        return res.status(400).json({
+          error: "Day, start time, and end time are required for each showtime",
+        });
       }
 
       // Log parameters to check their values
@@ -235,7 +232,7 @@ async function updateShowtimesById(req, res) {
         day,
         start_time,
         end_time,
-        parseFloat(price), 
+        parseFloat(price),
         id,
       ]);
 
@@ -256,9 +253,14 @@ async function getShowtimesWithMovies(req, res) {
   try {
     const query = `
       SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price, 
-             m.title, m.poster, m.description, m.genre, m.release_date
+             m.title, m.poster, m.description, m.genre, m.release_date,
+             c.name AS cinema_name, 
+             c.location AS cinema_location, 
+             c.country AS cinema_country,
+             c.images AS cinema_images
       FROM showtimes s
       JOIN movies m ON s.movie_id = m.movie_id
+      JOIN cinemas c ON s.cinema_id = c.cinema_id
       ORDER BY s.day DESC;
     `;
     const result = await DB.query(query);

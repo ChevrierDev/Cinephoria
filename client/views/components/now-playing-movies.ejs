@@ -34,10 +34,16 @@
                   </div>
                 </div>
                 <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
-                  <%= showtime.title %>
+                  <%= showtime.cinema_name %>
                 </h1>
                 <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                  <%= new Date(showtime.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                  Séance: <%= new Date(showtime.day).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </p>
+                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                  Début: <%= showtime.start_time.slice(0, 5) %>
+                </p>
+                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                  Fin: <%= showtime.end_time.slice(0, 5) %>
                 </p>
               </div>
             </a>
