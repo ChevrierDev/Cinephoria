@@ -11,7 +11,7 @@ async function getMovies(req, res) {
       res.status(404).json("No movies found !");
       return;
     }
-    res.status(200).json(results.rows);
+    return results.rows;
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error !");

@@ -2,6 +2,7 @@ const express = require("express");
 const filmsRoutes = express.Router();
 const {
   getLastWedMovies,
+  getMovies
 } = require("../../controllers/movies/movies.controllers");
 const {
     getShowtimesWithMovies
@@ -11,13 +12,14 @@ const decodeData = require("../../services/decodeData.services");
 filmsRoutes.get("/", async (req, res) => {
   try {
     const lastMovies = await getLastWedMovies(req, res);
-    const Showtimes = await getShowtimesWithMovies(req, res);
-    const decMovies = decodeData(lastMovies);
-    const decodedShowtimes = decodeData(Showtimes)
+    const movies = await getMovies(req, res);
+    const decLastMovies = decodeData(lastMovies);
+    const decMovies = decodeData(movies)
     res.render("layouts/films", {
       title: "Les derniers films disponible.",
-      movies: decMovies,
-      showtimes: decodedShowtimes
+      lastMovies: decLastMovies,
+      movies: decMovies
+      
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);

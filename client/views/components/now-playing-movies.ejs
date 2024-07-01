@@ -10,19 +10,19 @@
   <div class="swiper latest-movie-slider">
     <div class="swiper-wrapper">
       
-      <% if (showtimes.length !== 0) { %>
-        <% showtimes.forEach(showtime => { %>
+      <% if (movies.length !== 0) { %>
+        <% movies.forEach(movie => { %>
           <!-- card -->
           <div class="swiper-slide flex flex-col items-center justify-center">
             <a href="/films/disponibiliter">
               <div class="flex space-y-2 items-center justify-center flex-col w-60 pb-3">
                 <div class="w-full h-fit relative group">
                   <div class="relative">
-                    <img src="uploads/<%= showtime.poster %>" alt="photo film" class="object-cover" />
+                    <img src="uploads/<%= movie.poster %>" alt="photo film" class="object-cover" />
                     <!-- movie details container -->
                     <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <p class="font-arvo text-white text-sm text-center text-ellipsis">
-                        <%= showtime.description %>
+                        <%= movie.description %>
                       </p>
                       <p class="font-arvo text-goldOne font-bold text-sm text-center">
                         5/5
@@ -30,20 +30,14 @@
                     </div>
                   </div>
                   <div class="absolute top-4 right-0 bg-goldOne/85 font-arvo text-white font-bold h-6 w-fit px-2 text-nowrap">
-                    <%= showtime.genre %>
+                    <%= movie.genre %>
                   </div>
                 </div>
                 <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
-                  <%= showtime.cinema_name %>
+                  <%= movie.title %>
                 </h1>
                 <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                  Séance: <%= new Date(showtime.day).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
-                </p>
-                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                  Début: <%= showtime.start_time.slice(0, 5) %>
-                </p>
-                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                  Fin: <%= showtime.end_time.slice(0, 5) %>
+                  Depuis le <%= new Date(movie.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
                 </p>
               </div>
             </a>

@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <% if (movies.length !== 0) { %>
+    <% if (lastMovies.length !== 0) { %>
     <!-- latest movies carousel -->
     <div class="swiper latest-movie-slider">
       <div class="swiper-wrapper">
        
-        <% movies.forEach(movie => { %>
+        <% lastMovies.forEach(movie => { %>
 
           <% if (movie.favorite === false) { %>
             <!-- card -->
