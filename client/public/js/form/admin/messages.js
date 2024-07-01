@@ -14,5 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
       msg.classList.add("hidden");
       msg.classList.remove("flex");
       localStorage.removeItem("success-message");
-    }, 6000);
+    }, 1000);
 })

@@ -12,5 +12,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     msg.classList.add("hidden");
     localStorage.removeItem("assignation-succes");
-  }, 6000);
+  }, 1000);
 });

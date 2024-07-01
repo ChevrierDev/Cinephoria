@@ -23,7 +23,8 @@ const {
 
 const {
   getRooms
-} = require('../../../controllers/rooms/rooms.controllers')
+} = require('../../../controllers/rooms/rooms.controllers');
+
 
 //admin dashboard homePage routes
 adminDashboardRoutes.get(
@@ -88,9 +89,7 @@ adminDashboardRoutes.get(
     const movie = await getMovieById(req, res);
     res.render("dashboard/admin/updateMovie", {
       title: `Modifier le film.`,
-      movie : movie
     });
-    
   }
 );
 
@@ -387,7 +386,7 @@ adminDashboardRoutes.get(
   enrichUserWithInfo,
   async (req, res) => {
     const cinemas = await getCinemas(req, res);
-    const users =await getUsers(req, res);
+    const users = await getUsers(req, res);
     const employees = users.filter(user => user.role === 'employee');
     res.render("dashboard/admin/assign", {
       title: `Assigner un employer à un cinémas.`,
