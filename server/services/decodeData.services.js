@@ -3,8 +3,12 @@ const he = require("he");
 function decodeData(items) {
   return items.map((item) => {
     return Object.entries(item).reduce((acc, [key, value]) => {
-      acc[key] =
-        typeof value === "string" ? he.decode(value.replace("_", " ")) : value;
+      if (typeof value === "string") {
+        const decodedValue = he.decode(value.replace(/_/g, " "));
+        acc[key] = decodedValue;
+      } else {
+        acc[key] = value;
+      }
       return acc;
     }, {});
   });

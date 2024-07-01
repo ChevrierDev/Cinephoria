@@ -15,6 +15,10 @@ const {
   validateShowtimes,
 } = require("../../middlewares/validator/showtimes.validator");
 
+const {
+  getShowtimesByCinema
+} = require('../../controllers/showtimes/showtimes.controllers');
+
 // get all showtimes
 showtimesRoutes.get("/showtimes", getShowtimes);
 
@@ -26,6 +30,8 @@ showtimesRoutes.get(
   "/getShowtimesByCinemaAndRoom/:cinemaId/:roomId",
   getShowtimesByCinemaAndRoom
 );
+
+showtimesRoutes.get("/showtimes/:cinemaId", getShowtimesByCinema);
 
 // get showtimes by Id
 showtimesRoutes.get("/showtimes/:id", getShowtimesById);

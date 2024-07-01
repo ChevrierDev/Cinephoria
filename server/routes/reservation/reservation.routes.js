@@ -1,17 +1,35 @@
 const express = require("express");
 const reservationRoutes = express.Router();
 const {
-    getLastWedMovies,
-  } = require("../../controllers/movies/movies.controllers");
-  const decodeData = require("../../services/decodeData.services");
+  getShowtimesByCinema,
+  getShowtimes,
+} = require("../../controllers/showtimes/showtimes.controllers");
+const { getCinemas } = require("../../controllers/cinemas/cinemas.controllers");
+const { filterShowtimes } = require("../../services/filterMoviesService");
+const decodeData = require("../../services/decodeData.services");
 
 reservationRoutes.get("/", async (req, res) => {
   try {
-    const lastMovies = await getLastWedMovies(req, res);
-    const decMovies = decodeData(lastMovies);
+    const { genres, days, qualities, cinemaId } = req.query;
+    let showtimes = [];
+
+    if (cinemaId) {
+      showtimes = await getShowtimesByCinema(cinemaId);
+    } else {
+      showtimes = await getShowtimes();
+    }
+
+    if (genres || days || qualities) {
+      showtimes = filterShowtimes(showtimes, genres, days, qualities);
+    }
+
+    const cinemas = await getCinemas(req, res);
+    const decShowtimes = decodeData(showtimes);
     res.render("layouts/reservation", {
       title: "Réserver un film.",
-      movies: decMovies,
+      cinemas: cinemas,
+      showtimes: decShowtimes,
+      cinemaId: cinemaId || '',
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);
