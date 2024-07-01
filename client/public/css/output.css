@@ -1204,6 +1204,12 @@ video {
 .gap-4{
   gap: 1rem;
 }
+.gap-2{
+  gap: 0.5rem;
+}
+.gap-5{
+  gap: 1.25rem;
+}
 .gap-x-1{
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -2398,6 +2404,10 @@ video {
     margin-right: 1rem;
   }
 
+  .sm\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
@@ -2780,6 +2790,10 @@ video {
 
   .lg\:max-w-4xl{
     max-width: 56rem;
+  }
+
+  .lg\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:text-xl{
