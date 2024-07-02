@@ -12,7 +12,8 @@ const {
 const { getCinemas } = require("../../controllers/cinemas/cinemas.controllers");
 const decodeData = require("../../services/decodeData.services");
 const {
-  filterMovies
+  filterMovies,
+  filterShowtimes
 } = require('../../services/filterMoviesService')
 
 filmsRoutes.get("/", async (req, res) => {
@@ -26,6 +27,10 @@ filmsRoutes.get("/", async (req, res) => {
       showtimes = await getShowtimes();
     }
 
+    if (genres || days || qualities) {
+      showtimes = filterShowtimes(showtimes, genres, days, qualities);
+    }
+
     const lastMovies = await getLastWedMovies(req, res);
     const movies = await getMovies(req, res);
     const cinemas = await getCinemas(req, res);
@@ -35,7 +40,7 @@ filmsRoutes.get("/", async (req, res) => {
 
     // Filtrer les films
     const filteredMovies = filterMovies(decLastMovies, genres, days, qualities);
-    const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities)
+    const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities);
 
     res.render("layouts/films", {
       title: "Les derniers films disponible.",
