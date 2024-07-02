@@ -7,13 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const cinemaIdInput = document.getElementById("cinemaId");
 
     applyFilterButton.addEventListener("click", function(event) {
-        // Empêcher le comportement par défaut du bouton de soumission pour utiliser JavaScript pour soumettre
         event.preventDefault(); 
-
-        // Fermer le menu de filtrage
         filterMenu.classList.add("hidden");
-
-        // Soumettre le formulaire pour mettre à jour les séances
         filterForm.submit();
     });
 

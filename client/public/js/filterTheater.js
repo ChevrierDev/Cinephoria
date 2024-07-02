@@ -1,3 +1,4 @@
+const currentPage = window.location.pathname
 document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("search-theater-input");
     const franceCinemaList = document.getElementById("france-cinema-list");
@@ -58,7 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
     cinemaItems.forEach(item => {
       item.addEventListener("click", function() {
         const cinemaId = this.getAttribute("data-cinema-id");
-        window.location.href = `/reservation?cinemaId=${cinemaId}`;
+        if (currentPage === "/reservation") {
+            window.location.href = `/reservation?cinemaId=${cinemaId}`;
+        }else{
+            window.location.href = `/films?cinemaId=${cinemaId}`;
+        }
+        
       });
     });
 });

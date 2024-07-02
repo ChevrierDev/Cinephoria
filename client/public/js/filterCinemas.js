@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
   const showtimesButtons = document.querySelectorAll(".showtimes-button");
   
@@ -12,7 +13,14 @@ document.addEventListener("DOMContentLoaded", function() {
   const urlParams = new URLSearchParams(window.location.search);
   const cinemaId = urlParams.get("cinemaId");
 
-  if (cinemaId) {
+  if (currentPage === "/reservation") {
+    if (cinemaId) {
       window.history.replaceState({}, document.title, "/reservation");
+    }
+  } else {
+    if (cinemaId) {
+      window.history.replaceState({}, document.title, "/films");
+    }
   }
+
 });

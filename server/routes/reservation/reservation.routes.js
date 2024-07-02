@@ -29,7 +29,8 @@ reservationRoutes.get("/", async (req, res) => {
       title: "Réserver un film.",
       cinemas: cinemas,
       showtimes: decShowtimes,
-      cinemaId: cinemaId || '',
+      cinemaId: cinemaId || "",
+      currentLocation: req.path,
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);
