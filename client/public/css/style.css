@@ -275,3 +275,7 @@ background: greenyellow
   top: 50%;
   right: -60px;
 }
+
+.selected-day {
+  border-bottom: 4px solid #DAA520
+}

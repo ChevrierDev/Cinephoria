@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= title %></title>
     <script defer src="/js/filterMovies.js"></script>
 </head>
 <body>
@@ -28,7 +28,7 @@
                         data-genre="<%= (showtime.genre || '').toLowerCase().split(',').join(' ') %>"
                         data-days="<%= showtime.showtimes ? showtime.showtimes.map(st => new Date(st.day).toLocaleDateString('fr-FR', { weekday: 'long' }).toLowerCase()).join(' ') : '' %>"
                         data-qualities="<%= showtime.showtimes ? showtime.showtimes.map(st => (st.quality || '').toLowerCase()).join(' ') : '' %>">
-                        <a href="/films/disponibiliter">
+                        <a href="/reservation/choisir-sceance/<%= cinemaId %>?filmId=<%= showtime.movie_id %>">
                             <div class="flex space-y-2 items-center justify-center flex-col w-60 pb-3">
                                 <div class="w-full h-fit relative group">
                                     <div class="relative">

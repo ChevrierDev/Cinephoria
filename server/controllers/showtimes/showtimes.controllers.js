@@ -45,6 +45,121 @@ async function getShowtimesByCinemaAndRoom(req, res) {
   }
 }
 
+// Function to get showtimes by cinema and film
+async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
+  try {
+    const query = `
+      SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price,
+             m.movie_id, m.title, m.poster, m.description, m.genre, m.release_date,
+             c.name AS cinema_name,
+             c.location AS cinema_location,
+             c.country AS cinema_country,
+             c.images AS cinema_images,
+             r.quality AS room_quality,
+             r.name AS room_name
+      FROM showtimes s
+      JOIN movies m ON s.movie_id = m.movie_id
+      JOIN cinemas c ON s.cinema_id = c.cinema_id
+      JOIN rooms r ON s.room_id = r.room_id
+      WHERE s.cinema_id = $1 AND m.movie_id = $2
+      ORDER BY s.day DESC;
+    `;
+    const result = await DB.query(query, [cinemaId, filmId]);
+
+    // Regroup showtimes by movie
+    const showtimesByMovie = {};
+    result.rows.forEach(row => {
+      if (!showtimesByMovie[row.movie_id]) {
+        showtimesByMovie[row.movie_id] = {
+          movie_id: row.movie_id,
+          title: row.title,
+          poster: row.poster,
+          description: row.description,
+          genre: row.genre,
+          release_date: row.release_date,
+          cinema_name: row.cinema_name,
+          cinema_location: row.cinema_location,
+          cinema_country: row.cinema_country,
+          cinema_images: row.cinema_images,
+          showtimes: []
+        };
+      }
+      showtimesByMovie[row.movie_id].showtimes.push({
+        showtimes_id: row.showtimes_id,
+        day: row.day,
+        start_time: row.start_time,
+        end_time: row.end_time,
+        price: row.price,
+        quality: row.room_quality,
+        room: row.room_name // Ensure room name is included
+      });
+    });
+
+    return Object.values(showtimesByMovie);
+  } catch (err) {
+    console.log("Internal server error", err);
+    throw err;
+  }
+}
+
+
+// Function to get showtimes by film
+async function getShowtimesByFilm(filmId) {
+  try {
+    const query = `
+      SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price,
+             m.movie_id, m.title, m.poster, m.description, m.genre, m.release_date,
+             c.name AS cinema_name,
+             c.location AS cinema_location,
+             c.country AS cinema_country,
+             c.images AS cinema_images,
+             r.quality AS room_quality,
+             r.name AS room_name
+      FROM showtimes s
+      JOIN movies m ON s.movie_id = m.movie_id
+      JOIN cinemas c ON s.cinema_id = c.cinema_id
+      JOIN rooms r ON s.room_id = r.room_id
+      WHERE m.movie_id = $1
+      ORDER BY s.day DESC;
+    `;
+    const result = await DB.query(query, [filmId]);
+
+    const showtimesByMovie = {};
+    result.rows.forEach(row => {
+      if (!showtimesByMovie[row.movie_id]) {
+        showtimesByMovie[row.movie_id] = {
+          movie_id: row.movie_id,
+          title: row.title,
+          poster: row.poster,
+          description: row.description,
+          genre: row.genre,
+          release_date: row.release_date,
+          cinema_name: row.cinema_name,
+          cinema_location: row.cinema_location,
+          cinema_country: row.cinema_country,
+          cinema_images: row.cinema_images,
+          showtimes: []
+        };
+      }
+      showtimesByMovie[row.movie_id].showtimes.push({
+        showtimes_id: row.showtimes_id,
+        day: row.day,
+        start_time: row.start_time,
+        end_time: row.end_time,
+        price: row.price,
+        quality: row.room_quality,
+        room_name: row.room_name // Ajout du nom de la salle
+      });
+    });
+
+    return Object.values(showtimesByMovie);
+  } catch (err) {
+    console.log("Internal server error", err);
+    throw err;
+  }
+}
+
+
 // Function to get showtimes by cinema
 async function getShowtimesByCinema(cinemaId) {
   try {
@@ -356,6 +471,8 @@ async function deleteShowtimesById(req, res) {
 module.exports = {
   getShowtimes,
   getShowtimesByCinema,
+  getShowtimesByCinemaAndFilm,
+  getShowtimesByFilm,
   getShowtimesWithMovies,
   getShowtimesById,
   postShowtimes,

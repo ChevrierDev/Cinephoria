@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <link rel="icon" href="../images/logo-blanc.png" />
-    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link
       type="text/css"
       rel="stylesheet"
@@ -15,10 +15,11 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
     ></script>
-    <script type="text/javascript" defer src="../js/main.js"></script>
-    <script type="text/javascript" defer src="../js/swipper.js"></script>
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/activeLink.js" defer></script>
+    <script type="text/javascript" defer src="/js/main.js"></script>
+    <script type="text/javascript" defer src="/js/swipper.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="/js/choose-session.js"></script>
+    <script src="/js/activeLink.js" defer></script>
     <style>
    
   </style>
@@ -37,14 +38,14 @@
             <!-- Slides -->
             <div class="swiper-slide">
               <img
-                src="../images/Bannière/gabriel-dizzi-WPXxp36tkHQ-unsplash.jpg"
+                src="/uploads/<%= film.banner %>"
                 alt="photo header"
                 class="object-cover w-full h-full"
               />
             </div>
             <div class="swiper-slide">
               <img
-                src="../images/Bannière/michel-caicedo-9cqLeJoS46w-unsplash.jpg"
+                src="/uploads/<%= film.poster %>"
                 alt="photo header"
                 class="object-cover w-full h-full"
               />
@@ -61,7 +62,7 @@
         <div class="container flex flex-col h-full  w-[40vw] justify-start items-start space-y-6 py-8">
           <!-- movie title -->
           <h1 class="font-arvo text-white font-bold text-4xl">
-            Blade Runner
+            <%= film.title %>
           </h1>
 
           <!-- movie score button-->
@@ -85,27 +86,27 @@
             </div>
 
             <p class="font-arvo text-white font-bold">1h31</p>
-            <p class="font-arvo text-white font-bold">Science-fiction</p>
+            <p class="font-arvo text-white font-bold"><%= film.genre %></p>
 
           </div>
 
           <div class="container text-nowrap flex flex-col text-xs">
-            <p class="font-arvo text-white font-bold">Sortie : 01 mai 2024</p>
-            <p class="font-arvo text-white font-bold">Avec Ryan Gosling, Harrison Ford, de Denis Villeneuve </p>
+            <p class="font-arvo text-white font-bold">Sortie : <%= new Date(film.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+            <p class="font-arvo text-white font-bold">Avec <%= film.casting %> </p>
           </div>
 
           <div class="container">
-            <p class="font-arvo text-white text-xs w-[50%]">
-              En 2049, la société est fragilisée par les nombreuses tensions entre les humains et leurs esclaves créés par bio-ingénierie. L'officier K est un blade runner: il fait partie d'une force...
+            <p class="font-arvo text-white text-xs w-[80%]">
+              <%= film.description %>
             </p>
           </div>
 
           <!-- movie reservation button -->
-          <button class="w-36 h-14  cursor-none bg-goldOne p-1 space-x-2 flex items-center justify-center ease-out">
+          <div class="w-36 h-14  cursor-none bg-goldOne p-1 space-x-2 flex items-center justify-center ease-out hidden">
             <p class="font-arvo text-white text-xl font-bold">
               Séance  : 15€
             </p>
-          </button>
+          </div>
 
         </div>
 
@@ -136,7 +137,7 @@
 
         <div class="container flex pl-20 space-x-5 items-center justify-start w-full">
           <h1 class="font-arvo text-blueOne font-bold text-2xl">
-            Cinéphoria Les Halles
+            <%= cinema.name %>
           </h1>
           <!-- filter -->
           <form action="" class="space-x-3">
@@ -171,6 +172,9 @@
       </section>
       
     </main>
+
+    <input type="hidden" id="cinema-id" value="<%= cinema.cinema_id %>">
+    <input type="hidden" id="film-id" value="<%= film.movie_id %>">
 
     
     <!-- footer section -->
