@@ -37,8 +37,6 @@ filmsRoutes.get("/", async (req, res) => {
     const decLastMovies = decodeData(lastMovies);
     const decMovies = decodeData(movies);
     const decShowtimes = decodeData(showtimes);
-
-    // Filtrer les films
     const filteredMovies = filterMovies(decLastMovies, genres, days, qualities);
     const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities);
 
