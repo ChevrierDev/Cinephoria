@@ -11,6 +11,9 @@ const {
 } = require("../../controllers/showtimes/showtimes.controllers");
 const { getCinemas } = require("../../controllers/cinemas/cinemas.controllers");
 const decodeData = require("../../services/decodeData.services");
+const {
+  filterMovies
+} = require('../../services/filterMoviesService')
 
 filmsRoutes.get("/", async (req, res) => {
   try {
@@ -29,12 +32,17 @@ filmsRoutes.get("/", async (req, res) => {
     const decLastMovies = decodeData(lastMovies);
     const decMovies = decodeData(movies);
     const decShowtimes = decodeData(showtimes);
+
+    // Filtrer les films
+    const filteredMovies = filterMovies(decLastMovies, genres, days, qualities);
+    const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities)
+
     res.render("layouts/films", {
       title: "Les derniers films disponible.",
-      lastMovies: decLastMovies,
+      lastMovies: filteredMovies,
       cinemas: cinemas,
       showtimes: decShowtimes,
-      movies: decMovies,
+      movies: filterCurrentMovies,
       cinemaId: cinemaId || "",
       currentLocation: req.path,
     });
@@ -43,6 +51,7 @@ filmsRoutes.get("/", async (req, res) => {
     res.status(500).render("error", { error: "Internal server error" });
   }
 });
+
 
 filmsRoutes.get("/disponibiliter", (req, res) => {
   res.render("film/movie-availability", {
