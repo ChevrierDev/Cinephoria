@@ -267,9 +267,9 @@ async function getJoinInfoShowtimesById(req, res) {
     const id = req.params.id;
     const query = `
       SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price,
-             m.title AS movie_title, m.poster AS movie_poster, m.duration AS movie_duration, m.banner AS movie_banner, m.video AS movie_trailer, m.description AS movie_description, m.genre AS movie_genre, m.release_date AS movie_release_date,
-             c.name AS cinema_name, c.location AS cinema_location, c.country AS cinema_country, c.images AS cinema_images,
-             r.name AS room_name, r.quality AS room_quality
+             m.title AS movie_title, m.poster AS movie_poster, m.duration AS movie_duration, m.banner AS movie_banner, m.video AS movie_trailer, m.description AS movie_description,m.movie_id AS movie_id, m.genre AS movie_genre, m.release_date AS movie_release_date,
+             c.name AS cinema_name,c.cinema_id AS cinema_id, c.location AS cinema_location, c.country AS cinema_country, c.images AS cinema_images,
+             r.name AS room_name,r.room_id AS room_id, r.quality AS room_quality
       FROM showtimes s
       JOIN movies m ON s.movie_id = m.movie_id
       JOIN cinemas c ON s.cinema_id = c.cinema_id

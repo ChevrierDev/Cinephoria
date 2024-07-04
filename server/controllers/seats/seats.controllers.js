@@ -39,6 +39,14 @@ async function getSeatsById(req, res) {
   }
 }
 
+async function getSeatsByRoomId(roomId) {
+  const query = "SELECT * FROM seats WHERE room_id = $1";
+  const parameter = [roomId];
+  const result = await DB.query(query, parameter); 
+  return result.rows;
+}
+
+
 // Function to create a new seat
 async function postSeats(req, res) {
   try {
@@ -126,6 +134,7 @@ async function deleteSeatsById(req, res) {
 module.exports = {
     getSeats,
     getSeatsById,
+    getSeatsByRoomId,
     postSeats,
     deleteSeatsById,
     updateSeatsById,
