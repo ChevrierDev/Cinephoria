@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/path/to/your/css/styles.css">
+    <style>
+    
+    </style>
 </head>
 <body>
-      <!-- chairs -->
-      <div class="chair">
-        <% let currentRow = ''; %>
-        <% seats.forEach((seat, index) => { %>
-          <% if (seat && seat.seat_label) { %>
-            <% if (seat.seat_label[0] !== currentRow) { %>
-              <% if (currentRow) { %>
-                <span><%= currentRow %></span>
-                </div> <!-- Close previous row div -->
-              <% } %>
-              <% currentRow = seat.seat_label[0]; %>
-              <div class="row relative space-x-0.5 md:-space-x-10">
-                <span><%= currentRow %></span>
-            <% } %>
-            <li class="seat"><%= seat.seat_label %></li>
-            <% if (index === seats.length - 1) { %>
-              <span><%= currentRow %></span>
-              </div> <!-- Close current row div -->
-            <% } %>
+  <!-- chairs -->
+  <div class="chair" data-reserved-seats='<%= JSON.stringify(reservedSeats) %>' data-total-seats="<%= seatsCount %>">
+    <% let currentRow = ''; %>
+    <% seats.forEach((seat, index) => { %>
+      <% if (seat && seat.seat_label) { %>
+        <% if (seat.seat_label[0] !== currentRow) { %>
+          <% if (currentRow) { %>
+            <span><%= currentRow %></span>
+            </div> <!-- Close previous row div -->
           <% } %>
-        <% }); %>
-      </div>
+          <% currentRow = seat.seat_label[0]; %>
+          <div class="row relative space-x-0.5 md:-space-x-10">
+          <span><%= currentRow %></span>
+        <% } %>
+        <li class="seat" data-id="<%= seat.seat_id %>" data-label="<%= seat.seat_label %>"><%= seat.seat_label %></li>
+        <% if (index === seats.length - 1) { %>
+          <span><%= currentRow %></span>
+          </div> <!-- Close current row div -->
+        <% } %>
+      <% } %>
+    <% }); %>
+  </div>
 </body>
 </html>

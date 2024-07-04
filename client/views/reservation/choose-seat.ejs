@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/activeLink.js" defer></script>
     <script src="/js/choose-seat.js" defer></script>
+    <script src="/js/reserve-seat.js" defer></script>
+    <script src="/js/employee/succesMessage.js" defer></script>
     <style>
    
   </style>
@@ -178,11 +180,13 @@
         <!-- choose your seat section -->
         <section class=" h-full md:mx-auto md:w-[80%] md:pt-28  relative">
           
-    
-            
+           <div class="container hidden w-fit mx-auto" id="message">
+    <p id="text" class="text-sm font-arvo font-bold text-green-600"></p>
+</div>
+
             <div class="container md:pt-10 pt-20  flex flex-col items-center mx-auto w-full space-y-7">
                 <h1 class="font-arvo font-bold text-blueOne text-4xl">Sélectionnez vos places</h1>
-                <p class="font-arvo text-blueOne text-xl">160 places libres</p>
+                <p class="font-arvo text-blueOne text-xl" id="totalSeats-count"><%= seatsCount - reservedSeats.length %> places libres</p>
             </div>
 
             <!-- seat map and selection -->
@@ -212,15 +216,13 @@
                 <!-- VERIFY NUMBER OF SEAT -->
                 <button id="view-seat">
                     <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
-                        <p class="font-arvo ">1 place réservée</p>
+                        <p class="font-arvo seats-count">0 place réservée</p>
                         <div class="mt-0.5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
                         </div>
                     </div>
                 </button>
 
-                <!-- CURRENT SEAT CHOOSEN -->
-                <p class="font-arvo text-blueOne">B15</p>
             </div>
 
             <!-- RESERVATION CONFIRMATION BUTTON -->
@@ -239,12 +241,11 @@
             <!-- VERIFY NUMBER OF SEAT -->
             <div id="view-seat">
                 <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
-                    <p class="font-arvo ">1 place réservée</p>
+                    <p class="font-arvo seats-count" >0 place réservée</p>
                 </div>
             </div>
 
-            <!-- CURRENT SEAT CHOOSEN -->
-            <p class="font-arvo text-blueOne">B15</p>
+     
         </div>
 
         <!-- RESERVATION CONFIRMATION BUTTON -->
@@ -257,6 +258,10 @@
 
     <!-- total amount plus reserve Now menu  -->
     <div class="absolute h-full w-full hidden  bg-white md:w-[50%] space-y-7 px-10 py-7 md:h-[85%] bottom-50 md:top-2/3 rounded-xl left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" id="reservation-details">
+        <!-- Error message container -->
+        <div id="error-message" class="text-redOne font-arvo text-center mt-2 hidden">
+        Vous devez sélectionner au moins un siège pour réserver.
+        </div>
         <!-- Current session info -->
         <div class="w-full space-y-2 flex flex-col text-blueOne font-arvo items-center justify-center">
             <h1 class="font-bold text-xl"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h1>
@@ -266,6 +271,7 @@
         <!-- current movie info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
             <div class="flex flex-col gap-y-3 px-4 py-5">
+                
                 <h1 class="font-bold text-3xl"><%= showtimes.movie_title %></h1>
                 <div class="flex items-center space-x-4 justify-between">
                     <p>Durée: <%= showtimes.movie_duration %> min</p>
@@ -286,6 +292,8 @@
 
         <!-- general cinema and place info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
+           
+
             <div class="flex flex-col gap-y-3 px-4 py-5">
                 <h1 class="font-bold text-3xl"><%= showtimes.cinema_name %></h1>
                 <div class="flex items-center space-x-4 justify-between">
@@ -303,7 +311,7 @@
 
         <!-- total session amount -->
         <div class="w-full flex text-blueOne font-arvo justify-center">
-                <h1 class="font-bold text-2xl">TOTAL A RÉGLER : <%= showtimes.price %> €</h1>
+            <h1 class="font-bold text-2xl" id="total-price" data-price="<%= showtimes.price %>"> </h1>
         </div>
 
         <!-- go to payment button -->
@@ -315,6 +323,10 @@
         </div>
 
     </div>
+
+    <input type="hidden" id="user_id" value="<%= user.user_id %>">
+    <input type="hidden" id="cinema_id" value="<%= showtimes.cinema_id %>">
+    <input type="hidden" id="showtimes_id" value="<%= showtimes.showtimes_id %>">
 
 </body>
     

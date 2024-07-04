@@ -117,7 +117,7 @@
 }
 
 /* Javascript class Colors */
-.chair .booked{
+.chair .free{
   background: gray  !important;
 }
 
@@ -125,6 +125,12 @@
   background: greenyellow  !important;
   color: black !important;
 }
+
+.chair .booked{
+  background: #fd6565 !important;
+  color: black !important;
+}
+
 
 .details{
   width: 100%;

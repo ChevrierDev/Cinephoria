@@ -10,7 +10,9 @@ const {
   getShowtimesByFilm,
 } = require("../../controllers/showtimes/showtimes.controllers");
 const {
-  getSeatsByRoomId
+  getSeatsByRoomId,
+  getReservedSeats,
+  getSeatCountByRoomId
 } = require('../../controllers/seats/seats.controllers')
 const {
   getCinemas,
@@ -194,10 +196,14 @@ reservationRoutes.get(
     const decShowtimes = decodeData(showtimes);
     const roomId = decShowtimes.room_id;
     const seats  = await getSeatsByRoomId(roomId)
+    const seatsCount = await getSeatCountByRoomId(roomId);
+    const reservedSeats = await getReservedSeats(decShowtimes.showtimes_id);
     res.render("reservation/choose-seat", {
       title: "choisissez des places pour votre scéance.",
       showtimes: decShowtimes,
-      seats: seats
+      seats: seats,
+      reservedSeats: reservedSeats,
+      seatsCount: seatsCount
     });
   }
 );

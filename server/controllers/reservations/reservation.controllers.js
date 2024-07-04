@@ -39,38 +39,35 @@ async function getReservationById(req, res) {
 }
 
 // Function to create a new reservation
-// Note: Bug to fix (unable to post)
 async function postReservation(req, res) {
   try {
     const {
       user_id,
       cinema_id,
       showtimes_id,
-      seats_reserved,
-      status
+      seats_reserved
     } = req.body;
 
-    // Validate the request body fields
     if (
       !user_id ||
       !cinema_id ||
       !showtimes_id ||
-      !seats_reserved ||
-      typeof status !== "boolean"
+      !seats_reserved
     ) {
       return res
         .status(400)
         .json({ error: "You must enter all required fields!" });
     }
 
-    const query =
-      "INSERT INTO reservations (user_id, cinema_id, showtimes_id, seats_reserved, status) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const query = `
+      INSERT INTO reservations (user_id, cinema_id, showtimes_id, seats_reserved, status, reserved_at) 
+      VALUES ($1, $2, $3, $4::jsonb, false, NOW()) 
+      RETURNING *`;
     const result = await DB.query(query, [
       user_id,
       cinema_id,
       showtimes_id,
-      seats_reserved,
-      status,
+      JSON.stringify(seats_reserved) 
     ]);
 
     // Send the newly created reservation as response
@@ -80,7 +77,6 @@ async function postReservation(req, res) {
     res.status(500).json({ error: "Internal server error!" });
   }
 }
-
 // Function to update a reservation by ID
 async function updateReservationById(req, res) {
     try {
