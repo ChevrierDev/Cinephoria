@@ -1852,6 +1852,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity));
 }
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
 .text-red-700{
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -2333,6 +2337,15 @@ video {
 
 .hover\:animate-bg-fill-animation:hover{
   animation: bg-fill 1.5s forwards;
+}
+
+.hover\:border-b-4:hover{
+  border-bottom-width: 4px;
+}
+
+.hover\:border-b-goldOne:hover{
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(227 176 75 / var(--tw-border-opacity));
 }
 
 .hover\:bg-goldOne:hover{

@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  
-  <!-- select days section -->
-  <div class="swiper choose-days-slider h-[15vh]">
-    <div class="swiper-wrapper m-0 p-0">
-      <% sessions.forEach(session => { %>
-        <% session.showtimes.forEach(showtime => { %>
-          <% const day = new Date(showtime.day); %>
-          <div class="swiper-slide m-0 p-0">
-            <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300 day-button" data-date="<%= day.toISOString().split('T')[0] %>">
-              <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-                <p class="font-arvo w-48 text-center font-bold text-blueOne"><%= day.toLocaleDateString('fr-FR', { weekday: 'short' }) %>.</p>
-                <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne"><%= day.getDate() %></p>
-                <p class="font-arvo w-48 text-center font-bold text-blueOne"><%= day.toLocaleDateString('fr-FR', { month: 'short' }) %></p>
-              </div>
-            </button>
-          </div>
-        <% }) %>
+
+  <!-- Swiper component for selecting days -->
+  <div class="swiper choose-days-slider h-[15vh]" data-sessions='<%= JSON.stringify(sessions) %>'>
+    <div class="swiper-wrapper m-0 p-0" id="day-buttons-container">
+      <% uniqueDates.forEach(date => { %>
+        <div class="swiper-slide m-0 p-0">
+          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300 day-button" data-date="<%= date %>">
+            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
+              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { weekday: 'short' }) %>.</p>
+              <p class="font-arvo font-bold w-48 text-center text-2xl"><%= new Date(date).getDate() %></p>
+              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { month: 'short' }) %></p>
+            </div>
+          </button>
+        </div>
       <% }) %>
     </div>
-    <!-- Boutons de navigation Swiper -->
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </div>
+
+  <!-- Other content of your page -->
 
 </body>
 </html>

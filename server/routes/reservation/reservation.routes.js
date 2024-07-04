@@ -1,18 +1,17 @@
 const express = require("express");
 const reservationRoutes = express.Router();
+const moment = require('moment');
 const {
   getShowtimesByCinema,
   getShowtimes,
+  getShowtimesByCinemaAndFilm,
+  getShowtimesByFilm,
 } = require("../../controllers/showtimes/showtimes.controllers");
 const {
   getCinemas,
   getCinemaById,
 } = require("../../controllers/cinemas/cinemas.controllers");
 const { getMovieById } = require("../../controllers/movies/movies.controllers");
-const {
-  getShowtimesByCinemaAndFilm,
-  getShowtimesByFilm,
-} = require("../../controllers/showtimes/showtimes.controllers");
 const { filterShowtimes } = require("../../services/filterMoviesService");
 const decodeData = require("../../services/decodeData.services");
 
@@ -33,12 +32,14 @@ reservationRoutes.get("/", async (req, res) => {
 
     const cinemas = await getCinemas(req, res);
     const decShowtimes = decodeData(showtimes);
+
     res.render("layouts/reservation", {
       title: "Réserver un film.",
-      cinemas: cinemas,
-      showtimes: decShowtimes,
+      cinemas: cinemas || [], // Passez un tableau vide si aucun cinéma n'est trouvé
+      showtimes: decShowtimes || [], 
       cinemaId: cinemaId || "",
       currentLocation: req.path,
+      message: showtimes.length === 0 ? "Aucune séance disponible." : ""
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);
@@ -52,17 +53,49 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
 
   try {
     const cinema = await getCinemaById({ params: { id: cinemaId } }, res);
-    if (!cinema) return;
+    if (!cinema) return res.status(404).render("error", { error: "Cinéma non trouvé" });
 
     const film = await getMovieById({ params: { id: filmId } }, res);
-    if (!film) return;
+    if (!film) return res.status(404).render("error", { error: "Film non trouvé" });
 
     const sessions = await getShowtimesByCinemaAndFilm(cinemaId, filmId);
 
-    // Trier les séances par date croissante
+    const groupedSessions = {};
+    const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+
     sessions.forEach((session) => {
-      session.showtimes.sort((a, b) => new Date(a.day) - new Date(b.day));
+      session.showtimes.forEach((showtime) => {
+        const localDay = moment(showtime.day, 'DD/MM/YYYY').toDate();
+        const date = localDay.toISOString().split('T')[0];
+        const startDateTimeStr = `${date}T${showtime.start_time}Z`;
+        const endDateTimeStr = `${date}T${showtime.end_time}Z`;
+
+        const startDateTime = new Date(startDateTimeStr);
+        const endDateTime = new Date(endDateTimeStr);
+
+        if (isNaN(startDateTime.getTime()) || isNaN(endDateTime.getTime())) {
+          console.error("Invalid date or time value detected", { showtime });
+          throw new Error("Invalid date or time value");
+        }
+
+        if (!groupedSessions[date]) {
+          groupedSessions[date] = [];
+        }
+        groupedSessions[date].push({
+          ...showtime,
+          startDateTime,
+          endDateTime,
+          localDay,
+        });
+      });
     });
+
+    const uniqueSessions = Object.keys(groupedSessions).sort().map(date => ({
+      day: date,
+      showtimes: groupedSessions[date]
+    }));
+
+    const uniqueDates = Object.keys(groupedSessions).sort();
 
     const decFilm = decodeData(film);
 
@@ -70,13 +103,17 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
       title: "Choisir une séance pour votre film",
       cinema,
       film: decFilm,
-      sessions,
+      sessions: uniqueSessions,
+      uniqueDates: uniqueDates,
+      message: uniqueSessions.length === 0 ? "Aucune séance disponible pour cette date." : ""
     });
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
 
 
 reservationRoutes.get("/get-sessions", async (req, res) => {
@@ -124,7 +161,6 @@ reservationRoutes.get("/get-sessions", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 reservationRoutes.get("/login", (req, res) => {
   res.render("reservation/auth-page", {

@@ -1,23 +1,27 @@
 const DB = require("../../config/postgres.config");
+const moment = require('moment');
+const momentTimezone = require('moment-timezone');
+
+
 
 // Functions to get all showtimes
-async function getShowtimes(req, res) {
+async function getShowtimes() {
   try {
     const query = "SELECT * FROM showtimes";
     const results = await DB.query(query);
 
     // Check if any showtimes are found
     if (results.rows.length <= 0) {
-      res.status(404).json({ message: "No showtimes found !" });
-      return;
+      return []; 
     }
     // Send the found showtimes as response
-   return results.rows
+    return results.rows;
   } catch (err) {
     console.log(err);
-    res.status(500).json("Internal server error !");
+    throw new Error("Internal server error"); 
   }
 }
+
 
 // Function to get showtimes by cinema and room
 async function getShowtimesByCinemaAndRoom(req, res) {
@@ -45,7 +49,6 @@ async function getShowtimesByCinemaAndRoom(req, res) {
   }
 }
 
-// Function to get showtimes by cinema and film
 async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
   try {
     const query = `
@@ -62,12 +65,12 @@ async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
       JOIN cinemas c ON s.cinema_id = c.cinema_id
       JOIN rooms r ON s.room_id = r.room_id
       WHERE s.cinema_id = $1 AND m.movie_id = $2
-      ORDER BY s.day DESC;
+      ORDER BY s.day ASC, s.start_time ASC;
     `;
     const result = await DB.query(query, [cinemaId, filmId]);
 
-    // Regroup showtimes by movie
     const showtimesByMovie = {};
+
     result.rows.forEach(row => {
       if (!showtimesByMovie[row.movie_id]) {
         showtimesByMovie[row.movie_id] = {
@@ -84,14 +87,38 @@ async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
           showtimes: []
         };
       }
+
+      // Utilisation de moment.js pour vérifier et formater les dates et heures
+      const day = moment(row.day);
+      const startDateTime = moment(row.day).set({
+        hour: parseInt(row.start_time.split(':')[0]),
+        minute: parseInt(row.start_time.split(':')[1]),
+        second: parseInt(row.start_time.split(':')[2])
+      });
+      const endDateTime = moment(row.day).set({
+        hour: parseInt(row.end_time.split(':')[0]),
+        minute: parseInt(row.end_time.split(':')[1]),
+        second: parseInt(row.end_time.split(':')[2])
+      });
+
+      if (!day.isValid() || !startDateTime.isValid() || !endDateTime.isValid()) {
+        console.error("Invalid date or time value detected", { row });
+        throw new Error("Invalid date or time value");
+      }
+
+      // Formater les dates et heures pour l'affichage
+      const localDay = day.format('DD/MM/YYYY');
+      const localStartTime = startDateTime.format('HH:mm');
+      const localEndTime = endDateTime.format('HH:mm');
+
       showtimesByMovie[row.movie_id].showtimes.push({
         showtimes_id: row.showtimes_id,
-        day: row.day,
-        start_time: row.start_time,
-        end_time: row.end_time,
+        day: localDay,
+        start_time: localStartTime,
+        end_time: localEndTime,
         price: row.price,
         quality: row.room_quality,
-        room: row.room_name // Ensure room name is included
+        room_name: row.room_name
       });
     });
 
@@ -101,7 +128,6 @@ async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
     throw err;
   }
 }
-
 
 // Function to get showtimes by film
 async function getShowtimesByFilm(filmId) {
