@@ -228,7 +228,6 @@ background: greenyellow
   pointer-events: auto; 
   z-index: 100; }
 
-
 #movie {
   z-index: 100;
   position: fixed; 
@@ -278,4 +277,26 @@ background: greenyellow
 
 .selected-day {
   border-bottom: 4px solid #DAA520
+}
+
+.session-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#availability-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+#availability-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#reservation-button-container {
+  display: none;
+  align-self: flex-start;
 }

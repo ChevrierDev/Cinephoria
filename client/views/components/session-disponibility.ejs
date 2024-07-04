@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Réservation de Séances</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <button id="session-availability" class=" flex flex-col gap-y-4 md:space-x-4  md:flex-row">
-        <!-- <a href="/reservation/choisir-place">
-            <div class="container flex justify-center items-center md:w-[15vw] w-[40vw] bg-whiteOne shadow-xl h-[20vh] hover:border-b-4 hover:border-b-goldOne mb-7 md:mb-0 mx-auto md:mx-0 cursor-pointer group">
-                  <h3 class="font-arvo font-bold text-lg text-blueOne group-hover:text-goldOne">
-                    Réserver
-                  </h3>   
-            </div>
-        </a> -->
-    </button>
-  
+    <div id="availability-wrapper" class="gap-x-7">
+        <div id="availability-container">
+            <!-- Les séances seront ajoutées ici par JavaScript -->
+        </div>
+        <div id="reservation-button-container">
+            <a id="reservation-link" href="/reservation/choisir-place">
+                <div id="reservation-button" class="container flex justify-center items-center md:w-[15vw] w-[40vw] bg-whiteOne shadow-xl h-[20vh] hover:border-b-4 hover:border-b-goldOne mb-7 md:mb-0 mx-auto md:mx-0 cursor-pointer group">
+                    <h3 class="font-arvo font-bold text-lg text-blueOne group-hover:text-goldOne">
+                        Réserver
+                    </h3>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>

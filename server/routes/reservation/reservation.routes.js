@@ -168,7 +168,7 @@ reservationRoutes.get("/login", (req, res) => {
   });
 });
 
-reservationRoutes.get("/choisir-place", (req, res) => {
+reservationRoutes.get("/choisir-place/:id", (req, res) => {
   res.render("reservation/choose-seat", {
     title: "choisissez des places pour votre scéance.",
   });

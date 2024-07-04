@@ -34,7 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const dayButtons = document.querySelectorAll(".day-button");
-  const availabilityContainer = document.querySelector("#session-availability");
+  const availabilityContainer = document.querySelector("#availability-container");
+  const reservationButtonContainer = document.getElementById('reservation-button-container');
+  const reservationLink = document.getElementById('reservation-link');
+  let selectedShowtimeId = null;
 
   dayButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -72,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
               "shadow-xl",
               "h-[20vh]"
             );
+            sessionDiv.dataset.showtimeId = showtime.showtimes_id; // Ajouter l'ID de la séance comme data attribute
 
-            // Utilisez simplement les heures de début et de fin
             const startTime = new Date(`1970-01-01T${showtime.start_time}Z`);
             const endTime = new Date(`1970-01-01T${showtime.end_time}Z`);
 
@@ -91,32 +94,32 @@ document.addEventListener("DOMContentLoaded", () => {
                   <p>${showtime.room_name}</p>
                 </div>
               </div>
-
-              
             `;
 
             availabilityContainer.appendChild(sessionDiv);
 
             sessionDiv.addEventListener("click", (e) => {
               e.preventDefault();
-              if (sessionDiv.classList.contains("selected-day")) {
-                sessionDiv.classList.remove("selected-day");
-              } else {
-                document.querySelectorAll(".container.selected-day").forEach((selectedDiv) => {
-                  selectedDiv.classList.remove("selected-day");
-                });
-                sessionDiv.classList.add("selected-day");
-              }
+              selectedShowtimeId = sessionDiv.dataset.showtimeId; // Enregistrer l'ID de la séance
+              console.log(selectedShowtimeId); // Log the showtime ID
+              document.querySelectorAll(".container.selected-day").forEach((selectedDiv) => {
+                selectedDiv.classList.remove("selected-day");
+              });
+              sessionDiv.classList.add("selected-day");
+              reservationLink.href = `/reservation/choisir-place/${selectedShowtimeId}`; // Mettre à jour le href
             });
           });
         });
 
-        // Réinitialiser et redémarrer le Swiper après mise à jour du contenu
+        // Afficher le bouton "Réserver" après avoir mis à jour les séances
+        reservationButtonContainer.style.display = "flex";
+
         swiper.update();
       })
       .catch((error) => {
         console.error("Error fetching sessions:", error);
         availabilityContainer.innerHTML = "<p class='text-red-500 font-bold'>Aucune séance trouvée pour cette date.</p>";
+        reservationButtonContainer.style.display = "none"; // Masquer le bouton "Réserver" en cas d'erreur
       });
   }
 });
