@@ -163,13 +163,13 @@
 
             <div class=" px-5 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Date</h1>
-                <h2 class="font-arvo text-white text-2xl font-bold">Mardi 07 Mai 2024</h2>
+                <h2 class="font-arvo text-white text-2xl font-bold"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h2>
             </div>
 
             <div class=" px-5 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Scéance</h1>
-                <h2 class="font-arvo text-white text-2xl font-bold">19:45 VF</h2>
-                <p class="font-arvo font-light text-white text-xs">Fin prévue à 21:16</p>
+                <h2 class="font-arvo text-white text-2xl font-bold"><%= showtimes.start_time.substring(0, 5) %> VF</h2>
+                <p class="font-arvo font-light text-white text-xs">Fin prévue à <%= showtimes.end_time.substring(0, 5) %></p>
             </div>
 
         </section>
@@ -234,7 +234,7 @@
     </main>
 
     <!-- DESKTOP RESERVATION CONFIRMATION -->
-    <footer class=" w-[80%] ml-[20%] mt-[75.5px] hidden md:block">
+    <footer class=" w-[80%] ml-[20%] mt-[76px] hidden md:block">
         <div class="w-full flex items-center justify-between py-7 px-7">
             <!-- VERIFY NUMBER OF SEAT -->
             <button id="view-seat">
@@ -262,27 +262,27 @@
     <div class="absolute h-full w-full hidden  bg-white md:w-[50%] space-y-7 px-10 py-7 md:h-[85%] bottom-50 md:top-2/3 rounded-xl left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" id="reservation-details">
         <!-- Current session info -->
         <div class="w-full space-y-2 flex flex-col text-blueOne font-arvo items-center justify-center">
-            <h1 class="font-bold text-xl">Mardi 7 Mai</h1>
-            <h2 class="font-bold text-lg">19:45</h2>
+            <h1 class="font-bold text-xl"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h1>
+            <h2 class="font-bold text-lg"><%= showtimes.start_time.substring(0, 5) %></h2>
             <p class="font-light text-sm">VF</p>
         </div>
         <!-- current movie info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
             <div class="flex flex-col gap-y-3 px-4 py-5">
-                <h1 class="font-bold text-3xl">Blade Runner</h1>
+                <h1 class="font-bold text-3xl"><%= showtimes.movie_title %></h1>
                 <div class="flex items-center space-x-4 justify-between">
-                    <p>Durée: 1h31</p>
-                    <p class="bg-blueOne/20 px-1">Fin prévue à 21h36</p>
+                    <p>Durée: <%= showtimes.movie_duration %> min</p>
+                    <p class="bg-blueOne/20 px-1">Fin prévue à <%= showtimes.end_time.substring(0, 5) %></p>
                 </div>
             </div>
             <!-- movie picture and place -->
             <div class="flex items-center space-x-4">
                 <div class="flex space-y-1 items-center justify-center flex-col">
                     <h1 class="font-bold text-xl">1 Place</h1>
-                    <h1 class="font-bold text-blueOne/60 text-xl">4K</h1>
+                    <h1 class="font-bold text-blueOne/60 text-xl"><%= showtimes.room_quality %></h1>
                 </div>
                 <div class="h-full w-24 ">
-                    <img src="../images/Films/blade-runner.jpeg" alt="Movie picture" class="w-full h-full object-cover">
+                    <img src="/uploads/<%= showtimes.movie_poster %>" alt="Movie picture" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -290,23 +290,23 @@
         <!-- general cinema and place info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
             <div class="flex flex-col gap-y-3 px-4 py-5">
-                <h1 class="font-bold text-3xl">Cinéphoria Les Halles</h1>
+                <h1 class="font-bold text-3xl"><%= showtimes.cinema_name %></h1>
                 <div class="flex items-center space-x-4 justify-between">
-                    <p>Paris 75001</p>
+                    <p><%= showtimes.cinema_location %></p>
                 </div>
             </div>
             <!-- movie picture and place -->
             <div class="flex items-center space-x-4">
                 <div class="flex items-center justify-center flex-col p-2 mr-6 border rounded-sm bg-goldOne">
                     <h1 class="text-xl">Salle</h1>
-                    <h1 class="font-bold text-xl">8</h1>
+                    <h1 class="font-bold text-xl"><%= showtimes.room_name %></h1>
                 </div>
             </div>
         </div>
 
         <!-- total session amount -->
         <div class="w-full flex text-blueOne font-arvo justify-center">
-                <h1 class="font-bold text-2xl">TOTAL A RÉGLER : 15 €</h1>
+                <h1 class="font-bold text-2xl">TOTAL A RÉGLER : <%= showtimes.price %> €</h1>
         </div>
 
         <!-- go to payment button -->
