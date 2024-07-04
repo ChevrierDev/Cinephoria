@@ -7,11 +7,11 @@
 </head>
 <body>
     <form class="font-arvo px-10 w-full" action="/api/v1/auth" method="post">
-
+        <input type="hidden" name="redirect" value="<%= redirectUrl %>">
         <div class="flex flex-col">
             <div class="">
                 <div class="w-full border border-gray-300 p-3 rounded-sm bg-whiteOne mb-3">
-                    <input class="bg-whiteOne outline-none flex-1 w-full placeholder:text-blueOne" type="text" id="email" name="email" placeholder="E-mail*" Prequired>
+                    <input class="bg-whiteOne outline-none flex-1 w-full placeholder:text-blueOne" type="text" id="email" name="email" placeholder="E-mail*" required>
                 </div>
             </div>
             <div class="">
@@ -20,12 +20,10 @@
                 </div>
             </div>
         </div>
-
         <div class="text-blueOne flex items-center font-semibold text-xs mb-16">
             <input class="bg-whiteOne m-0 placeholder:text-blueOne mr-1" type="checkbox" id="remember" name="remember">
             <label for="remember"></label> SE SOUVENIR DE MOI
         </div>
-        
         <div class="flex justify-center">
             <button class="bg-redOne text-white py-2 px-4 w-52 rounded-sm hover:scale-105 hover:bg-red-500 duration-200">JE ME CONNECTE</button>
         </div>

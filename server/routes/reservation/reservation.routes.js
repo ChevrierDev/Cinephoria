@@ -1,9 +1,11 @@
 const express = require("express");
 const reservationRoutes = express.Router();
-const moment = require('moment');
+const moment = require("moment");
 const {
   getShowtimesByCinema,
   getShowtimes,
+  getShowtimesById,
+  getJoinInfoShowtimesById,
   getShowtimesByCinemaAndFilm,
   getShowtimesByFilm,
 } = require("../../controllers/showtimes/showtimes.controllers");
@@ -14,6 +16,9 @@ const {
 const { getMovieById } = require("../../controllers/movies/movies.controllers");
 const { filterShowtimes } = require("../../services/filterMoviesService");
 const decodeData = require("../../services/decodeData.services");
+const {
+  checkAuthenticated,
+} = require("../../middlewares/autorisation/autorisation");
 
 reservationRoutes.get("/", async (req, res) => {
   try {
@@ -36,10 +41,10 @@ reservationRoutes.get("/", async (req, res) => {
     res.render("layouts/reservation", {
       title: "Réserver un film.",
       cinemas: cinemas || [], // Passez un tableau vide si aucun cinéma n'est trouvé
-      showtimes: decShowtimes || [], 
+      showtimes: decShowtimes || [],
       cinemaId: cinemaId || "",
       currentLocation: req.path,
-      message: showtimes.length === 0 ? "Aucune séance disponible." : ""
+      message: showtimes.length === 0 ? "Aucune séance disponible." : "",
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);
@@ -53,10 +58,12 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
 
   try {
     const cinema = await getCinemaById({ params: { id: cinemaId } }, res);
-    if (!cinema) return res.status(404).render("error", { error: "Cinéma non trouvé" });
+    if (!cinema)
+      return res.status(404).render("error", { error: "Cinéma non trouvé" });
 
     const film = await getMovieById({ params: { id: filmId } }, res);
-    if (!film) return res.status(404).render("error", { error: "Film non trouvé" });
+    if (!film)
+      return res.status(404).render("error", { error: "Film non trouvé" });
 
     const sessions = await getShowtimesByCinemaAndFilm(cinemaId, filmId);
 
@@ -65,8 +72,8 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
 
     sessions.forEach((session) => {
       session.showtimes.forEach((showtime) => {
-        const localDay = moment(showtime.day, 'DD/MM/YYYY').toDate();
-        const date = localDay.toISOString().split('T')[0];
+        const localDay = moment(showtime.day, "DD/MM/YYYY").toDate();
+        const date = localDay.toISOString().split("T")[0];
         const startDateTimeStr = `${date}T${showtime.start_time}Z`;
         const endDateTimeStr = `${date}T${showtime.end_time}Z`;
 
@@ -90,10 +97,12 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
       });
     });
 
-    const uniqueSessions = Object.keys(groupedSessions).sort().map(date => ({
-      day: date,
-      showtimes: groupedSessions[date]
-    }));
+    const uniqueSessions = Object.keys(groupedSessions)
+      .sort()
+      .map((date) => ({
+        day: date,
+        showtimes: groupedSessions[date],
+      }));
 
     const uniqueDates = Object.keys(groupedSessions).sort();
 
@@ -105,16 +114,16 @@ reservationRoutes.get("/choisir-sceance/:cinemaId", async (req, res) => {
       film: decFilm,
       sessions: uniqueSessions,
       uniqueDates: uniqueDates,
-      message: uniqueSessions.length === 0 ? "Aucune séance disponible pour cette date." : ""
+      message:
+        uniqueSessions.length === 0
+          ? "Aucune séance disponible pour cette date."
+          : "",
     });
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
-
 
 reservationRoutes.get("/get-sessions", async (req, res) => {
   const date = req.query.date;
@@ -146,7 +155,7 @@ reservationRoutes.get("/get-sessions", async (req, res) => {
         showtimes: session.showtimes.filter(
           (showtime) =>
             new Date(showtime.day).toISOString().split("T")[0] === date
-        )
+        ),
       }))
       .filter((session) => session.showtimes.length > 0);
 
@@ -162,16 +171,30 @@ reservationRoutes.get("/get-sessions", async (req, res) => {
   }
 });
 
-reservationRoutes.get("/login", (req, res) => {
+reservationRoutes.get("/login/:id", async (req, res) => {
+  const redirectUrl = `/reservation/choisir-place/${req.params.id}`;
+  const showtimes = await getJoinInfoShowtimesById(req, res);
+  const decShowtimes = decodeData(showtimes);
+  console.log(decShowtimes);
   res.render("reservation/auth-page", {
     title: "Connectez-vous ou créer un compte.",
+    redirectUrl: redirectUrl,
+    showtimes: decShowtimes,
   });
 });
 
-reservationRoutes.get("/choisir-place/:id", (req, res) => {
-  res.render("reservation/choose-seat", {
-    title: "choisissez des places pour votre scéance.",
-  });
-});
+reservationRoutes.get(
+  "/choisir-place/:id",
+  checkAuthenticated,
+  async (req, res) => {
+    const showtimes = await getJoinInfoShowtimesById(req, res);
+    const decShowtimes = decodeData(showtimes);
+    console.log(decShowtimes)
+    res.render("reservation/choose-seat", {
+      title: "choisissez des places pour votre scéance.",
+      showtimes: decShowtimes,
+    });
+  }
+);
 
 module.exports = reservationRoutes;

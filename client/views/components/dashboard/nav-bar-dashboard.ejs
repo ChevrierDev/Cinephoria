@@ -20,7 +20,7 @@
         <li class="nav"><a href="/reservation">RÉSERVATION</a></li>
         <li class="nav"><a href="/contact">CONTACT</a></li>
         <% if (user && user.role === 'user') { %>
-          <li class="nav"><a href="/dashboard/users">MON ESPACE</a></li>
+          <li class="nav"><a href="/dashboard/user">MON ESPACE</a></li>
         <% } else if (user && user.role === 'employee') { %>
         <li class="nav"><a href="/dashboard/employee">INTRANET</a></li>
         <% } else if (user && user.role === 'admin') { %>

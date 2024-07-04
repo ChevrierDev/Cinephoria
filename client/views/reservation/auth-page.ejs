@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="icon" href="../images/logo-blanc.png" />
-    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link rel="icon" href="/images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link
       type="text/css"
       rel="stylesheet"
@@ -15,11 +15,11 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
     ></script>
-    <script type="text/javascript" defer src="../js/main.js"></script>
-    <script type="text/javascript" defer src="../js/swipper.js"></script>
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/form-switcher.js" defer></script>
-    <script src="../js/activeLink.js" defer></script>
+    <script type="text/javascript" defer src="/js/main.js"></script>
+    <script type="text/javascript" defer src="/js/swipper.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/form-switcher.js" defer></script>
+    <script src="/js/activeLink.js" defer></script>
     <style>
    
   </style>
@@ -38,7 +38,7 @@
                     <!-- Slides -->
                     <div class="swiper-slide">
                         <img
-                            src="../images/films/blade-runner.jpeg"
+                            src="/uploads/<%= showtimes.movie_banner %>"
                             alt="photo header"
                             class="object-cover w-full h-full"
                         />
@@ -56,19 +56,19 @@
                 
                 
                 <div class="container mx-auto w-[20%] min-h-[40%] md:h-[80%] md:w-[15%]">
-                    <img src="../images/films/blade-runner.jpeg" class="object-cover h-full" alt="">
+                    <img src="/uploads/<%= showtimes.movie_poster %>" class="object-cover h-full" alt="">
                 </div>
                 
                 <div class="container flex flex-col items-center justify-center space-y-2 bg-whiteOne rounded-tl-3xl rounded-br-3xl mx-auto w-[30%] h-[25%] md:w-[18%] md:h-[35%]">
-                    <h1 class="font-arvo font-bold text-lg text-blueOne">Blade Runner</h1>
-                    <p class="font-arvo text-sm text-blueOne text-nowrap">Cinéphoria Les Halles</p>
+                    <h1 class="font-arvo font-bold text-lg text-blueOne"><%= showtimes.movie_title %></h1>
+                    <p class="font-arvo text-sm text-blueOne text-nowrap"><%= showtimes.cinema_name %></p>
                     <p class="font-arvo text-xs text-blueOne">Accès bus</p>
                     
                 </div>
                 
                 <div class="container flex flex-col items-center justify-center space-y-2 bg-blueOne rounded-tl-3xl rounded-br-3xl mx-auto w-[30%] h-[25%] md:w-[18%] md:h-[35%]">
-                    <h1 class="font-arvo  text-lg text-white">07/05-19:45</h1>
-                    <p class="font-arvo text-sm text-white">(fin 21:16)</p>
+                    <h1 class="font-arvo text-lg text-white"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' }) %>-<%= showtimes.start_time.substring(0, 5) %></h1>
+                    <p class="font-arvo text-sm text-white"><%= showtimes.end_time.substring(0, 5) %></p>
                     <p class="font-arvo font-bold text-xs text-white">VF</p>
                 </div>
 

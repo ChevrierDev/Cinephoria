@@ -251,13 +251,44 @@ async function getShowtimesById(req, res) {
     // Check if the showtimes with the given ID is found
     if (results.rows.length <= 0) {
       res.status(404).json({ message: "No showtimes id found !" });
-      return;
+      return [];
     }
     // Send the found showtimes as response
-    res.status(200).json(results.rows);
+    return results.rows[0];
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error !");
+  }
+}
+
+// Function to get a showtime by ID with all related information
+async function getJoinInfoShowtimesById(req, res) {
+  try {
+    const id = req.params.id;
+    const query = `
+      SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price,
+             m.title AS movie_title, m.poster AS movie_poster, m.banner AS movie_banner, m.video AS movie_trailer, m.description AS movie_description, m.genre AS movie_genre, m.release_date AS movie_release_date,
+             c.name AS cinema_name, c.location AS cinema_location, c.country AS cinema_country, c.images AS cinema_images,
+             r.name AS room_name, r.quality AS room_quality
+      FROM showtimes s
+      JOIN movies m ON s.movie_id = m.movie_id
+      JOIN cinemas c ON s.cinema_id = c.cinema_id
+      JOIN rooms r ON s.room_id = r.room_id
+      WHERE s.showtimes_id = $1
+    `;
+    const results = await DB.query(query, [id]);
+
+    // Check if the showtimes with the given ID is found
+    if (results.rows.length <= 0) {
+      res.status(404).json({ message: "No showtimes found with the given ID!" });
+      return null;
+    }
+
+    // Send the found showtime as response
+    return results.rows[0];
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Internal server error!");
   }
 }
 
@@ -501,6 +532,7 @@ module.exports = {
   getShowtimesByFilm,
   getShowtimesWithMovies,
   getShowtimesById,
+  getJoinInfoShowtimesById,
   postShowtimes,
   deleteShowtimesById,
   updateShowtimesById,

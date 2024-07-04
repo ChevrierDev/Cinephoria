@@ -99,7 +99,7 @@ app.use("/login", loginRoutes);
 app.get('/dashboard/employee', (req, res) => {
   res.redirect('/dashboard/employee/films')
 })
-app.use("/dashboard/users", userDashboardRoutes);
+app.use("/dashboard/user", userDashboardRoutes);
 app.use("/dashboard/admin", adminDashboardRoutes);
 app.use("/dashboard/employee", employeeDashboardRoutes);
 

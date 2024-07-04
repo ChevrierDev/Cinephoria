@@ -5,7 +5,7 @@ const DB = require("../../config/postgres.config");
 
 async function authUser(req, res) {
   try {
-    const { email, password } = req.body;
+    const { email, password, redirect } = req.body;
     const findUserQuery = `SELECT * FROM users WHERE email = $1`;
     const { rows } = await DB.query(findUserQuery, [email]);
 
@@ -34,7 +34,6 @@ async function authUser(req, res) {
       httpOnly: true,
       secure: true,
       maxAge: 1 * 60 * 60 * 1000,
-      
     });
 
     if (user.must_change_password) {
@@ -47,25 +46,16 @@ async function authUser(req, res) {
       if (user.role === "employee") {
         return res.redirect('/dashboard/employee/reset-pass');
       }
-    };
+    }
 
     console.log("User logged in, token:", token);
 
-    switch (user.role) {
-      case "admin":
-        return res.redirect("/dashboard/admin");
-      case "employee":
-        return res.redirect("/dashboard/employee");
-      case "user":
-        return res.redirect("/dashboard/users");
-    }
-
-    return res.status(200).json({ message: "User logged in", accessToken: token });
+    const redirectUrl = redirect || `/dashboard/${user.role}`;
+    return res.redirect(redirectUrl);
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
   }
 }
-
 
 module.exports = { authUser };
