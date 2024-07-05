@@ -214,14 +214,11 @@
         <div class="w-full flex-col md:hidden">
             <div class="w-full flex items-center justify-between py-7 px-3">
                 <!-- VERIFY NUMBER OF SEAT -->
-                <button id="view-seat">
+                <div id="view-seat">
                     <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
                         <p class="font-arvo seats-count">0 place réservée</p>
-                        <div class="mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
-                        </div>
                     </div>
-                </button>
+                </div>
 
             </div>
 
@@ -281,7 +278,7 @@
             <!-- movie picture and place -->
             <div class="flex items-center space-x-4">
                 <div class="flex space-y-1 items-center justify-center flex-col">
-                    <h1 class="font-bold text-xl">1 Place</h1>
+                    <h1 class="font-bold text-xl" id="seats-reserved">0 Place</h1>
                     <h1 class="font-bold text-blueOne/60 text-xl"><%= showtimes.room_quality %></h1>
                 </div>
                 <div class="h-full w-24 ">

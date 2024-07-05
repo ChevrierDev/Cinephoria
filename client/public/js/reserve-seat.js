@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const userId = document.getElementById("user_id").value;
     const cinemaId = document.getElementById("cinema_id").value;
     const showtimesId = document.getElementById("showtimes_id").value;
+    const totalReservedSeats = document.getElementById('seats-reserved')
     let reservedCount = 0;
     let selectedSeats = [];
 
@@ -35,11 +36,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     element.textContent = `${reservedCount} place${reservedCount > 1 ? "s" : ""} réservée`;
                 });
 
+                totalReservedSeats.innerHTML = `${reservedCount} place${reservedCount > 1 ? "s" : ""}`
+
                 const totalPrice = reservedCount * pricePerSeat;
                 totalPriceElement.textContent = `TOTAL A RÉGLER : ${totalPrice.toFixed(2)} €`;
                 console.log("Selected Seats:", selectedSeats);
             });
-        }
+        };
     });
 
     // Décrémente le nombre de places disponibles
