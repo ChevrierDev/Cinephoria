@@ -39,7 +39,6 @@ const roomsRoutes = require("./api/rooms/rooms.routes");
 const resetPassApiRoutes = require("./api/resetPassword/resetPassApi.routes");
 const assignRouter = require('./api/assign/assignRouter.routes');
 
-
 //login and logout API
 const authRouter = require("./auth/loginApi");
 const logoutRouter = require("./auth/logoutApi");
@@ -100,10 +99,9 @@ app.use("/login", loginRoutes);
 app.get('/dashboard/employee', (req, res) => {
   res.redirect('/dashboard/employee/films')
 })
-app.use("/dashboard/users", userDashboardRoutes);
+app.use("/dashboard/user", userDashboardRoutes);
 app.use("/dashboard/admin", adminDashboardRoutes);
 app.use("/dashboard/employee", employeeDashboardRoutes);
-
 
 //API routes
 app.use("/api/v1/", usersRoutes);
@@ -125,7 +123,5 @@ app.use("/api/v1/", logoutRouter);
 //form components routes
 app.use("/", loginFormRoutes);
 app.use("/", registerFormRoutes);
-
-
 
 module.exports = app;

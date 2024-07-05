@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="icon" href="../images/logo-blanc.png" />
-    <link type="text/css" rel="stylesheet" href="../css/output.css" />
+    <link rel="icon" href="/images/logo-blanc.png" />
+    <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link
       type="text/css"
       rel="stylesheet"
@@ -15,11 +15,13 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
     ></script>
-    <script type="text/javascript" defer src="../js/main.js"></script>
-    <script type="text/javascript" defer src="../js/swipper.js"></script>
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../js/activeLink.js" defer></script>
-    <script src="../js/choose-seat.js" defer></script>
+    <script type="text/javascript" defer src="/js/main.js"></script>
+    <script type="text/javascript" defer src="/js/swipper.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/activeLink.js" defer></script>
+    <script src="/js/choose-seat.js" defer></script>
+    <script src="/js/reserve-seat.js" defer></script>
+    <script src="/js/employee/succesMessage.js" defer></script>
     <style>
    
   </style>
@@ -30,7 +32,7 @@
     <div class="absolute bg-black w-[80%] h-[70%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 hidden no-blur " id="movie">
         <div class="h-full w-full relative no-blur">
             <video class="w-full h-full" autoplay muted loop id="video">
-                <source src="../video/blade-runner.mp4" type="video/mp4">
+                <source src="/uploads/<%= showtimes.movie_trailer %>" type="video/mp4">
             </video>
             <div class="absolute top-2 right-4">
                 <button id="close-video" class="hover:scale-105 hover:rotate-180 duration-500">
@@ -57,7 +59,7 @@
                 <!-- Slides -->
                 <div class="swiper-slide">
                 <img
-                    src="../images/films/blade-runner.jpeg"
+                    src="/uploads/<%= showtimes.movie_banner %>"
                     alt="photo header"
                     class="object-cover w-full h-full"
                 />
@@ -75,10 +77,10 @@
                 
                 
                 <div class="container mx-auto w-[30%] min-h-[80%] md:h-[80%] md:w-[15%]">
-                    <img src="../images/films/blade-runner.jpeg" class="object-cover w-full h-full" alt="">
+                    <img src="/uploads/<%= showtimes.movie_poster %>" class="object-cover w-full h-full" alt="">
                 </div>
 
-                <h1 class="font-arvo tracking-wider font-bold text-2xl text-white">Blade Runner</h1>
+                <h1 class="font-arvo tracking-wider font-bold text-2xl text-white"><%= showtimes.movie_title %></h1>
                     
             </div>
             
@@ -99,7 +101,7 @@
                     <!-- Slides -->
                     <div class="swiper-slide">
                     <img
-                        src="../images/films/blade-runner.jpeg"
+                        src="/uploads/<%= showtimes.movie_banner %>"
                         alt="photo header"
                         class="object-cover w-full h-full"
                     />
@@ -112,14 +114,14 @@
 
             <!-- cinephoria logo -->
             <div class=" h-fit w-fit items-center space-y-8  justify-start absolute flex flex-col -top-2 right-5 z-40  pt-8 md:gap-y-0 ">
-                <img src="../images/logo-blanc.png" height="25" width="25" alt="logo cinephoria">
+                <img src="/images/logo-blanc.png" height="25" width="25" alt="logo cinephoria">
             </div>
 
             <!-- current movie card -->
             <div class=" h-full w-full items-center space-y-12  justify-start absolute flex flex-col top-28 z-40  pt-8 md:gap-y-0 ">
                 
                 <div class="container mx-auto w-[80%] min-h-[60%]  relative">
-                    <img src="../images/films/blade-runner.jpeg" class="object-cover w-full h-full" alt="">
+                    <img src="/uploads/<%= showtimes.movie_poster %>" class="object-cover w-full h-full" alt="">
 
                     <button class="absolute w-12 h-12 rounded-full bg-goldOne text-white flex items-center justify-center hover:scale-110 hover:rotate-[360deg] duration-500 left-1/2 -bottom-10 -translate-x-1/2 -translate-y-1/2" id="start-trailer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><g fill="none"><g clip-path="url(#gravityUiPlayFill0)"><path fill="currentColor" fill-rule="evenodd" d="M14.756 10.164c1.665-.962 1.665-3.366 0-4.329L6.251.918C4.585-.045 2.5 1.158 2.5 3.083v9.834c0 1.925 2.085 3.128 3.751 2.164z" clip-rule="evenodd"/></g><defs><clipPath id="gravityUiPlayFill0"><path fill="currentColor" d="M0 0h16v16H0z"/></clipPath></defs></g></svg>
@@ -128,7 +130,7 @@
 
                 </div>
 
-                <h1 class="font-arvo tracking-wider font-bold text-3xl text-white">Blade Runner</h1>
+                <h1 class="font-arvo tracking-wider font-bold text-3xl text-white"><%= showtimes.movie_title %></h1>
 
             </div>
 
@@ -136,18 +138,18 @@
             <div class="container">
                 <div class=" px-3 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-3">
                     <h1 class="font-arvo text-white text-sm">Cinéma</h1>
-                    <h2 class="font-arvo text-white text-lg font-bold">Cinéphoria les Halles</h2>
+                    <h2 class="font-arvo text-white text-lg font-bold"><%= showtimes.cinema_name %></h2>
                 </div>
     
                 <div class=" px-3 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-3">
                     <h1 class="font-arvo text-white text-sm">Date</h1>
-                    <h2 class="font-arvo text-white text-lg font-bold">Mardi 07 Mai 2024</h2>
+                    <h2 class="font-arvo text-white text-lg font-bold"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h2>
                 </div>
     
                 <div class=" px-3 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-3">
                     <h1 class="font-arvo text-white text-sm">Scéance</h1>
-                    <h2 class="font-arvo text-white text-lg font-bold">19:45 VF</h2>
-                    <p class="font-arvo font-light text-white text-xs">Fin prévue à 21:16</p>
+                    <h2 class="font-arvo text-white text-lg font-bold"><%= showtimes.start_time.substring(0, 5) %> VF</h2>
+                    <p class="font-arvo font-light text-white text-xs">Fin prévue à <%= showtimes.end_time.substring(0, 5) %></p>
                 </div>
             </div>
 
@@ -158,18 +160,18 @@
 
             <div class=" px-5 mx-auto bg-[#060F1E]  w-full   border-b-1  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Cinéma</h1>
-                <h2 class="font-arvo text-white text-2xl font-bold">Cinéphoria les Halles</h2>
+                <h2 class="font-arvo text-white text-2xl font-bold"><%= showtimes.cinema_name %></h2>
             </div>
 
             <div class=" px-5 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Date</h1>
-                <h2 class="font-arvo text-white text-2xl font-bold">Mardi 07 Mai 2024</h2>
+                <h2 class="font-arvo text-white text-2xl font-bold"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h2>
             </div>
 
             <div class=" px-5 mx-auto bg-[#060F1E]  w-full  border-t border-b  border-gray-300 flex flex-col space-y-1 items-start justify-center h-fit py-4">
                 <h1 class="font-arvo text-white text-lg">Scéance</h1>
-                <h2 class="font-arvo text-white text-2xl font-bold">19:45 VF</h2>
-                <p class="font-arvo font-light text-white text-xs">Fin prévue à 21:16</p>
+                <h2 class="font-arvo text-white text-2xl font-bold"><%= showtimes.start_time.substring(0, 5) %> VF</h2>
+                <p class="font-arvo font-light text-white text-xs">Fin prévue à <%= showtimes.end_time.substring(0, 5) %></p>
             </div>
 
         </section>
@@ -178,11 +180,13 @@
         <!-- choose your seat section -->
         <section class=" h-full md:mx-auto md:w-[80%] md:pt-28  relative">
           
-    
-            
+           <div class="container hidden w-fit mx-auto" id="message">
+    <p id="text" class="text-sm font-arvo font-bold text-green-600"></p>
+</div>
+
             <div class="container md:pt-10 pt-20  flex flex-col items-center mx-auto w-full space-y-7">
                 <h1 class="font-arvo font-bold text-blueOne text-4xl">Sélectionnez vos places</h1>
-                <p class="font-arvo text-blueOne text-xl">160 places libres</p>
+                <p class="font-arvo text-blueOne text-xl" id="totalSeats-count"><%= seatsCount - reservedSeats.length %> places libres</p>
             </div>
 
             <!-- seat map and selection -->
@@ -210,17 +214,12 @@
         <div class="w-full flex-col md:hidden">
             <div class="w-full flex items-center justify-between py-7 px-3">
                 <!-- VERIFY NUMBER OF SEAT -->
-                <button id="view-seat">
+                <div id="view-seat">
                     <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
-                        <p class="font-arvo ">1 place réservée</p>
-                        <div class="mt-0.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
-                        </div>
+                        <p class="font-arvo seats-count">0 place réservée</p>
                     </div>
-                </button>
+                </div>
 
-                <!-- CURRENT SEAT CHOOSEN -->
-                <p class="font-arvo text-blueOne">B15</p>
             </div>
 
             <!-- RESERVATION CONFIRMATION BUTTON -->
@@ -234,20 +233,16 @@
     </main>
 
     <!-- DESKTOP RESERVATION CONFIRMATION -->
-    <footer class=" w-[80%] ml-[20%] mt-[75.5px] hidden md:block">
+    <footer class=" w-[80%] ml-[20%] mt-[76px] hidden md:block">
         <div class="w-full flex items-center justify-between py-7 px-7">
             <!-- VERIFY NUMBER OF SEAT -->
-            <button id="view-seat">
+            <div id="view-seat">
                 <div class="flex items-center space-x-2 text-blueOne justify-between px-2">
-                    <p class="font-arvo ">1 place réservée</p>
-                    <div class="mt-0.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M12.78 5.22a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.75.75 0 0 1 1.06 0"/></svg>
-                    </div>
+                    <p class="font-arvo seats-count" >0 place réservée</p>
                 </div>
-            </button>
+            </div>
 
-            <!-- CURRENT SEAT CHOOSEN -->
-            <p class="font-arvo text-blueOne">B15</p>
+     
         </div>
 
         <!-- RESERVATION CONFIRMATION BUTTON -->
@@ -260,53 +255,60 @@
 
     <!-- total amount plus reserve Now menu  -->
     <div class="absolute h-full w-full hidden  bg-white md:w-[50%] space-y-7 px-10 py-7 md:h-[85%] bottom-50 md:top-2/3 rounded-xl left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" id="reservation-details">
+        <!-- Error message container -->
+        <div id="error-message" class="text-redOne font-arvo text-center mt-2 hidden">
+        Vous devez sélectionner au moins un siège pour réserver.
+        </div>
         <!-- Current session info -->
         <div class="w-full space-y-2 flex flex-col text-blueOne font-arvo items-center justify-center">
-            <h1 class="font-bold text-xl">Mardi 7 Mai</h1>
-            <h2 class="font-bold text-lg">19:45</h2>
+            <h1 class="font-bold text-xl"><%= new Date(showtimes.day).toLocaleDateString('fr-FR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) %></h1>
+            <h2 class="font-bold text-lg"><%= showtimes.start_time.substring(0, 5) %></h2>
             <p class="font-light text-sm">VF</p>
         </div>
         <!-- current movie info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
             <div class="flex flex-col gap-y-3 px-4 py-5">
-                <h1 class="font-bold text-3xl">Blade Runner</h1>
+                
+                <h1 class="font-bold text-3xl"><%= showtimes.movie_title %></h1>
                 <div class="flex items-center space-x-4 justify-between">
-                    <p>Durée: 1h31</p>
-                    <p class="bg-blueOne/20 px-1">Fin prévue à 21h36</p>
+                    <p>Durée: <%= showtimes.movie_duration %> min</p>
+                    <p class="bg-blueOne/20 px-1">Fin prévue à <%= showtimes.end_time.substring(0, 5) %></p>
                 </div>
             </div>
             <!-- movie picture and place -->
             <div class="flex items-center space-x-4">
                 <div class="flex space-y-1 items-center justify-center flex-col">
-                    <h1 class="font-bold text-xl">1 Place</h1>
-                    <h1 class="font-bold text-blueOne/60 text-xl">4K</h1>
+                    <h1 class="font-bold text-xl" id="seats-reserved">0 Place</h1>
+                    <h1 class="font-bold text-blueOne/60 text-xl"><%= showtimes.room_quality %></h1>
                 </div>
                 <div class="h-full w-24 ">
-                    <img src="../images/Films/blade-runner.jpeg" alt="Movie picture" class="w-full h-full object-cover">
+                    <img src="/uploads/<%= showtimes.movie_poster %>" alt="Movie picture" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
 
         <!-- general cinema and place info -->
         <div class="w-full flex text-blueOne  shadow-lg font-arvo justify-between">
+           
+
             <div class="flex flex-col gap-y-3 px-4 py-5">
-                <h1 class="font-bold text-3xl">Cinéphoria Les Halles</h1>
+                <h1 class="font-bold text-3xl"><%= showtimes.cinema_name %></h1>
                 <div class="flex items-center space-x-4 justify-between">
-                    <p>Paris 75001</p>
+                    <p><%= showtimes.cinema_location %></p>
                 </div>
             </div>
             <!-- movie picture and place -->
             <div class="flex items-center space-x-4">
                 <div class="flex items-center justify-center flex-col p-2 mr-6 border rounded-sm bg-goldOne">
                     <h1 class="text-xl">Salle</h1>
-                    <h1 class="font-bold text-xl">8</h1>
+                    <h1 class="font-bold text-xl"><%= showtimes.room_name %></h1>
                 </div>
             </div>
         </div>
 
         <!-- total session amount -->
         <div class="w-full flex text-blueOne font-arvo justify-center">
-                <h1 class="font-bold text-2xl">TOTAL A RÉGLER : 15 €</h1>
+            <h1 class="font-bold text-2xl" id="total-price" data-price="<%= showtimes.price %>"> </h1>
         </div>
 
         <!-- go to payment button -->
@@ -318,6 +320,10 @@
         </div>
 
     </div>
+
+    <input type="hidden" id="user_id" value="<%= user.user_id %>">
+    <input type="hidden" id="cinema_id" value="<%= showtimes.cinema_id %>">
+    <input type="hidden" id="showtimes_id" value="<%= showtimes.showtimes_id %>">
 
 </body>
     

@@ -3,129 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  
-    <!-- select days section -->
-    <div class="swiper choose-days-slider h-[15vh]">
-      <div class="swiper-wrapper m-0 p-0">
-        <!--FIRST SLIDE-->
+
+  <!-- Swiper component for selecting days -->
+  <div class="swiper choose-days-slider h-[15vh]" data-sessions='<%= JSON.stringify(sessions) %>'>
+    <div class="swiper-wrapper m-0 p-0" id="day-buttons-container">
+      <% uniqueDates.forEach(date => { %>
         <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
+          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300 day-button" data-date="<%= date %>">
             <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Ven.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-gray-400/80">03</p>
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Mai</p>
+              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { weekday: 'short' }) %>.</p>
+              <p class="font-arvo font-bold w-48 text-center text-2xl"><%= new Date(date).getDate() %></p>
+              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { month: 'short' }) %></p>
             </div>
           </button>
         </div>
-
-        <!--SECOND SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Sam.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-gray-400/80">04</p>
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--THIRD SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Dim.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-gray-400/80">05</p>
-              <p class="font-arvo w-48 text-center font-bold text-gray-400/80">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--FOURTH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Lun.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">06</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--FIFTH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mar.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">07</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--SIXTH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mer.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">08</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--SEVENTH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Jeu.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">09</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--EIGHT SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mer.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">08</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--NINETH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mer.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">08</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-        <!--TENTH SLIDE-->
-        <div class="swiper-slide m-0 p-0">
-          <button class="m-0 p-0 flex shadow-xl h-[15vh] bg-whiteOne border hover:border-b-4 hover:border-b-goldOne cursor-pointer">
-            <div class="m-0 p-0 flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mer.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl text-blueOne">08</p>
-              <p class="font-arvo w-48 text-center font-bold text-blueOne">Mai</p>
-            </div>
-          </button>
-        </div>
-
-      </div>
-      <!-- Boutons de navigation Swiper -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <% }) %>
     </div>
-
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
+
+  <!-- Other content of your page -->
+
 </body>
 </html>

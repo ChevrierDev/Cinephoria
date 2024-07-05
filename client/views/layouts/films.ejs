@@ -17,6 +17,7 @@
     ></script>
     <script type="text/javascript" src="js/main.js" defer></script>
     <script type="text/javascript" src="js/filter.js" defer></script>
+    <script type="text/javascript" src="js/filterCinemas.js" defer></script>
     <script type="text/javascript" src="js/swipper.js" defer></script>
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -226,11 +227,20 @@
             <p class="text-3xl mx-28 my-16 font-arvo text-blueOne font-bold">
                 NOUVEAUTÉS
             </p>
-    
-            <!-- latest movies carousel -->
-            <div >
-                <%- include('../components/latest-movies') %>
+
+            <div id="movies-container">
+              <% if (cinemaId) { %>
+                  <!-- Include current showtimes -->
+                  <%- include('../components/current-showtimes') %>
+              <% } else { %>
+                      <!-- latest movies carousel -->
+                  <div id="latest-movies-container">
+                    <%- include('../components/latest-movies') %>
+                  </div>
+              <% } %>
             </div>
+    
+        
         </section>
 
         <!-- Now playing movies -->
@@ -240,9 +250,18 @@
                 A L'AFFICHE
             </p>
 
-            <div >
-                <%- include('../components/now-playing-movies') %>
+            <div id="movies-container">
+              <% if (cinemaId) { %>
+                  <!-- Include current showtimes -->
+                  <%- include('../components/current-showtimes') %>
+              <% } else { %>
+                  <!-- Include latest movies -->
+                  <div >
+                    <%- include('../components/now-playing-movies') %>
+                  </div>
+              <% } %>
             </div>
+
 
         </section>
 

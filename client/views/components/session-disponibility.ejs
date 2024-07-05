@@ -3,104 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Réservation de Séances</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
-        <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
-          <h3 class="font-arvo font-bold text-lg text-blueOne">
-            15 : 30
-          </h3>
-          <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
+    <div id="availability-wrapper" class="gap-x-7">
+        <div id="availability-container">
+            <!-- Les séances seront ajoutées ici par JavaScript -->
         </div>
-        <div class="flex items-center space-y-3 justify-center flex-col">
-          <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
-            (fin  17:01)
-          </p>
-          <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
-            <p>Salle</p>
-            <p>2</p>
-          </div>
+        <div id="reservation-button-container">
+            <a id="reservation-link" href="/reservation/choisir-place">
+                <div id="reservation-button" class="container flex justify-center items-center md:w-[15vw] w-[40vw] bg-whiteOne shadow-xl h-[20vh] hover:border-b-4 hover:border-b-goldOne mb-7 md:mb-0 mx-auto md:mx-0 cursor-pointer group">
+                    <h3 class="font-arvo font-bold text-lg text-blueOne group-hover:text-goldOne">
+                        Réserver
+                    </h3>
+                </div>
+            </a>
         </div>
-      </div>
-      <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
-        <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
-          <h3 class="font-arvo font-bold text-lg text-blueOne">
-            15 : 30
-          </h3>
-          <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
-        </div>
-        <div class="flex items-center space-y-3 justify-center flex-col">
-          <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
-            (fin  17:01)
-          </p>
-          <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
-            <p>Salle</p>
-            <p>2</p>
-          </div>
-        </div>
-      </div>
-      <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
-        <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
-          <h3 class="font-arvo font-bold text-lg text-blueOne">
-            15 : 30
-          </h3>
-          <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
-        </div>
-        <div class="flex items-center space-y-3 justify-center flex-col">
-          <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
-            (fin  17:01)
-          </p>
-          <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
-            <p>Salle</p>
-            <p>2</p>
-          </div>
-        </div>
-      </div>
-      <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
-        <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
-          <h3 class="font-arvo font-bold text-lg text-blueOne">
-            15 : 30
-          </h3>
-          <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
-        </div>
-        <div class="flex items-center space-y-3 justify-center flex-col">
-          <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
-            (fin  17:01)
-          </p>
-          <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
-            <p>Salle</p>
-            <p>2</p>
-          </div>
-        </div>
-      </div>
-      <div class="container flex items-center  w-[15vw] bg-whiteOne shadow-xl  h-[20vh] ">
-        <div class="flex flex-col space-y-3 items-center justify-center w-[60%]">
-          <h3 class="font-arvo font-bold text-lg text-blueOne">
-            15 : 30
-          </h3>
-          <p class="w-full text-center px-2 text-slate-300 font-bold font-arvo text-lg">VF</p>
-        </div>
-        <div class="flex items-center space-y-3 justify-center flex-col">
-          <p class="font-arvo text-nowrap font-light text-sm tracking-wide text-blueOne">
-            (fin  17:01)
-          </p>
-          <div class="flex flex-col w-14 h-9 bg-goldOne items-center justify-center text-xs font-arvo font-bold text-blueOne py-4 ">
-            <p>Salle</p>
-            <p>2</p>
-          </div>
-        </div>
-
-      </div>
-
-      <a href="/reservation/choisir-place">
-        <div class="container flex justify-center items-center  md:w-[15vw] w-[40vw] bg-whiteOne shadow-xl h-[20vh] hover:border-b-4 hover:border-b-goldOne mb-7 md:mb-0 mx-auto md:mx-0 cursor-pointer group">
-          <h3 class="font-arvo font-bold text-lg text-blueOne group group-hover:text-goldOne">
-            Valider
-          </h3>   
-        </div>
-      </a>
- 
+    </div>
 
 </body>
 </html>

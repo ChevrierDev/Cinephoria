@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Recherche de films</title>
+    <script defer src="/js/searchMovies.js"></script>
 </head>
 <body>
     <section
         id="search-movie"
-        class="absolute z-10 top-[130px] hidden min-h-screen  bg-blueOne w-full text-5xl flex-col justify-top items-center origin-top animate-open-menu"
-      >
+        class="absolute z-10 top-[130px] hidden min-h-screen bg-blueOne w-full text-5xl flex-col justify-top items-center origin-top animate-open-menu"
+    >
         <div
-          class="container gap-y-5 flex flex-col w-[80vw] mx-auto bg-transparent pt-4 md:px-20"
+            class="container gap-y-5 flex flex-col w-[80vw] mx-auto bg-transparent pt-4 md:px-20"
         >
-          <div
-            class="w-full flex items-center justify-between text-white md:px-5 md:py-5"
-          >
-            <p class="font-arvo text-xl text-nowrap">Rechercher un film</p>
-            <a href="#bottom">
-              <button class="text-6xl pb-3" id="close-search-movie">
-                &times;
-              </button>
-            </a>
-          </div>
-
-          <form action="">
             <div
-              class="flex items-center justify-between border border-gray-400/70 h-20 w-full bg-whiteOne px-4 pl-10"
+                class="w-full flex items-center justify-between text-white md:px-5 md:py-5"
             >
-              <input type="text"
-                class="list-none font-arvo text-xl text-blueOne outline-none flex-1 bg-transparent"
-                placeholder="Rechercher un film..."
-              />
+                <p class="font-arvo text-xl text-nowrap">Rechercher un film</p>
+                <a href="#bottom">
+                    <button class="text-6xl pb-3" id="close-search-movie">
+                        &times;
+                    </button>
+                </a>
             </div>
-          </form>
 
-         
-      </section>
+            <form id="search-form">
+                <div
+                    class="flex items-center justify-between border border-gray-400/70 h-20 w-full bg-whiteOne px-4 pl-10"
+                >
+                    <input type="text" id="search-input"
+                        class="list-none font-arvo text-xl text-blueOne outline-none flex-1 bg-transparent"
+                        placeholder="Rechercher un film..."
+                    />
+                </div>
+            </form>
+            
+          <!-- Conteneur pour les résultats de la recherche -->
+          <div id="search-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-[80vw] mx-auto bg-transparent pt-4 "></div>
+        </div>
+    </section>
 </body>
 </html>

@@ -56,7 +56,6 @@
         <div class="container gap-y-7 w-fit mx-auto flex flex-col">
           <div class="container flex space-x-4 mx-auto">
             <div class="flex relative">
-
               <a href="#top">
                 <button class="theater-filter">
                   <div class="flex items-center justify-between cursor-pointer border border-gray-400/70 h-20 w-[80vw] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation">
@@ -68,18 +67,11 @@
                     </svg>
                   </div>
                 </button>
-                
               </a>
-
-              <div
-                class="bg-goldOne w-12 h-10 flex items-center justify-center absolute -left-5 top-1/2 transform -translate-y-1/2 -rotate-12"
-              >
+              <div class="bg-goldOne w-12 h-10 flex items-center justify-center absolute -left-5 top-1/2 transform -translate-y-1/2 -rotate-12">
                 <p class="text-white font-arvo rotate-12 font-bold">Où ?</p>
               </div>
             </div>
-
-            
-
             <!-- filter movies -->
             <a href="#top" class=" flex items-center">
               <button class="movies-filter">
@@ -97,48 +89,38 @@
                 </svg>
               </button>
             </a>
-
-            
-           
           </div>
-
-          
         </div>
-
-          <div class="container ml-32 mt-8 w-fit">
-            <a href="#top">
-            <button
-            class="flex items-center justify-between space-x-4 open-search-movies"
-            >
-            <svg
+        <div class="container ml-32 mt-8 w-fit">
+          <a href="#top">
+            <button class="flex items-center justify-between space-x-4 open-search-movies">
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="text-blueOne"
                 width="1.5em"
                 height="1.5em"
                 viewBox="0 0 24 24"
-            >
+              >
                 <path
-                fill="currentColor"
-                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
+                  fill="currentColor"
+                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
                 />
-            </svg>
-            <p class="text-blueOne font-arvo font-bold text-sm">
+              </svg>
+              <p class="text-blueOne font-arvo font-bold text-sm">
                 RECHERCHER UN FILM
-            </p>
+              </p>
             </button>
-            </a>
+          </a>
         </div>
       </section>
-
       <!-- MOBILE search theater and movies filter  -->
       <section class="w-full flex flex-col mt-10 md:hidden">
         <div class="container gap-y-5 flex flex-col px-3 w-fit mx-auto">
           <!-- filter theater input -->
           <div class="container space-x-4 flex w-fit mx-auto">
-            
             <a href="#top">
-                <div class="flex">
-                <button  class="theater-filter">
+              <div class="flex">
+                <button class="theater-filter">
                   <div
                     class="flex items-center justify-between cursor-pointer border border-gray-400/70 h-20 w-[80vw] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/30 bg-[length:200%_100%] hover:animate-bg-fill-animation"
                   >
@@ -160,12 +142,10 @@
                   </div>
                 </button>
               </div>
-              </a>
-             
-
+            </a>
             <!-- filter movies -->
             <a href="#top" class="flex items-center">
-              <button  class="movies-filter">
+              <button class="movies-filter">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="text-blueOne"
@@ -180,38 +160,27 @@
                 </svg>
               </button>
             </a>
-            
           </div>
-
-          
         </div>
-
       </section>
-
-        <!-- search movies menu -->
-        <section>
-          <%- include('../components/search-movies-menu') %>
-        </section>
-
-
+      <!-- search movies menu -->
+      <section>
+        <%- include('../components/search-movies-menu') %>
+      </section>
       <!-- filter menue section -->
       <section>
         <%- include('../components/filter-menu') %>
       </section>
 
-      <!-- current  theater movies -->
       <section  class="mt-16">
-        <!-- latest movies carousel -->
-        <div >
-        <%- include('../components/latest-movies') %>
+        <!-- current Showtimes carousel -->
+        <div>
+          <%- include('../components/current-showtimes') %>
         </div>
       </section>
-
-
       <!-- search theater dropdown  -->
       <%- include('../components/searchTheaterMenu') %>
     </main>
-
     <!-- footer section -->
     <footer class="mt-36"><%- include('../components/footer') %></footer>
   </body>

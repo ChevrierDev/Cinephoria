@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <script defer src="/js/filterMovies.js"></script>
+</head>
+<body>
+    <div id="no-movies-message" class="hidden w-full flex items-center justify-center">
+        <p class="font-arvo text-blueOne font-bold text-3xl">Aucun film correspondant disponible</p>
+    </div>
+
+    <% if (!cinemaId) { %>
+        <div class="w-full flex items-center justify-center">
+            <p class="font-arvo text-blueOne font-bold text-3xl">Choisir un cinéma pour afficher les séances disponibles</p>
+        </div>
+    <% } else if (showtimes.length === 0) { %>
+        <div class="w-full flex items-center justify-center">
+            <p class="font-arvo text-blueOne font-bold text-3xl">Aucun film correspondant à vos filtres disponible</p>
+        </div>
+    <% } else { %>
+        <!-- current showtimes carousel -->
+        <div class="swiper latest-movie-slider">
+            <div class="swiper-wrapper">
+                <% showtimes.forEach(showtime => { %>
+                    <div class="swiper-slide flex flex-col items-center justify-center movie"
+                        data-genre="<%= (showtime.genre || '').toLowerCase().split(',').join(' ') %>"
+                        data-days="<%= showtime.showtimes ? showtime.showtimes.map(st => new Date(st.day).toLocaleDateString('fr-FR', { weekday: 'long' }).toLowerCase()).join(' ') : '' %>"
+                        data-qualities="<%= showtime.showtimes ? showtime.showtimes.map(st => (st.quality || '').toLowerCase()).join(' ') : '' %>">
+                        <a href="/reservation/choisir-sceance/<%= cinemaId %>?filmId=<%= showtime.movie_id %>">
+                            <div class="flex space-y-2 items-center justify-center flex-col w-60 pb-3">
+                                <div class="w-full h-fit relative group">
+                                    <div class="relative">
+                                        <img src="uploads/<%= showtime.poster %>" alt="photo film" class="object-cover" />
+                                        <!-- movie details container -->
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                            <p class="font-arvo text-white text-sm text-center text-ellipsis">
+                                                <%= showtime.description %>
+                                            </p>
+                                            <p class="font-arvo text-goldOne font-bold text-sm text-center">5/5</p>
+                                        </div>
+                                    </div>
+                                    <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold h-6 w-fit px-3 text-nowrap">
+                                        <%= showtime.genre %>
+                                    </div>
+                                </div>
+                                <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
+                                    <%= showtime.title %>
+                                </h1>
+                                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                                    Depuis le <%= new Date(showtime.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% } %>
+</body>
+</html>

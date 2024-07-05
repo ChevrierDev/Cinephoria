@@ -11,7 +11,7 @@ accueilRoutes.get("/", async (req, res) => {
     const decMovies = decodeData(lastMovies);
     res.render("layouts/accueil", {
       title: "Bienvenue à Cinéphoria.",
-      movies: decMovies, 
+      lastMovies: decMovies, 
     });
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);

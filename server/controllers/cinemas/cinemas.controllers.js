@@ -24,7 +24,7 @@ async function getCinemaById(req, res) {
       res.status(400).json({ message: "No cinema found !" });
       return;
     }
-    res.status(200).json(result.rows[0]);
+    return result.rows[0];
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });

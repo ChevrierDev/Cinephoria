@@ -39,6 +39,51 @@ async function getSeatsById(req, res) {
   }
 }
 
+async function getSeatsByRoomId(roomId) {
+  const query = "SELECT * FROM seats WHERE room_id = $1";
+  const parameter = [roomId];
+  const result = await DB.query(query, parameter); 
+  return result.rows;
+}
+
+async function getSeatCountByRoomId(roomId) {
+  try {
+    const query = `
+        SELECT COUNT(*) AS total_seats
+        FROM seats
+        WHERE room_id = $1;
+    `;
+    const parameter = [roomId];
+    const result = await DB.query(query, parameter);
+    const totalSeats = result.rows[0].total_seats;
+
+    return  totalSeats;
+} catch (error) {
+    console.error(error);
+}
+}
+
+async function getReservedSeats(showtimesId) {
+  try {
+      const query = `
+          SELECT seats_reserved 
+          FROM reservations 
+          WHERE showtimes_id = $1 AND status = false;`;
+      const result = await DB.query(query, [showtimesId]);
+      let reservedSeats = [];
+      result.rows.forEach(row => {
+          reservedSeats = reservedSeats.concat(row.seats_reserved);
+      });
+      console.log("Sièges réservés depuis la base de données :", reservedSeats); 
+      return reservedSeats;
+  } catch (error) {
+      console.error(error);
+      return [];
+  }
+}
+
+
+
 // Function to create a new seat
 async function postSeats(req, res) {
   try {
@@ -126,6 +171,9 @@ async function deleteSeatsById(req, res) {
 module.exports = {
     getSeats,
     getSeatsById,
+    getReservedSeats,
+    getSeatCountByRoomId,
+    getSeatsByRoomId,
     postSeats,
     deleteSeatsById,
     updateSeatsById,
