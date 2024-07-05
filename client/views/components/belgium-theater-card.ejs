@@ -38,42 +38,40 @@
             <div class="container text-nowrap flex flex-col text-xs">
               <p class="font-arvo text-blueOne font-normal mb-10 ml-1"><%= cinema.location %></p>
             </div>
-
+            <!-- theater address -->
             <div class="container flex md:space-x-10 space-x-7 w-38">
 
-              <% if (cinema.showtime) { %>
-                <div class="flex md:w-[45%] shadow-xl md:h-[15vh] bg-whiteOne w-[55%] h-[11vh]">
-                  <div class="flex flex-col w-[80%] py-2 h-full text-center">
-                    <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
-  
-                    <div class="flex flex-col items-center h-full justify-center w-full">
-                      <p class="font-arvo font-bold text-blueOne">
-                        <%= cinema.showtime.start_time.substring(0, 5) %>
-                      </p>
-                      <p class="font-arvo font-light text-sm tracking-wide text-blueOne">
-                        (<%= cinema.showtime.end_time.substring(0, 5) %>)
-                      </p>
-  
+                <% if (cinema.showtime) { %>
+                    <div class="flex md:w-[45%] shadow-xl md:h-[15vh] bg-whiteOne w-[55%] h-[11vh]">
+                      <div class="flex flex-col w-[80%] py-2 h-full text-center">
+                        <p class="w-full text-start px-2 text-slate-400 font-bold font-arvo text-xs">VF</p>
+      
+                        <div class="flex flex-col items-center h-full justify-center w-full">
+                          <p class="font-arvo font-bold text-blueOne">
+                            <%= cinema.showtime.start_time.substring(0, 5) %>
+                          </p>
+                          <p class="font-arvo font-light text-sm tracking-wide text-blueOne">
+                            (<%= cinema.showtime.end_time.substring(0, 5) %>)
+                          </p>
+      
+                        </div>
+      
+                      </div>
+                      <div class="flex md:w-[20%]  w-10 bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
+                        <p><%= cinema.showtime.quality %></p>
+                      </div>
                     </div>
-  
-                  </div>
-                  <div class="flex md:w-[20%]  w-10 bg-blueOne items-center justify-center font-arvo font-bold text-white py-4 h-full">
-                    <p><%= cinema.showtime.quality %></p>
-                  </div>
-                </div>
-                
-                <div class="flex w-[30%] shadow-xl md:h-[15vh] bg-whiteOne h-[11vh]">
-                  <div class="flex flex-col items-center justify-center  w-[100%] h-full">
-                    <p class="font-arvo w-full text-center font-bold text-blueOne">
-                      <%= cinema.showtime.price %> <span class="text-blueOne text-lg font-extrabold font-arvo">€</span> 
-                    </p>
-                  </div>
-                </div>
-              <% } else { %>
-                <p class="font-arvo font-light text-sm tracking-wide text-blueOne">Aucune séance disponible pour ce film dans ce cinéma.</p>
-              <% } %>
-
-             
+                    
+                    <div class="flex w-[30%] shadow-xl md:h-[15vh] bg-whiteOne h-[11vh]">
+                      <div class="flex flex-col items-center justify-center  w-[100%] h-full">
+                        <p class="font-arvo w-full text-center font-bold text-blueOne">
+                          <%= cinema.showtime.price %> <span class="text-blueOne text-lg font-extrabold font-arvo">€</span> 
+                        </p>
+                      </div>
+                    </div>
+                  <% } else { %>
+                    <p class="font-arvo font-light text-sm tracking-wide text-blueOne">Aucune séance disponible pour ce film dans ce cinéma.</p>
+                  <% } %>
     
             </div>
 

@@ -6,7 +6,8 @@
     <title></title>
     <link type="text/css" rel="stylesheet" href="../css/output.css" />
     <script defer src="/js/filterMovies.js"></script>
-    <link rel="stylesheet" href="../css/style.css" />
+    <script defer src="/js/moviesAvailability.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <% if (lastMovies.length !== 0) { %>
@@ -19,7 +20,7 @@
           <% if (movie.favorite === false) { %>
             <!-- card -->
             <div class="swiper-slide flex flex-col items-center justify-center">
-              <a href="/films/disponibiliter">
+              <a href="/films/disponibiliter/<%= movie.movie_id %>">
                 <div
                   class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
                 >
@@ -64,7 +65,7 @@
           <% } else {%>
             <!-- card with heart -->
             <div class="swiper-slide flex flex-col items-center justify-center">
-              <a href="/films/disponibiliter">
+              <a href="/films/disponibiliter/<%= movie.movie_id %>">
                 <div
                   class="flex space-y-2 items-center justify-center flex-col w-60 pb-3"
                 >

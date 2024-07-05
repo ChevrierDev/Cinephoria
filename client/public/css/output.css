@@ -1912,6 +1912,9 @@ video {
 .outline{
   outline-style: solid;
 }
+.outline-dashed{
+  outline-style: dashed;
+}
 .outline-8{
   outline-width: 8px;
 }

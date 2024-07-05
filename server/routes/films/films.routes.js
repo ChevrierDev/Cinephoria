@@ -3,9 +3,11 @@ const filmsRoutes = express.Router();
 const {
   getLastWedMovies,
   getMovies,
+  getMovieById
 } = require("../../controllers/movies/movies.controllers");
 const {
   getShowtimesWithMovies,
+  getShowtimesByFilm,
   getShowtimesByCinema,
   getShowtimes,
 } = require("../../controllers/showtimes/showtimes.controllers");
@@ -39,6 +41,8 @@ filmsRoutes.get("/", async (req, res) => {
     const decShowtimes = decodeData(showtimes);
     const filteredMovies = filterMovies(decLastMovies, genres, days, qualities);
     const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities);
+    console.log(decShowtimes[0])
+   
 
     res.render("layouts/films", {
       title: "Les derniers films disponible.",
@@ -56,10 +60,32 @@ filmsRoutes.get("/", async (req, res) => {
 });
 
 
-filmsRoutes.get("/disponibiliter", (req, res) => {
+filmsRoutes.get("/disponibiliter/:id", async (req, res) => {
+  const filmId = req.params.id;
+  const movie = await getMovieById(req, res);
+  const cinemas = await getCinemas(req, res);
+  const showtimes = await getShowtimesByFilm(filmId);
+
+  // Filtrer les cinémas français et associer les séances
+  const frenchCinemas = cinemas.filter(cinema => cinema.country.toLowerCase() === 'france');
+  const cinemaShowtimes = frenchCinemas.map(cinema => {
+    const cinemaShowtime = showtimes.find(show => show.cinema_id === cinema.cinema_id);
+    return {
+      ...cinema,
+      showtimes: cinemaShowtime ? cinemaShowtime.showtimes : null
+    };
+  });
+
+  const decMovies = decodeData(movie);
   res.render("film/movie-availability", {
     title: "Les derniers films disponible.",
+    movie: decMovies,
+    cinemas: cinemaShowtimes,
+    filmId: filmId
   });
 });
+
+
+
 
 module.exports = filmsRoutes;

@@ -43,6 +43,9 @@ const assignRouter = require('./api/assign/assignRouter.routes');
 const authRouter = require("./auth/loginApi");
 const logoutRouter = require("./auth/logoutApi");
 
+//components routes
+const theater = require('./routes/components/theater.routes')
+
 const app = express();
 app.use(methodOverride('_method'))
 app.use(flash());
@@ -123,5 +126,6 @@ app.use("/api/v1/", logoutRouter);
 //form components routes
 app.use("/", loginFormRoutes);
 app.use("/", registerFormRoutes);
+app.use("/", theater);
 
 module.exports = app;

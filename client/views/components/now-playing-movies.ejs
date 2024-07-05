@@ -14,7 +14,7 @@
         <% movies.forEach(movie => { %>
           <!-- card -->
           <div class="swiper-slide flex flex-col items-center justify-center">
-            <a href="/films/disponibiliter">
+            <a href="/films/disponibiliter/<%= movie.movie_id %>">
               <div class="flex space-y-2 items-center justify-center flex-col w-60 pb-3">
                 <div class="w-full h-fit relative group">
                   <div class="relative">

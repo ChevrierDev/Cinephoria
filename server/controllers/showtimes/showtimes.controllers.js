@@ -135,12 +135,9 @@ async function getShowtimesByFilm(filmId) {
     const query = `
       SELECT s.showtimes_id, s.day, s.start_time, s.end_time, s.price,
              m.movie_id, m.title, m.poster, m.description, m.genre, m.release_date,
-             c.name AS cinema_name,
-             c.location AS cinema_location,
-             c.country AS cinema_country,
-             c.images AS cinema_images,
-             r.quality AS room_quality,
-             r.name AS room_name
+             c.cinema_id, c.name AS cinema_name, c.location AS cinema_location, 
+             c.country AS cinema_country, c.images AS cinema_images,
+             r.quality AS room_quality, r.name AS room_name
       FROM showtimes s
       JOIN movies m ON s.movie_id = m.movie_id
       JOIN cinemas c ON s.cinema_id = c.cinema_id
@@ -150,16 +147,15 @@ async function getShowtimesByFilm(filmId) {
     `;
     const result = await DB.query(query, [filmId]);
 
-    const showtimesByMovie = {};
+    // Ajout de logs pour vérifier les données récupérées
+    console.log('Showtimes récupérées:', JSON.stringify(result.rows, null, 2));
+
+    // Organiser les séances par cinéma
+    const showtimesByCinema = {};
     result.rows.forEach(row => {
-      if (!showtimesByMovie[row.movie_id]) {
-        showtimesByMovie[row.movie_id] = {
-          movie_id: row.movie_id,
-          title: row.title,
-          poster: row.poster,
-          description: row.description,
-          genre: row.genre,
-          release_date: row.release_date,
+      if (!showtimesByCinema[row.cinema_id]) {
+        showtimesByCinema[row.cinema_id] = {
+          cinema_id: row.cinema_id,
           cinema_name: row.cinema_name,
           cinema_location: row.cinema_location,
           cinema_country: row.cinema_country,
@@ -167,24 +163,23 @@ async function getShowtimesByFilm(filmId) {
           showtimes: []
         };
       }
-      showtimesByMovie[row.movie_id].showtimes.push({
+      showtimesByCinema[row.cinema_id].showtimes.push({
         showtimes_id: row.showtimes_id,
         day: row.day,
         start_time: row.start_time,
         end_time: row.end_time,
         price: row.price,
         quality: row.room_quality,
-        room_name: row.room_name // Ajout du nom de la salle
+        room_name: row.room_name 
       });
     });
 
-    return Object.values(showtimesByMovie);
+    return Object.values(showtimesByCinema);
   } catch (err) {
     console.log("Internal server error", err);
     throw err;
   }
 }
-
 
 // Function to get showtimes by cinema
 async function getShowtimesByCinema(cinemaId) {

@@ -10,14 +10,14 @@
      <div class="flex flex-col min-h-screen md:flex-row container mx-auto w-[50vw] md:min-h-0 md:h-[70vh] space-x-10 mt-20 mb-40">
         <!-- movie picture container -->
         <div class="w-full h-auto flex justify-center container mx-auto md:mx-0">
-          <img src="../images/Films/blade-runner.png" class="object-cover h-full" alt="movie picture">
+          <img src="/uploads/<%= movie.poster %>" class="object-cover h-full" alt="movie picture">
       </div>
         
         <!-- movie detail -->
         <div class="container flex flex-col h-full w-[40vw] justify-center items-start space-y-6 py-5 ">
           <!-- movie title -->
           <h1 class="font-arvo text-blueOne font-bold md:text-4xl text-center text-xl ml-4 md:ml-0">
-            Blade Runner
+            <%= movie.title %>
           </h1>
 
           <!-- movie score button-->
@@ -40,29 +40,29 @@
               <p class="text-blueOne font-arvo font-bold text-xs md:text-sm">248</p>
             </div>
 
-            <p class="font-arvo text-blueOne font-bold text-xs md:text-sm">1h31</p>
-            <p class="font-arvo text-blueOne font-bold text-xs md:text-sm">Science-fiction</p>
+            <p class="font-arvo text-blueOne font-bold text-xs md:text-sm"><%= movie.duration %> min</p>
+            <p class="font-arvo text-blueOne font-bold text-xs md:text-sm"><%= movie.genre %></p>
 
           </div>
 
           <div class="container text-nowrap flex flex-col text-xs ml-7 md:ml-0">
-            <p class="font-arvo text-blueOne font-bold">Sortie : 01 mai 2024</p>
+            <p class="font-arvo text-blueOne font-bold">Sortie : <%= new Date(movie.release_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
             <p class="font-arvo text-blueOne font-bold block md:hidden">
-                Avec Ryan Gosling,<br> Harrison Ford,<br> de Denis Villeneuve
+              <%= movie.casting %>
               </p>
               <p class="font-arvo text-blueOne font-bold hidden md:block md:text-xs">
-                Avec Ryan Gosling, Harrison Ford, de Denis Villeneuve
+                <%= movie.casting %>
               </p>
           </div>
 
           <div class="container">
             <p class="font-arvo text-blueOne w-full md:w-[70%]">
-              En 2049, la société est fragilisée par les nombreuses tensions entre les humains et leurs esclaves créés par bio-ingénierie. L'officier K est un blade runner: il fait partie d'une force...
+              <%= movie.description %>
             </p>
           </div>
 
           <!-- movie reservation button -->
-           <a href="/reservation/Choisir-sceance">
+           <a href="#theater">
              <button class="w-44 h-16 bg-goldOne p-1 space-x-2 flex items-center justify-center group hover:scale-95 duration-200 ease-out">
                <p class="font-arvo text-white text-xl font-bold">
                  Réserver
