@@ -2,6 +2,8 @@ const express = require("express");
 const reservationApiRoutes = express.Router();
 const {
   getReservation,
+  getAllReservationInfoById,
+  getReservationByUserId,
   getReservationById,
   deleteReservationById,
   postReservation,
@@ -15,6 +17,12 @@ const {
 
 // get all reservation
 reservationApiRoutes.get("/reservation", getReservation);
+
+// get all reservation by user Id
+reservationApiRoutes.get("/reservation/user", getReservationByUserId);
+
+// get reservation info by Id using POST
+reservationApiRoutes.post("/reservation/info", getAllReservationInfoById);
 
 // get reservation by Id
 reservationApiRoutes.get("/reservation/:id", getReservationById);

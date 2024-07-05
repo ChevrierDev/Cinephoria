@@ -6,7 +6,11 @@ const {
 } = require("../../../middlewares/autorisation/autorisation");
 const {
   enrichUserWithInfo
-} = require('../../../middlewares/enrichUserWithInfo')
+} = require('../../../middlewares/enrichUserWithInfo');
+const {
+  getReservationByUserId
+} = require('../../../controllers/reservations/reservation.controllers');
+const decodeData = require('../../../services/decodeData.services')
 
 // user reset password routes
 userDashboardRoutes.get(
@@ -28,10 +32,14 @@ userDashboardRoutes.get(
   checkAuthenticated,
   checkRole("user"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
     const user = req.user.details
+    const userId = req.user.sub
+    const reservation = await getReservationByUserId(userId);
+    const decReservation = decodeData(reservation)
     res.render("dashboard/users/users", {
-      title: `Bienvenue ${user.first_name}.`
+      title: `Bienvenue ${user.first_name}.`,
+      reservations: decReservation
     });
   }
 );
@@ -54,7 +62,7 @@ userDashboardRoutes.get(
 
 //users dashboard get review form routes
 userDashboardRoutes.get(
-  "/reviews-form",
+  "/reviews-form/:id",
   checkAuthenticated,
   checkRole("user"),
   enrichUserWithInfo,
