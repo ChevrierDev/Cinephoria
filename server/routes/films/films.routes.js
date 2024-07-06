@@ -14,6 +14,9 @@ const {
 const { getCinemas } = require("../../controllers/cinemas/cinemas.controllers");
 const decodeData = require("../../services/decodeData.services");
 const {
+  getReviewsByMovieId
+} = require('../../controllers/reviews/reviews.controllers')
+const {
   filterMovies,
   filterShowtimes
 } = require('../../services/filterMoviesService')
@@ -41,7 +44,7 @@ filmsRoutes.get("/", async (req, res) => {
     const decShowtimes = decodeData(showtimes);
     const filteredMovies = filterMovies(decLastMovies, genres, days, qualities);
     const filterCurrentMovies = filterMovies(decMovies, genres, days, qualities);
-    console.log(decShowtimes[0])
+ 
    
 
     res.render("layouts/films", {
@@ -62,29 +65,42 @@ filmsRoutes.get("/", async (req, res) => {
 
 filmsRoutes.get("/disponibiliter/:id", async (req, res) => {
   const filmId = req.params.id;
-  const movie = await getMovieById(req, res);
-  const cinemas = await getCinemas(req, res);
-  const showtimes = await getShowtimesByFilm(filmId);
+  
+  try {
+    const movie = await getMovieById(req, res);
+    const cinemas = await getCinemas(req, res);
+    const showtimes = await getShowtimesByFilm(filmId);
+    const reviews = await getReviewsByMovieId(req, res) || [];
 
-  // Filtrer les cinémas français et associer les séances
-  const frenchCinemas = cinemas.filter(cinema => cinema.country.toLowerCase() === 'france');
-  const cinemaShowtimes = frenchCinemas.map(cinema => {
-    const cinemaShowtime = showtimes.find(show => show.cinema_id === cinema.cinema_id);
-    return {
-      ...cinema,
-      showtimes: cinemaShowtime ? cinemaShowtime.showtimes : null
-    };
-  });
+    if (!movie || !cinemas || !showtimes) {
+      throw new Error("Data fetch error");
+    }
 
-  const decMovies = decodeData(movie);
-  res.render("film/movie-availability", {
-    title: "Les derniers films disponible.",
-    movie: decMovies,
-    cinemas: cinemaShowtimes,
-    filmId: filmId
-  });
+    const confirmedReviews = reviews.filter(review => review.status === true);
+    const decReviews = decodeData(confirmedReviews);
+
+    const frenchCinemas = cinemas.filter(cinema => cinema.country.toLowerCase() === 'france');
+    const cinemaShowtimes = frenchCinemas.map(cinema => {
+      const cinemaShowtime = showtimes.find(show => show.cinema_id === cinema.cinema_id);
+      return {
+        ...cinema,
+        showtimes: cinemaShowtime ? cinemaShowtime.showtimes : null
+      };
+    });
+
+    const decMovies = decodeData(movie);
+    res.render("film/movie-availability", {
+      title: "Les derniers films disponible.",
+      movie: decMovies,
+      cinemas: cinemaShowtimes,
+      filmId: filmId,
+      reviews: decReviews
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error!" });
+  }
 });
-
 
 
 

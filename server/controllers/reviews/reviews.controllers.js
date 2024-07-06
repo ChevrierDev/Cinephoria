@@ -66,6 +66,20 @@ async function getReviewsById(req, res) {
   }
 }
 
+async function getReviewsByMovieId(req, res) {
+  const movieId = req.params.id;
+  console.log(`Fetching reviews for movie ID: ${movieId}`);
+  try {
+    const query = "SELECT * FROM reviews WHERE movie_id = $1";
+    const result = await DB.query(query, [movieId]);
+    return result.rows;
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error!" });
+    return [];
+  }
+}
+
 // Function to create a new review
 async function postReviews(req, res) {
   try {
@@ -148,6 +162,7 @@ async function deleteReviewsById(req, res) {
 module.exports = {
   getReviews,
   getReviewsById,
+  getReviewsByMovieId,
   getAllReviewsInfo,
   postReviews,
   deleteReviewsById,

@@ -71,6 +71,40 @@ const initSwipper = () => {
     },
   });
 
+  const avisSlider = new Swiper(".swiper-container-avis", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: true,
+    grabCursor: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      1024: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+    },
+  });
+
+
   // const chooseDaysSlider = new Swiper(".choose-days-slider", {
   //   slidesPerView: 6,
   //   spaceBetween: -80, 

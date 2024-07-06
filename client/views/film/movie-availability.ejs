@@ -67,6 +67,28 @@
         <section>
           <%- include('../components/movie-details') %>
         </section>
+
+        <div class="w-fit mx-auto">
+          <h1 class="font-arvo text-blueOne font-bold text-lg">Avis</h1>
+        </div>
+
+        <% if (reviews && reviews.length > 0) { %>
+         <!-- Swiper -->
+         <div class="swiper-container swiper-container-avis bg-whiteOne  py-4 mx-auto  mt-3 max-w-full">
+          <div class="swiper-wrapper">
+            <% reviews.forEach(review => { %>
+              <div class="swiper-slide">
+                <div class="text-center p-4 space-y-3">
+                    <p class="font-arvo text-blueOne">"<%= review.comment %>"</p>
+                </div>
+              </div>
+            <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+          
+          
   
         
         <section class="w-full  flex flex-col mt-28" id="theater">
