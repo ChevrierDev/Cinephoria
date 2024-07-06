@@ -10,7 +10,10 @@ const {
 const {
   getReservationByUserId
 } = require('../../../controllers/reservations/reservation.controllers');
-const decodeData = require('../../../services/decodeData.services')
+const {
+  getMovieById
+} = require('../../../controllers/movies/movies.controllers')
+const decodeData = require('../../../services/decodeData.services');
 
 // user reset password routes
 userDashboardRoutes.get(
@@ -66,10 +69,14 @@ userDashboardRoutes.get(
   checkAuthenticated,
   checkRole("user"),
   enrichUserWithInfo,
-  (req, res) => {
+  async (req, res) => {
+    const movies = await getMovieById(req, res);
+    const decMovies = decodeData(movies);
+    console.log(decMovies)
     res.render("dashboard/users/reviewForm", {
       title: `Laisser un avis.`,
-      currentPath: req.path
+      currentPath: req.path,
+      movies: decMovies
     });
   }
 );

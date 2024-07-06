@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const movieCards = document.querySelectorAll(".movie-card");
   const descriptionBtn = document.getElementById("movie-description");
   const closeDescriptionBtn = document.getElementById("close-description");
+  const accessReviewFormBtn = document.getElementById("go-to-review-form");
+  const reviewsButton = document.getElementById("reviews-button");
+
+
 
   const descriptionCard = document.getElementById("description-card");
 
@@ -10,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //movie card selection effect
   movieCards.forEach((card) => {
-    card.addEventListener("click", (e) => {
+    card.addEventListener("click", async (e) => {
       e.preventDefault();
       let isSelected = card.classList.contains("outline-goldOne");
 
@@ -33,7 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      movieCards.forEach((m) => {
+        if (m.classList.contains("outline-goldOne")) {
+          anySelected = true;
+          movieId = m.getAttribute("data-movie-id");
+          reservationId = m.getAttribute("data-reservation-id")
+
+
+        }
+      });
+
       if (anySelected) {
+        accessReviewFormBtn.href = `/dashboard/user/reviews-form/${movieId}`
         descriptionBtn.classList.remove("hidden");
         descriptionBtn.classList.add("flex");
       } else {
@@ -41,19 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
         descriptionBtn.classList.add("hidden");
       }
 
-      movieCards.forEach((m) => {
-        if (m.classList.contains("outline-goldOne")) {
-          anySelected = true;
-          movieId = m.getAttribute("data-movie-id");
-          reservationId = m.getAttribute("data-reservation-id")
-          console.log(reservationId);
-          console.log(movieId);
-        }
-      });
+      const reservationInfo = await fetchReservationInfo(reservationId);
+      if (reservationInfo) {
+        checkIfMovieEnded(reservationInfo);
+      }
 
       if (!anySelected) {
         movieId = null;
         reservationId = null;
+        accessReviewFormBtn.href = "#";
       }
     });
   });
@@ -86,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reservationInfo = await fetchReservationInfo(reservationId);
     if (reservationInfo) {
       displayReservationInfo(reservationInfo);
+      
     }
 
     window.scrollTo({
@@ -119,6 +131,43 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionCard.querySelector(".movie-quality").textContent = info.quality;
     descriptionCard.querySelector(".movie-hall").textContent = `Salle ${info.room_name}`;
     descriptionCard.querySelector(".movie-accessibility").textContent = info.seat_accessibility  ? 'Accessible aux PMR' : 'Non accessible aux PMR';
+  }
+
+  function checkIfMovieEnded(info) {
+    const endTime = new Date(info.showtime_day + ' ' + info.end_time);
+    const now = new Date();
+
+    if (now > endTime) {
+      reviewsButton.disabled = false;
+      reviewsButton.classList.remove('opacity-50');
+    } else {
+      reviewsButton.disabled = true;
+      reviewsButton.classList.add('opacity-50');
+    }
+  }
+
+  function checkIfMovieEnded(info) {
+
+
+
+    // Extract date from showtime_day and create a full date-time string with end_time
+    const showtimeDate = new Date(info.showtime_day);
+    const [endHour, endMinute, endSecond] = info.end_time.split(':');
+    showtimeDate.setHours(endHour, endMinute, endSecond);
+
+
+
+    const now = new Date();
+
+
+
+    if (now > showtimeDate) {
+      reviewsButton.disabled = false;
+      reviewsButton.classList.remove('opacity-50');
+    } else {
+      reviewsButton.disabled = true;
+      reviewsButton.classList.add('opacity-50');
+    }
   }
 
 });

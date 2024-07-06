@@ -541,6 +541,9 @@ video {
     max-width: 1536px;
   }
 }
+.visible{
+  visibility: visible;
+}
 .fixed{
   position: fixed;
 }
@@ -1879,6 +1882,9 @@ video {
 .opacity-90{
   opacity: 0.9;
 }
+.opacity-50{
+  opacity: 0.5;
+}
 .shadow-lg{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1895,6 +1901,9 @@ video {
 }
 .outline{
   outline-style: solid;
+}
+.outline-dashed{
+  outline-style: dashed;
 }
 .outline-8{
   outline-width: 8px;
