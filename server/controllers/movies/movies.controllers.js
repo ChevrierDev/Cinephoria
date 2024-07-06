@@ -40,7 +40,7 @@ async function getLastWedMovies(req, res) {
 
 async function getMovieById(req, res) {
   try {
-    const { id } = req.params;
+    const id  = req.params.id;
     const query = "SELECT * FROM movies WHERE movie_id = $1";
     const result = await DB.query(query, [id]);
     if (result.rows.length === 0) {

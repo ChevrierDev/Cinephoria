@@ -11,9 +11,6 @@ const initApp = () => {
   };
 
   hamburgerBtn.addEventListener("click", toggleHamburgerMenu);
- 
-  console.log(mobileMenu.classList)
-  console.log(hamburgerBtn.classList)
 
   window.addEventListener('resize',() => {
     if (window.innerWidth > 768) {

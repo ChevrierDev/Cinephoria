@@ -20,6 +20,33 @@ async function getReviews(req, res) {
   }
 }
 
+async function getAllReviewsInfo(req, res) {
+  try {
+    const query = `
+    SELECT
+      r.review_id, r.comment, r.rating, r.status,
+      m.movie_id, m.title AS movie_title
+    FROM 
+      reviews r
+    JOIN 
+      movies m 
+    ON 
+      r.movie_id = m.movie_id
+    `;
+    const results = await DB.query(query);
+
+     // Check if any reviews are found
+    if (results.rows.length <= 0) {
+      res.status(404).json({message:"No reviews found !"});
+      return [];
+    }
+    return results.rows
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Internal server error !");
+  }
+}
+
 // Function to get a reviews by ID
 async function getReviewsById(req, res) {
   try {
@@ -39,115 +66,89 @@ async function getReviewsById(req, res) {
   }
 }
 
-// Note: Bug to fix (unable to post)
 // Function to create a new review
 async function postReviews(req, res) {
-    try {
-      const {
-        user_id,
-        movie_id,
-        rating,
-        comment,
-        status,
-      } = req.body;
-  
-      // Validate the request body fields
-      if (
-        !user_id ||
-        !movie_id ||
-        !rating ||
-        !comment ||
-        typeof status === 'undefined'
-      ) {
-        return res
-          .status(400)
-          .json({ error: "You must enter all required fields!" });
-      }
-  
-      const query =
-        "INSERT INTO reviews (user_id, movie_id, rating, comment, status, created_at) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING *";
-      const result = await DB.query(query, [
-        user_id,
-        movie_id,
-        rating,
-        comment,
-        status,
-      ]);
-  
-      // Send the newly created review as response
-      res.status(201).json(result.rows[0]);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: "Internal server error!" });
+  try {
+    const { user_id, movie_id, rating, comment } = req.body;
+
+    // Validate the request body fields
+    if (!user_id || !movie_id || !rating || !comment) {
+      req.flash('error_msg', 'Vous devez remplir tous les champs obligatoires !');
+      return res.redirect('back');
     }
+
+    // Vérifier s'il existe déjà une revue pour cet utilisateur et ce film
+    const checkQuery = "SELECT * FROM reviews WHERE user_id = $1 AND movie_id = $2";
+    const checkResult = await DB.query(checkQuery, [user_id, movie_id]);
+
+    if (checkResult.rows.length > 0) {
+      req.flash('error_msg', 'Vous avez déjà soumis un avis pour ce film.');
+      return res.redirect('back');
+    }
+
+    // Insérer une nouvelle revue
+    const insertQuery = "INSERT INTO reviews (user_id, movie_id, rating, comment, status, created_at) VALUES ($1, $2, $3, $4, 'false', NOW()) RETURNING *";
+    const insertResult = await DB.query(insertQuery, [user_id, movie_id, rating, comment]);
+
+    req.flash('success_msg', 'Votre avis a été soumis avec succès !');
+    res.redirect(`/dashboard/users/reviews-form/${movie_id}`);
+  } catch (err) {
+    console.log(err);
+    req.flash('error_msg', 'Erreur interne du serveur !');
+    res.redirect('back');
   }
+}
   
   
 
-// Note: Bug to fix (unable to post)
-// Function to update a reviews by ID
 async function updateReviewsById(req, res) {
   try {
-    const id = req.params.id;
-    const {
-      user_id,
-      movie_id,
-      rating,
-      comment,
-      status,
-    } = req.body;
+    const { review_id } = req.params;
 
-    const checkIfexistQuery = "SELECT * FROM reviews WHERE review_id = $1";
-    const reviewExist = await DB.query(checkIfexistQuery, [id]);
+    const checkIfExistQuery = "SELECT * FROM reviews WHERE review_id = $1";
+    const reviewExist = await DB.query(checkIfExistQuery, [review_id]);
 
     if (reviewExist.rows.length <= 0) {
-        return res.status(404).json({message: "Reviews with this provided ID does not exist."})
+      return res.status(404).json({ message: "Review with the provided ID does not exist." });
     }
 
-    const query =
-      "UPDATE reviews SET user_id = $1, movie_id = $2, rating = $3, comment = $4, status = $5, created_at = NOW() WHERE review_id = $6 RETURNING *";
-    const result = await DB.query(query, [
-      user_id,
-      movie_id,
-      rating,
-      comment,
-      status,
-      id,
-    ]);
-    // Send a success message as response
-    return res.status(200).json({ message: "reviews updated successfully" });
+    const query = "UPDATE reviews SET status = true WHERE review_id = $1 RETURNING *";
+    const result = await DB.query(query, [review_id]);
+
+    return res.status(200).json({ message: "Review updated successfully", review: result.rows[0] });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error!" });
   }
 }
 
-// Function to delete a review by ID
+
 async function deleteReviewsById(req, res) {
-    try {
-      const id = req.params.id;
-      const foundReviewsQuery = "SELECT * FROM reviews WHERE review_id = $1";
-      const reviews = await DB.query(foundReviewsQuery, [id]);
-       // Check if the review with the given ID is found
-      if (reviews.rows.length !== 0) {
-        const query = "DELETE FROM reviews WHERE review_id = $1";
-        await DB.query(query, [id]);
-        // Send a success message as response
-        return res.status(200).json({message:"Review deleted successfully"});
-      } else {
-        return res.status(404).json({message:"No review found!"});
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json("Internal server error!");
+  try {
+    const id = req.params.id;
+    const foundReviewsQuery = "SELECT * FROM reviews WHERE review_id = $1";
+    const reviews = await DB.query(foundReviewsQuery, [id]);
+    
+    if (reviews.rows.length !== 0) {
+      const query = "DELETE FROM reviews WHERE review_id = $1";
+      await DB.query(query, [id]);
+      
+      return res.status(200).json({ message: "Review deleted successfully" });
+    } else {
+      return res.status(404).json({ message: "No review found!" });
     }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error!" });
   }
+}
   
 
 // Export the functions as a module
 module.exports = {
   getReviews,
   getReviewsById,
+  getAllReviewsInfo,
   postReviews,
   deleteReviewsById,
   updateReviewsById,

@@ -1,96 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Reviews</title>
     <link rel="icon" href="/images/logo-blanc.png" type="image/x-icon">
     <link type="text/css" rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="/js/filter.js" defer></script>
-    <script type="text/javascript" src="/js/main.js" defer></script>
-    
+    <script defer src="/js/review.js"></script>
 </head>
-
-<body class=" min-h-screen relative ">
+<body class="min-h-screen relative">
     <!-- Nav Bar -->
-    <header class=" ">
+    <header>
         <%- include('../../components/dashboard/nav-bar-dashboard') %>
     </header>
-    
 
     <!-- Side Bar Menu -->
     <aside class="fixed z-20 top-0 left-0 h-screen">
         <%- include('../../components/dashboard/side-menu') %>
     </aside>
 
-    <!-- Cinema and Date Filters -->
-    <main class=" flex text-blueOne flex-col items-center w-full justify-center md:w-[85vw] ml-auto md:pt-32 md:mb-32 " id=" main-container ">
+    <!-- Main Content -->
+    <main class="flex text-blueOne flex-col items-center w-full justify-center md:w-[85vw] ml-auto md:pt-32 md:mb-32" id="main-container">
+        <% if (error_msg) { %>
+            <% error_msg.forEach(error => { %>
+              <ul class="w-fit mx-auto">
+                <li class="list-disc font-arvo text-redOne text-center"><%= error %></li>
+              </ul>
+            <% }) %>
+          <% } %>
+    
+        <% if (success_msg) { %>
+            <% success_msg.forEach(message => { %>
+              <ul class="w-fit mx-auto">
+                <p class="list-disc font-arvo text-green-500 text-center"><%= message %></p>
+              </ul>
+            <% }) %>
+          <% } %>
+        <!-- Reviews Section -->
+        <section class="w-full md:w-[48%] flex items-center gap-y-2 justify-center flex-col md:gap-y-10 mt-10">
+            <h1 class="text-blueOne font-bold text-5xl text-center font-arvo">Nouveaux avis</h1>
 
-        <!-- reviews section -->
-        <section class="w-full md:w-[48%] flex items-center  gap-y-2 justify-center flex-col md:gap-y-10 mt-10">
+            <% if (reviews && reviews.length > 0) { %>
+                <% reviews.forEach(review => { %>
+                    <!-- Movie Reviews Card -->
+                    <div class="flex flex-col w-full mt-4" data-review-id="<%= review.review_id %>">
+                        <div class="w-full flex items-center bg-blueOne h-12">
+                            <p class="w-full text-center text-white text-lg font-arvo font-bold"><%= review.movie_title %></p>
+                        </div>
 
-          <h1 class="text-blueOne font-bold text-5xl text-center font-arvo">Nouveaux avis</h1>
+                        <div class="flex items-center justify-between">
+                            <div class="flex justify-start w-[80%] py-6 px-3">
+                                <p class="w-full text-left text-blueOne text-lg font-arvo font-light"><%= review.comment %></p>
+                            </div>
 
-            <!-- Search a movie -->
-            <a href="#top">
-                <button class="container w-fit open-search-movies">
-                    <div class="flex items-center justify-between cursor-pointer border h-20 w-[40vw] min-w-[300px] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation whitespace-nowrap">
-                        <li class="list-none font-arvo text-blueOne">
-                            Rechercher un film
-                        </li>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-blueOne" width="2em" height="2em" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/>
-                        </svg>
-                    </div>
-                </button>
-            </a>
-        
-            <!-- Choose a movie theater -->
-            <button class="theater-filter">
-                <div class="flex items-center justify-between cursor-pointer border h-20 w-[40vw] min-w-[300px] bg-whiteOne px-4 pl-16 hover:bg-gradient-to-r from-whiteOne to-blueOne/15 bg-[length:200%_100%] hover:animate-bg-fill-animation whitespace-nowrap">
-                    <li class="list-none font-arvo text-blueOne">
-                        Choisir un cinéma
-                    </li>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-blueOne" width="1.9em" height="1.9em" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"/>
-                    </svg>
-                </div>
-            </button>
+                            <div class="flex items-center justify-center w-[20%] pl-4">
+                                <div class="w-14 h-14 flex items-center justify-center bg-goldOne">
+                                    <p class="text-blueOne font-arvo font-bold"><%= review.rating %></p>
+                                </div>
+                            </div>
+                        </div>
 
-
-            <!-- movie reviews card -->
-            <div class="flex flex-col w-full mt-4">
-                <div class="w-full flex items-center bg-blueOne h-12">
-                    <p class="w-full  text-center text-white text-lg font-arvo font-bold">BLADE RUNNER</p>
-                </div>
-
-                <div class="flex items center justify-between">
-                    <div class="flex justyfy-start w-[80%] py-6 px-3  ">
-                        <p class="w-full text-left text-blueOne text-lg font-arvo font-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta ullam, ea minima autem porro fuga similique quasi tempora totam pariatur at dolore nulla, enim molestiae aliquid nihil! Repellendus, at quasi!    
-                        </p>
-                    </div>
-
-                    <div class="flex items-center justify-center w-[20%] pl-4">
-                        <div class="w-14 h-14 flex items-center justify-center bg-goldOne">
-                            <p class="text-blueOne font-arvo font-bold">4</p>
+                        <div class="flex w-full h-12">
+                            <button class="w-[50%] bg-white border border-blueOne flex items-center justify-center validate-review" data-review-id="<%= review.review_id %>">
+                                <p class="text-lg text-blueOne font-arvo font-bold text-center">VALIDER</p>
+                            </button>
+                            <button class="w-[50%] bg-redOne flex items-center justify-center hover:bg-red-600 duration-300 ease-out delete-review" data-review-id="<%= review.review_id %>">
+                                <p class="text-lg text-white font-arvo font-bold text-center">SUPPRIMER</p>
+                            </button>
                         </div>
                     </div>
-                </div>
-
-                <div class="flex w-full h-12">
-                    <button class="w-[50%] bg-white border border-blueOne flex items-center justify-center">
-                        <p class="text-lg text-blueOne font-arvo font-bold text-center">VALIDER</p>
-                    </button>
-                    <button class="w-[50%] bg-redOne flex items-center justify-center hover:bg-red-600 duration-300 ease-out">
-                        <p class="text-lg text-white font-arvo font-bold text-center">SUPPRIMER</p>
-                    </button>
-                </div>
-            </div>
-
+                <% }) %>
+            <% } %>
         </section>
-        
     </main>
 
     <!-- Footer -->
@@ -99,7 +81,5 @@
     </footer>
     
     <div class="hidden" id="close-filter-menu"></div>
-
 </body>
-
 </html>

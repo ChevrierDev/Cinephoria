@@ -13,32 +13,22 @@
     <!-- Movie Listings -->
     <main class="container grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-14 md:gap-20 w-fit h-fit ">
 
-        <!-- movie card -->
-         <a >
-            <div class="flex flex-col cursor-pointer items-center justify-center w-60 pb-3 h-fit space-y-2  ">
-                <img src="/images/Films/fall-guy1.jpg" alt="Image 1" class="w-[40vw] h-[45vh] object-cover movie-card">
-                <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
-                    Fall Guy
-                </h1>
-                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Réservation faite le : 01/10/2023
-                </p>
-            </div>
-        </a>
-        <!-- movie card -->
-         <a >
-            <div class="flex flex-col cursor-pointer items-center justify-center w-60 pb-3 h-fit space-y-2  ">
-                <img src="/images/Films/fall-guy1.jpg" alt="Image 1" class="w-[40vw] h-[45vh] object-cover movie-card">
-                <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
-                    Fall Guy
-                </h1>
-                <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
-                Réservation faite le : 01/10/2023
-                </p>
-            </div>
-        </a>
-
-      
+        <% if (reservations && reservations.length > 0) { %>
+         <% reservations.forEach(reservation => { %>
+            <!-- movie card -->
+            <a >
+                <div class="flex flex-col cursor-pointer items-center justify-center w-60 pb-3 h-fit space-y-2  ">
+                    <img src="/uploads/<%= reservation.movie_poster %>" alt="Image 1" class="w-[40vw] h-[45vh] object-cover movie-card" data-movie-id=<%= reservation.movie_id %> data-reservation-id=<%= reservation.reservation_id %>>
+                    <h1 class="font-arvo text-blueOne text-lg font-bold tracking-wide">
+                        <%= reservation.movie_title %>
+                    </h1>
+                    <p class="font-arvo text-blueOne font-thin text-sm tracking-wide">
+                    Réservation faite le : <%= new Date(reservation.reserved_at).toLocaleDateString("fr-FR", {year: "numeric", month:"2-digit", day:"2-digit"}) %>
+                    </p>
+                </div>
+            </a>
+         <% }) %>
+        <% } %>
      
     </main>
     

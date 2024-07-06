@@ -22,6 +22,6 @@ reviewsRoutes.delete("/reviews/:id", deleteReviewsById);
 reviewsRoutes.post("/reviews",postReviewsValidator(), validateReviews, postReviews);
 
 // update reviews
-reviewsRoutes.put("/reviews/:id",postReviewsValidator(), validateReviews, updateReviewsById);
+reviewsRoutes.put('/reviews/:review_id', updateReviewsById);
 
 module.exports = reviewsRoutes;
