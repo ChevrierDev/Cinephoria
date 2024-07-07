@@ -541,9 +541,6 @@ video {
     max-width: 1536px;
   }
 }
-.visible{
-  visibility: visible;
-}
 .fixed{
   position: fixed;
 }
@@ -816,6 +813,9 @@ video {
 .mt-28{
   margin-top: 7rem;
 }
+.mt-3{
+  margin-top: 0.75rem;
+}
 .mt-36{
   margin-top: 9rem;
 }
@@ -839,9 +839,6 @@ video {
 }
 .mt-\[76px\]{
   margin-top: 76px;
-}
-.mt-3{
-  margin-top: 0.75rem;
 }
 .block{
   display: block;
@@ -1879,14 +1876,14 @@ video {
 .opacity-0{
   opacity: 0;
 }
+.opacity-50{
+  opacity: 0.5;
+}
 .opacity-60{
   opacity: 0.6;
 }
 .opacity-90{
   opacity: 0.9;
-}
-.opacity-50{
-  opacity: 0.5;
 }
 .shadow-lg{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -1898,20 +1895,12 @@ video {
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.shadow-md{
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .outline-none{
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 .outline{
   outline-style: solid;
-}
-.outline-dashed{
-  outline-style: dashed;
 }
 .outline-8{
   outline-width: 8px;
@@ -2382,11 +2371,6 @@ video {
 .hover\:bg-white:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-orange-300:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 186 116 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-gradient-to-r:hover{
