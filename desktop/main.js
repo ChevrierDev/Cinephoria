@@ -11,10 +11,11 @@ function createWindow() {
     title: "Cinéphoria",
     width: 800,
     height: 600,
+    icon: path.join(__dirname + '/icon/logo-blanc.ico'),
     webPreferences: {
         contextIsolation: true,
         nodeIntegration: true,
-        preload: path.join(__dirname, 'preload.js')
+        preload: path.join(__dirname , 'preload.js')
     }
   });
 
@@ -23,7 +24,7 @@ function createWindow() {
   }
 
   // Loads HTML file into the window
-  win.loadFile('views/login.html');
+  win.loadFile('views/employeeDashboard.html');
 }
 
 // Calls createWindow() when the app is ready

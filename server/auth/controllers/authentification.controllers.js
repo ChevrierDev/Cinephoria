@@ -51,7 +51,11 @@ async function authUser(req, res) {
     console.log("User logged in, token:", token);
 
     const redirectUrl = redirect || `/dashboard/${user.role}`;
-    return res.redirect(redirectUrl);
+    if (req.headers['x-electron-request']) {
+      return res.status(200).json({ token, redirectUrl: 'employeeDashboard.html' });
+    } else {
+      return res.redirect(redirectUrl);
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
