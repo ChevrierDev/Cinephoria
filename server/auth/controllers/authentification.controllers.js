@@ -10,7 +10,7 @@ async function authUser(req, res) {
     const { rows } = await DB.query(findUserQuery, [email]);
 
     if (rows.length <= 0) {
-      return res.status(404).json({ message: "No user found with this email address." });
+      return res.status(404).json({ message: "Aucun utilisateur trouvé avec cette adresse email." });
     }
 
     const user = rows[0];
@@ -18,7 +18,7 @@ async function authUser(req, res) {
     const verifyPassword = await compareHashedPassword(password, user.password);
 
     if (!verifyPassword) {
-      return res.status(401).json({ message: "Incorrect password." });
+      return res.status(401).json({ message: "Mot de passe incorrecte." });
     }
 
     const token = jwtToken.sign(
