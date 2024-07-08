@@ -9,7 +9,42 @@
     <title>Employé Dashboard</title>
 </head>
 <body>
-    <main class="w-screen h-screen flex">
+    <main class="w-screen h-screen flex relative">
+        <!-- intervention form -->
+        <div class=" flex-col absolute w-1/2 h-[80%] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-100 rounded-md shadow-md z-50 hidden" id="intervention-form-menu">
+            <div class="flex items-center justify-start pl-7 pt-5">
+                <button class="bg-blueOne w-14 h-11 flex items-center justify-center hover:scale-95 duration-200 ease-in-out shadow-sm" id="close-intervention-form-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14 5l-7 7l7 7"/></svg>
+                </button>
+            </div>
+
+            <h1 class="text-blueOne text-2xl tracking-wide font-arvo font-bold text-center mb-4">Vendredi 06 Mai</h1>
+
+            <form action="" id="incident-form" class="p-3 w-[80%] space-y-7 mx-auto">
+
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-rooms">
+                    <p class="font-arvo text-lg font-bold text-blueOne" id="rooms-choosen">Choisir une Salle</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                        <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
+                    </svg>
+                </div>
+
+                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-seats">
+                    <p class="font-arvo text-lg font-bold text-blueOne" id="seats-choosen">Choisir un siège</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                        <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
+                    </svg>
+                </div>
+
+                <div class="container w-full px-4 flex items-center bg-white h-fit rounded-md">
+                    <textarea class="text-lg font-arvo font-bold text-blueOne flex-1 outline-none h-44 pt-5 placeholder:text-blueOne" placeholder="Message" name="comment"></textarea>
+                </div>
+
+                <button type="submit" class="bg-redOne w-32 tracking-wide h-10 flex items-center justify-center font-arvo mx-auto text-white font-bold hover:scale-95 duration-150 hover:bg-red-600">Valider</button>
+            </form>
+            
+        </div>
+
         <!-- sidebar menu -->
         <aside class="h-full bg-blueOne w-72">
             <!-- sidebar title -->

@@ -120,7 +120,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   openTheaterFilterBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    theaterFilterMenu.classList.toggle("hidden");
+    const isHidden = theaterFilterMenu.classList.contains('hidden');
+    closeAllMenu()
+    if (isHidden) {
+      theaterFilterMenu.classList.toggle("hidden");
+    }
   });
 
   try {
@@ -134,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cinemas = await response.json();
 
     cinemas.forEach((cinema) => {
-      const cinemaItem = document.createElement("li");
+      const cinemaItem = document.createElement("button");
       cinemaItem.textContent = cinema.name;
       cinemaItem.classList.add(
         "py-2",
@@ -145,7 +149,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         "font-bold",
         "text-blueOne",
         "cursor-pointer",
-        "list-none",
         "tracking-wide"
       );
       // Add data-cinema-id attribute with cinema ID
@@ -163,5 +166,36 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Erreur lors de la récupération des cinémas:", error);
   }
+
+  //open intervention menu feature
+  const openInterventionBtn = document.getElementById('open-incident-menu-button');
+  const interventionMenu = document.getElementById('intervention-form-menu');
+  const closeInterventionBtn = document.getElementById('close-intervention-form-menu');
+
+  const closeAllMenu = () => {
+    interventionMenu.classList.add('hidden');
+    interventionMenu.classList.remove('flex');
+    theaterFilterMenu.classList.add('hidden');
+  } 
+
+  openInterventionBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation(); 
+    const isHidden = interventionMenu.classList.contains('hidden');
+    closeAllMenu();
+    if (isHidden) {
+      interventionMenu.classList.toggle('hidden');
+      interventionMenu.classList.toggle('flex');
+    }
+  })
+
+  closeInterventionBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation(); 
+    interventionMenu.classList.add('hidden');
+    interventionMenu.classList.remove('flex');
+  })
+
+ 
 
 });
