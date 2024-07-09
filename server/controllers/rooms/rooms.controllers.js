@@ -45,13 +45,14 @@ async function getRoomsByCinema(req, res) {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: "No rooms found for this cinema" });
     }
-
+    
     res.status(200).json({ rooms: result.rows });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
 
 // Function to create a new room
 async function postRooms(req, res) {

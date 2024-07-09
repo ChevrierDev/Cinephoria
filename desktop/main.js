@@ -22,12 +22,12 @@ function createWindow() {
     },
   });
 
-  if (isDev) {
+  if (!isDev) {
     mainWindow.webContents.openDevTools();
   }
 
   // Loads HTML file into the window
-  if (!loggedIn) {
+  if (loggedIn) {
     mainWindow.loadFile(path.join(__dirname, 'views/employeeDashboard.html'));
   } else {
     mainWindow.loadFile(path.join(__dirname, 'views/login.html'));

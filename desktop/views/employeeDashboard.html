@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/output.css">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
-    <script defer src="../renderer.js"></script>
+    <script type="module" defer src="../renderer.js"></script>
     <title>Employé Dashboard</title>
 </head>
-<body>
-    <main class="w-screen h-screen flex relative">
+<body class="overflow-x-hidden">
+    <main class="w-screen h-screen flex relative ">
         <!-- intervention form -->
         <div class=" flex-col absolute w-1/2 h-[80%] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-100 rounded-md shadow-md z-50 hidden" id="intervention-form-menu">
             <div class="flex items-center justify-start pl-7 pt-5">
@@ -18,29 +18,50 @@
                 </button>
             </div>
 
-            <h1 class="text-blueOne text-2xl tracking-wide font-arvo font-bold text-center mb-4">Vendredi 06 Mai</h1>
+            <h1 class="text-blueOne text-2xl tracking-wide font-arvo font-bold text-center mb-4" id="today-intervention-date">Vendredi 06 Mai</h1>
 
             <form action="" id="incident-form" class="p-3 w-[80%] space-y-7 mx-auto">
 
-                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-rooms">
-                    <p class="font-arvo text-lg font-bold text-blueOne" id="rooms-choosen">Choisir une Salle</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
-                        <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
-                    </svg>
+                <div class="w-full h-16 bg-white flex items-center justify-between cursor-pointer relative" id="select-rooms">
+                    <!-- choose rooms button -->
+                    <button class="px-7 w-full flex items-center justify-between">
+                        <p class="font-arvo text-lg font-bold text-blueOne" id="rooms-choosen">Choisir une Salle</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                            <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
+                        </svg>    
+                    </button>
+                    
+                    <!-- rooms list -->
+                    <div class="absolute w-full max-h-80 py-5 bg-blueOne animate-open-menu z-50 hidden top-full overflow-y-auto" id="rooms-menu">
+                        <ul class="text-blue-one font-arvo text-white font-bold  list-none" id="rooms-list">
+
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="w-full h-16 bg-white flex items-center justify-between px-7 cursor-pointer" id="select-seats">
-                    <p class="font-arvo text-lg font-bold text-blueOne" id="seats-choosen">Choisir un siège</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
-                        <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
-                    </svg>
+                <div class="w-full h-16 bg-white flex items-center justify-between  cursor-pointer relative" id="select-seats">
+                    <!-- choose rooms button -->
+                    <div class="px-7 w-full flex items-center justify-between ">
+                        <p class="font-arvo text-lg font-bold text-blueOne" id="seats-choosen">Choisir un siège</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+                            <path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/>
+                        </svg>    
+                    </div>
+                
+                    <!-- rooms list -->
+                    <div class="absolute max-h-80  w-full py-5 bg-blueOne animate-open-menu z-50 top-full hidden overflow-y-auto" id="seats-menu">
+                        <ul class="text-blue-one font-arvo text-white font-bold  list-none" id="seats-list">
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="container w-full px-4 flex items-center bg-white h-fit rounded-md">
-                    <textarea class="text-lg font-arvo font-bold text-blueOne flex-1 outline-none h-44 pt-5 placeholder:text-blueOne" placeholder="Message" name="comment"></textarea>
+                    <textarea class="text-lg font-arvo font-bold text-blueOne flex-1 outline-none h-44 pt-5 placeholder:text-blueOne" placeholder="Message" name="description" id="intervention-description"></textarea>
                 </div>
 
-                <button type="submit" class="bg-redOne w-32 tracking-wide h-10 flex items-center justify-center font-arvo mx-auto text-white font-bold hover:scale-95 duration-150 hover:bg-red-600">Valider</button>
+                <button type="submit" class="bg-redOne w-32 tracking-wide h-10 flex items-center justify-center font-arvo mx-auto text-white font-bold hover:scale-95 duration-150 hover:bg-red-600" id="submit-intervention-form">Valider
+                </button>
+
             </form>
             
         </div>
@@ -49,7 +70,7 @@
         <aside class="h-full bg-blueOne w-72">
             <!-- sidebar title -->
             <div class="flex space-x-7 p-4 pt-7">
-                <p class="text-white text-2xl">Bonjour, <br><span class="text-3xl">Emily</span></p>
+                <p class="text-white text-2xl">Bonjour, <br><span class="text-3xl" id="user-name"></span></p>
                 <img class="h-28 w-12" src="../icon/logo-blanc.ico" alt="Cinéphoria small white logo">
             </div>
             <!-- sidebar nav menu -->
@@ -61,7 +82,7 @@
                     <h1 class="text-white text-sm tracking-wide font-arvo  font-bold text-center mb-4">Choisir cinéma pour intervention</h1>
                     <div class="w-full " >
                         <a href="#" >
-                            <button class="text-white text-base tracking-normal font-arvo font-bold h-12 w-full bg-black hover:bg-goldOne active:bg-goldOne flex items-center justify-between px-5 text-nowrap " id="theater-filter-button">
+                            <button class="text-white text-base tracking-normal font-arvo font-bold h-12 w-full bg-black hover:bg-goldOne  flex items-center justify-between px-5 text-nowrap " id="theater-filter-button">
                                 <p id="text-content">Cinéma</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-width="2" d="m5 10l7 7l7-7"/></svg>
                             </button>
@@ -72,7 +93,7 @@
                 </div>
 
                 <div class="w-full">
-                    <button class="text-white text-base tracking-normal font-arvo font-bold h-12 w-full bg-black hover:bg-goldOne active:bg-goldOne flex justify-center items-center px-10 gap-4 text-nowrap" id="open-incident-menu-button">
+                    <button class="text-white text-base tracking-normal font-arvo font-bold h-12 w-full bg-black hover:bg-goldOne  flex justify-center items-center px-10 gap-4 text-nowrap" id="open-incident-menu-button">
                         Saisir une intervention
                     </button>
                     <a href="#">
@@ -84,7 +105,7 @@
             </div>
             <div class="flex items-end justify-center h-[15vh] py-6">
                 <form action="" method="post" class="w-full">
-                    <button type="submit" id="logoutBtn" class="text-white h-14 flex items-center justify-center gap-x-3 font-bold font-arvo text-sm hover:bg-goldOne active:bg-goldOne w-full">
+                    <button type="submit" id="logoutBtn" class="text-white h-14 flex items-center justify-center gap-x-3 font-bold font-arvo text-sm hover:bg-goldOne  w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"/></svg>
                         <p class="pt-0.5">Déconnexion</p>
                     </button>
@@ -95,19 +116,8 @@
         <section class="mx-auto p-10 w-[85%] flex flex-col items-center">
             <h1 class="font-arvo text-5xl font-bold text-blueOne tracking-wide mt-2">Opérations en cours</h1>
             <!-- theater container -->
-            <div class="grid grid-cols-4 gap-4 mt-8 pt-10">
-                <!-- theater intervention card -->
-                <div class="w-fit flex flex-col cursor-pointer hover:scale-105 hover:duration-500 hover:ease-in-out">
-                    <img src="../../client/public/images/cinema/Beaugrenelle.jpg" class="object-cover" width="250" height="290" alt="cinéma photo">
-                    <!-- intervention detail -->
-                    <div class="min-h-14 bg-black flex flex-col items-start px-2 py-2">
-                        <!-- theater name -->
-                        <h2 class="font-arvo text-lg font-bold text-white tracking-wide">Panthéon</h2>
-                        <p class="font-arvo text-sm text-white/65 tracking-wide">Suspension défectueuse</p>
-                        <p class="font-arvo text-sm text-white/65 tracking-wide">Salle 1</p>
-                        <p class="font-arvo text-sm text-white/65 tracking-wide">A15</p>
-                    </div>
-                </div>
+            <div class="grid grid-cols-4 gap-4 mt-8 pt-10" id="intervention-container">
+               
             </div>
         </section>
     </main>
