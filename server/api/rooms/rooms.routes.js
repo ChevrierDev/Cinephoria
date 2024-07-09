@@ -18,6 +18,8 @@ const {
 // get all Rooms
 roomsRoutes.get("/rooms", getRooms);
 
+
+
 // get Rooms by Id
 roomsRoutes.get("/rooms/:id", getRoomsById);
 

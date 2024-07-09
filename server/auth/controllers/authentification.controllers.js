@@ -10,7 +10,11 @@ async function authUser(req, res) {
     const { rows } = await DB.query(findUserQuery, [email]);
 
     if (rows.length <= 0) {
-      return res.status(404).json({ message: "No user found with this email address." });
+      return res
+        .status(404)
+        .json({
+          message: "Aucun utilisateur trouvé avec cette adresse email.",
+        });
     }
 
     const user = rows[0];
@@ -18,7 +22,7 @@ async function authUser(req, res) {
     const verifyPassword = await compareHashedPassword(password, user.password);
 
     if (!verifyPassword) {
-      return res.status(401).json({ message: "Incorrect password." });
+      return res.status(401).json({ message: "Mot de passe incorrecte." });
     }
 
     const token = jwtToken.sign(
@@ -38,20 +42,37 @@ async function authUser(req, res) {
 
     if (user.must_change_password) {
       if (user.role === "user") {
-        return res.redirect('/dashboard/user/reset-pass');
+        return res.redirect("/dashboard/user/reset-pass");
       }
       if (user.role === "admin") {
-        return res.redirect('/dashboard/admin/reset-pass');
+        return res.redirect("/dashboard/admin/reset-pass");
       }
       if (user.role === "employee") {
-        return res.redirect('/dashboard/employee/reset-pass');
+        return res.redirect("/dashboard/employee/reset-pass");
       }
     }
 
     console.log("User logged in, token:", token);
 
     const redirectUrl = redirect || `/dashboard/${user.role}`;
-    return res.redirect(redirectUrl);
+    if (req.headers["x-electron-request"]) {
+      if (user.role !== "employee") {
+        return res
+          .status(403)
+          .json({ message: "Accès réservé aux employés uniquement." });
+      }
+      return res.status(200).json({
+        token,
+        redirectUrl: "employeeDashboard.html",
+        user: {
+          first_name: user.first_name,
+          last_name: user.last_name,
+          role: user.role,
+        },
+      });
+    } else {
+      return res.redirect(redirectUrl);
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");

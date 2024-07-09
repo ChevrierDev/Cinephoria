@@ -8,7 +8,6 @@
     "start": "electron .",
     "build:css": "tailwindcss build -i views/css/styles.css -o views/css/output.css",
     "watch:css": "tailwindcss build -i views/css/styles.css -o views/css/output.css --watch"
-    
   },
   "keywords": [],
   "author": "",
@@ -20,6 +19,7 @@
     "tailwindcss": "^3.4.4"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "toastify-js": "^1.12.0"
   }

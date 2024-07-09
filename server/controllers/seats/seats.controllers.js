@@ -46,6 +46,45 @@ async function getSeatsByRoomId(roomId) {
   return result.rows;
 }
 
+async function getSeatsByRoomIdApi(req, res) {
+  const id = req.params.id
+  const query = "SELECT * FROM seats WHERE room_id = $1";
+  const parameter = [id];
+  const results = await DB.query(query, parameter); 
+  return res.status(200).json(results.rows);
+}
+
+async function getRoomsSeatsByCinemaId(req, res) {
+  const id = req.params.id;
+  const query = `
+  SELECT 
+    s.seat_id, s.seat_label, s.accessibility,
+    r.room_id, r.name AS room_name, r.quality,
+    c.cinema_id, c.name AS cinema_name
+  FROM
+    seats s
+  JOIN 
+    rooms r ON s.room_id = r.room_id
+  JOIN
+    cinemas c ON r.cinema_id = c.cinema_id
+  WHERE
+    c.cinema_id = $1 
+  `;
+  const parameter = [id];
+  try {
+    const result = await DB.query(query, parameter);
+    const isElectronRequest = req.headers['x-electron-request'] === 'true';
+    if (isElectronRequest) {
+      return res.status(200).json(result.rows);
+    } else {
+      return result.rows;
+    }
+  } catch (error) {
+    console.error("Erreur lors de la récupération des salles et sièges par ID de cinéma :", error);
+    return res.status(500).json({ error: "Erreur interne du serveur" });
+  }
+}
+
 async function getSeatCountByRoomId(roomId) {
   try {
     const query = `
@@ -171,7 +210,9 @@ async function deleteSeatsById(req, res) {
 module.exports = {
     getSeats,
     getSeatsById,
+    getSeatsByRoomIdApi,
     getReservedSeats,
+    getRoomsSeatsByCinemaId,
     getSeatCountByRoomId,
     getSeatsByRoomId,
     postSeats,
