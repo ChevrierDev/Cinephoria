@@ -16,6 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (errorContainer && !errorContainer.classList.contains("hidden")) {
     setTimeout(() => {
       errorContainer.classList.add("hidden");
-    }, 3000);
+    }, 10000);
   }
 });

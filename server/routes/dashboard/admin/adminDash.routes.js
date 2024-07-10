@@ -134,6 +134,7 @@ adminDashboardRoutes.get(
     const movie = await getMovieById(req, res);
     res.render("dashboard/admin/updateMovie", {
       title: `Modifier le film.`,
+      movie: movie
     });
   }
 );

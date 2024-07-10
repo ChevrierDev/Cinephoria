@@ -135,7 +135,9 @@ const updateUserValidator = () => {
 async function validateUser(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    let errorMsg = errors.array().map(err => err.msg); 
+    req.flash('error_msg', errorMsg);
+    return res.redirect('back');
   }
   next();
 }

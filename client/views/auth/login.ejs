@@ -21,11 +21,12 @@
     <main class="flex items-center justify-center min-h-screen mb-28 relative">
         
         <% if (error_msg && error_msg.length > 0) { %>
-            <div id="error-container" class="absolute w-80 h-14 top-0 flex items-center justify-center">
+            <ul id="error-container" class="absolute w-fit h-fit top-0 flex flex-col items-center justify-center space-y-2">
                 <% error_msg.forEach(error => { %>
-                    <p class="font-arvo font-bold text-redOne text-center"><%= error %></p>
+                    <li class="font-arvo font-bold text-redOne text-center text-sm list-none"><%= error %></li>
                 <% }) %>
-            </div>
+            </ul>
+           
         <% } %>
       
         
