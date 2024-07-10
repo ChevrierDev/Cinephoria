@@ -38,16 +38,16 @@
                         <p class="font-arvo  text-white text-sm text-center text-ellipsis">
                           <%= movie.description %>
                         </p>
-
-                        <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                          5/5
-                        </p>
                       </div>
 
                     </div>
                     
                     <div class="absolute top-4 right-0 bg-blueOne font-arvo text-white font-bold  h-6 w-fit px-3 text-nowrap">
                       <%= movie.genre %>
+                    </div>
+
+                    <div class="absolute bottom-4 left-2 rounded-full bg-blueOne/75 font-arvo flex items-center justify-center text-white font-bold  h-10 w-10 px-3 text-nowrap">
+                     - <%= movie.pg %>
                     </div>
 
                   </div>
@@ -74,16 +74,12 @@
                       <img
                       src="uploads/<%= movie.poster %>"
                         alt="photo film"
-                        class="object-cover"
+                        class="object-contain"
                       />
                       <!-- movie details container -->
                       <div class="absolute inset-0 flex flex-col items-center justify-center bg-blueOne/85 p-2 px-8 space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                         <p class="font-arvo  text-white text-sm text-center text-ellipsis">
                           <%= movie.description %>
-                        </p>
-
-                        <p class="font-arvo  text-goldOne font-bold text-sm text-center">
-                          5/5
                         </p>
                       </div>
                     </div>
@@ -117,7 +113,7 @@
     </div>
     <% } else { %>
       <div class="w-full flex items-center justify-center">
-        <p class="font-arvo text-blueOne font-bold text-3xl">Aucun films ajouté</p>
+        <p class="font-arvo text-blueOne font-bold text-3xl">Aucun films récemment ajoutés</p>
       </div>
       <% } %>
   </body>

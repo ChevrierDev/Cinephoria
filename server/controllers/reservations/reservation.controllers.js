@@ -138,35 +138,59 @@ async function getAllReservationInfoById(req, res) {
   }
 }
 
-// Function to create a new reservation
 async function postReservation(req, res) {
   try {
     const { user_id, cinema_id, showtimes_id, seats_reserved } = req.body;
 
     if (!user_id || !cinema_id || !showtimes_id || !seats_reserved) {
-      return res
-        .status(400)
-        .json({ error: "You must enter all required fields!" });
+      return res.status(400).json({ error: "You must enter all required fields!" });
     }
 
-    const query = `
-      INSERT INTO reservations (user_id, cinema_id, showtimes_id, seats_reserved, status, reserved_at) 
-      VALUES ($1, $2, $3, $4::jsonb, false, NOW()) 
-      RETURNING *`;
-    const result = await DB.query(query, [
-      user_id,
-      cinema_id,
-      showtimes_id,
-      JSON.stringify(seats_reserved),
-    ]);
+    // Convertir seats_reserved en JSON string pour le stockage
+    const seats_reserved_json = JSON.stringify(seats_reserved);
 
-    // Send the newly created reservation as response
+    // Commencer une transaction
+    await DB.query('BEGIN');
+
+    // Acquérir un verrou de conseil partagé pour les sièges réservés
+    const lockKey = showtimes_id;
+    const lockQuery = `SELECT pg_advisory_xact_lock($1)`;
+    await DB.query(lockQuery, [lockKey]);
+    console.log(lockQuery)
+
+    // Vérifier si les sièges sont déjà réservés
+    const checkQuery = `
+      SELECT seats_reserved
+      FROM reservations
+      WHERE showtimes_id = $1 AND seats_reserved @> $2::jsonb
+    `;
+    const checkResult = await DB.query(checkQuery, [showtimes_id, seats_reserved_json]);
+    console.log(checkResult)
+    if (checkResult.rows.length > 0) {
+      await DB.query('ROLLBACK');
+      return res.status(400).json({ error: "One or more seats are already reserved!" });
+    }
+
+    // Insérer la nouvelle réservation
+    const insertQuery = `
+      INSERT INTO reservations (user_id, cinema_id, showtimes_id, seats_reserved, status, reserved_at)
+      VALUES ($1, $2, $3, $4::jsonb, false, NOW())
+      RETURNING *
+    `;
+    const result = await DB.query(insertQuery, [user_id, cinema_id, showtimes_id, seats_reserved_json]);
+
+    // Commit la transaction
+    await DB.query('COMMIT');
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
+    await DB.query('ROLLBACK');
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
   }
 }
+
+
 // Function to update a reservation by ID
 async function updateReservationById(req, res) {
   try {

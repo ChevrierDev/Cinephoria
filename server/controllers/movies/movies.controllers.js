@@ -55,6 +55,20 @@ async function getMovieById(req, res) {
   }
 }
 
+async function getMoviesAverageRating(movieId) {
+  try {
+    const query = 'SELECT AVG(rating) as average_rating FROM reviews WHERE movie_id = $1';
+    const result = await DB.query(query, [movieId]);
+    const averageRating = result.rows[0].average_rating;
+
+    // Renvoie 0 si aucune note n'est trouvée
+    return averageRating ? parseFloat(averageRating) : 0;
+  } catch (err) {
+    console.log(err);
+    throw new Error('Internal server error!');
+  }
+}
+
 async function postMovie(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -280,6 +294,7 @@ async function deleteMovieById(req, res) {
 
 module.exports = {
   getMovies,
+  getMoviesAverageRating,
   getMovieById,
   postMovie,
   deleteMovieById,

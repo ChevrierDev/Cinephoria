@@ -3,6 +3,7 @@ const filmsRoutes = express.Router();
 const {
   getLastWedMovies,
   getMovies,
+  getMoviesAverageRating,
   getMovieById
 } = require("../../controllers/movies/movies.controllers");
 const {
@@ -65,12 +66,14 @@ filmsRoutes.get("/", async (req, res) => {
 
 filmsRoutes.get("/disponibiliter/:id", async (req, res) => {
   const filmId = req.params.id;
-  
+
   try {
     const movie = await getMovieById(req, res);
     const cinemas = await getCinemas(req, res);
     const showtimes = await getShowtimesByFilm(filmId);
     const reviews = await getReviewsByMovieId(req, res) || [];
+    const rating = await getMoviesAverageRating(filmId);
+    console.log(rating);
 
     if (!movie || !cinemas || !showtimes) {
       throw new Error("Data fetch error");
@@ -94,14 +97,14 @@ filmsRoutes.get("/disponibiliter/:id", async (req, res) => {
       movie: decMovies,
       cinemas: cinemaShowtimes,
       filmId: filmId,
-      reviews: decReviews
+      reviews: decReviews,
+      rating: rating
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
   }
 });
-
 
 
 module.exports = filmsRoutes;
