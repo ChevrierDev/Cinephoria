@@ -5,24 +5,37 @@ const DB = require("../../config/postgres.config");
 
 async function authUser(req, res) {
   try {
+    const isElectronRequest = req.headers["x-electron-request"];
     const { email, password, redirect } = req.body;
     const findUserQuery = `SELECT * FROM users WHERE email = $1`;
     const { rows } = await DB.query(findUserQuery, [email]);
 
-    if (rows.length <= 0) {
-      return res
-        .status(404)
-        .json({
+    if (isElectronRequest) {
+      if (rows.length <= 0) {
+        return res.status(404).json({
           message: "Aucun utilisateur trouvé avec cette adresse email.",
         });
+      }
+    }
+
+    if (rows.length <= 0) {
+      req.flash('error_msg', 'Aucun utilisateur trouvé avec cette adresse email.');
+      return res.redirect('/login');
     }
 
     const user = rows[0];
 
     const verifyPassword = await compareHashedPassword(password, user.password);
 
+    if (isElectronRequest) {
+      if (!verifyPassword) {
+        return res.status(401).json({ message: "Mot de passe incorrecte." });
+      }
+    }
+
     if (!verifyPassword) {
-      return res.status(401).json({ message: "Mot de passe incorrecte." });
+      req.flash('error_msg', 'Mot de passe incorrecte.');
+      return res.redirect('/login');
     }
 
     const token = jwtToken.sign(
@@ -55,7 +68,7 @@ async function authUser(req, res) {
     console.log("User logged in, token:", token);
 
     const redirectUrl = redirect || `/dashboard/${user.role}`;
-    if (req.headers["x-electron-request"]) {
+    if (isElectronRequest) {
       if (user.role !== "employee") {
         return res
           .status(403)
