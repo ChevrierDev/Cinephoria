@@ -180,7 +180,6 @@ reservationRoutes.get("/login/:id", async (req, res) => {
   const redirectUrl = `/reservation/choisir-place/${req.params.id}`;
   const showtimes = await getJoinInfoShowtimesById(req, res);
   const decShowtimes = decodeData(showtimes);
-  console.log(decShowtimes);
   res.render("reservation/auth-page", {
     title: "Connectez-vous ou créer un compte.",
     redirectUrl: redirectUrl,

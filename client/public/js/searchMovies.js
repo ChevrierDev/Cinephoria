@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error('Error during search:', err);
             }
         } else {
-            searchResults.innerHTML = '';  // Clear results if query is too short
+            searchResults.innerHTML = ''; 
         }
     });
 

@@ -1,37 +1,60 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const swiper = new Swiper('.choose-days-slider', {
-    slidesPerView: 6,
-    spaceBetween: -80,
-    grabCursor: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    on: {
-      slideChangeTransitionEnd: function () {
-        const slides = document.querySelectorAll(".swiper-slide");
-        slides.forEach((slide) => {
-          slide.style.transition = "none";
-          if (slide.classList.contains("swiper-slide-duplicate")) {
-            slide.style.transform = "translateX(0px)";
-          }
-        });
+  const slides = document.querySelectorAll(".swiper-slide");
+  console.log(slides.length)
+  
+  if (slides.length <= 4 ) {
+    const swiper = new Swiper('.choose-days-slider', {
+      slidesPerView: 1,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
-    },
-    breakpoints: {
-      180: { slidesPerView: 1, spaceBetween: 10 },
-      480: { slidesPerView: 1, spaceBetween: 10 },
-      680: { slidesPerView: 2, spaceBetween: 10 },
-      786: { slidesPerView: 3, spaceBetween: 10 },
-      1024: { slidesPerView: 5, spaceBetween: 10 },
-      1280: { slidesPerView: 5, spaceBetween: 10 },
-      1536: { slidesPerView: 5, spaceBetween: 10 },
-    },
-  });
+      on: {
+        slideChangeTransitionEnd: function () {
+         
+          slides.forEach((slide) => {
+            slide.style.transition = "none";
+            if (slide.classList.contains("swiper-slide-duplicate")) {
+              slide.style.transform = "translateX(0px)";
+            }
+          });
+        },
+      },
+    });
+  } else {
+    const swiper = new Swiper('.choose-days-slider', {
+      slidesPerView: 5,
+      spaceBetween: 10,
+      grabCursor: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      on: {
+        slideChangeTransitionEnd: function () {
+         
+          slides.forEach((slide) => {
+            slide.style.transition = "none";
+            if (slide.classList.contains("swiper-slide-duplicate")) {
+              slide.style.transform = "translateX(0px)";
+            }
+          });
+        },
+      },
+      
+      breakpoints: {
+        180: { slidesPerView: 1, spaceBetween: 10 },
+        480: { slidesPerView: 1, spaceBetween: 10 },
+        680: { slidesPerView: 2, spaceBetween: 10 },
+        786: { slidesPerView: 3, spaceBetween: 10 },
+        1024: { slidesPerView: 5, spaceBetween: 10 },
+        1280: { slidesPerView: 5, spaceBetween: 10 },
+        1536: { slidesPerView: 5, spaceBetween: 10 },
+      },
+    });
+  }
+ 
 
   const dayButtons = document.querySelectorAll(".day-button");
   const availabilityContainer = document.querySelector("#availability-container");
@@ -75,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "shadow-xl",
               "h-[20vh]"
             );
-            sessionDiv.dataset.showtimeId = showtime.showtimes_id; // Ajouter l'ID de la séance comme data attribute
+            sessionDiv.dataset.showtimeId = showtime.showtimes_id; 
 
             const startTime = new Date(`1970-01-01T${showtime.start_time}Z`);
             const endTime = new Date(`1970-01-01T${showtime.end_time}Z`);
@@ -100,26 +123,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             sessionDiv.addEventListener("click", (e) => {
               e.preventDefault();
-              selectedShowtimeId = sessionDiv.dataset.showtimeId; // Enregistrer l'ID de la séance
+              selectedShowtimeId = sessionDiv.dataset.showtimeId;
               console.log(selectedShowtimeId); // Log the showtime ID
               document.querySelectorAll(".container.selected-day").forEach((selectedDiv) => {
                 selectedDiv.classList.remove("selected-day");
               });
               sessionDiv.classList.add("selected-day");
-              reservationLink.href = `/reservation/choisir-place/${selectedShowtimeId}`; // Mettre à jour le href
+              reservationLink.href = `/reservation/choisir-place/${selectedShowtimeId}`; 
             });
           });
         });
 
-        // Afficher le bouton "Réserver" après avoir mis à jour les séances
         reservationButtonContainer.style.display = "flex";
 
-        swiper.update();
       })
       .catch((error) => {
         console.error("Error fetching sessions:", error);
         availabilityContainer.innerHTML = "<p class='text-red-500 font-bold'>Aucune séance trouvée pour cette date.</p>";
-        reservationButtonContainer.style.display = "none"; // Masquer le bouton "Réserver" en cas d'erreur
+        reservationButtonContainer.style.display = "none"; 
       });
   }
 });

@@ -61,7 +61,6 @@ async function getMoviesAverageRating(movieId) {
     const result = await DB.query(query, [movieId]);
     const averageRating = result.rows[0].average_rating;
 
-    // Renvoie 0 si aucune note n'est trouvée
     return averageRating ? parseFloat(averageRating) : 0;
   } catch (err) {
     console.log(err);

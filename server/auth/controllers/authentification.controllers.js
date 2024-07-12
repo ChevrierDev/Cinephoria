@@ -65,8 +65,6 @@ async function authUser(req, res) {
       }
     }
 
-    console.log("User logged in, token:", token);
-
     const redirectUrl = redirect || `/dashboard/${user.role}`;
     if (isElectronRequest) {
       if (user.role !== "employee") {

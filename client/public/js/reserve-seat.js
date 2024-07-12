@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const seatId = seat.getAttribute("data-id");
         if (reservedSeats.includes(seatId)) {
             seat.classList.add("booked");
-            seat.style.pointerEvents = 'none'; // Empêche le clic sur les sièges réservés
+            seat.style.pointerEvents = 'none'; 
         } else {
             seat.addEventListener("click", () => {
                 if (seat.classList.contains("selected")) {

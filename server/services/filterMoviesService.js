@@ -1,5 +1,4 @@
 // services/filterMoviesService.js
-
 function filterShowtimes(showtimes, genres, days, qualities) {
     return showtimes.filter(showtime => {
       const showtimeGenres = (showtime.genre || '').toLowerCase().split(" ");

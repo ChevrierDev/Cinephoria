@@ -1094,11 +1094,8 @@ video {
 .w-full{
   width: 100%;
 }
-.w-80{
-  width: 20rem;
-}
-.min-w-\[300px\]{
-  min-width: 300px;
+.min-w-96{
+  min-width: 24rem;
 }
 .max-w-36{
   max-width: 9rem;
@@ -1391,9 +1388,6 @@ video {
 .text-ellipsis{
   text-overflow: ellipsis;
 }
-.whitespace-nowrap{
-  white-space: nowrap;
-}
 .text-nowrap{
   text-wrap: nowrap;
 }
@@ -1555,9 +1549,6 @@ video {
 .object-cover{
   -o-object-fit: cover;
      object-fit: cover;
-}
-.p-0{
-  padding: 0px;
 }
 .p-1{
   padding: 0.25rem;

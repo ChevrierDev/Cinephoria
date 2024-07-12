@@ -8,9 +8,8 @@ require('./task/dataTransferTask.js');
 
 const server = http.createServer(app);
 
-//connexion to MongoDB
-connectDB()
 
 server.listen(PORT, () => {
   console.log(`Vous êtes connecté au port ${PORT}`);
+  connectDB() //connexion to MongoDB
 });
