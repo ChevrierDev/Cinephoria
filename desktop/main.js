@@ -5,7 +5,7 @@ const path = require("node:path");
 const isDev = process.env.NODE_ENV === "development";
 const isMac = process.platform === "darwin";
 
-let mainWindow; // Déclarez la variable mainWindow
+let mainWindow; 
 let loggedIn = false;
 
 // Creates the main window
