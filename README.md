@@ -12,6 +12,8 @@
 
 # Local deployement:
 
+##WEB APPLICATION
+
 ## To set up the project locally, follow these steps:
 
 ### Clone the repository:
@@ -129,6 +131,78 @@ MONGODB_URI=your_mongodb_uri
 ### Run the server:
 ```
 npm run server
+```
+
+## Desktop Application
+### Navigate to the desktop directory:
+```
+cd desktop
+```
+### Initialize the project with npm:
+```
+npm init
+```
+
+### Install the necessary dependencies:
+```
+npm install electron autoprefixer postcss tailwindcss axios dotenv toastify-js
+```
+### Ensure your desktop/package.json includes the following scripts:
+```
+{
+  "name": "desktop",
+  "productName": "Cinéphoria",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:css": "tailwindcss build -i views/css/styles.css -o views/css/output.css",
+    "watch:css": "tailwindcss build -i views/css/styles.css -o views/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "electron": "^31.1.0",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "toastify-js": "^1.12.0"
+  }
+}
+```
+### Set up Tailwind CSS:
+##### Follow the official Tailwind CSS installation guide to configure Tailwind CSS in your desktop project.
+
+### Create the styles.css file:
+#### Ensure you have a styles.css file in your views/css directory with the following content:
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### Configure the .env file:
+#### Before starting the desktop application, make sure you have a .env file in the desktop directory with the following content:
+```
+NODE_ENV=development
+```
+### Build and watch CSS:
+#### Before running these commands, ensure Tailwind CSS is properly set up and the styles.css file is created as described above.
+```
+npm run build:css
+npm run watch:css
+```
+### Run the desktop application:
+```
+npm start
+or
+npx electronmon .
 ```
 
 
