@@ -20,6 +20,7 @@ const loginFormRoutes = require("./routes/components/login-form.routes");
 const registerFormRoutes = require("./routes/components/register-form.routes");
 const resetPasswordRoutes = require("./routes/reset-password/resetPass.routes");
 const loginRoutes = require("./routes/login/login.routes");
+const ticketRoutes = require('./routes/ticket/ticket.routes');
 
 //Dashboard routes
 const userDashboardRoutes = require("./routes/dashboard/users/userDash.routes");
@@ -97,6 +98,7 @@ app.use("/reservation", reservationRoutes);
 app.use("/contact", contactRoutes);
 app.use("/reset", resetPasswordRoutes);
 app.use("/login", loginRoutes);
+app.use("/ticket", ticketRoutes);
 
 //user Dashboard layout
 app.get('/dashboard/employee', (req, res) => {

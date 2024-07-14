@@ -41,8 +41,8 @@ const Home = () => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log('Data fetched:', response.data);
       setData(response.data.Data);
+      console.log("data receive:", response.data.Data)
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {

@@ -12,6 +12,9 @@ module.exports = {
         beigeOne: '#DAC0A3',
         simpleBlue: '#2360bd',
       },
+      backgroundImage: {
+        'bg-img': "url('/images/michel-caicedo-9cqLeJoS46w-unsplash.jpg')"
+      },
       fontFamily: {
         "arvo": ["Arvo", "serif"]
       },
