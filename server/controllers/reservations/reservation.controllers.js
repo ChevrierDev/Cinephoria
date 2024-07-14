@@ -83,6 +83,59 @@ async function getReservationByUserId(userId) {
   }
 }
 
+
+//Get reservation by user id mobile version API 
+async function getReservationByUserIdMobile(req, res) {
+  const userId = req.params.userId;
+  try {
+    const query = `
+    SELECT 
+      r.reservation_id, 
+      r.user_id, 
+      r.cinema_id, 
+      r.showtimes_id, 
+      r.seats_reserved, 
+      r.status, 
+      r.reserved_at,
+      s.day AS showtime_day, 
+      s.start_time, 
+      s.end_time, 
+      m.movie_id, 
+      m.title AS movie_title, 
+      m.poster AS movie_poster, 
+      m.description AS movie_description, 
+      m.genre AS movie_genre, 
+      m.release_date AS movie_release_date,
+      c.name AS cinema_name, 
+      c.location AS cinema_location,
+      rm.name AS room_name 
+    FROM 
+      public.reservations r
+    JOIN 
+      public.showtimes s ON r.showtimes_id = s.showtimes_id
+    JOIN 
+      public.rooms rm ON s.room_id = rm.room_id
+    JOIN 
+      public.movies m ON s.movie_id = m.movie_id
+    JOIN 
+      public.cinemas c ON r.cinema_id = c.cinema_id
+    WHERE 
+      r.user_id = $1;
+  `;
+    const results = await DB.query(query, [userId]);
+    // Check if the reservation with the given ID is found
+    if (results.rows.length <= 0) {
+      res.status(404).json({message: "No reservation found for the current user."});
+      return [];
+    }
+    // Send the found reservation as response
+    return res.status(200).json({message: "Réservations found", Data: results.rows});
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Internal server error !");
+  }
+}
+
 async function getAllReservationInfoById(req, res) {
   try {
     const { reservationId } = req.body;
@@ -129,7 +182,7 @@ async function getAllReservationInfoById(req, res) {
     const results = await DB.query(query, [reservationId]);
     if (results.rows.length <= 0) {
       res.status(404).json({ message: "No reservation found!" });
-      return;
+      return ;
     }
     res.status(200).json(results.rows[0]);
   } catch (err) {
@@ -253,6 +306,7 @@ async function deleteReservationById(req, res) {
 // Export the functions as a module
 module.exports = {
   getReservation,
+  getReservationByUserIdMobile,
   getAllReservationInfoById,
   getReservationById,
   getReservationByUserId,

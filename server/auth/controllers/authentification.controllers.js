@@ -19,8 +19,11 @@ async function authUser(req, res) {
     }
 
     if (rows.length <= 0) {
-      req.flash('error_msg', 'Aucun utilisateur trouvé avec cette adresse email.');
-      return res.redirect('/login');
+      req.flash(
+        "error_msg",
+        "Aucun utilisateur trouvé avec cette adresse email."
+      );
+      return res.redirect("/login");
     }
 
     const user = rows[0];
@@ -34,8 +37,8 @@ async function authUser(req, res) {
     }
 
     if (!verifyPassword) {
-      req.flash('error_msg', 'Mot de passe incorrecte.');
-      return res.redirect('/login');
+      req.flash("error_msg", "Mot de passe incorrecte.");
+      return res.redirect("/login");
     }
 
     const token = jwtToken.sign(
@@ -52,6 +55,14 @@ async function authUser(req, res) {
       secure: true,
       maxAge: 1 * 60 * 60 * 1000,
     });
+
+    if (req.headers["x-react-native-request"]) {
+      return res.status(200).json({
+        message: "user logged in.",
+        accessToken: token,
+        id: user.user_id,
+      });
+    }
 
     if (user.must_change_password) {
       if (user.role === "user") {

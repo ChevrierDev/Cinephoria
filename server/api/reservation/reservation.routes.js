@@ -8,6 +8,7 @@ const {
   deleteReservationById,
   postReservation,
   updateReservationById,
+  getReservationByUserIdMobile
 } = require("../../controllers/reservations/reservation.controllers");
 
 const {
@@ -20,6 +21,9 @@ reservationApiRoutes.get("/reservation", getReservation);
 
 // get all reservation by user Id
 reservationApiRoutes.get("/reservation/user", getReservationByUserId);
+
+// get all reservation by user MOBILE VERSION Id
+reservationApiRoutes.get("/reservation/user/:userId", getReservationByUserIdMobile);
 
 // get reservation info by Id using POST
 reservationApiRoutes.post("/reservation/info", getAllReservationInfoById);
