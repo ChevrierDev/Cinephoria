@@ -12,7 +12,7 @@
 
 # Local deployement:
 
-##WEB APPLICATION
+# WEB APPLICATION
 
 ## To set up the project locally, follow these steps:
 
@@ -133,7 +133,7 @@ MONGODB_URI=your_mongodb_uri
 npm run server
 ```
 
-## Desktop Application
+# DESKTOP APPLICATION
 ### Navigate to the desktop directory:
 ```
 cd desktop
