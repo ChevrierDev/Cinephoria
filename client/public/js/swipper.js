@@ -1,5 +1,5 @@
 const initSwipper = () => {
-  // Initialiser le premier carrousel
+
   const mainSlider = new Swiper(".main-slider", {
     slidesPerView: 1,
     loop: true,

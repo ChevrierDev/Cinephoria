@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let reservedCount = 0;
     let selectedSeats = [];
 
-    // Marquez les sièges réservés
     seats.forEach((seat) => {
         const seatId = seat.getAttribute("data-id");
         if (reservedSeats.includes(seatId)) {
@@ -45,7 +44,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         };
     });
 
-    // Décrémente le nombre de places disponibles
     const totalSeatsCount = parseInt(chairDiv.getAttribute('data-total-seats'));
     const availableSeatsCount = totalSeatsCount - reservedSeats.length;
     totalSeatsCountElement.textContent = `${availableSeatsCount} places libres`;
@@ -61,7 +59,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (!errorMessageElement.classList.contains("hidden")) {
                 errorMessageElement.classList.add("hidden");
             }
-            // Prépare les données de la réservation
             const reservationData = {
                 user_id: userId,
                 cinema_id: cinemaId,
@@ -92,7 +89,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     });
 
-    // Affiche le message de succès s'il existe dans le stockage local
     const successMessage = localStorage.getItem('success-message');
     const messageContainer = document.getElementById('message');
     const text = document.getElementById('text');

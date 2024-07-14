@@ -271,18 +271,18 @@ async function postReservation(req, res) {
       return res.status(400).json({ error: "You must enter all required fields!" });
     }
 
-    // Convertir seats_reserved en JSON string pour le stockage
+   
     const seats_reserved_json = JSON.stringify(seats_reserved);
 
     // Commencer une transaction
     await DB.query('BEGIN');
 
-    // Acquérir un verrou de conseil partagé pour les sièges réservés
+    
     const lockKey = showtimes_id;
     const lockQuery = `SELECT pg_advisory_xact_lock($1)`;
     await DB.query(lockQuery, [lockKey]);
 
-    // Vérifier si les sièges sont déjà réservés
+  
     const checkQuery = `
       SELECT seats_reserved
       FROM reservations
@@ -294,7 +294,7 @@ async function postReservation(req, res) {
       return res.status(400).json({ error: "One or more seats are already reserved!" });
     }
 
-    // Insérer la nouvelle réservation et générer un token
+   
     const token = crypto.randomBytes(16).toString('hex');
     const insertQuery = `
       INSERT INTO reservations (user_id, cinema_id, showtimes_id, seats_reserved, status, reserved_at, token)
@@ -303,7 +303,7 @@ async function postReservation(req, res) {
     `;
     const result = await DB.query(insertQuery, [user_id, cinema_id, showtimes_id, seats_reserved_json, token]);
 
-    // Commit la transaction
+   
     await DB.query('COMMIT');
 
     res.status(201).json({ ...result.rows[0], token });
@@ -338,7 +338,7 @@ async function updateReservationById(req, res) {
       return res.status(404).json({ message: "Reservation not found" });
     }
 
-    // Send a success message as response
+    
     return res
       .status(200)
       .json({
@@ -358,11 +358,11 @@ async function deleteReservationById(req, res) {
     const foundReservationQuery =
       "SELECT * FROM reservations WHERE reservation_id = $1";
     const reservation = await DB.query(foundReservationQuery, [id]);
-    // Check if the reservation with the given ID is found
+  
     if (reservation.rows.length !== 0) {
       const query = "DELETE FROM reservations WHERE reservation_id = $1";
       await DB.query(query, [id]);
-      // Send a success message as response
+
       return res
         .status(200)
         .json({ message: "Reservation deleted successfully" });

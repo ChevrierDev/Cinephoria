@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               if (user && user.first_name) {
                 localStorage.setItem("userName", user.first_name);
               }
-            // Redirect the user to the employee dashboard page
+
             window.location.href = "employeeDashboard.html";
           } else {
             const errorMessage =
@@ -248,9 +248,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     //get rooms liste text content
     roomsList.addEventListener("click", (e) => {
-      // Changed to single event listener for UL
+
       if (e.target.tagName === "LI") {
-        // Ensure it's an LI element
+
         e.preventDefault();
         roomChoosen.innerText = e.target.textContent;
       }
@@ -273,9 +273,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     //get seats liste text content
     seatsList.addEventListener("click", (e) => {
-      // Changed to single event listener for UL
+     
       if (e.target.tagName === "LI") {
-        // Ensure it's an LI element
+   
         e.preventDefault();
         seatChoosen.innerText = e.target.textContent;
       }

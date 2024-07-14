@@ -34,7 +34,6 @@ function createWindow() {
   } 
 }
 
-// Écoute les événements de connexion et de déconnexion
 ipcMain.on('login-success', () => {
   loggedIn = true;
   mainWindow.loadFile(path.join(__dirname, 'views/employeeDashboard.html'));
@@ -45,17 +44,14 @@ ipcMain.on('logout', () => {
   mainWindow.loadFile(path.join(__dirname, 'views/login.html'));
 });
 
-// Calls createWindow() when the app is ready
 app.whenReady().then(createWindow);
 
-// Quits the app when all windows are closed (Windows & Linux)
 app.on("window-all-closed", () => {
   if (!isMac) {
     app.quit();
   }
 });
 
-// Opens a window if none are open (macOS)
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();

@@ -2,10 +2,6 @@ const currentPage = window.location.pathname;
 
 if (currentPage === "/dashboard/admin/showtimes/select-movies") {
   document.addEventListener("DOMContentLoaded", () => {
-    //emloyee confirmation alert pop up variable
-    // const validateBtn = document.getElementById("open-alert-btn");
-    // const confirmationMenu = document.getElementById("alert");
-    // const closeConfirmationMenuBtn = document.getElementById("close-alert");
 
     //theater variable
     const selectTheaterBtn = document.getElementById("select-theater");
@@ -57,16 +53,6 @@ if (currentPage === "/dashboard/admin/showtimes/select-movies") {
       });
     });
 
-    //emloyee confirmation alert pop up dropdown
-    // validateBtn.addEventListener("click", (e) => {
-    //   e.preventDefault();
-    //   confirmationMenu.classList.toggle("hidden");
-    // });
-
-    // closeConfirmationMenuBtn.addEventListener("click", (e) => {
-    //   e.preventDefault();
-    //   confirmationMenu.classList.add("hidden");
-    // });
   });
 } else {
   document.addEventListener("DOMContentLoaded", () => {

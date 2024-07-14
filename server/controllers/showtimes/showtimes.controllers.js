@@ -10,11 +10,11 @@ async function getShowtimes() {
     const query = "SELECT * FROM showtimes";
     const results = await DB.query(query);
 
-    // Check if any showtimes are found
+
     if (results.rows.length <= 0) {
       return []; 
     }
-    // Send the found showtimes as response
+
     return results.rows;
   } catch (err) {
     console.log(err);
@@ -36,12 +36,11 @@ async function getShowtimesByCinemaAndRoom(req, res) {
     `;
     const results = await DB.query(query, [cinemaId, roomId]);
 
-    // Check if any showtimes are found
+
     if (results.rows.length <= 0) {
       return res.status(404).json({ message: "No showtimes found!" });
     }
 
-    // Send the found showtimes as response
     res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
@@ -88,7 +87,6 @@ async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
         };
       }
 
-      // Utilisation de moment.js pour vérifier et formater les dates et heures
       const day = moment(row.day);
       const startDateTime = moment(row.day).set({
         hour: parseInt(row.start_time.split(':')[0]),
@@ -106,7 +104,7 @@ async function getShowtimesByCinemaAndFilm(cinemaId, filmId) {
         throw new Error("Invalid date or time value");
       }
 
-      // Formater les dates et heures pour l'affichage
+
       const localDay = day.format('DD/MM/YYYY');
       const localStartTime = startDateTime.format('HH:mm');
       const localEndTime = endDateTime.format('HH:mm');
@@ -147,10 +145,9 @@ async function getShowtimesByFilm(filmId) {
     `;
     const result = await DB.query(query, [filmId]);
 
-    // Ajout de logs pour vérifier les données récupérées
+
     console.log('Showtimes récupérées:', JSON.stringify(result.rows, null, 2));
 
-    // Organiser les séances par cinéma
     const showtimesByCinema = {};
     result.rows.forEach(row => {
       if (!showtimesByCinema[row.cinema_id]) {
@@ -202,7 +199,7 @@ async function getShowtimesByCinema(cinemaId) {
     `;
     const result = await DB.query(query, [cinemaId]);
     
-    // Regroup showtimes by movie
+
     const showtimesByMovie = {};
     result.rows.forEach(row => {
       if (!showtimesByMovie[row.movie_id]) {
@@ -226,7 +223,7 @@ async function getShowtimesByCinema(cinemaId) {
         start_time: row.start_time,
         end_time: row.end_time,
         price: row.price,
-        quality: row.room_quality // Add room quality here
+        quality: row.room_quality 
       });
     });
 
@@ -243,12 +240,12 @@ async function getShowtimesById(req, res) {
     const id = req.params.id;
     const query = "SELECT * FROM showtimes WHERE showtimes_id = $1";
     const results = await DB.query(query, [id]);
-    // Check if the showtimes with the given ID is found
+
     if (results.rows.length <= 0) {
       res.status(404).json({ message: "No showtimes id found !" });
       return [];
     }
-    // Send the found showtimes as response
+
     return results.rows[0];
   } catch (err) {
     console.log(err);
@@ -273,13 +270,13 @@ async function getJoinInfoShowtimesById(req, res) {
     `;
     const results = await DB.query(query, [id]);
 
-    // Check if the showtimes with the given ID is found
+  
     if (results.rows.length <= 0) {
       res.status(404).json({ message: "No showtimes found with the given ID!" });
       return null;
     }
 
-    // Send the found showtime as response
+ 
     return results.rows[0];
   } catch (err) {
     console.log(err);
@@ -292,7 +289,7 @@ async function postShowtimes(req, res) {
   try {
     const { movie_id, cinema_id, room_id, price, showtimes } = req.body;
 
-    // Validate the request body fields
+ 
     if (
       !movie_id ||
       !cinema_id ||
@@ -358,7 +355,7 @@ async function postShowtimes(req, res) {
       insertedShowtimes.push(result.rows[0]);
     }
 
-    // Send the newly created showtimes as response
+    
     res.status(201).json(insertedShowtimes);
   } catch (err) {
     console.log(err);
@@ -372,7 +369,7 @@ async function updateShowtimesById(req, res) {
     const id = parseInt(req.params.id);
     const { movie_id, cinema_id, room_id, price, showtimes } = req.body;
 
-    // Vérifiez que tous les champs sont présents
+  
     if (
       !movie_id ||
       !cinema_id ||
@@ -387,14 +384,14 @@ async function updateShowtimesById(req, res) {
     for (const showtime of showtimes) {
       const { day, start_time, end_time } = showtime;
 
-      // Vérifiez que les champs showtime sont présents
+      
       if (!day || !start_time || !end_time) {
         return res.status(400).json({
           error: "Day, start time, and end time are required for each showtime",
         });
       }
 
-      // Log parameters to check their values
+     
       console.log(
         "Parameters for conflict check:",
         cinema_id,
@@ -502,11 +499,11 @@ async function deleteShowtimesById(req, res) {
     const foundShowtimesQuery =
       "SELECT * FROM showtimes WHERE showtimes_id = $1";
     const showtimes = await DB.query(foundShowtimesQuery, [id]);
-    // Check if the showtimes with the given ID is found
+
     if (showtimes.rows.length !== 0) {
       const query = "DELETE FROM showtimes WHERE showtimes_id = $1";
       await DB.query(query, [id]);
-      // Send a success message as response
+    
       return res
         .status(200)
         .json({ message: "Showtimes deleted successfully" });

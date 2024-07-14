@@ -1,4 +1,4 @@
-// Import the database configuration
+
 const DB = require("../../config/postgres.config");
 
 // Functions to get all reviews
@@ -7,12 +7,12 @@ async function getReviews(req, res) {
     const query = "SELECT * FROM reviews";
     const results = await DB.query(query);
 
-     // Check if any reviews are found
+
     if (results.rows.length <= 0) {
       res.status(404).json({message:"No reviews found !"});
       return;
     }
-    // Send the found reviews as response
+
     res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
@@ -85,13 +85,13 @@ async function postReviews(req, res) {
   try {
     const { user_id, movie_id, rating, comment } = req.body;
 
-    // Validate the request body fields
+  
     if (!user_id || !movie_id || !rating || !comment) {
       req.flash('error_msg', 'Vous devez remplir tous les champs obligatoires !');
       return res.redirect('back');
     }
 
-    // Vérifier s'il existe déjà une revue pour cet utilisateur et ce film
+   
     const checkQuery = "SELECT * FROM reviews WHERE user_id = $1 AND movie_id = $2";
     const checkResult = await DB.query(checkQuery, [user_id, movie_id]);
 
@@ -100,7 +100,7 @@ async function postReviews(req, res) {
       return res.redirect('back');
     }
 
-    // Insérer une nouvelle revue
+  
     const insertQuery = "INSERT INTO reviews (user_id, movie_id, rating, comment, status, created_at) VALUES ($1, $2, $3, $4, 'false', NOW()) RETURNING *";
     const insertResult = await DB.query(insertQuery, [user_id, movie_id, rating, comment]);
 

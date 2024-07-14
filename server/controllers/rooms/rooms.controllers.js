@@ -22,12 +22,12 @@ async function getRoomsById(req, res) {
     const id = req.params.id;
     const query = "SELECT * FROM rooms WHERE room_id = $1";
     const results = await DB.query(query, [id]);
-    // Check if the room with the given ID is found
+
     if (results.rows.length <= 0) {
       res.status(404).json("No room id found !");
       return;
     }
-    // Send the found room as response
+
     res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
@@ -59,7 +59,7 @@ async function postRooms(req, res) {
   try {
     const { cinema_id, name, quality } = req.body;
 
-    // Validate the request body fields
+
     if (!cinema_id || !name || !quality) {
       return res
         .status(400)
@@ -70,7 +70,7 @@ async function postRooms(req, res) {
       "INSERT INTO rooms (cinema_id, name, quality) VALUES ($1, $2, $3) RETURNING *";
     const result = await DB.query(query, [cinema_id, name, quality]);
 
-    // Send the newly created room as response
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.log(err);

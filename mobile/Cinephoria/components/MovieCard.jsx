@@ -3,23 +3,22 @@ import { View, Text, Image, Modal, Pressable, Button, ImageBackground, ActivityI
 import QRCode from 'react-native-qrcode-svg';
 import icons from '../constants/icons';
 
-const MovieCard = ({ movie }) => { // + Ajout de la prop `movie`
+const MovieCard = ({ movie }) => { 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [qrCodeValue, setQrCodeValue] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handlePress = async () => {
     setLoading(true);
-    try {
-      // + Génération de l'URL avec le token et l'ID de la réservation
+    try {     
       const qrCodeUrl = `http://127.0.0.1:3030/ticket/${movie.reservation_id}?token=${movie.token}`;
       console.log(qrCodeUrl)
-      setQrCodeValue(qrCodeUrl); // + Mise à jour de l'état avec l'URL pour le QR code
+      setQrCodeValue(qrCodeUrl); 
     } catch (error) {
       console.error('Error generating QR code URL:', error);
     } finally {
       setLoading(false);
-      setIsModalVisible(true); // + Affichage du modal après la génération de l'URL
+      setIsModalVisible(true); 
     }
   };
 

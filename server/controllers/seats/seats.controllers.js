@@ -7,12 +7,11 @@ async function getSeats(req, res) {
     const query = "SELECT * FROM seats";
     const results = await DB.query(query);
 
-     // Check if any seats are found
     if (results.rows.length <= 0) {
       res.status(404).json("No seats found !");
       return;
     }
-    // Send the found seats as response
+
     res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
@@ -26,12 +25,12 @@ async function getSeatsById(req, res) {
     const id = req.params.id;
     const query = "SELECT * FROM seats WHERE seat_id = $1";
     const results = await DB.query(query, [id]);
-    // Check if the seat with the given ID is found
+
     if (results.rows.length <= 0) {
       res.status(404).json({message:"No seat id found !"});
       return;
     }
-    // Send the found seat as response
+
     res.status(200).json(results.rows);
   } catch (err) {
     console.log(err);
@@ -132,7 +131,7 @@ async function postSeats(req, res) {
       accessibility
     } = req.body;
 
-    // Validate the request body fields
+
     if (
       !room_id ||
       !seat_label ||
@@ -151,7 +150,7 @@ async function postSeats(req, res) {
       accessibility
     ]);
 
-    // Send the newly created seat as response
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.log(err);

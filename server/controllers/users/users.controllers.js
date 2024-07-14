@@ -248,7 +248,6 @@ async function deleteUserById(req, res) {
         `Associated records in cinema_employees for user ID: ${id} have been deleted`
       );
 
-      // Supprimer l'utilisateur de la table users
       const deleteUserQuery = "DELETE FROM users WHERE user_id = $1";
       await DB.query(deleteUserQuery, [id]);
 

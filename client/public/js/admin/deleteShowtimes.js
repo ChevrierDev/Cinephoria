@@ -6,18 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, "", currentUrl.toString());
   }
 
-  // Vérifiez la page actuelle
+
   const currentPage = window.location.pathname;
 
   if (currentPage === "/dashboard/admin/showtimes/delete") {
-    // Variables pour les cinémas
+ 
     const theaterMenuBtn = document.getElementById("select-theater");
     const theaterList = document.querySelectorAll("#theater-list li");
     const choosenTheater = document.getElementById("cinema-choosen");
     const theaterMenu = document.getElementById("theater-menu");
     const cinemaIdInput = document.getElementById("cinema-id");
 
-    // Variables pour les salles
     const roomsMenuBtn = document.getElementById("select-room");
     const roomsMenu = document.getElementById("room-menu");
     const choosenRooms = document.getElementById("room-choosen");
@@ -26,22 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const roomIdInput = document.getElementById("room-id");
     const currentRoomNameInput = document.getElementById("current-room-name");
 
-    // Variables pour les séances
     const showtimesMenuBtn = document.getElementById("select-showtimes");
     const showtimesMenu = document.getElementById("showtimes-menu");
     const showtimesList = document.getElementById("showtimes-list");
     const choosenShowtimes = document.getElementById("showtimes-choosen");
 
-    // Variables pour les boutons de confirmation et de soumission
+
     const openAlertBtn = document.getElementById("open-alert-btn");
     const alertMenu = document.getElementById("alert");
     const closeAlertBtn = document.getElementById("close-alert");
     const submitFormBtn = document.getElementById("submit-form");
 
-    // Stockez l'ID du cinéma sélectionné
     let selectedCinemaId = null;
 
-    // Stockez l'ID du film sélectionné et la durée
     let selectedMovieId = null;
     let selectedMovieDuration = 0;
 
@@ -51,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showtimesMenu.classList.add("hidden");
     };
 
-    // Menu déroulant des cinémas
+
     theaterMenuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const isHidden = theaterMenu.classList.contains("hidden");
@@ -61,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Sélection des salles dans les cinémas correspondants
+
     theaterList.forEach((item) => {
       item.addEventListener("click", () => {
         selectedCinemaId = item.dataset.cinemaId;
@@ -69,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cinemaIdInput.value = selectedCinemaId;
         theaterMenu.classList.add("hidden");
 
-        // Récupérez les salles pour le cinéma sélectionné
+
         fetch(`/api/v1/getRoomsByCinema/${selectedCinemaId}`)
           .then((response) => response.json())
           .then((data) => {
@@ -97,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   currentRoomNameInput.value = room.name;
                   roomsMenu.classList.add("hidden");
 
-                  // Récupérez les séances pour la salle sélectionnée
                   fetchShowtimes(selectedCinemaId, room.room_id);
                 });
               });
@@ -124,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Menu déroulant des salles
+
     roomsMenuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const isHidden = roomsMenu.classList.contains("hidden");
@@ -134,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Menu déroulant des séances
+
     showtimesMenuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const isHidden = showtimesMenu.classList.contains("hidden");
@@ -144,12 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Met à jour la div avec le contenu de la séance sélectionnée
+  
     showtimesList.addEventListener("change", (e) => {
       const selectedOption = showtimesList.options[showtimesList.selectedIndex];
       choosenShowtimes.textContent = selectedOption.textContent;
 
-      // Ajouter l'ID de la séance à l'URL
+
       const showtimesId = selectedOption.value;
       const movieId = selectedOption.dataset.movieId;
       const movieDuration = selectedOption.dataset.movieDuration;
@@ -162,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showtimesMenu.classList.add("hidden");
     });
 
-    // Menu de confirmation d'alerte
+    
     openAlertBtn.addEventListener("click", (e) => {
       e.preventDefault();
       alertMenu.classList.toggle("hidden");
@@ -175,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alertMenu.classList.toggle("flex");
     });
 
-    // Récupération des données des films
+
     const searchInput = document.getElementById("search-movie-input");
     const movieContent = document.getElementById("movie-content");
 
@@ -223,17 +218,17 @@ document.addEventListener("DOMContentLoaded", () => {
           movieElement.addEventListener("click", () => {
             const movieItem = movieElement.querySelector(".movie-item");
 
-            // Vérifiez si le film est déjà sélectionné
+            
             if (movieItem.classList.contains("border-4", "border-goldOne")) {
               movieItem.classList.remove("border-4", "border-goldOne");
               selectedMovieId = null;
               selectedMovieDuration = 0;
             } else {
-              // Supprimez la bordure jaune du film précédemment sélectionné
+             
               document.querySelectorAll(".movie-item").forEach((item) => {
                 item.classList.remove("border-4", "border-goldOne");
               });
-              // Ajoutez une bordure jaune au film cliqué et stockez son ID
+             
               movieItem.classList.add("border-4", "border-goldOne");
               selectedMovieId = movie.movie_id;
               selectedMovieDuration =
@@ -247,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Fonction pour récupérer et afficher les séances
+    
     const fetchShowtimes = (cinemaId, roomId) => {
       fetch(`/api/v1/getShowtimesByCinemaAndRoom/${cinemaId}/${roomId}`)
         .then((response) => response.json())
@@ -456,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } else {
     document.addEventListener("DOMContentLoaded", () => {
-      // Affichage des messages de succès
+     
       const successMessage = localStorage.getItem("success-message");
       const messageContainer = document.getElementById("message");
       const text = document.getElementById("text");

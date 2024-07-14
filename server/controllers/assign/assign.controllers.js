@@ -3,7 +3,7 @@ const DB = require("../../config/postgres.config");
 async function assignPost(req, res) {
   const { cinema, firstName, lastName } = req.body;
 
-  console.log("Received data:", { cinema, firstName, lastName }); // Log the received data
+  console.log("Received data:", { cinema, firstName, lastName }); 
 
   try {
     const cinemaResult = await DB.query(
@@ -11,7 +11,7 @@ async function assignPost(req, res) {
       [cinema]
     );
     if (cinemaResult.rows.length === 0) {
-      console.log("Cinema not found:", cinema); // Log if cinema not found
+      console.log("Cinema not found:", cinema); 
       return res.status(404).json({ error: "Cinema not found" });
     }
     const cinemaId = cinemaResult.rows[0].cinema_id;
@@ -21,7 +21,7 @@ async function assignPost(req, res) {
       [firstName, lastName]
     );
     if (employeeResult.rows.length === 0) {
-      console.log("Employee not found:", { firstName, lastName }); // Log if employee not found
+      console.log("Employee not found:", { firstName, lastName }); 
       return res.status(404).json({ error: "Employee not found" });
     }
     const employeeId = employeeResult.rows[0].user_id;

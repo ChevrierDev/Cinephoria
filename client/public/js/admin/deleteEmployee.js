@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
   let selectedEmployeeId = null;
 
-  // Vérifiez que les éléments existent avant d'ajouter des gestionnaires d'événements
+
   if (
     selectTheater &&
     theaterMenu &&

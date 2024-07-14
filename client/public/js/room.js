@@ -88,7 +88,7 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
       alertMenu.classList.toggle("flex");
     });
 
-    // Ajouter un nouveau groupe de sièges
+
     addSeatGroupBtn.addEventListener("click", () => {
       const seatGroup = document.createElement("div");
       seatGroup.classList.add("seat-group", "flex", "items-center", "gap-x-2");
@@ -103,7 +103,6 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
             <button type="button" class="remove-seat-group bg-redOne text-white w-5 h-5 flex items-center justify-center hover:bg-red-600 duration-200 hover:scale-95">-</button>
         `;
 
-      // Ajouter le gestionnaire de suppression pour le bouton
       seatGroup
         .querySelector(".remove-seat-group")
         .addEventListener("click", () => {
@@ -111,7 +110,6 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
           validateInputs();
         });
 
-      // Ajouter les gestionnaires d'événements pour la validation
       seatGroup
         .querySelector(".seat-label")
         .addEventListener("input", validateInputs);
@@ -120,10 +118,10 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
         .addEventListener("input", validateInputs);
 
       seatGroupsContainer.appendChild(seatGroup);
-      validateInputs(); // Valider les champs après l'ajout d'un nouveau groupe
+      validateInputs(); 
     });
 
-    // Ajouter les gestionnaires d'événements de validation initiaux
+
     document
       .querySelectorAll(".seat-label")
       .forEach((label) => label.addEventListener("input", validateInputs));
@@ -362,7 +360,7 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
                 <button type="button" class="remove-seat-group bg-redOne text-white w-5 h-5 flex items-center justify-center hover:bg-red-600 duration-200 hover:scale-95">-</button>
             `;
 
-        // Ajouter le gestionnaire de suppression pour le bouton
+
         seatGroup
           .querySelector(".remove-seat-group")
           .addEventListener("click", () => {
@@ -370,7 +368,7 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
             validateInputs();
           });
 
-        // Ajouter les gestionnaires d'événements pour la validation
+
         seatGroup
           .querySelector(".seat-label")
           .addEventListener("input", validateInputs);
@@ -399,8 +397,7 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
         const roomName = document.getElementById("room-name").value;
         const roomQuality = document.getElementById("room-quality").value;
         const seatGroups = Array.from(document.querySelectorAll(".seat-group"));
-        const roomId = roomIdInput.value; // Assurez-vous que roomId est défini
-
+        const roomId = roomIdInput.value; 
         const seats = seatGroups.map((group) => {
           return {
             seat_label: group.querySelector(".seat-label").value,
@@ -416,8 +413,8 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
           const response = await fetch(
             `/api/v1/updateRoomWithSeats/${roomId}`,
             {
-              // Assurez-vous que cette URL est correcte
-              method: "PUT", // Utilisez PUT pour mettre à jour les ressources existantes
+
+              method: "PUT", 
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 cinema_id: selectedCinemaId,
@@ -498,7 +495,7 @@ if (currentPage === "/dashboard/admin/rooms/add" || currentPage === "/dashboard/
   
           const selectedCinemaId = item.dataset.cinemaId;
           
-          // Fetch rooms for the selected cinema
+
           fetch(`/api/v1/getRoomsByCinema/${selectedCinemaId}`)
             .then((response) => response.json())
             .then((data) => {
