@@ -60,6 +60,7 @@ filmsRoutes.get("/", async (req, res) => {
   } catch (err) {
     console.log("Error while fetching last Wednesday movies:", err);
     res.status(500).render("error", { error: "Internal server error" });
+    
   }
 });
 

@@ -8,8 +8,7 @@ async function getMovies(req, res) {
     const query = "SELECT * FROM movies";
     const results = await DB.query(query);
     if (results.rows.length <= 0) {
-      res.status(404).json("No movies found !");
-      return;
+      return [];
     }
     return results.rows;
   } catch (err) {
