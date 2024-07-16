@@ -10,21 +10,26 @@
 
   <!-- Swiper component for selecting days -->
   <div class="swiper choose-days-slider h-[15vh] " data-sessions='<%= JSON.stringify(sessions) %>'>
-    <div class="swiper-wrapper" id="day-buttons-container">
-      <% uniqueDates.forEach(date => { %>
-        <div class="swiper-slide  min-w-96 ">
-          <button class=" flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300 day-button" data-date="<%= date %>">
-            <div class=" flex flex-col items-center justify-center h-full">
-              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { weekday: 'short' }) %>.</p>
-              <p class="font-arvo font-bold w-48 text-center text-2xl"><%= new Date(date).getDate() %></p>
-              <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { month: 'short' }) %></p>
-            </div>
-          </button>
-        </div>
-      <% }) %>
-    </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <% if (uniqueDates && uniqueDates.length > 0) { %>
+      <div class="swiper-wrapper" id="day-buttons-container">
+        <% uniqueDates.forEach(date => { %>
+          <div class="swiper-slide  min-w-96 ">
+            <button class=" flex shadow-xl h-[15vh] bg-whiteOne border border-gray-300 day-button" data-date="<%= date %>">
+              <div class=" flex flex-col items-center justify-center h-full">
+                <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { weekday: 'short' }) %>.</p>
+                <p class="font-arvo font-bold w-48 text-center text-2xl"><%= new Date(date).getDate() %></p>
+                <p class="font-arvo w-48 text-center font-bold"><%= new Date(date).toLocaleDateString('fr-FR', { month: 'short' }) %></p>
+              </div>
+            </button>
+          </div>
+        <% }) %>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    <% } else { %>
+      <h1 class="font-arvo text-blueOne text-2xl font-bold w-full text-center mt-10">Aucune date n'est disponible pour ce films.</h1>
+      <% } %>
+    
   </div>
 
   <!-- Other content of your page -->
