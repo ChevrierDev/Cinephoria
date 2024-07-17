@@ -375,6 +375,16 @@ async function deleteReservationById(req, res) {
   }
 }
 
+async function deleteReservationsByShowtimesId(showtimesId) {
+  try {
+    const deleteReservationsQuery = "DELETE FROM reservations WHERE showtimes_id = $1";
+    await DB.query(deleteReservationsQuery, [showtimesId]);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Error deleting reservations");
+  }
+}
+
 // Export the functions as a module
 module.exports = {
   getReservation,
@@ -385,5 +395,6 @@ module.exports = {
   postReservation,
   deleteReservationById,
   updateReservationById,
-  getFullReservationInfoById
+  getFullReservationInfoById,
+  deleteReservationsByShowtimesId
 };

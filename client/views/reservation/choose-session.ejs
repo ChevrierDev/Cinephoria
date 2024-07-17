@@ -24,7 +24,7 @@
    
   </style>
   </head>
-  <body class="relative min-h-screen pb-20">
+  <body class="relative min-h-screen pb-20 overflow-x-hidden">
     <header class="relative">
       <!-- navbar section -->
       <%- include('../components/nav-bar') %>
@@ -145,7 +145,7 @@
 
       <!-- disponibility component section -->
       <section  class="w-full flex py-4 mt-16 px-7">
-        <button class="" id="disponibility">
+        <button class="mx-auto md:mx-0" id="disponibility">
           <%- include('../components/session-disponibility') %>
         </button>
       </section>
@@ -157,6 +157,8 @@
 
     
     <!-- footer section -->
-    <%- include('../components/footer') %>
+     <footer class="mt-40">
+       <%- include('../components/footer') %>
+     </footer>
   </body>
 </html>

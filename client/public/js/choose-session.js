@@ -93,7 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
               "container",
               "flex",
               "items-center",
-              "w-[15vw]",
+              "md:w-[15vw]",
+              "w-[40vw]",
               "bg-whiteOne",
               "shadow-xl",
               "h-[20vh]"
