@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- hidden theater menu -->
-                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-96 z-50 animate-open-menu hidden" id="theater-menu">
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 bottom-full z-50 animate-open-menu hidden" id="theater-menu">
                     <% if (cinemas.length !== 0) { %>
                         <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
                             <% cinemas.forEach(cinema => { %>
@@ -59,11 +59,11 @@
                         </svg>
                     </div>
                     <!-- hidden theater menu -->
-                    <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 -bottom-16 hidden  z-50 animate-open-menu " id="room-menu">
+                    <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 bottom-full hidden  z-50 animate-open-menu " id="room-menu">
                         <% if (rooms.length > 0) { %>
                             <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="room-list">
                                 <% rooms.forEach(room => { %>
-                                    <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105" data-room-id="<%= room.room_id %>" data-room-name="<%= room.name %>"><%= room.name %></li>
+                                    <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105" data-room-id="<%= room.room_id %>" data-room-name="<%= room.name %>"></li>
                                 <% }) %>
                             </ul>
                         <% } else { %>

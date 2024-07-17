@@ -28,7 +28,7 @@
                     <input type="text" name="cinema" id="cinema-input" class="hidden" value="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
                 </div>
-                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 z-50 hidden" id="theater-menu">
+                <div class="absolute bg-blueOne w-full h-fit py-8 bottom-full px-2 left-0 z-50 hidden animate-open-menu" id="theater-menu">
                     <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="theater-list">
                         <% if (cinemas.length !== 0) { %>
                             <% cinemas.forEach(cinema => { %>
@@ -46,12 +46,12 @@
                     <input type="text" name="lastName" id="employee-last-name" class="hidden" value="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M4.516 7.548c.436-.446 1.043-.481 1.576 0L10 11.295l3.908-3.747c.533-.481 1.141-.446 1.574 0c.436.445.408 1.197 0 1.615c-.406.418-4.695 4.502-4.695 4.502a1.095 1.095 0 0 1-1.576 0S4.924 9.581 4.516 9.163c-.409-.418-.436-1.17 0-1.615"/></svg>
                 </div>
-                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 left-0 z-50 hidden" id="employee-menu">
+                <div class="absolute bg-blueOne w-full h-fit py-8 px-2 bottom-full left-0 z-50 hidden animate-open-menu" id="employee-menu">
                     <ul class="w-full space-y-5 font-arvo font-bold text-white text-lg" id="employee-list">
                         <% if (employees.length !== 0) { %>
                             <% employees.forEach(employee => { %>
                                 <li class="list-none hover:translate-x-5 duration-200 ease-out cursor-pointer hover:text-goldOne hover:scale-105" data-id="<%= employee.id %>">
-                                    <%= employee.first_name %> <%= employee.last_name %>
+                                    
                                 </li>
                             <% }) %>
                         <% } %>

@@ -293,7 +293,7 @@ employeeDashboardRoutes.get(
       });
     } catch (err) {
       console.log(err)
-      res.render("dashboard/employee/updateShowtimes", {
+      res.render("dashboard/employee/deleteShowtimes", {
         title: `Supprimer une séance.`,
         cinemas: cinemas || [],
         rooms: rooms || []
